@@ -81,5 +81,7 @@ def main():
     
 set_printoptions(suppress=True) #Avoid scientific notation when printing arrs
 
-main()
+if __name__ == '__main__':
+    main()
+
 
