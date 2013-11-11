@@ -16,6 +16,7 @@ def read_hessian(filename, n_coords):
         a = f.readline().split()
         for j in range(n_coords):
             hessian[i,j] = float(a[j])
+            print hessian[i,j]
     f.close()
 
     return hessian
@@ -88,44 +89,6 @@ def read_molecule(filename):
     coordinates = array(coordinates, double)
 
     return coordinates, mass, num_atoms_list, charge_list, sum(num_atoms_list)
-
-def read_dalton(): 
-    "For testing purposes"
-    
-    dummy = []
-    cubic_force_field = zeros((12, 12, 12))
-    
-    f = open("input/cff", 'r')
-    
-    for i in range(12):
-        dummy = f.readline()
-        dummy = f.readline()
-        dummy = f.readline()
-        dummy = f.readline()
-        dummy = f.readline()
-        dummy = f.readline()
-        for j in range(12):
-            a = f.readline().split()
-            for k in range(1,6):
-                cubic_force_field[i,j,k-1] = float(a[k])
-        dummy = f.readline()
-        dummy = f.readline()
-    
-        for j in range(12):
-            a = f.readline().split()
-            for k in range(1,6):
-                cubic_force_field[i,j,k+4] = float(a[k])
-                
-        dummy = f.readline()
-        dummy = f.readline()            
-                
-        for j in range(12):
-            a = f.readline().split()
-            for k in range(1,3):
-                cubic_force_field[i,j,k+9] = float(a[k])  
-  
-    f.close()
-    return cubic_force_field
     
 def masswt_hessian(num_atoms_list, charge_list): 
     """returns mass (array)"""
@@ -186,6 +149,9 @@ def fundamental_freq(hessian, num_atoms_list, charge_list, molecule, n_atoms):
     hessian_proj = dot(M_I.transpose(), hessian_trans_rot(hessian, molecule, n_nm, n_atoms))
     hessian_proj = dot(hessian_proj, M_I)
     v, La = linalg.eig(hessian_proj)
+    
+    print "All the eigenvectors"
+    print v
         
     v_reduced = v[:n_nm]
     
@@ -218,7 +184,7 @@ def fundamental_freq(hessian, num_atoms_list, charge_list, molecule, n_atoms):
     #print(reldiff(absolute(correct_EVEC),absolute(La_reduced)))
     #print "\n\nRaw La\n"
     
-    return v_reduced, La_reduced, freq
+    return v_reduced, La_reduced, freq, La
 
 def to_normal_coordinates():
     """returns normal coordinates (array)"""
@@ -253,7 +219,6 @@ def to_normal_coordinates_3D(cubic_force_field, eigvec, n_atoms):
                     temp = temp + cubic_force_field[kp,j,i]* eigvec[kp,k]
                 cff_norm[k,j,i]= temp
                 
-    
     for i in range(n_coords):
         for j in range(n_coords):
             for k in range(n_coords):
@@ -261,6 +226,7 @@ def to_normal_coordinates_3D(cubic_force_field, eigvec, n_atoms):
                 for jp in range(n_coords):
                     temp = temp + cff_norm[k,jp,i]* eigvec[jp,j]
                 cubic_force_field[k,j,i]= temp
+                
     for i in range(n_nm):
         for j in range(n_nm):
             for k in range(n_nm):
@@ -277,8 +243,6 @@ def to_cartessian_coordinates(normal_coords, n_atoms, eigvec):
     factor = sqrt(1822.8884796) #I DONT KNOW WHY?!
     
     n_nm = 3 * n_atoms - 6
-    
-    #cartessian_coordinates = zeros((4,3))
     
     correct_coords = mat([[-0.0001200721,0.0008903518,-0.0015799527]
     ,[0.0002073285,-0.0007928443,-0.0017227255]
@@ -303,13 +267,12 @@ def to_cartessian_coordinates(normal_coords, n_atoms, eigvec):
     #instead of reshape() this will fail if it cannot be done efficiently:
     cartessian_coordinates.shape = (n_atoms, 3) 
                 
-    print "result:"
-    print cartessian_coordinates
-    print "correct:"
-    print correct_coords
-    print "\n\nDIFF: \n"
-    print correct_coords + cartessian_coordinates
-    
+    #print "result:"
+    #print cartessian_coordinates
+    #print "correct:"
+    #print correct_coords
+    #print "\n\nDIFF: \n"
+    #print correct_coords - cartessian_coordinates
     return cartessian_coordinates
 
 def effective_geometry(cff_norm, frequencies, n_atoms):
@@ -345,7 +308,7 @@ def get_3D_property(property_type, pre_property, nm, eig, write_to_file):
  
     if (write_to_file == True):
 		
-        filename = os.path.abspath("/home/benedicte/Dropbox/master/The Program/output/" + property_type)
+        filename = os.path.abspath("/home/benedicte/Dropbox/master/The Program/water/output/" + property_type)
         f = open(filename, "w")
 		
         line1 = str(corrected_property[0]).strip('[]')
@@ -378,7 +341,7 @@ def get_4D_property(property_type, pre_property, n_nm, n_atom, eig, write_to_fil
     #nuclear_shield_corrected = nuclear_shield + nuclear_shield_correction
     
     if (write_to_file == True):
-        filename = os.path.abspath("/home/benedicte/Dropbox/master/The Program/output/" + property_type)
+        filename = os.path.abspath("/home/benedico/Dropbox/master/The Program/output/" + property_type)
         f = open(filename, "w")
         
         for atom in range(n_atom):
@@ -415,7 +378,7 @@ def get_dipole_moment(dipole_moment, n_nm, eig, pre_dipole_moment, write_to_file
     
     if (write_to_file == True):
 		
-        filename = os.path.abspath("/home/benedicte/Dropbox/master/The Program/output/Dipole Moment")
+        filename = os.path.abspath("/home/benedico/Dropbox/master/The Program/water/output/Dipole Moment")
         f = open(filename, "w")
         line = str(dipole_moment_corrected).strip('[]')
         f.write(line + "\n")
@@ -460,10 +423,10 @@ def get_polarizabilities(property_type, pre_property, n_nm, eig, polar):
                     corrected_property[ifreq,j,i] += pre_property[ifreq,nm,j,i]*factor
     
         corrected_property = corrected_property*prefactor
-	if (write_to_file == True):
+        if (write_to_file == True):
         
-		filename = os.path.abspath("/home/benedicte/Dropbox/master/The Program/output/" + property_type)
-        f = open(filename, "w")
+			filename = os.path.abspath("/home/benedico/Dropbox/master/The Program/output/" + property_type)
+			f = open(filename, "w")
         
         for atom in range(n_atom):
             line1 = str(corrected_property[atom][0]).strip('[]')

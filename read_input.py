@@ -45,17 +45,38 @@ def read_mol_quad(filename, nm):
     f = open(filename, 'r')
     second_deriv = zeros((nm,3,3))
     property_type = 0
+    pre_property = zeros((3,3))
+    
     dummy = []
     
     finished = 0
+    
     while (finished == 0):
+        cur_line = f.readline()
+        if re.search('Molecular quadrupole moment at effective geometry',cur_line):
+            finished = 1    
+    
+    dummy = f.readline()
+    dummy = f.readline()
+    dummy = f.readline()
+    dummy = f.readline()
+    
+    
+    mline = f.readline()
+    mline = mline.split()
+    
+    for i in range(3):
+        pre_property[i][0] = mline[1]
+        pre_property[i][1] = mline[2]  
+        pre_property[i][2] = mline[3]
+    
+    while (finished == 1):
         cur_line = f.readline()
         if re.search('quadrupole moment second derivatives',cur_line):
             line_split = cur_line.split()
             property_type = line_split[0] + line_split[1]
-            finished = 1
+            finished = 2
             
-
     dummy = f.readline()
     dummy = f.readline()
     dummy = f.readline()
@@ -63,6 +84,7 @@ def read_mol_quad(filename, nm):
     for mode in range(nm):
         mline = f.readline()
         mline = mline.split()
+        print mline
             
         second_deriv[mode][0][0]= mline[1]
         second_deriv[mode][0][1]= mline[2]  
@@ -74,7 +96,7 @@ def read_mol_quad(filename, nm):
         
         
     f.close()
-    return second_deriv, property_type
+    return second_deriv, property_type, pre_property
 
 def read_3d_input(filename, nm):
     """Imports things needed from the DALTON.OUT that I need"""
