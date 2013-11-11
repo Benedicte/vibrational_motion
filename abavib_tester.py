@@ -13,10 +13,12 @@ dipole_pre = mat([ 0.37370174, 0.49133014, -0.19279329])
 
 
 def main():
-    mol_name = 'MOLECULE.INP'
-    hessian_name = 'hessian'
-    hessian_vib_name = 'hessian_vibprop'
-    cff_name = 'cff'
+    
+    input_name = "input_h2o/"
+    mol_name = input_name + 'MOLECULE.INP'
+    hessian_name = input_name + 'hessian'
+    hessian_vib_name = input_name + 'hessian_vibprop'
+    cff_name = input_name + 'cff'
     coordinates, masses,  num_atoms_list, charge_list, n_atoms = read_molecule(mol_name)
 
     n_coords = 3 * n_atoms
@@ -51,7 +53,7 @@ def main():
     #spin_spin_deriv, prop_type = read_3d_input("SPIN-SPIN", 6)
     #spin_spin = get_3D_property(spin_spin_deriv, n_nm, EVAL)
     
-    mol_quad_deriv, prop_type, pre_property = read_mol_quad("MOLQUAD", 3)
+    mol_quad_deriv, prop_type, pre_property = read_mol_quad(input_name + "MOLQUAD", 3)
     
     #print "Pre Property"
     #print pre_property
