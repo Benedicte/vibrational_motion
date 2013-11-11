@@ -308,7 +308,7 @@ def get_3D_property(property_type, pre_property, nm, eig, write_to_file):
  
     if (write_to_file == True):
 		
-        filename = os.path.abspath("/home/benedicte/Dropbox/master/The Program/output/" + property_type)
+        filename = "output/" + property_type
         f = open(filename, "w")
 		
         line1 = str(corrected_property[0]).strip('[]')
@@ -341,7 +341,7 @@ def get_4D_property(property_type, pre_property, n_nm, n_atom, eig, write_to_fil
     #nuclear_shield_corrected = nuclear_shield + nuclear_shield_correction
     
     if (write_to_file == True):
-        filename = os.path.abspath("/home/benedico/Dropbox/master/The Program/output/" + property_type)
+        filename = "output/" + property_type
         f = open(filename, "w")
         
         for atom in range(n_atom):
