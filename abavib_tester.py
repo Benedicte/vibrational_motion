@@ -105,6 +105,13 @@ spin_r_deriv = array([[[[0,0,0],[0,0,0],[0,0,0]]
 ,[[-0.938,-0.023,0.429],[0.238,-0.081,0.181],[-0.089,0.154,0.076]]
 ,[[-23.118,-7.709,1.512],[-0.479,1.249,-1.707],[0.168,-1.961,-1.911]]]])
 
+correct_shield = array([[[-2.73543218,0.23201889,-1.35752979],[1.29310207,-11.10707143,0.82513205],[-1.89858102,-0.74269857,-4.01976529]]
+,[[-2.75685668,0.21430005,1.31818971],[1.31036411,-11.22126964,-0.84225704],[1.85157732,0.71749018,-3.98227118]]
+,[[-0.2278518,-0.00043512,-0.09115688],[0.00750604,-0.04561196,0.03692163],[-0.12086826,-0.11442797,-0.34873231]]
+,[[-0.2255517,-0.00031229,0.08987755],[0.00613924,-0.04107803,-0.03594509],[0.1193651,0.1134338,-0.34278067]]])
+
+correct_shield = correct_shield.transpose((0,2,1))
+
 def main():
     input_folder = 'input/'
     mol_name = input_folder + 'MOLECULE.INP'
@@ -128,9 +135,6 @@ def main():
     
     eig, eigvec, freq = fundamental_freq(hessian, num_atoms_list, charge_list, coordinates, n_atoms)
     
-    print "freq"
-    print eigvec
-    
     cubic_force_field = read_cubic_force_field(cff_name, n_coords)
 
     cff_correct = read_dalton() 
@@ -148,6 +152,11 @@ def main():
     dipole_moment_diff, dipole_moment_corrected = get_dipole_moment(dipole, n_nm, EVAL, DIPOLE_PRE, True)
    
     shield = get_4D_property("Shield", shield_deriv, n_nm, n_atoms, EVAL, True)
+    print shield
+    print correct_shield
+    
+    print shield - correct_shield
+    
     spin_r = get_4D_property("Spin - Rotation Constant", spin_r_deriv, n_nm, n_atoms, EVAL, True)
     
     nuc_quad_deriv, prop_type = read_4d_input(input_folder + "property", 4, 6)
