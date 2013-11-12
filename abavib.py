@@ -16,7 +16,6 @@ def read_hessian(filename, n_coords):
         a = f.readline().split()
         for j in range(n_coords):
             hessian[i,j] = float(a[j])
-            print hessian[i,j]
     f.close()
 
     return hessian
@@ -149,10 +148,7 @@ def fundamental_freq(hessian, num_atoms_list, charge_list, molecule, n_atoms):
     hessian_proj = dot(M_I.transpose(), hessian_trans_rot(hessian, molecule, n_nm, n_atoms))
     hessian_proj = dot(hessian_proj, M_I)
     v, La = linalg.eig(hessian_proj)
-    
-    print "All the eigenvectors"
-    print v
-        
+
     v_reduced = v[:n_nm]
     
     v_args = v_reduced.argsort()[::-1]
@@ -197,10 +193,6 @@ def to_normal_coordinates():
     qi = (coordinates - coordinates_eq)*sqrt(mass_temp)
     qi = reshape(qi,12)
     norm_coordiates =  multiply(eigvec, qi)
-
-    print coordinates
-    print mass_temp
-    print masses
 
     return n_normal_coords
 
@@ -440,8 +432,6 @@ def get_polarizabilities(property_type, pre_property, n_nm, eig, polar):
             f.write("\n") # Seperates the 2D matrices making up the 3D matrix
 
         f.close()
-        
-        
         
     return corrected_property
     

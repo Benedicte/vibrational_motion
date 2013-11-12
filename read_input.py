@@ -84,7 +84,6 @@ def read_mol_quad(filename, nm):
     for mode in range(nm):
         mline = f.readline()
         mline = mline.split()
-        print mline
             
         second_deriv[mode][0][0]= mline[1]
         second_deriv[mode][0][1]= mline[2]  

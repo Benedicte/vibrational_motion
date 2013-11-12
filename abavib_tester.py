@@ -17,8 +17,7 @@ def main():
     input_name = "input_h2o/"
     mol_name = input_name + 'MOLECULE.INP'
     hessian_name = input_name + 'hessian'
-    hessian_vib_name = input_name + 'hessian_vibprop'
-    cff_name = input_name + 'cff'
+    cff_name = input_name + 'cubic_force_field'
     coordinates, masses,  num_atoms_list, charge_list, n_atoms = read_molecule(mol_name)
 
     n_coords = 3 * n_atoms
@@ -30,6 +29,15 @@ def main():
     hessian = subtract(hessian_temp , diag(hessian.diagonal()))
     
     eig, eigvec_reduced, freq, eigvec = fundamental_freq(hessian, num_atoms_list, charge_list, coordinates, n_atoms)
+   
+    print "eig1"
+    print eig
+   
+    print "freq"
+    print freq
+    
+    print "eigvec"
+    print eigvec
     
     cubic_force_field = read_cubic_force_field(cff_name, n_coords)
   
@@ -38,9 +46,6 @@ def main():
     effective_geometry_norm = effective_geometry(cff_norm_reduced, freq, n_atoms)
     
     effective_geometry_cart = to_cartessian_coordinates(effective_geometry_norm, n_atoms, eigvec_reduced)
-    
-    print "effective geometry"
-    print effective_geometry_norm
     
     #dipole_moment_diff, dipole_moment_corrected = get_dipole_moment(dipole, n_nm, eig, dipole_pre, True)
    
@@ -53,7 +58,7 @@ def main():
     #spin_spin_deriv, prop_type = read_3d_input("SPIN-SPIN", 6)
     #spin_spin = get_3D_property(spin_spin_deriv, n_nm, EVAL)
     
-    mol_quad_deriv, prop_type, pre_property = read_mol_quad(input_name + "MOLQUAD", 3)
+    #mol_quad_deriv, prop_type, pre_property = read_mol_quad(input_name + "MOLQUAD", 3)
     
     #print "Pre Property"
     #print pre_property
@@ -61,16 +66,7 @@ def main():
     #print "mol_quad_deriv"
     #print mol_quad_deriv
     
-    print "The eigenvalues"
-    print eig
-    
-    print "The Frequencies"
-    print freq
-    
-    print "effective geometry"
-    print effective_geometry_cart 
-    
-    mol_quad = get_3D_property(prop_type, mol_quad_deriv, n_nm, eig, True)
+    #mol_quad = get_3D_property(prop_type, mol_quad_deriv, n_nm, eig, True)
     
     #polari_deriv, prop_type = read_polari("POLARI", 6)
     #polari = get_3D_property(prop_type, polari_deriv, n_nm, EVAL, True)  
