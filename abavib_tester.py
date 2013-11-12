@@ -11,7 +11,7 @@ dipole = mat([[0.083445,0.020685,-0.008117]
 
 dipole_pre = mat([ 0.37370174, 0.49133014, -0.19279329])
 
-eig_correct = mat ([[0.003447,-0.039874,-0.067216]
+eig_correct = array ([[0.003447,-0.039874,-0.067216]
 ,[-0.072965,0.008106,-0.01714]
 ,[0.02863,-0.00318,0.006726]
 ,[-0.019459,0.890699,0.354563]
@@ -19,7 +19,7 @@ eig_correct = mat ([[0.003447,-0.039874,-0.067216]
 ,[-0.138013,0.105431,-0.179775]
 ,[-0.035255,-0.257865,0.712205]
 ,[0.806271,0.140066,-0.18613]
-,[-0.316368,-0.054958,0.073029])
+,[-0.316368,-0.054958,0.073029]])
 
 def main():
     
@@ -46,7 +46,7 @@ def main():
     print freq
     
     print "eigvec"
-    print eigvec
+    print eigvec_reduced
     
     cubic_force_field = read_cubic_force_field(cff_name, n_coords)
   
@@ -54,7 +54,11 @@ def main():
    
     effective_geometry_norm = effective_geometry(cff_norm_reduced, freq, n_atoms)
     
-    effective_geometry_cart = to_cartessian_coordinates(effective_geometry_norm, n_atoms, eigvec_reduced)
+    effective_geometry_cart = to_cartessian_coordinates(effective_geometry_norm, n_atoms, eig_correct)
+    
+    
+    print "effective geometry"
+    print effective_geometry_cart
     
     #dipole_moment_diff, dipole_moment_corrected = get_dipole_moment(dipole, n_nm, eig, dipole_pre, True)
    
