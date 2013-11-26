@@ -94,6 +94,9 @@ def main():
     eig, eigvec, freq, eigvec_full = fundamental_freq(hessian, num_atoms_list, charge_list, coordinates, n_atoms)
     cubic_force_field = read_cubic_force_field(cff_name, n_coords) 
     cff_norm, cff_norm_reduced = to_normal_coordinates_3D(cubic_force_field, correct_big_EVEC, n_atoms)
+    cff_norm1, cff_norm_reduced1 = to_normal_coordinates_3D(cubic_force_field, eigvec_full, n_atoms)
+    print cff_norm
+    print cff_norm1
     effective_geometry_norm = effective_geometry(cff_norm_reduced, freq, n_atoms)
     effective_geometry_cart = to_cartessian_coordinates(effective_geometry_norm, n_atoms, eigvec)
     
