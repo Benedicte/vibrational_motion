@@ -258,13 +258,7 @@ def to_cartessian_coordinates(normal_coords, n_atoms, eigvec):
     
     #instead of reshape() this will fail if it cannot be done efficiently:
     cartessian_coordinates.shape = (n_atoms, 3) 
-                
-    #print "result:"
-    #print cartessian_coordinates
-    #print "correct:"
-    #print correct_coords
-    #print "\n\nDIFF: \n"
-    #print correct_coords - cartessian_coordinates
+
     return cartessian_coordinates
 
 def effective_geometry(cff_norm, frequencies, n_atoms):
@@ -284,11 +278,10 @@ def effective_geometry(cff_norm, frequencies, n_atoms):
 
 def get_3D_property(property_type, pre_property, nm, eig, write_to_file):
     """ Corrects magnetizabilities, rotational g-factor, molecular quadropole moments, and indirect spin-spin coupling"""
-    
+
     m_e = 1822.8884796 # conversion factor from a.m.u to a.u 
     prefactor = 1/(4*m_e)
     corrected_property = zeros((3,3))
-    
     for mode in range(nm):
         factor = 1/(sqrt(eig[mode])) # the reduced one
         for i in range(3):
@@ -393,8 +386,6 @@ def get_dipole_moment1(dipole_moment, n_nm, eig, pre_dipole_moment): # Don't rem
     dipole_moment_diff = dipole_moment_diff * prefactor 
     dipole_moment_corrected = add(pre_dipole_moment, dipole_moment_diff)
     
-    
-    
     return dipole_moment_diff, dipole_moment_corrected
 
 def get_polarizabilities(property_type, pre_property, n_nm, eig, polar):
@@ -432,8 +423,8 @@ def get_polarizabilities(property_type, pre_property, n_nm, eig, polar):
             f.write("\n") # Seperates the 2D matrices making up the 3D matrix
 
         f.close()
-        
-    return corrected_property
+
+    return corrected_property, "POLARI"
     
 def get_optical_rotation(property_type, pre_property1, pre_property2, n_nm, ifreq, eig, write_to_file):
     """ Corrects optical rotations""" 
