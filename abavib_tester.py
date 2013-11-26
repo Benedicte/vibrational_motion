@@ -46,6 +46,8 @@ dipole = array([[-0.048779,-0.282926,-0.008477],
 [-0.000336,0.000407,-0.240555]])
 
 EVAL = array([0.0003967267, 0.0003909715, 5.5175184e-005, 4.4395569e-005, 2.8355625e-005, 1])
+EVAL1 = array([0.0003967267, 0.0003909715, 5.5175184e-005, 4.4395569e-005, 2.8355625e-005, 0.00028389])
+0.00028389
 
 DIPOLE_PRE = array([0.00026608, -0.00020134, 0.97738028]) 
 
@@ -77,40 +79,23 @@ shield_deriv = array([[[[-216.249,81.381,123.581],[51.559,-619.252,135.959],[151
 ,[[-1.86,-0.158,3.015],[0.096,0.164,-0.277],[2.78,0.05,-4.648]]
 ,[[-0.608,-0.232,-2.134],[-1.261,-2.343,1.843],[1.392,1.7,-4.339]]]])
 
-spin_r_deriv = array([[[[0,0,0],[0,0,0],[0,0,0]]
-,[[0,0,0],[0,0,0],[0,0,0]]
-,[[0,0,0],[0,0,0],[0,0,0]]
-,[[0,0,0],[0,0,0],[0,0,0]]
-,[[0,0,0],[0,0,0],[0,0,0]]
-,[[0,0,0],[0,0,0],[0,0,0]]]
-
-,[[[0,0,0],[0,0,0],[0,0,0]]
-,[[0,0,0],[0,0,0],[0,0,0]]
-,[[0,0,0],[0,0,0],[0,0,0]]
-,[[0,0,0],[0,0,0],[0,0,0]]
-,[[0,0,0],[0,0,0],[0,0,0]]
-,[[0,0,0],[0,0,0],[0,0,0]]]
-
-,[[[136.89,-5.394,-9.21],[-1.691,0.252,-6.393],[-1.436,-6.749,2.286]]
-,[[-2.917,-2.804,-1.75],[-0.144,-0.452,0.418],[-0.11,0.393,-0.659]]
-,[[-25.89,4.641,-3.062],[1.737,1.401,1.405],[0.456,1.381,-1.006]]
-,[[-30.511,-6.352,3.134],[0.977,1.131,1.13],[0.405,1.15,-1.325]]
-,[[-1.107,0.07,0.459],[-0.235,-0.084,-0.183],[-0.085,-0.156,0.075]]
-,[[-23.392,7.811,1.401],[0.492,1.278,1.732],[0.163,1.989,-1.95]]]
-
-,[[[22.297,3.684,-1.833],[0.21,-1.498,-0.785],[0.033,-0.745,0.371]]
-,[[110.556,4.55,-9.1],[1.614,1.274,6.706],[-1.571,7.041,1.248]]
-,[[-27.316,-4.983,-3.093],[-1.81,1.481,-1.459],[0.479,-1.432,-1.073]]
-,[[-28.461,6.688,3.022],[-0.893,1.048,-1.047],[0.36,-1.071,-1.251]]
-,[[-0.938,-0.023,0.429],[0.238,-0.081,0.181],[-0.089,0.154,0.076]]
-,[[-23.118,-7.709,1.512],[-0.479,1.249,-1.707],[0.168,-1.961,-1.911]]]])
-
 correct_shield = array([[[-2.73543218,0.23201889,-1.35752979],[1.29310207,-11.10707143,0.82513205],[-1.89858102,-0.74269857,-4.01976529]]
 ,[[-2.75685668,0.21430005,1.31818971],[1.31036411,-11.22126964,-0.84225704],[1.85157732,0.71749018,-3.98227118]]
 ,[[-0.2278518,-0.00043512,-0.09115688],[0.00750604,-0.04561196,0.03692163],[-0.12086826,-0.11442797,-0.34873231]]
 ,[[-0.2255517,-0.00031229,0.08987755],[0.00613924,-0.04107803,-0.03594509],[0.1193651,0.1134338,-0.34278067]]])
 
 correct_shield = correct_shield.transpose((0,2,1))
+correct_MOLQUAD = array([-0.00825547,-0.00810764,0.0000083,0.02245658,-0.00003619,-0.01420111])
+correct_g_tensor = array([[-0.02776227,-0.00001852,0.00232808],[-0.00000333,-0.00035603,-0.00000795],[0.00046495,-0.00000757,0.00136186]])
+correct_magnet = array([-0.03198422,-0.00377751,0.00008762,0.0440208,0.00003563,0.00310904])
+correct_polari = array([0.02969292,0.03673433,-0.00014646,0.18001732,-0.0001547,0.08188467])
+correct_spinrot = array([[-0.21388431,0.0334947,0.00389405,-0.09999148,0.04560931,0.00144877,-0.05558241,0.00337925,-0.03279227]
+,[-0.1955979,-0.03304894,0.0032995,0.10214155,0.0453841,-0.00085245,-0.05945283,-0.0027541,-0.03244115]])
+
+correct_nucquad = array([[0.00173516,-0.00266833,-0.00676687,0.01132919,-0.01183273,-0.01306435]
+,[0.00177681,-0.0026176,0.00675537,0.01120484,0.01177362,-0.01298165]
+,[-0.00844869,0.00204556,0.01162262,-0.00631312,0.00461045,0.01476181]
+,[-0.00845538,0.00208702,-0.01167536,-0.00643277,-0.00467444,0.01488815]])
 
 def main():
     input_folder = 'input/'
@@ -134,14 +119,10 @@ def main():
     hessian_vib = subtract(hessian_temp , diag(hessian_vib.diagonal()))
     
     eig, eigvec, freq = fundamental_freq(hessian, num_atoms_list, charge_list, coordinates, n_atoms)
-    
     cubic_force_field = read_cubic_force_field(cff_name, n_coords)
-
     cff_correct = read_dalton() 
-
     cff_norm, cff_norm_reduced = to_normal_coordinates_3D(cff_correct, correct_big_EVEC, n_atoms)
     effective_geometry_norm = effective_geometry(cff_norm_reduced, freq, n_atoms)
-    
     effective_geometry_cart = to_cartessian_coordinates(effective_geometry_norm, n_atoms, eigvec)
     
     # The effective geometry is not the same as the one for DALTON, because of the difference in
@@ -152,29 +133,34 @@ def main():
     dipole_moment_diff, dipole_moment_corrected = get_dipole_moment(dipole, n_nm, EVAL, DIPOLE_PRE, True)
    
     shield = get_4D_property("Shield", shield_deriv, n_nm, n_atoms, EVAL, True)
-    print shield
-    print correct_shield
     
-    print shield - correct_shield
-    
-    spin_r = get_4D_property("Spin - Rotation Constant", spin_r_deriv, n_nm, n_atoms, EVAL, True)
-    
-    nuc_quad_deriv, prop_type = read_4d_input(input_folder + "property", 4, 6)
+    nuc_quad_deriv, prop_type = read_4d_input(input_folder + "NUCQUAD", 4, 6)
     nuc_quad = get_4D_property(prop_type, nuc_quad_deriv, n_nm, n_atoms, EVAL, True)
     
-    spin_spin_deriv, prop_type = read_3d_input(input_folder + "SPIN-SPIN", 6)
-    spin_spin = get_3D_property(prop_type, spin_spin_deriv, n_nm, EVAL, True)
-    
-    mol_quad_deriv, prop_type = read_mol_quad(input_folder + "MOLQUAD", 6)
-    mol_quad = get_3D_property(prop_type, mol_quad_deriv, n_nm, EVAL, True)
+    #spin_spin_deriv, prop_type = read_3d_input(input_folder + "SPIN-SPIN", 6)
+    #spin_spin = get_3D_property(prop_type, spin_spin_deriv, n_nm, EVAL, True)
     
     polari_deriv, prop_type = read_polari(input_folder + "POLARI", 6)
     polari = get_3D_property(prop_type, polari_deriv, n_nm, EVAL, True)  
     
-    quartic_force_field = read_quartic_force_field(input_folder + 'quartic',12)     
+    mol_quad_deriv, prop_type = read_mol_quad(input_folder + "MOLQUAD", 6)
+    mol_quad = get_3D_property(prop_type, mol_quad_deriv, 6, EVAL, True)
     
-   
+    magnet_deriv, g_tensor_deriv = read_magnet("input/MAGNET", 6)
+    g_tensor = get_3D_property("g-tensor", g_tensor_deriv, n_nm, EVAL, True)  
+    magnet = get_3D_property("magnet", magnet_deriv, n_nm, EVAL, True)
+
+    spinrot_deriv, prop_type = read_spinrot("input/SPIN-ROT", 4, 6)
+    spinrot = get_4D_property(prop_type, spinrot_deriv, n_nm, n_atoms, EVAL, True) 
     
+    
+    quartic_force_field = read_quartic_force_field(input_folder + 'quartic',12)   
+    
+    print "g-tensor"
+    print g_tensor   
+    print correct_g_tensor
+    
+
 set_printoptions(suppress=True) #Avoid scientific notation when printing arrs
 
 main()
