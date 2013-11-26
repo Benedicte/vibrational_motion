@@ -90,13 +90,13 @@
   Hans Agren,               KTH Stockholm,                Sweden      (SIRIUS module, MC-SCRF solvation model)
  --------------------------------------------------------------------------------
 
-     Date and time (Linux)  : Mon Nov 25 22:08:27 2013
-     Host name              : c9-1.local                              
+     Date and time (Linux)  : Tue Nov 12 20:39:50 2013
+     Host name              : c17-11.local                            
 
  * Work memory size             :   100000000 =  762.94 megabytes.
 
  * Directories for basis set searches:
-   1) /global/work/benedico/1901613.stallo-adm.uit.no/basis/
+   1) /global/work/benedico/1891201.stallo-adm.uit.no/basis/
 
 
 Compilation information
@@ -152,7 +152,8 @@ Compilation information
 .THRESH                                           
 1.0D-10                                           
 **START                                           
-.QUADRU                                           
+.MAGNET                                           
+.NOLOND                                           
 *LINRES                                           
 .THRESH                                           
 1.0D-6                                            
@@ -160,7 +161,8 @@ Compilation information
 .THRESH                                           
 1.0D-5                                            
 **EACH STEP                                       
-.QUADRU                                           
+.MAGNET                                           
+.NOLOND                                           
 *LINRES                                           
 .THRESH                                           
 1.0D-6                                            
@@ -232,7 +234,7 @@ H    -0.69729204 -1.73608239  1.59679826
   Number of symmetry independent centers:    2
   Number of basis sets to read;    2
   Basis set file used for this atomic type with Z =   8 :
-     "/global/work/benedico/1901613.stallo-adm.uit.no/basis/STO-3G"
+     "/global/work/benedico/1891201.stallo-adm.uit.no/basis/STO-3G"
 
   Atomic type no.    2
   --------------------
@@ -240,7 +242,7 @@ H    -0.69729204 -1.73608239  1.59679826
   Number of symmetry independent centers:    2
   Number of basis sets to read;    2
   Basis set file used for this atomic type with Z =   1 :
-     "/global/work/benedico/1901613.stallo-adm.uit.no/basis/STO-3G"
+     "/global/work/benedico/1891201.stallo-adm.uit.no/basis/STO-3G"
 
 
                          SYMGRP: Point group information
@@ -369,7 +371,7 @@ Point group: C1
      ************************************************************************
 
  >>>> Total CPU  time used in HERMIT:   0.01 seconds
- >>>> Total wall time used in HERMIT:   0.03 seconds
+ >>>> Total wall time used in HERMIT:   0.05 seconds
 
 
                         .----------------------------------.
@@ -403,8 +405,8 @@ Point group: C1
  **********************************************************************
 
  
-     Date and time (Linux)  : Mon Nov 25 22:08:27 2013
-     Host name              : c9-1.local                              
+     Date and time (Linux)  : Tue Nov 12 20:39:51 2013
+     Host name              : c17-11.local                            
 
  Title lines from ".mol" input file:
      Hydrogen Peroxide                                                       
@@ -499,42 +501,42 @@ Point group: C1
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
    9  Screening settings (-IFTHRS, DIFDEN)  -10    T
-   9    -148.746937918        2.78703D-06    7.14D-11    9
+   9    -148.746937918        2.78703D-06    7.15D-11    9
       Virial theorem: -V/T =      2.008688
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
   10  Screening settings (-IFTHRS, DIFDEN)  -12    F
-  10    -148.746937918        2.52558D-07   -4.12D-10   10
+  10    -148.746937918        2.52559D-07   -4.12D-10   10
       Virial theorem: -V/T =      2.008688
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
   11  Screening settings (-IFTHRS, DIFDEN)  -15    F
-  11    -148.746937918        8.34902D-08   -2.84D-14   10
+  11    -148.746937918        8.34586D-08    5.68D-14   10
       Virial theorem: -V/T =      2.008688
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
   12  Screening settings (-IFTHRS, DIFDEN)  -15    T
-  12    -148.746937918        1.41996D-08    0.00D+00   10
+  12    -148.746937918        1.41996D-08   -5.68D-14   10
       Virial theorem: -V/T =      2.008688
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
   13  Screening settings (-IFTHRS, DIFDEN)  -15    T
-  13    -148.746937918        6.90742D-09   -5.68D-14   10
+  13    -148.746937918        6.90742D-09    0.00D+00   10
       Virial theorem: -V/T =      2.008688
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
   14  Screening settings (-IFTHRS, DIFDEN)  -15    T
-  14    -148.746937918        1.71759D-09    2.84D-14   10
+  14    -148.746937918        1.71759D-09   -5.68D-14   10
       Virial theorem: -V/T =      2.008688
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
   15  Screening settings (-IFTHRS, DIFDEN)  -15    T
-  15    -148.746937918        3.54419D-10    5.68D-14   10
+  15    -148.746937918        3.54418D-10    0.00D+00   10
       Virial theorem: -V/T =      2.008688
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
   16  Screening settings (-IFTHRS, DIFDEN)  -15    T
-  16    -148.746937918        4.01280D-11   -8.53D-14   10
+  16    -148.746937918        4.01274D-11    5.68D-14   10
 
  *** DIIS converged in  16 iterations !
 @    Converged SCF energy, gradient:   -148.746937918214    4.01D-11
@@ -561,7 +563,7 @@ Point group: C1
 
  >>> Writing SIRIFC interface file <<<
 
- >>>> CPU and wall time for SCF :       0.124       0.297
+ >>>> CPU and wall time for SCF :       0.090       0.253
 
 
                        .-----------------------------------.
@@ -580,8 +582,8 @@ Point group: C1
 @    Final gradient norm:           0.000000000040
 
  
-     Date and time (Linux)  : Mon Nov 25 22:08:28 2013
-     Host name              : c9-1.local                              
+     Date and time (Linux)  : Tue Nov 12 20:39:51 2013
+     Host name              : c17-11.local                            
 
  (Only coefficients >0.0100 are printed.)
 
@@ -618,12 +620,12 @@ Point group: C1
 
 
 
- >>>> Total CPU  time used in SIRIUS :      0.13 seconds
- >>>> Total wall time used in SIRIUS :      0.34 seconds
+ >>>> Total CPU  time used in SIRIUS :      0.10 seconds
+ >>>> Total wall time used in SIRIUS :      0.28 seconds
 
  
-     Date and time (Linux)  : Mon Nov 25 22:08:28 2013
-     Host name              : c9-1.local                              
+     Date and time (Linux)  : Tue Nov 12 20:39:51 2013
+     Host name              : c17-11.local                            
 
 
                      .---------------------------------------.
@@ -661,9 +663,11 @@ Maximum number of iterations reset in numerical differentiation to    25
       The molecular gradient
       The molecular Hessian
       Geometry optimization
-      Quadrupole moments
+      Magnetic susceptibilities
+      INFO - London orbitals are NOT used
       Direct calculation - no two-electron integrals written or read.
       Two-electron integrals will be calculated in parallel
+      Molecular rotational g-factor
       Natural orbital connection is used
       for perturbation dependent basis sets.
 
@@ -711,20 +715,20 @@ Maximum number of iterations reset in numerical differentiation to    25
 
 
  
-     Date and time (Linux)  : Mon Nov 25 22:08:28 2013
-     Host name              : c9-1.local                              
+     Date and time (Linux)  : Tue Nov 12 20:39:51 2013
+     Host name              : c17-11.local                            
 
  (ORTBVC) new orbital b-vector no.  4
  is removed because of linear dependence;
- norm of vector after Gram-Schmidt's orthogonalization 5.12489D-16
+ norm of vector after Gram-Schmidt's orthogonalization 5.21006D-16
 
  (ORTBVC) new orbital b-vector no.  5
  is removed because of linear dependence;
- norm of vector after Gram-Schmidt's orthogonalization 5.09932D-16
+ norm of vector after Gram-Schmidt's orthogonalization 3.92538D-16
 
  (ORTBVC) new orbital b-vector no.  6
  is removed because of linear dependence;
- norm of vector after Gram-Schmidt's orthogonalization 5.18865D-16
+ norm of vector after Gram-Schmidt's orthogonalization 4.77220D-16
 
  (ORTBVC) NBOSIM reduced from  6 to  3
 
@@ -737,8 +741,8 @@ Maximum number of iterations reset in numerical differentiation to    25
 
 
  
-     Date and time (Linux)  : Mon Nov 25 22:08:28 2013
-     Host name              : c9-1.local                              
+     Date and time (Linux)  : Tue Nov 12 20:39:51 2013
+     Host name              : c17-11.local                            
 
 
                              Molecular geometry (au)
@@ -846,54 +850,127 @@ Maximum number of iterations reset in numerical differentiation to    25
 
 
 
-        *****************************************************************
-        ************* ABACUS - Molecular quadrupole moments *************
-        *****************************************************************
+   ****************************************************************************
+   ************************ ABACUS - MAGNETIZABILITIES ************************
+   ****************************************************************************
 
 
-  Units:  C m**2/(10**(-40))   (SI) 
-          Debye*AAngstroem     (cgs)
+  Units:  JT**(-2)/(10**(-30))   (SI) 
+          ppm cm**(3) mol**(-1)  (cgs)
+
+ Calculation without London orbitals (GIAOs).
 
 
-  Principal values (au, SI and cgs) and axes:
-  -------------------------------------------
+  Magnetizabilities                    au          SI         cgs
+  ---------------------------------------------------------------
 
-  Q_aa         1.2784      5.7356      1.7195     -0.0003    0.0002    1.0000
-  Q_bb         0.4073      1.8274      0.5478      0.6849    0.7287    0.0000
-  Q_cc        -1.6857     -7.5630     -2.2673      0.7287   -0.6849    0.0004
-
-
-                          Total quadrupole moments (au)
-                          -----------------------------
-
-                         Ex          Ey          Ez
-
-            Ex      -0.703986    1.044502   -0.000828
-            Ey       1.044502   -0.574416    0.000728
-            Ez      -0.000828    0.000728    1.278402
+  Isotropic magnetizability:      -8.8386   -697.4560    -42.0018
+  Diamagnetic contribution:      -10.9416   -863.4071    -51.9956
+  Paramagnetic contribution:       2.1030    165.9511      9.9938
+  1st anisotropy:                 -3.9598   -312.4728    -18.8176
+  2nd anisotropy:                  6.8504    540.5704     32.5539
 
 
 
-                 Total quadrupole moments (cgs, Debye*AAngstroem)
-                 ------------------------------------------------
+  Principal values (au, SI, and cgs) and axes:
+  --------------------------------------------
 
-                         Ex          Ey          Ez
-
-            Ex      -0.946885    1.404891   -0.001113
-            Ey       1.404891   -0.772609    0.000979
-            Ez      -0.001113    0.000979    1.719494
+  khi_aa     -10.7656   -849.5211    -51.1594      0.9996   -0.0283   -0.0006
+  khi_bb      -4.2716   -337.0758    -20.2992      0.0283    0.9996   -0.0001
+  khi_cc     -11.4785   -905.7712    -54.5468      0.0006    0.0001    1.0000
 
 
+                        Total magnetizability tensor (au)
+                        ---------------------------------
 
-                          Total quadrupole moments (SI)
-                          -----------------------------
+                       Bx                  By                  Bz
 
-                         Ex          Ey          Ez
+  Bx       -10.760435024057      0.183905356469     -0.000478359472
+  By         0.183905356469     -4.276840741314     -0.000863504149
+  Bz        -0.000478359472     -0.000863504149    -11.478482058502
 
-            Ex      -3.158468    4.686210   -0.003714
-            Ey       4.686210   -2.577147    0.003265
-            Ez      -0.003714    0.003265    5.735615
 
+
+                     Diamagnetic magnetizability tensor (au)
+                     ---------------------------------------
+
+                       Bx                  By                  Bz
+
+  Bx       -14.247827871256      0.429401921063     -0.001014095971
+  By         0.429401921063     -5.068798947620     -0.001806139514
+  Bz        -0.001014095971     -0.001806139514    -13.508228935547
+
+
+
+                     Paramagnetic magnetizability tensor (au)
+                     ----------------------------------------
+
+                       Bx                  By                  Bz
+
+  Bx         3.487392847198     -0.245496564593      0.000535736500
+  By        -0.245496564593      0.791958206306      0.000942635364
+  Bz         0.000535736500      0.000942635364      2.029746877045
+
+
+
+ ****************************************************************************************
+ ************************ ABACUS - MOLECULAR ROTATIONAL g-TENSOR ************************
+ ****************************************************************************************
+
+
+ Calculation without London orbitals.
+
+
+ Principal moments of inertia (a.u.) and principal axes
+ ------------------------------------------------------
+
+   IA    6.343988          0.035359    0.999375   -0.000085
+   IB   70.528444         -0.000989    0.000120    1.000000
+   IC   75.088137          0.999374   -0.035358    0.000992
+
+
+  Molecular rotational g-tensor
+  -----------------------------
+
+  Isotropic g-tensor       :       0.43405928
+  Nuclear contribution     :       0.70003616
+  Diamagnetic contribution :       0.00000000
+  Electronic contribution  :      -0.26597688
+  1st anisotropy:                  0.05971214
+  2nd anisotropy:                  0.00497293
+
+
+
+  Molecular rotational g-tensor in principal axis system (a.u.):
+  --------------------------------------------------------------
+
+   A            0.47386737      0.00001739     -0.00682660
+   B            0.00019330      0.43737456      0.00005079
+   C           -0.08080038      0.00005407      0.39093590
+
+
+  Nuclear contribution in principal axis system (a.u.):
+  -----------------------------------------------------
+
+   A            0.96796596      0.00007471     -0.01485576
+   B            0.00083058      0.55332874     -0.00000131
+   C           -0.17583433     -0.00000139      0.57881378
+
+
+  Electronic contribution in principal axis system (a.u.):
+  --------------------------------------------------------
+
+   A           -0.49409859     -0.00005732      0.00802916
+   B           -0.00063728     -0.11595418      0.00005210
+   C            0.09503396      0.00005547     -0.18787788
+
+
+  Diamagnetic contribution in principal axis system (a.u.):
+  ---------------------------------------------------------
+
+   A            0.00000000      0.00000000      0.00000000
+   B            0.00000000      0.00000000      0.00000000
+   C            0.00000000      0.00000000      0.00000000
 
 
    Interatomic separations (in Angstrom):
@@ -950,8 +1027,8 @@ Maximum number of iterations reset in numerical differentiation to    25
  Center-of-mass coordinates (a.u.):    0.000000    0.000000    0.000000
   Norm of projected gradient     0.148226
 
- Largest deviation from orthonormality of OMOs:0.546230E-13
- - found for element    6   6
+ Largest deviation from orthonormality of OMOs:0.528466E-13
+ - found for element   11  11
 
 
        ********************************************************************
@@ -1033,14 +1110,25 @@ Maximum number of iterations reset in numerical differentiation to    25
     ==== End of matrix output ====
 
 
-  Molecular quadrupole moment at effective geometry
-  -------------------------------------------------
+  Magnetizabilities at effective geometry
+  ---------------------------------------
 
                        Bx                  By                  Bz
 
-  Bx        -0.703985619455      1.044501703447     -0.000827790564
-  By         1.044501703447     -0.574416122860      0.000727700446
-  Bz        -0.000827790564      0.000727700446      1.278401742316
+  Bx       -10.760435024057      0.183905356469     -0.000478359472
+  By         0.183905356469     -4.276840741314     -0.000863504149
+  Bz        -0.000478359472     -0.000863504149    -11.478482058502
+
+
+
+  Rotational g tensor at effective geometry
+  -----------------------------------------
+
+                       Bx                  By                  Bz
+
+  Bx         0.473867371898      0.000193303469     -0.080800375656
+  By         0.000017387523      0.437374562507      0.000054073767
+  Bz        -0.006826599673      0.000050790163      0.390935896804
 
 
 
@@ -1050,8 +1138,8 @@ Maximum number of iterations reset in numerical differentiation to    25
 
 
 
- >>>> Total CPU  time used in ABACUS:   0.51 seconds
- >>>> Total wall time used in ABACUS:   0.59 seconds
+ >>>> Total CPU  time used in ABACUS:   0.38 seconds
+ >>>> Total wall time used in ABACUS:   0.55 seconds
 
 
                    .-------------------------------------------.
@@ -1078,7 +1166,7 @@ Maximum number of iterations reset in numerical differentiation to    25
                      `---------------------------------------'
 
  >>>> Total CPU  time used in HERMIT:   0.01 seconds
- >>>> Total wall time used in HERMIT:   0.02 seconds
+ >>>> Total wall time used in HERMIT:   0.01 seconds
 
 
                         .----------------------------------.
@@ -1136,12 +1224,12 @@ Maximum number of iterations reset in numerical differentiation to    25
 @      MULPOP O      -0.17; O      -0.18; H       0.17; H       0.18; 
  -----------------------------------------------------------------------------
    7  Screening settings (-IFTHRS, DIFDEN)  -11    F
-   7    -148.747560868        1.33993D-05    5.66D-10    7
+   7    -148.747560868        1.33993D-05    5.65D-10    7
       Virial theorem: -V/T =      2.008893
 @      MULPOP O      -0.17; O      -0.18; H       0.17; H       0.18; 
  -----------------------------------------------------------------------------
    8  Screening settings (-IFTHRS, DIFDEN)  -11    T
-   8    -148.747560868        3.43071D-06   -5.58D-11    8
+   8    -148.747560868        3.43071D-06   -5.57D-11    8
       Virial theorem: -V/T =      2.008893
 @      MULPOP O      -0.17; O      -0.18; H       0.17; H       0.18; 
  -----------------------------------------------------------------------------
@@ -1151,32 +1239,32 @@ Maximum number of iterations reset in numerical differentiation to    25
 @      MULPOP O      -0.17; O      -0.18; H       0.17; H       0.18; 
  -----------------------------------------------------------------------------
   10  Screening settings (-IFTHRS, DIFDEN)  -15    F
-  10    -148.747560868        2.30216D-07   -3.13D-12   10
+  10    -148.747560868        2.30216D-07   -3.24D-12   10
       Virial theorem: -V/T =      2.008893
 @      MULPOP O      -0.17; O      -0.18; H       0.17; H       0.18; 
  -----------------------------------------------------------------------------
   11  Screening settings (-IFTHRS, DIFDEN)  -15    T
-  11    -148.747560868        6.51001D-08   -5.68D-14   10
+  11    -148.747560868        6.51110D-08    1.71D-13   10
       Virial theorem: -V/T =      2.008893
 @      MULPOP O      -0.17; O      -0.18; H       0.17; H       0.18; 
  -----------------------------------------------------------------------------
   12  Screening settings (-IFTHRS, DIFDEN)  -15    T
-  12    -148.747560868        8.73925D-09    0.00D+00   10
+  12    -148.747560868        8.73925D-09   -1.71D-13   10
       Virial theorem: -V/T =      2.008893
 @      MULPOP O      -0.17; O      -0.18; H       0.17; H       0.18; 
  -----------------------------------------------------------------------------
   13  Screening settings (-IFTHRS, DIFDEN)  -15    T
-  13    -148.747560868        1.86107D-09    0.00D+00   10
+  13    -148.747560868        1.86107D-09    5.68D-14   10
       Virial theorem: -V/T =      2.008893
 @      MULPOP O      -0.17; O      -0.18; H       0.17; H       0.18; 
  -----------------------------------------------------------------------------
   14  Screening settings (-IFTHRS, DIFDEN)  -15    T
-  14    -148.747560868        2.86640D-10   -5.68D-14   10
+  14    -148.747560868        2.86638D-10    0.00D+00   10
       Virial theorem: -V/T =      2.008893
 @      MULPOP O      -0.17; O      -0.18; H       0.17; H       0.18; 
  -----------------------------------------------------------------------------
   15  Screening settings (-IFTHRS, DIFDEN)  -15    T
-  15    -148.747560868        4.00931D-11    1.14D-13   10
+  15    -148.747560868        4.00879D-11    5.68D-14   10
 
  *** DIIS converged in  15 iterations !
 @    Converged SCF energy, gradient:   -148.747560867903    4.01D-11
@@ -1218,7 +1306,7 @@ Maximum number of iterations reset in numerical differentiation to    25
  *** GEOMETRY WALK STEP ACCEPTED.
 
 
- >>>> CPU and wall time for SCF :       0.791       0.817
+ >>>> CPU and wall time for SCF :       0.085       0.106
 
 
                        .-----------------------------------.
@@ -1237,17 +1325,17 @@ Maximum number of iterations reset in numerical differentiation to    25
 @    Final gradient norm:           0.000000000040
 
  
-     Date and time (Linux)  : Mon Nov 25 22:08:29 2013
-     Host name              : c9-1.local                              
+     Date and time (Linux)  : Tue Nov 12 20:39:52 2013
+     Host name              : c17-11.local                            
 
 
 
- >>>> Total CPU  time used in SIRIUS :      0.79 seconds
- >>>> Total wall time used in SIRIUS :      0.82 seconds
+ >>>> Total CPU  time used in SIRIUS :      0.09 seconds
+ >>>> Total wall time used in SIRIUS :      0.11 seconds
 
  
-     Date and time (Linux)  : Mon Nov 25 22:08:29 2013
-     Host name              : c9-1.local                              
+     Date and time (Linux)  : Tue Nov 12 20:39:52 2013
+     Host name              : c17-11.local                            
 
 
                      .---------------------------------------.
@@ -1269,9 +1357,11 @@ Maximum number of iterations reset in numerical differentiation to    25
 
       The molecular gradient
       Geometry optimization
-      Quadrupole moments
+      Magnetic susceptibilities
+      INFO - London orbitals are NOT used
       Direct calculation - no two-electron integrals written or read.
       Two-electron integrals will be calculated in parallel
+      Molecular rotational g-factor
       Natural orbital connection is used
       for perturbation dependent basis sets.
 
@@ -1294,8 +1384,8 @@ Maximum number of iterations reset in numerical differentiation to    25
 
 
  
-     Date and time (Linux)  : Mon Nov 25 22:08:29 2013
-     Host name              : c9-1.local                              
+     Date and time (Linux)  : Tue Nov 12 20:39:52 2013
+     Host name              : c17-11.local                            
 
  Largest deviation from tra-rot symmetry is in gradient element  6:  1.06E-10
 
@@ -1306,60 +1396,73 @@ Maximum number of iterations reset in numerical differentiation to    25
 
 
  
-     Date and time (Linux)  : Mon Nov 25 22:08:29 2013
-     Host name              : c9-1.local                              
+     Date and time (Linux)  : Tue Nov 12 20:39:52 2013
+     Host name              : c17-11.local                            
 
 
-        *****************************************************************
-        ************* ABACUS - Molecular quadrupole moments *************
-        *****************************************************************
+   ****************************************************************************
+   ************************ ABACUS - MAGNETIZABILITIES ************************
+   ****************************************************************************
 
 
-  Units:  C m**2/(10**(-40))   (SI) 
-          Debye*AAngstroem     (cgs)
+  Units:  JT**(-2)/(10**(-30))   (SI) 
+          ppm cm**(3) mol**(-1)  (cgs)
+
+ Calculation without London orbitals (GIAOs).
 
 
-  Principal values (au, SI and cgs) and axes:
-  -------------------------------------------
+  Magnetizabilities                    au          SI         cgs
+  ---------------------------------------------------------------
 
-  Q_aa         1.3007      5.8357      1.7495      0.0005   -0.0075    1.0000
-  Q_bb         0.3896      1.7478      0.5240      0.6865    0.7272    0.0051
-  Q_cc        -1.6903     -7.5836     -2.2735      0.7272   -0.6864   -0.0055
-
-
-                          Total quadrupole moments (au)
-                          -----------------------------
-
-                         Ex          Ey          Ez
-
-            Ex      -0.710216    1.038168    0.008832
-            Ey       1.038168   -0.590380   -0.014728
-            Ez       0.008832   -0.014728    1.300597
+  Isotropic magnetizability:      -8.8419   -697.7137    -42.0173
+  Diamagnetic contribution:      -10.9764   -866.1499    -52.1608
+  Paramagnetic contribution:       2.1345    168.4362     10.1435
+  1st anisotropy:                 -3.9557   -312.1462    -18.7979
+  2nd anisotropy:                  6.8693    542.0574     32.6435
 
 
 
-                 Total quadrupole moments (cgs, Debye*AAngstroem)
-                 ------------------------------------------------
+  Principal values (au, SI, and cgs) and axes:
+  --------------------------------------------
 
-                         Ex          Ey          Ez
-
-            Ex      -0.955265    1.396371    0.011880
-            Ey       1.396371   -0.794082   -0.019809
-            Ez       0.011880   -0.019809    1.749347
+  khi_aa     -10.7842   -850.9878    -51.2477      0.9996   -0.0280    0.0073
+  khi_bb      -4.2623   -336.3421    -20.2550      0.0280    0.9996    0.0003
+  khi_cc     -11.4790   -905.8112    -54.5492     -0.0073   -0.0001    1.0000
 
 
+                        Total magnetizability tensor (au)
+                        ---------------------------------
 
-                          Total quadrupole moments (SI)
-                          -----------------------------
+                       Bx                  By                  Bz
 
-                         Ex          Ey          Ez
-
-            Ex      -3.186423    4.657794    0.039627
-            Ey       4.657794   -2.648771   -0.066076
-            Ez       0.039627   -0.066076    5.835194
+  Bx       -10.779155881446      0.182572927936      0.005144299278
+  By         0.182572927936     -4.267446179263      0.001980805495
+  Bz         0.005144299278      0.001980805495    -11.478950513536
 
 
- Largest deviation from orthonormality of OMOs:0.306422E-13
+
+                     Diamagnetic magnetizability tensor (au)
+                     ---------------------------------------
+
+                       Bx                  By                  Bz
+
+  Bx       -14.291533670880      0.437255669185      0.010476336751
+  By         0.437255669185     -5.114873657460      0.012997904777
+  Bz         0.010476336751      0.012997904777    -13.522723656278
+
+
+
+                     Paramagnetic magnetizability tensor (au)
+                     ----------------------------------------
+
+                       Bx                  By                  Bz
+
+  Bx         3.512377789433     -0.254682741249     -0.005332037473
+  By        -0.254682741249      0.847427478197     -0.011017099282
+  Bz        -0.005332037473     -0.011017099282      2.043773142743
+
+
+ Largest deviation from orthonormality of OMOs:0.324185E-13
  - found for element    7   7
 
 
@@ -1374,12 +1477,11 @@ Maximum number of iterations reset in numerical differentiation to    25
  CPU time statistics for ABACUS
  ------------------------------
 
- REST       00:00:01     529 %
 
 
 
- >>>> Total CPU  time used in ABACUS:   0.24 seconds
- >>>> Total wall time used in ABACUS:   0.28 seconds
+ >>>> Total CPU  time used in ABACUS:   0.20 seconds
+ >>>> Total wall time used in ABACUS:   0.37 seconds
 
 
                    .-------------------------------------------.
@@ -1406,7 +1508,7 @@ Maximum number of iterations reset in numerical differentiation to    25
                      `---------------------------------------'
 
  >>>> Total CPU  time used in HERMIT:   0.01 seconds
- >>>> Total wall time used in HERMIT:   0.02 seconds
+ >>>> Total wall time used in HERMIT:   0.01 seconds
 
 
                         .----------------------------------.
@@ -1474,17 +1576,17 @@ Maximum number of iterations reset in numerical differentiation to    25
 @      MULPOP O      -0.19; O      -0.18; H       0.19; H       0.18; 
  -----------------------------------------------------------------------------
    9  Screening settings (-IFTHRS, DIFDEN)  -11    T
-   9    -148.744507067        2.16053D-06   -2.14D-11    9
+   9    -148.744507067        2.16053D-06   -2.13D-11    9
       Virial theorem: -V/T =      2.008451
 @      MULPOP O      -0.19; O      -0.18; H       0.19; H       0.18; 
  -----------------------------------------------------------------------------
   10  Screening settings (-IFTHRS, DIFDEN)  -11    T
-  10    -148.744507067        4.95925D-07   -4.38D-12   10
+  10    -148.744507067        4.95924D-07   -4.43D-12   10
       Virial theorem: -V/T =      2.008451
 @      MULPOP O      -0.19; O      -0.18; H       0.19; H       0.18; 
  -----------------------------------------------------------------------------
   11  Screening settings (-IFTHRS, DIFDEN)  -15    F
-  11    -148.744507067        1.36643D-07    1.13D-11   10
+  11    -148.744507067        1.36644D-07    1.13D-11   10
       Virial theorem: -V/T =      2.008451
 @      MULPOP O      -0.19; O      -0.18; H       0.19; H       0.18; 
  -----------------------------------------------------------------------------
@@ -1494,7 +1596,7 @@ Maximum number of iterations reset in numerical differentiation to    25
 @      MULPOP O      -0.19; O      -0.18; H       0.19; H       0.18; 
  -----------------------------------------------------------------------------
   13  Screening settings (-IFTHRS, DIFDEN)  -15    T
-  13    -148.744507067        4.52074D-09    8.53D-14   10
+  13    -148.744507067        4.52074D-09    0.00D+00   10
       Virial theorem: -V/T =      2.008451
 @      MULPOP O      -0.19; O      -0.18; H       0.19; H       0.18; 
  -----------------------------------------------------------------------------
@@ -1504,12 +1606,12 @@ Maximum number of iterations reset in numerical differentiation to    25
 @      MULPOP O      -0.19; O      -0.18; H       0.19; H       0.18; 
  -----------------------------------------------------------------------------
   15  Screening settings (-IFTHRS, DIFDEN)  -15    T
-  15    -148.744507067        1.55637D-10   -1.42D-13   10
+  15    -148.744507067        1.55641D-10    0.00D+00   10
       Virial theorem: -V/T =      2.008451
 @      MULPOP O      -0.19; O      -0.18; H       0.19; H       0.18; 
  -----------------------------------------------------------------------------
   16  Screening settings (-IFTHRS, DIFDEN)  -15    T
-  16    -148.744507067        2.55223D-11    1.71D-13   10
+  16    -148.744507067        2.55149D-11    0.00D+00   10
 
  *** DIIS converged in  16 iterations !
 @    Converged SCF energy, gradient:   -148.744507066720    2.55D-11
@@ -1551,7 +1653,7 @@ Maximum number of iterations reset in numerical differentiation to    25
  *** GEOMETRY WALK STEP ACCEPTED.
 
 
- >>>> CPU and wall time for SCF :       1.618       1.649
+ >>>> CPU and wall time for SCF :       0.059       0.083
 
 
                        .-----------------------------------.
@@ -1570,17 +1672,17 @@ Maximum number of iterations reset in numerical differentiation to    25
 @    Final gradient norm:           0.000000000026
 
  
-     Date and time (Linux)  : Mon Nov 25 22:08:31 2013
-     Host name              : c9-1.local                              
+     Date and time (Linux)  : Tue Nov 12 20:39:52 2013
+     Host name              : c17-11.local                            
 
 
 
- >>>> Total CPU  time used in SIRIUS :      1.62 seconds
- >>>> Total wall time used in SIRIUS :      1.66 seconds
+ >>>> Total CPU  time used in SIRIUS :      0.06 seconds
+ >>>> Total wall time used in SIRIUS :      0.09 seconds
 
  
-     Date and time (Linux)  : Mon Nov 25 22:08:31 2013
-     Host name              : c9-1.local                              
+     Date and time (Linux)  : Tue Nov 12 20:39:52 2013
+     Host name              : c17-11.local                            
 
 
                      .---------------------------------------.
@@ -1602,9 +1704,11 @@ Maximum number of iterations reset in numerical differentiation to    25
 
       The molecular gradient
       Geometry optimization
-      Quadrupole moments
+      Magnetic susceptibilities
+      INFO - London orbitals are NOT used
       Direct calculation - no two-electron integrals written or read.
       Two-electron integrals will be calculated in parallel
+      Molecular rotational g-factor
       Natural orbital connection is used
       for perturbation dependent basis sets.
 
@@ -1627,10 +1731,10 @@ Maximum number of iterations reset in numerical differentiation to    25
 
 
  
-     Date and time (Linux)  : Mon Nov 25 22:08:31 2013
-     Host name              : c9-1.local                              
+     Date and time (Linux)  : Tue Nov 12 20:39:52 2013
+     Host name              : c17-11.local                            
 
- Largest deviation from tra-rot symmetry is in gradient element  6:  1.04E-10
+ Largest deviation from tra-rot symmetry is in gradient element  3:  1.04E-10
 
 
    ***************************************************************************
@@ -1639,60 +1743,73 @@ Maximum number of iterations reset in numerical differentiation to    25
 
 
  
-     Date and time (Linux)  : Mon Nov 25 22:08:31 2013
-     Host name              : c9-1.local                              
+     Date and time (Linux)  : Tue Nov 12 20:39:52 2013
+     Host name              : c17-11.local                            
 
 
-        *****************************************************************
-        ************* ABACUS - Molecular quadrupole moments *************
-        *****************************************************************
+   ****************************************************************************
+   ************************ ABACUS - MAGNETIZABILITIES ************************
+   ****************************************************************************
 
 
-  Units:  C m**2/(10**(-40))   (SI) 
-          Debye*AAngstroem     (cgs)
+  Units:  JT**(-2)/(10**(-30))   (SI) 
+          ppm cm**(3) mol**(-1)  (cgs)
+
+ Calculation without London orbitals (GIAOs).
 
 
-  Principal values (au, SI and cgs) and axes:
-  -------------------------------------------
+  Magnetizabilities                    au          SI         cgs
+  ---------------------------------------------------------------
 
-  Q_aa         1.2562      5.6358      1.6896     -0.0014    0.0078    1.0000
-  Q_bb         0.4251      1.9074      0.5718      0.6834    0.7301   -0.0048
-  Q_cc        -1.6813     -7.5432     -2.2614      0.7301   -0.6833    0.0063
-
-
-                          Total quadrupole moments (au)
-                          -----------------------------
-
-                         Ex          Ey          Ez
-
-            Ex      -0.697585    1.050859   -0.010874
-            Ey       1.050859   -0.558435    0.015598
-            Ez      -0.010874    0.015598    1.256020
+  Isotropic magnetizability:      -8.8340   -697.0906    -41.9798
+  Diamagnetic contribution:      -10.9076   -860.7194    -51.8337
+  Paramagnetic contribution:       2.0736    163.6289      9.8540
+  1st anisotropy:                 -3.9653   -312.9067    -18.8437
+  2nd anisotropy:                  6.8341    539.2837     32.4764
 
 
 
-                 Total quadrupole moments (cgs, Debye*AAngstroem)
-                 ------------------------------------------------
+  Principal values (au, SI, and cgs) and axes:
+  --------------------------------------------
 
-                         Ex          Ey          Ez
-
-            Ex      -0.938276    1.413441   -0.014625
-            Ey       1.413441   -0.751114    0.020980
-            Ez      -0.014625    0.020980    1.689390
+  khi_aa     -10.7465   -848.0085    -51.0683      0.9996   -0.0286   -0.0090
+  khi_bb      -4.2779   -337.5681    -20.3288      0.0286    0.9996   -0.0007
+  khi_cc     -11.4775   -905.6951    -54.5422      0.0090    0.0004    1.0000
 
 
+                        Total magnetizability tensor (au)
+                        ---------------------------------
 
-                          Total quadrupole moments (SI)
-                          -----------------------------
+                       Bx                  By                  Bz
 
-                         Ex          Ey          Ez
-
-            Ex      -3.129752    4.714733   -0.048785
-            Ey       4.714733   -2.505446    0.069983
-            Ez      -0.048785    0.069983    5.635198
+  Bx       -10.741255985907      0.184755948241     -0.006693333222
+  By         0.184755948241     -4.283151942861     -0.004696423288
+  Bz        -0.006693333222     -0.004696423288    -11.477454806031
 
 
- Largest deviation from orthonormality of OMOs:0.459632E-13
+
+                     Diamagnetic magnetizability tensor (au)
+                     ---------------------------------------
+
+                       Bx                  By                  Bz
+
+  Bx       -14.205077578004      0.421617897385     -0.012041639736
+  By         0.421617897385     -5.023794888550     -0.016342902017
+  Bz        -0.012041639736     -0.016342902017    -13.493803484182
+
+
+
+                     Paramagnetic magnetizability tensor (au)
+                     ----------------------------------------
+
+                       Bx                  By                  Bz
+
+  Bx         3.463821592096     -0.236861949143      0.005348306514
+  By        -0.236861949143      0.740642945689      0.011646478728
+  Bz         0.005348306514      0.011646478728      2.016348678152
+
+
+ Largest deviation from orthonormality of OMOs:0.446310E-13
  - found for element    1   1
 
 
@@ -1707,11 +1824,12 @@ Maximum number of iterations reset in numerical differentiation to    25
  CPU time statistics for ABACUS
  ------------------------------
 
+ REST       00:00:02     427 %
 
 
 
- >>>> Total CPU  time used in ABACUS:   0.17 seconds
- >>>> Total wall time used in ABACUS:   0.19 seconds
+ >>>> Total CPU  time used in ABACUS:   0.35 seconds
+ >>>> Total wall time used in ABACUS:   0.42 seconds
 
 
                    .-------------------------------------------.
@@ -1806,17 +1924,17 @@ Maximum number of iterations reset in numerical differentiation to    25
 @      MULPOP O      -0.18; O      -0.17; H       0.18; H       0.17; 
  -----------------------------------------------------------------------------
    9  Screening settings (-IFTHRS, DIFDEN)  -11    T
-   9    -148.747090981        6.26647D-07   -1.99D-12    9
+   9    -148.747090981        6.26647D-07   -2.05D-12    9
       Virial theorem: -V/T =      2.008838
 @      MULPOP O      -0.18; O      -0.17; H       0.18; H       0.17; 
  -----------------------------------------------------------------------------
   10  Screening settings (-IFTHRS, DIFDEN)  -15    F
-  10    -148.747090981        9.17281D-08    2.42D-12   10
+  10    -148.747090981        9.17282D-08    2.33D-12   10
       Virial theorem: -V/T =      2.008838
 @      MULPOP O      -0.18; O      -0.17; H       0.18; H       0.17; 
  -----------------------------------------------------------------------------
   11  Screening settings (-IFTHRS, DIFDEN)  -15    T
-  11    -148.747090981        3.90532D-08   -2.84D-14   10
+  11    -148.747090981        3.90447D-08    0.00D+00   10
       Virial theorem: -V/T =      2.008838
 @      MULPOP O      -0.18; O      -0.17; H       0.18; H       0.17; 
  -----------------------------------------------------------------------------
@@ -1826,17 +1944,17 @@ Maximum number of iterations reset in numerical differentiation to    25
 @      MULPOP O      -0.18; O      -0.17; H       0.18; H       0.17; 
  -----------------------------------------------------------------------------
   13  Screening settings (-IFTHRS, DIFDEN)  -15    T
-  13    -148.747090981        1.60963D-09    5.68D-14   10
+  13    -148.747090981        1.60963D-09    8.53D-14   10
       Virial theorem: -V/T =      2.008838
 @      MULPOP O      -0.18; O      -0.17; H       0.18; H       0.17; 
  -----------------------------------------------------------------------------
   14  Screening settings (-IFTHRS, DIFDEN)  -15    T
-  14    -148.747090981        3.11039D-10   -8.53D-14   10
+  14    -148.747090981        3.11037D-10    2.84D-14   10
       Virial theorem: -V/T =      2.008838
 @      MULPOP O      -0.18; O      -0.17; H       0.18; H       0.17; 
  -----------------------------------------------------------------------------
   15  Screening settings (-IFTHRS, DIFDEN)  -15    T
-  15    -148.747090981        4.70958D-11    0.00D+00   10
+  15    -148.747090981        4.70868D-11   -5.68D-14   10
 
  *** DIIS converged in  15 iterations !
 @    Converged SCF energy, gradient:   -148.747090980719    4.71D-11
@@ -1878,7 +1996,7 @@ Maximum number of iterations reset in numerical differentiation to    25
  *** GEOMETRY WALK STEP ACCEPTED.
 
 
- >>>> CPU and wall time for SCF :       0.099       0.119
+ >>>> CPU and wall time for SCF :       0.103       0.123
 
 
                        .-----------------------------------.
@@ -1897,17 +2015,17 @@ Maximum number of iterations reset in numerical differentiation to    25
 @    Final gradient norm:           0.000000000047
 
  
-     Date and time (Linux)  : Mon Nov 25 22:08:32 2013
-     Host name              : c9-1.local                              
+     Date and time (Linux)  : Tue Nov 12 20:39:53 2013
+     Host name              : c17-11.local                            
 
 
 
- >>>> Total CPU  time used in SIRIUS :      0.10 seconds
+ >>>> Total CPU  time used in SIRIUS :      0.11 seconds
  >>>> Total wall time used in SIRIUS :      0.13 seconds
 
  
-     Date and time (Linux)  : Mon Nov 25 22:08:32 2013
-     Host name              : c9-1.local                              
+     Date and time (Linux)  : Tue Nov 12 20:39:53 2013
+     Host name              : c17-11.local                            
 
 
                      .---------------------------------------.
@@ -1929,9 +2047,11 @@ Maximum number of iterations reset in numerical differentiation to    25
 
       The molecular gradient
       Geometry optimization
-      Quadrupole moments
+      Magnetic susceptibilities
+      INFO - London orbitals are NOT used
       Direct calculation - no two-electron integrals written or read.
       Two-electron integrals will be calculated in parallel
+      Molecular rotational g-factor
       Natural orbital connection is used
       for perturbation dependent basis sets.
 
@@ -1954,8 +2074,8 @@ Maximum number of iterations reset in numerical differentiation to    25
 
 
  
-     Date and time (Linux)  : Mon Nov 25 22:08:32 2013
-     Host name              : c9-1.local                              
+     Date and time (Linux)  : Tue Nov 12 20:39:53 2013
+     Host name              : c17-11.local                            
 
  Largest deviation from tra-rot symmetry is in gradient element  7:  1.92E-10
 
@@ -1966,60 +2086,73 @@ Maximum number of iterations reset in numerical differentiation to    25
 
 
  
-     Date and time (Linux)  : Mon Nov 25 22:08:32 2013
-     Host name              : c9-1.local                              
+     Date and time (Linux)  : Tue Nov 12 20:39:53 2013
+     Host name              : c17-11.local                            
 
 
-        *****************************************************************
-        ************* ABACUS - Molecular quadrupole moments *************
-        *****************************************************************
+   ****************************************************************************
+   ************************ ABACUS - MAGNETIZABILITIES ************************
+   ****************************************************************************
 
 
-  Units:  C m**2/(10**(-40))   (SI) 
-          Debye*AAngstroem     (cgs)
+  Units:  JT**(-2)/(10**(-30))   (SI) 
+          ppm cm**(3) mol**(-1)  (cgs)
+
+ Calculation without London orbitals (GIAOs).
 
 
-  Principal values (au, SI and cgs) and axes:
-  -------------------------------------------
+  Magnetizabilities                    au          SI         cgs
+  ---------------------------------------------------------------
 
-  Q_aa         1.2954      5.8117      1.7423     -0.0014    0.0104    0.9999
-  Q_bb         0.3939      1.7673      0.5298      0.6861    0.7275   -0.0067
-  Q_cc        -1.6893     -7.5790     -2.2721      0.7275   -0.6860    0.0082
-
-
-                          Total quadrupole moments (au)
-                          -----------------------------
-
-                         Ex          Ey          Ez
-
-            Ex      -0.708662    1.039714   -0.013604
-            Ey       1.039714   -0.586456    0.021083
-            Ez      -0.013604    0.021083    1.295118
+  Isotropic magnetizability:      -8.8408   -697.6330    -42.0124
+  Diamagnetic contribution:      -10.9681   -865.4967    -52.1214
+  Paramagnetic contribution:       2.1273    167.8637     10.1090
+  1st anisotropy:                 -3.9571   -312.2548    -18.8044
+  2nd anisotropy:                  6.8653    541.7444     32.6246
 
 
 
-                 Total quadrupole moments (cgs, Debye*AAngstroem)
-                 ------------------------------------------------
+  Principal values (au, SI, and cgs) and axes:
+  --------------------------------------------
 
-                         Ex          Ey          Ez
-
-            Ex      -0.953175    1.398451   -0.018298
-            Ey       1.398451   -0.788804    0.028357
-            Ez      -0.018298    0.028357    1.741979
+  khi_aa     -10.7796   -850.6261    -51.2259      0.9995   -0.0281   -0.0112
+  khi_bb      -4.2640   -336.4701    -20.2627      0.0281    0.9996   -0.0007
+  khi_cc     -11.4789   -905.8029    -54.5487      0.0112    0.0004    0.9999
 
 
+                        Total magnetizability tensor (au)
+                        ---------------------------------
 
-                          Total quadrupole moments (SI)
-                          -----------------------------
+                       Bx                  By                  Bz
 
-                         Ex          Ey          Ez
-
-            Ex      -3.179450    4.664731   -0.061034
-            Ey       4.664731   -2.631166    0.094588
-            Ez      -0.061034    0.094588    5.810615
+  Bx       -10.774597994698      0.182909198665     -0.007931473305
+  By         0.182909198665     -4.269095483965     -0.004681906863
+  Bz        -0.007931473305     -0.004681906863    -11.478793206806
 
 
- Largest deviation from orthonormality of OMOs:0.262013E-13
+
+                     Diamagnetic magnetizability tensor (au)
+                     ---------------------------------------
+
+                       Bx                  By                  Bz
+
+  Bx       -14.281138941525      0.435379042649     -0.016148504604
+  By         0.435379042649     -5.103916272993     -0.021339824310
+  Bz        -0.016148504604     -0.021339824310    -13.519242719024
+
+
+
+                     Paramagnetic magnetizability tensor (au)
+                     ----------------------------------------
+
+                       Bx                  By                  Bz
+
+  Bx         3.506540946828     -0.252469843984      0.008217031299
+  By        -0.252469843984      0.834820789028      0.016657917447
+  Bz         0.008217031299      0.016657917447      2.040449512218
+
+
+ Largest deviation from orthonormality of OMOs:0.246470E-13
  - found for element    3   3
 
 
@@ -2037,8 +2170,8 @@ Maximum number of iterations reset in numerical differentiation to    25
 
 
 
- >>>> Total CPU  time used in ABACUS:   0.15 seconds
- >>>> Total wall time used in ABACUS:   0.27 seconds
+ >>>> Total CPU  time used in ABACUS:   0.20 seconds
+ >>>> Total wall time used in ABACUS:   0.33 seconds
 
 
                    .-------------------------------------------.
@@ -2064,8 +2197,8 @@ Maximum number of iterations reset in numerical differentiation to    25
                      | Starting in Integral Section (HERMIT) |
                      `---------------------------------------'
 
- >>>> Total CPU  time used in HERMIT:   0.00 seconds
- >>>> Total wall time used in HERMIT:   0.02 seconds
+ >>>> Total CPU  time used in HERMIT:   0.01 seconds
+ >>>> Total wall time used in HERMIT:   0.01 seconds
 
 
                         .----------------------------------.
@@ -2133,42 +2266,42 @@ Maximum number of iterations reset in numerical differentiation to    25
 @      MULPOP O      -0.18; O      -0.19; H       0.18; H       0.19; 
  -----------------------------------------------------------------------------
    9  Screening settings (-IFTHRS, DIFDEN)  -11    T
-   9    -148.745003066        2.36424D-06   -2.77D-11    9
+   9    -148.745003066        2.36424D-06   -2.76D-11    9
       Virial theorem: -V/T =      2.008507
 @      MULPOP O      -0.18; O      -0.19; H       0.18; H       0.19; 
  -----------------------------------------------------------------------------
   10  Screening settings (-IFTHRS, DIFDEN)  -11    T
-  10    -148.745003066        4.67377D-07   -3.38D-12   10
+  10    -148.745003066        4.67376D-07   -3.35D-12   10
       Virial theorem: -V/T =      2.008507
 @      MULPOP O      -0.18; O      -0.19; H       0.18; H       0.19; 
  -----------------------------------------------------------------------------
   11  Screening settings (-IFTHRS, DIFDEN)  -15    F
-  11    -148.745003066        1.36523D-07    9.55D-12   10
+  11    -148.745003066        1.36521D-07    9.61D-12   10
       Virial theorem: -V/T =      2.008507
 @      MULPOP O      -0.18; O      -0.19; H       0.18; H       0.19; 
  -----------------------------------------------------------------------------
   12  Screening settings (-IFTHRS, DIFDEN)  -15    T
-  12    -148.745003066        2.31837D-08   -2.84D-14   10
+  12    -148.745003066        2.31836D-08    0.00D+00   10
       Virial theorem: -V/T =      2.008507
 @      MULPOP O      -0.18; O      -0.19; H       0.18; H       0.19; 
  -----------------------------------------------------------------------------
   13  Screening settings (-IFTHRS, DIFDEN)  -15    T
-  13    -148.745003066        4.74853D-09    5.68D-14   10
+  13    -148.745003066        4.74853D-09    2.84D-14   10
       Virial theorem: -V/T =      2.008507
 @      MULPOP O      -0.18; O      -0.19; H       0.18; H       0.19; 
  -----------------------------------------------------------------------------
   14  Screening settings (-IFTHRS, DIFDEN)  -15    T
-  14    -148.745003066        6.76985D-10    2.84D-14   10
+  14    -148.745003066        6.76984D-10   -2.84D-14   10
       Virial theorem: -V/T =      2.008507
 @      MULPOP O      -0.18; O      -0.19; H       0.18; H       0.19; 
  -----------------------------------------------------------------------------
   15  Screening settings (-IFTHRS, DIFDEN)  -15    T
-  15    -148.745003066        1.62626D-10    0.00D+00   10
+  15    -148.745003066        1.62629D-10    2.84D-14   10
       Virial theorem: -V/T =      2.008507
 @      MULPOP O      -0.18; O      -0.19; H       0.18; H       0.19; 
  -----------------------------------------------------------------------------
   16  Screening settings (-IFTHRS, DIFDEN)  -15    T
-  16    -148.745003066        2.31014D-11    0.00D+00   10
+  16    -148.745003066        2.31125D-11   -2.84D-14   10
 
  *** DIIS converged in  16 iterations !
 @    Converged SCF energy, gradient:   -148.745003066159    2.31D-11
@@ -2210,7 +2343,7 @@ Maximum number of iterations reset in numerical differentiation to    25
  *** GEOMETRY WALK STEP ACCEPTED.
 
 
- >>>> CPU and wall time for SCF :       1.299       1.410
+ >>>> CPU and wall time for SCF :       0.250       0.272
 
 
                        .-----------------------------------.
@@ -2229,17 +2362,17 @@ Maximum number of iterations reset in numerical differentiation to    25
 @    Final gradient norm:           0.000000000023
 
  
-     Date and time (Linux)  : Mon Nov 25 22:08:33 2013
-     Host name              : c9-1.local                              
+     Date and time (Linux)  : Tue Nov 12 20:39:53 2013
+     Host name              : c17-11.local                            
 
 
 
- >>>> Total CPU  time used in SIRIUS :      1.30 seconds
- >>>> Total wall time used in SIRIUS :      1.42 seconds
+ >>>> Total CPU  time used in SIRIUS :      0.25 seconds
+ >>>> Total wall time used in SIRIUS :      0.28 seconds
 
  
-     Date and time (Linux)  : Mon Nov 25 22:08:33 2013
-     Host name              : c9-1.local                              
+     Date and time (Linux)  : Tue Nov 12 20:39:53 2013
+     Host name              : c17-11.local                            
 
 
                      .---------------------------------------.
@@ -2261,9 +2394,11 @@ Maximum number of iterations reset in numerical differentiation to    25
 
       The molecular gradient
       Geometry optimization
-      Quadrupole moments
+      Magnetic susceptibilities
+      INFO - London orbitals are NOT used
       Direct calculation - no two-electron integrals written or read.
       Two-electron integrals will be calculated in parallel
+      Molecular rotational g-factor
       Natural orbital connection is used
       for perturbation dependent basis sets.
 
@@ -2286,8 +2421,8 @@ Maximum number of iterations reset in numerical differentiation to    25
 
 
  
-     Date and time (Linux)  : Mon Nov 25 22:08:33 2013
-     Host name              : c9-1.local                              
+     Date and time (Linux)  : Tue Nov 12 20:39:53 2013
+     Host name              : c17-11.local                            
 
  Largest deviation from tra-rot symmetry is in gradient element  7:  1.80E-10
 
@@ -2298,60 +2433,73 @@ Maximum number of iterations reset in numerical differentiation to    25
 
 
  
-     Date and time (Linux)  : Mon Nov 25 22:08:33 2013
-     Host name              : c9-1.local                              
+     Date and time (Linux)  : Tue Nov 12 20:39:53 2013
+     Host name              : c17-11.local                            
 
 
-        *****************************************************************
-        ************* ABACUS - Molecular quadrupole moments *************
-        *****************************************************************
+   ****************************************************************************
+   ************************ ABACUS - MAGNETIZABILITIES ************************
+   ****************************************************************************
 
 
-  Units:  C m**2/(10**(-40))   (SI) 
-          Debye*AAngstroem     (cgs)
+  Units:  JT**(-2)/(10**(-30))   (SI) 
+          ppm cm**(3) mol**(-1)  (cgs)
+
+ Calculation without London orbitals (GIAOs).
 
 
-  Principal values (au, SI and cgs) and axes:
-  -------------------------------------------
+  Magnetizabilities                    au          SI         cgs
+  ---------------------------------------------------------------
 
-  Q_aa         1.2616      5.6604      1.6970      0.0010   -0.0099    1.0000
-  Q_bb         0.4208      1.8878      0.5659      0.6838    0.7297    0.0065
-  Q_cc        -1.6824     -7.5482     -2.2629      0.7297   -0.6837   -0.0075
-
-
-                          Total quadrupole moments (au)
-                          -----------------------------
-
-                         Ex          Ey          Ez
-
-            Ex      -0.699135    1.049289    0.012334
-            Ey       1.049289   -0.562307   -0.019051
-            Ez       0.012334   -0.019051    1.261441
+  Isotropic magnetizability:      -8.8350   -697.1750    -41.9849
+  Diamagnetic contribution:      -10.9158   -861.3733    -51.8731
+  Paramagnetic contribution:       2.0808    164.1984      9.8883
+  1st anisotropy:                 -3.9641   -312.8101    -18.8379
+  2nd anisotropy:                  6.8382    539.6082     32.4960
 
 
 
-                 Total quadrupole moments (cgs, Debye*AAngstroem)
-                 ------------------------------------------------
+  Principal values (au, SI, and cgs) and axes:
+  --------------------------------------------
 
-                         Ex          Ey          Ez
-
-            Ex      -0.940360    1.411330    0.016590
-            Ey       1.411330   -0.756322   -0.025625
-            Ez       0.016590   -0.025625    1.696682
+  khi_aa     -10.7511   -848.3737    -51.0903      0.9995   -0.0285    0.0103
+  khi_bb      -4.2762   -337.4362    -20.3209      0.0285    0.9996    0.0006
+  khi_cc     -11.4778   -905.7151    -54.5434     -0.0103   -0.0003    0.9999
 
 
+                        Total magnetizability tensor (au)
+                        ---------------------------------
 
-                          Total quadrupole moments (SI)
-                          -----------------------------
+                       Bx                  By                  Bz
 
-                         Ex          Ey          Ez
-
-            Ex      -3.136704    4.707689    0.055337
-            Ey       4.707689   -2.522818   -0.085475
-            Ez       0.055337   -0.085475    5.659522
+  Bx       -10.745917079737      0.184563647996      0.007567424149
+  By         0.184563647996     -4.281463848437      0.003948724574
+  Bz         0.007567424149      0.003948724574    -11.477691878190
 
 
- Largest deviation from orthonormality of OMOs:0.381917E-13
+
+                     Diamagnetic magnetizability tensor (au)
+                     ---------------------------------------
+
+                       Bx                  By                  Bz
+
+  Bx       -14.215483277764      0.423497596177      0.013657311690
+  By         0.423497596177     -5.034770514770      0.017461080198
+  Bz         0.013657311690      0.017461080198    -13.497282360774
+
+
+
+                     Paramagnetic magnetizability tensor (au)
+                     ----------------------------------------
+
+                       Bx                  By                  Bz
+
+  Bx         3.469566198027     -0.238933948181     -0.006089887541
+  By        -0.238933948181      0.753306666333     -0.013512355625
+  Bz        -0.006089887541     -0.013512355625      2.019590482584
+
+
+ Largest deviation from orthonormality of OMOs:0.386358E-13
  - found for element    6   6
 
 
@@ -2366,12 +2514,11 @@ Maximum number of iterations reset in numerical differentiation to    25
  CPU time statistics for ABACUS
  ------------------------------
 
- REST       00:00:01     756 %
 
 
 
- >>>> Total CPU  time used in ABACUS:   0.14 seconds
- >>>> Total wall time used in ABACUS:   2.27 seconds
+ >>>> Total CPU  time used in ABACUS:   0.20 seconds
+ >>>> Total wall time used in ABACUS:   0.27 seconds
 
 
                    .-------------------------------------------.
@@ -2466,37 +2613,37 @@ Maximum number of iterations reset in numerical differentiation to    25
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
    9  Screening settings (-IFTHRS, DIFDEN)  -11    T
-   9    -148.746808314        1.28290D-06   -2.73D-12    9
+   9    -148.746808314        1.28289D-06   -2.73D-12    9
       Virial theorem: -V/T =      2.008686
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
   10  Screening settings (-IFTHRS, DIFDEN)  -15    F
-  10    -148.746808314        3.18575D-07   -4.15D-12   10
+  10    -148.746808314        3.18574D-07   -4.01D-12   10
       Virial theorem: -V/T =      2.008686
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
   11  Screening settings (-IFTHRS, DIFDEN)  -15    T
-  11    -148.746808314        8.79453D-08   -5.68D-14   10
+  11    -148.746808314        8.79477D-08   -8.53D-14   10
       Virial theorem: -V/T =      2.008686
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
   12  Screening settings (-IFTHRS, DIFDEN)  -15    T
-  12    -148.746808314        2.17203D-08    1.14D-13   10
+  12    -148.746808314        2.17203D-08   -8.53D-14   10
       Virial theorem: -V/T =      2.008686
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
   13  Screening settings (-IFTHRS, DIFDEN)  -15    T
-  13    -148.746808314        2.13608D-09    0.00D+00   10
+  13    -148.746808314        2.13607D-09    0.00D+00   10
       Virial theorem: -V/T =      2.008686
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
   14  Screening settings (-IFTHRS, DIFDEN)  -15    T
-  14    -148.746808314        6.99037D-10   -5.68D-14   10
+  14    -148.746808314        6.99034D-10   -2.84D-14   10
       Virial theorem: -V/T =      2.008686
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
   15  Screening settings (-IFTHRS, DIFDEN)  -15    T
-  15    -148.746808314        7.45070D-11   -5.68D-14   10
+  15    -148.746808314        7.45079D-11    2.84D-14   10
 
  *** DIIS converged in  15 iterations !
 @    Converged SCF energy, gradient:   -148.746808314202    7.45D-11
@@ -2538,7 +2685,7 @@ Maximum number of iterations reset in numerical differentiation to    25
  *** GEOMETRY WALK STEP ACCEPTED.
 
 
- >>>> CPU and wall time for SCF :       1.600       1.623
+ >>>> CPU and wall time for SCF :       0.104       0.125
 
 
                        .-----------------------------------.
@@ -2557,17 +2704,17 @@ Maximum number of iterations reset in numerical differentiation to    25
 @    Final gradient norm:           0.000000000075
 
  
-     Date and time (Linux)  : Mon Nov 25 22:08:39 2013
-     Host name              : c9-1.local                              
+     Date and time (Linux)  : Tue Nov 12 20:39:54 2013
+     Host name              : c17-11.local                            
 
 
 
- >>>> Total CPU  time used in SIRIUS :      1.60 seconds
- >>>> Total wall time used in SIRIUS :      2.22 seconds
+ >>>> Total CPU  time used in SIRIUS :      0.11 seconds
+ >>>> Total wall time used in SIRIUS :      0.13 seconds
 
  
-     Date and time (Linux)  : Mon Nov 25 22:08:39 2013
-     Host name              : c9-1.local                              
+     Date and time (Linux)  : Tue Nov 12 20:39:54 2013
+     Host name              : c17-11.local                            
 
 
                      .---------------------------------------.
@@ -2589,9 +2736,11 @@ Maximum number of iterations reset in numerical differentiation to    25
 
       The molecular gradient
       Geometry optimization
-      Quadrupole moments
+      Magnetic susceptibilities
+      INFO - London orbitals are NOT used
       Direct calculation - no two-electron integrals written or read.
       Two-electron integrals will be calculated in parallel
+      Molecular rotational g-factor
       Natural orbital connection is used
       for perturbation dependent basis sets.
 
@@ -2614,8 +2763,8 @@ Maximum number of iterations reset in numerical differentiation to    25
 
 
  
-     Date and time (Linux)  : Mon Nov 25 22:08:39 2013
-     Host name              : c9-1.local                              
+     Date and time (Linux)  : Tue Nov 12 20:39:54 2013
+     Host name              : c17-11.local                            
 
  Largest deviation from tra-rot symmetry is in gradient element  1:  2.87E-10
 
@@ -2626,60 +2775,73 @@ Maximum number of iterations reset in numerical differentiation to    25
 
 
  
-     Date and time (Linux)  : Mon Nov 25 22:08:40 2013
-     Host name              : c9-1.local                              
+     Date and time (Linux)  : Tue Nov 12 20:39:54 2013
+     Host name              : c17-11.local                            
 
 
-        *****************************************************************
-        ************* ABACUS - Molecular quadrupole moments *************
-        *****************************************************************
+   ****************************************************************************
+   ************************ ABACUS - MAGNETIZABILITIES ************************
+   ****************************************************************************
 
 
-  Units:  C m**2/(10**(-40))   (SI) 
-          Debye*AAngstroem     (cgs)
+  Units:  JT**(-2)/(10**(-30))   (SI) 
+          ppm cm**(3) mol**(-1)  (cgs)
+
+ Calculation without London orbitals (GIAOs).
 
 
-  Principal values (au, SI and cgs) and axes:
-  -------------------------------------------
+  Magnetizabilities                    au          SI         cgs
+  ---------------------------------------------------------------
 
-  Q_aa         1.2800      5.7429      1.7217      0.0142    0.0325    0.9994
-  Q_bb         0.4057      1.8202      0.5457      0.6849    0.7278   -0.0334
-  Q_cc        -1.6857     -7.5631     -2.2674      0.7285   -0.6850    0.0119
-
-
-                          Total quadrupole moments (au)
-                          -----------------------------
-
-                         Ex          Ey          Ez
-
-            Ex      -0.703987    1.043991   -0.005841
-            Ey       1.043991   -0.574640    0.045501
-            Ez      -0.005841    0.045501    1.278627
+  Isotropic magnetizability:      -8.8386   -697.4604    -42.0021
+  Diamagnetic contribution:      -10.9417   -863.4157    -51.9961
+  Paramagnetic contribution:       2.1031    165.9553      9.9941
+  1st anisotropy:                 -3.9598   -312.4667    -18.8172
+  2nd anisotropy:                  6.8517    540.6682     32.5598
 
 
 
-                 Total quadrupole moments (cgs, Debye*AAngstroem)
-                 ------------------------------------------------
+  Principal values (au, SI, and cgs) and axes:
+  --------------------------------------------
 
-                         Ex          Ey          Ez
-
-            Ex      -0.946886    1.404203   -0.007856
-            Ey       1.404203   -0.772911    0.061200
-            Ez      -0.007856    0.061200    1.719797
+  khi_aa     -10.7666   -849.5947    -51.1638      0.9996   -0.0282   -0.0075
+  khi_bb      -4.2709   -337.0149    -20.2955      0.0283    0.9996    0.0052
+  khi_cc     -11.4785   -905.7715    -54.5468      0.0074   -0.0054    1.0000
 
 
+                        Total magnetizability tensor (au)
+                        ---------------------------------
 
-                          Total quadrupole moments (SI)
-                          -----------------------------
+                       Bx                  By                  Bz
 
-                         Ex          Ey          Ez
-
-            Ex      -3.158473    4.683918   -0.026206
-            Ey       4.683918   -2.578152    0.204143
-            Ez      -0.026206    0.204143    5.736625
+  Bx       -10.761424127170      0.183623507691     -0.004307188164
+  By         0.183623507691     -4.276245310009      0.037393088744
+  Bz        -0.004307188164      0.037393088744    -11.478253118067
 
 
- Largest deviation from orthonormality of OMOs:0.317524E-13
+
+                     Diamagnetic magnetizability tensor (au)
+                     ---------------------------------------
+
+                       Bx                  By                  Bz
+
+  Bx       -14.247984857461      0.429190109447     -0.002052391032
+  By         0.429190109447     -5.068973871623      0.030110692910
+  Bz        -0.002052391032      0.030110692910    -13.508223461780
+
+
+
+                     Paramagnetic magnetizability tensor (au)
+                     ----------------------------------------
+
+                       Bx                  By                  Bz
+
+  Bx         3.486560730291     -0.245566601756     -0.002254797132
+  By        -0.245566601756      0.792728561614      0.007282395833
+  Bz        -0.002254797132      0.007282395833      2.029970343713
+
+
+ Largest deviation from orthonormality of OMOs:0.321965E-13
  - found for element    7   7
 
 
@@ -2694,11 +2856,12 @@ Maximum number of iterations reset in numerical differentiation to    25
  CPU time statistics for ABACUS
  ------------------------------
 
+ REST       00:00:01     666 %
 
 
 
- >>>> Total CPU  time used in ABACUS:   0.15 seconds
- >>>> Total wall time used in ABACUS:   0.35 seconds
+ >>>> Total CPU  time used in ABACUS:   0.20 seconds
+ >>>> Total wall time used in ABACUS:   0.26 seconds
 
 
                    .-------------------------------------------.
@@ -2773,7 +2936,7 @@ Maximum number of iterations reset in numerical differentiation to    25
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
    5  Screening settings (-IFTHRS, DIFDEN)   -8    T
-   5    -148.746815794        8.44015D-04   -8.49D-07    5
+   5    -148.746815795        8.44015D-04   -8.49D-07    5
       Virial theorem: -V/T =      2.008687
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
@@ -2788,7 +2951,7 @@ Maximum number of iterations reset in numerical differentiation to    25
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
    8  Screening settings (-IFTHRS, DIFDEN)  -10    T
-   8    -148.746816090        5.50635D-06   -5.19D-10    8
+   8    -148.746816090        5.50635D-06   -5.20D-10    8
       Virial theorem: -V/T =      2.008687
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
@@ -2798,32 +2961,32 @@ Maximum number of iterations reset in numerical differentiation to    25
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
   10  Screening settings (-IFTHRS, DIFDEN)  -15    F
-  10    -148.746816090        1.93654D-07   -1.71D-13   10
+  10    -148.746816090        1.93654D-07   -1.42D-13   10
       Virial theorem: -V/T =      2.008687
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
   11  Screening settings (-IFTHRS, DIFDEN)  -15    T
-  11    -148.746816090        2.37817D-08   -2.84D-14   10
+  11    -148.746816090        2.37813D-08    2.84D-14   10
       Virial theorem: -V/T =      2.008687
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
   12  Screening settings (-IFTHRS, DIFDEN)  -15    T
-  12    -148.746816090        8.39972D-09    5.68D-14   10
+  12    -148.746816090        8.39972D-09   -5.68D-14   10
       Virial theorem: -V/T =      2.008687
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
   13  Screening settings (-IFTHRS, DIFDEN)  -15    T
-  13    -148.746816090        2.29468D-09   -8.53D-14   10
+  13    -148.746816090        2.29467D-09    8.53D-14   10
       Virial theorem: -V/T =      2.008687
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
   14  Screening settings (-IFTHRS, DIFDEN)  -15    T
-  14    -148.746816090        3.51129D-10    0.00D+00   10
+  14    -148.746816090        3.51131D-10   -8.53D-14   10
       Virial theorem: -V/T =      2.008687
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
   15  Screening settings (-IFTHRS, DIFDEN)  -15    T
-  15    -148.746816090        9.39736D-11    1.14D-13   10
+  15    -148.746816090        9.39713D-11    0.00D+00   10
 
  *** DIIS converged in  15 iterations !
 @    Converged SCF energy, gradient:   -148.746816089671    9.40D-11
@@ -2865,7 +3028,7 @@ Maximum number of iterations reset in numerical differentiation to    25
  *** GEOMETRY WALK STEP ACCEPTED.
 
 
- >>>> CPU and wall time for SCF :       1.370       1.395
+ >>>> CPU and wall time for SCF :       0.070       0.093
 
 
                        .-----------------------------------.
@@ -2884,17 +3047,17 @@ Maximum number of iterations reset in numerical differentiation to    25
 @    Final gradient norm:           0.000000000094
 
  
-     Date and time (Linux)  : Mon Nov 25 22:08:42 2013
-     Host name              : c9-1.local                              
+     Date and time (Linux)  : Tue Nov 12 20:39:54 2013
+     Host name              : c17-11.local                            
 
 
 
- >>>> Total CPU  time used in SIRIUS :      1.37 seconds
- >>>> Total wall time used in SIRIUS :      1.70 seconds
+ >>>> Total CPU  time used in SIRIUS :      0.07 seconds
+ >>>> Total wall time used in SIRIUS :      0.10 seconds
 
  
-     Date and time (Linux)  : Mon Nov 25 22:08:42 2013
-     Host name              : c9-1.local                              
+     Date and time (Linux)  : Tue Nov 12 20:39:54 2013
+     Host name              : c17-11.local                            
 
 
                      .---------------------------------------.
@@ -2916,9 +3079,11 @@ Maximum number of iterations reset in numerical differentiation to    25
 
       The molecular gradient
       Geometry optimization
-      Quadrupole moments
+      Magnetic susceptibilities
+      INFO - London orbitals are NOT used
       Direct calculation - no two-electron integrals written or read.
       Two-electron integrals will be calculated in parallel
+      Molecular rotational g-factor
       Natural orbital connection is used
       for perturbation dependent basis sets.
 
@@ -2941,8 +3106,8 @@ Maximum number of iterations reset in numerical differentiation to    25
 
 
  
-     Date and time (Linux)  : Mon Nov 25 22:08:42 2013
-     Host name              : c9-1.local                              
+     Date and time (Linux)  : Tue Nov 12 20:39:54 2013
+     Host name              : c17-11.local                            
 
  Largest deviation from tra-rot symmetry is in gradient element  1:  3.00E-10
 
@@ -2953,60 +3118,73 @@ Maximum number of iterations reset in numerical differentiation to    25
 
 
  
-     Date and time (Linux)  : Mon Nov 25 22:08:42 2013
-     Host name              : c9-1.local                              
+     Date and time (Linux)  : Tue Nov 12 20:39:54 2013
+     Host name              : c17-11.local                            
 
 
-        *****************************************************************
-        ************* ABACUS - Molecular quadrupole moments *************
-        *****************************************************************
+   ****************************************************************************
+   ************************ ABACUS - MAGNETIZABILITIES ************************
+   ****************************************************************************
 
 
-  Units:  C m**2/(10**(-40))   (SI) 
-          Debye*AAngstroem     (cgs)
+  Units:  JT**(-2)/(10**(-30))   (SI) 
+          ppm cm**(3) mol**(-1)  (cgs)
+
+ Calculation without London orbitals (GIAOs).
 
 
-  Principal values (au, SI and cgs) and axes:
-  -------------------------------------------
+  Magnetizabilities                    au          SI         cgs
+  ---------------------------------------------------------------
 
-  Q_aa         1.2788      5.7373      1.7200     -0.0148   -0.0321    0.9994
-  Q_bb         0.4071      1.8265      0.5476      0.6845    0.7282    0.0335
-  Q_cc        -1.6859     -7.5639     -2.2676      0.7289   -0.6846   -0.0112
-
-
-                          Total quadrupole moments (au)
-                          -----------------------------
-
-                         Ex          Ey          Ez
-
-            Ex      -0.704572    1.044738    0.004189
-            Ey       1.044738   -0.572859   -0.044018
-            Ez       0.004189   -0.044018    1.277431
+  Isotropic magnetizability:      -8.8392   -697.5057    -42.0048
+  Diamagnetic contribution:      -10.9421   -863.4473    -51.9980
+  Paramagnetic contribution:       2.1029    165.9416      9.9932
+  1st anisotropy:                 -3.9602   -312.4993    -18.8191
+  2nd anisotropy:                  6.8528    540.7592     32.5653
 
 
 
-                 Total quadrupole moments (cgs, Debye*AAngstroem)
-                 ------------------------------------------------
+  Principal values (au, SI, and cgs) and axes:
+  --------------------------------------------
 
-                         Ex          Ey          Ez
-
-            Ex      -0.947674    1.405208    0.005634
-            Ey       1.405208   -0.770515   -0.059205
-            Ez       0.005634   -0.059205    1.718189
+  khi_aa     -10.7676   -849.6790    -51.1689      0.9996   -0.0283    0.0062
+  khi_bb      -4.2707   -336.9996    -20.2946      0.0284    0.9996   -0.0054
+  khi_cc     -11.4793   -905.8386    -54.5509     -0.0061    0.0056    1.0000
 
 
+                        Total magnetizability tensor (au)
+                        ---------------------------------
 
-                          Total quadrupole moments (SI)
-                          -----------------------------
+                       Bx                  By                  Bz
 
-                         Ex          Ey          Ez
-
-            Ex      -3.161100    4.687268    0.018794
-            Ey       4.687268   -2.570162   -0.197488
-            Ez       0.018794   -0.197488    5.731262
+  Bx       -10.762444836705      0.184275128431      0.003334529101
+  By         0.184275128431     -4.276104938467     -0.039107432283
+  Bz         0.003334529101     -0.039107432283    -11.479097424429
 
 
- Largest deviation from orthonormality of OMOs:0.364153E-13
+
+                     Diamagnetic magnetizability tensor (au)
+                     ---------------------------------------
+
+                       Bx                  By                  Bz
+
+  Bx       -14.248573278493      0.429622028235      0.000023258171
+  By         0.429622028235     -5.068762455522     -0.033722796875
+  Bz         0.000023258171     -0.033722796875    -13.509047414959
+
+
+
+                     Paramagnetic magnetizability tensor (au)
+                     ----------------------------------------
+
+                       Bx                  By                  Bz
+
+  Bx         3.486128441788     -0.245346899804      0.003311270930
+  By        -0.245346899804      0.792657517055     -0.005384635407
+  Bz         0.003311270930     -0.005384635407      2.029949990530
+
+
+ Largest deviation from orthonormality of OMOs:0.357492E-13
  - found for element   10  10
 
 
@@ -3024,8 +3202,8 @@ Maximum number of iterations reset in numerical differentiation to    25
 
 
 
- >>>> Total CPU  time used in ABACUS:   0.17 seconds
- >>>> Total wall time used in ABACUS:   0.19 seconds
+ >>>> Total CPU  time used in ABACUS:   0.21 seconds
+ >>>> Total wall time used in ABACUS:   0.28 seconds
 
 
                    .-------------------------------------------.
@@ -3052,7 +3230,7 @@ Maximum number of iterations reset in numerical differentiation to    25
                      `---------------------------------------'
 
  >>>> Total CPU  time used in HERMIT:   0.01 seconds
- >>>> Total wall time used in HERMIT:   0.02 seconds
+ >>>> Total wall time used in HERMIT:   0.01 seconds
 
 
                         .----------------------------------.
@@ -3120,37 +3298,37 @@ Maximum number of iterations reset in numerical differentiation to    25
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
    9  Screening settings (-IFTHRS, DIFDEN)  -12    F
-   9    -148.747212553        1.73846D-06   -3.55D-11    9
+   9    -148.747212553        1.73846D-06   -3.54D-11    9
       Virial theorem: -V/T =      2.008729
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
   10  Screening settings (-IFTHRS, DIFDEN)  -12    T
-  10    -148.747212553        4.07473D-07   -1.59D-12   10
+  10    -148.747212553        4.07474D-07   -1.59D-12   10
       Virial theorem: -V/T =      2.008729
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
   11  Screening settings (-IFTHRS, DIFDEN)  -15    F
-  11    -148.747212553        8.40852D-08    5.97D-13   10
+  11    -148.747212553        8.40853D-08    6.82D-13   10
       Virial theorem: -V/T =      2.008729
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
   12  Screening settings (-IFTHRS, DIFDEN)  -15    T
-  12    -148.747212553        1.34737D-08    1.14D-13   10
+  12    -148.747212553        1.34737D-08   -1.14D-13   10
       Virial theorem: -V/T =      2.008729
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
   13  Screening settings (-IFTHRS, DIFDEN)  -15    T
-  13    -148.747212553        2.84980D-09   -5.68D-14   10
+  13    -148.747212553        2.84980D-09    1.14D-13   10
       Virial theorem: -V/T =      2.008729
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
   14  Screening settings (-IFTHRS, DIFDEN)  -15    T
-  14    -148.747212553        5.63292D-10    2.84D-14   10
+  14    -148.747212553        5.63293D-10   -5.68D-14   10
       Virial theorem: -V/T =      2.008729
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
   15  Screening settings (-IFTHRS, DIFDEN)  -15    T
-  15    -148.747212553        5.02826D-11    2.84D-14   10
+  15    -148.747212553        5.02786D-11    5.68D-14   10
 
  *** DIIS converged in  15 iterations !
 @    Converged SCF energy, gradient:   -148.747212552927    5.03D-11
@@ -3192,7 +3370,7 @@ Maximum number of iterations reset in numerical differentiation to    25
  *** GEOMETRY WALK STEP ACCEPTED.
 
 
- >>>> CPU and wall time for SCF :       0.491       0.552
+ >>>> CPU and wall time for SCF :       0.063       0.083
 
 
                        .-----------------------------------.
@@ -3211,17 +3389,17 @@ Maximum number of iterations reset in numerical differentiation to    25
 @    Final gradient norm:           0.000000000050
 
  
-     Date and time (Linux)  : Mon Nov 25 22:08:42 2013
-     Host name              : c9-1.local                              
+     Date and time (Linux)  : Tue Nov 12 20:39:55 2013
+     Host name              : c17-11.local                            
 
 
 
- >>>> Total CPU  time used in SIRIUS :      0.49 seconds
- >>>> Total wall time used in SIRIUS :      0.67 seconds
+ >>>> Total CPU  time used in SIRIUS :      0.07 seconds
+ >>>> Total wall time used in SIRIUS :      0.09 seconds
 
  
-     Date and time (Linux)  : Mon Nov 25 22:08:42 2013
-     Host name              : c9-1.local                              
+     Date and time (Linux)  : Tue Nov 12 20:39:55 2013
+     Host name              : c17-11.local                            
 
 
                      .---------------------------------------.
@@ -3243,9 +3421,11 @@ Maximum number of iterations reset in numerical differentiation to    25
 
       The molecular gradient
       Geometry optimization
-      Quadrupole moments
+      Magnetic susceptibilities
+      INFO - London orbitals are NOT used
       Direct calculation - no two-electron integrals written or read.
       Two-electron integrals will be calculated in parallel
+      Molecular rotational g-factor
       Natural orbital connection is used
       for perturbation dependent basis sets.
 
@@ -3268,8 +3448,8 @@ Maximum number of iterations reset in numerical differentiation to    25
 
 
  
-     Date and time (Linux)  : Mon Nov 25 22:08:42 2013
-     Host name              : c9-1.local                              
+     Date and time (Linux)  : Tue Nov 12 20:39:55 2013
+     Host name              : c17-11.local                            
 
  Largest deviation from tra-rot symmetry is in gradient element  4:  1.50E-10
 
@@ -3280,60 +3460,73 @@ Maximum number of iterations reset in numerical differentiation to    25
 
 
  
-     Date and time (Linux)  : Mon Nov 25 22:08:42 2013
-     Host name              : c9-1.local                              
+     Date and time (Linux)  : Tue Nov 12 20:39:55 2013
+     Host name              : c17-11.local                            
 
 
-        *****************************************************************
-        ************* ABACUS - Molecular quadrupole moments *************
-        *****************************************************************
+   ****************************************************************************
+   ************************ ABACUS - MAGNETIZABILITIES ************************
+   ****************************************************************************
 
 
-  Units:  C m**2/(10**(-40))   (SI) 
-          Debye*AAngstroem     (cgs)
+  Units:  JT**(-2)/(10**(-30))   (SI) 
+          ppm cm**(3) mol**(-1)  (cgs)
+
+ Calculation without London orbitals (GIAOs).
 
 
-  Principal values (au, SI and cgs) and axes:
-  -------------------------------------------
+  Magnetizabilities                    au          SI         cgs
+  ---------------------------------------------------------------
 
-  Q_aa         1.2395      5.5611      1.6672     -0.0001    0.0007    1.0000
-  Q_bb         0.4505      2.0212      0.6059      0.6683    0.7439   -0.0005
-  Q_cc        -1.6900     -7.5823     -2.2731      0.7439   -0.6683    0.0005
-
-
-                          Total quadrupole moments (au)
-                          -----------------------------
-
-                         Ex          Ey          Ez
-
-            Ex      -0.733933    1.064140   -0.000904
-            Ey       1.064140   -0.505559    0.001344
-            Ez      -0.000904    0.001344    1.239492
+  Isotropic magnetizability:      -8.8651   -699.5519    -42.1280
+  Diamagnetic contribution:      -10.9633   -865.1188    -52.0987
+  Paramagnetic contribution:       2.0982    165.5669      9.9707
+  1st anisotropy:                 -3.9782   -313.9249    -18.9050
+  2nd anisotropy:                  6.8972    544.2608     32.7762
 
 
 
-                 Total quadrupole moments (cgs, Debye*AAngstroem)
-                 ------------------------------------------------
+  Principal values (au, SI, and cgs) and axes:
+  --------------------------------------------
 
-                         Ex          Ey          Ez
-
-            Ex      -0.987165    1.431305   -0.001215
-            Ey       1.431305   -0.679994    0.001807
-            Ez      -0.001215    0.001807    1.667160
+  khi_aa     -10.8111   -853.1091    -51.3754      0.9995   -0.0317   -0.0007
+  khi_bb      -4.2670   -336.7113    -20.2772      0.0317    0.9995   -0.0000
+  khi_cc     -11.5173   -908.8351    -54.7313      0.0007    0.0000    1.0000
 
 
+                        Total magnetizability tensor (au)
+                        ---------------------------------
 
-                          Total quadrupole moments (SI)
-                          -----------------------------
+                       Bx                  By                  Bz
 
-                         Ex          Ey          Ez
-
-            Ex      -3.292829    4.774320   -0.004054
-            Ey       4.774320   -2.268217    0.006029
-            Ez      -0.004054    0.006029    5.561046
+  Bx       -10.804538125082      0.207382000028     -0.000510833413
+  By         0.207382000028     -4.273588569766     -0.000329163350
+  Bz        -0.000510833413     -0.000329163350    -11.517309518459
 
 
- Largest deviation from orthonormality of OMOs:0.299760E-13
+
+                     Diamagnetic magnetizability tensor (au)
+                     ---------------------------------------
+
+                       Bx                  By                  Bz
+
+  Bx       -14.281814164894      0.442825125586     -0.001015656336
+  By         0.442825125586     -5.062476605465     -0.001388436078
+  Bz        -0.001015656336     -0.001388436078    -13.545639589307
+
+
+
+                     Paramagnetic magnetizability tensor (au)
+                     ----------------------------------------
+
+                       Bx                  By                  Bz
+
+  Bx         3.477276039812     -0.235443125558      0.000504822924
+  By        -0.235443125558      0.788888035698      0.001059272727
+  Bz         0.000504822924      0.001059272727      2.028330070848
+
+
+ Largest deviation from orthonormality of OMOs:0.326406E-13
  - found for element    5   5
 
 
@@ -3351,8 +3544,8 @@ Maximum number of iterations reset in numerical differentiation to    25
 
 
 
- >>>> Total CPU  time used in ABACUS:   0.17 seconds
- >>>> Total wall time used in ABACUS:   0.19 seconds
+ >>>> Total CPU  time used in ABACUS:   0.20 seconds
+ >>>> Total wall time used in ABACUS:   0.27 seconds
 
 
                    .-------------------------------------------.
@@ -3379,7 +3572,7 @@ Maximum number of iterations reset in numerical differentiation to    25
                      `---------------------------------------'
 
  >>>> Total CPU  time used in HERMIT:   0.01 seconds
- >>>> Total wall time used in HERMIT:   0.02 seconds
+ >>>> Total wall time used in HERMIT:   0.01 seconds
 
 
                         .----------------------------------.
@@ -3442,42 +3635,42 @@ Maximum number of iterations reset in numerical differentiation to    25
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
    8  Screening settings (-IFTHRS, DIFDEN)  -10    T
-   8    -148.746460937        5.29951D-06    4.55D-11    8
+   8    -148.746460937        5.29951D-06    4.56D-11    8
       Virial theorem: -V/T =      2.008646
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
    9  Screening settings (-IFTHRS, DIFDEN)  -12    F
-   9    -148.746460937        3.35849D-07   -9.96D-11    9
+   9    -148.746460937        3.35849D-07   -9.97D-11    9
       Virial theorem: -V/T =      2.008646
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
   10  Screening settings (-IFTHRS, DIFDEN)  -15    F
-  10    -148.746460937        9.69762D-08   -1.14D-13   10
+  10    -148.746460937        9.69762D-08   -5.68D-14   10
       Virial theorem: -V/T =      2.008646
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
   11  Screening settings (-IFTHRS, DIFDEN)  -15    T
-  11    -148.746460937        4.13817D-08    5.68D-14   10
+  11    -148.746460937        4.13829D-08    0.00D+00   10
       Virial theorem: -V/T =      2.008646
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
   12  Screening settings (-IFTHRS, DIFDEN)  -15    T
-  12    -148.746460937        1.02701D-08    0.00D+00   10
+  12    -148.746460937        1.02701D-08    2.84D-14   10
       Virial theorem: -V/T =      2.008646
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
   13  Screening settings (-IFTHRS, DIFDEN)  -15    T
-  13    -148.746460937        2.13621D-09    0.00D+00   10
+  13    -148.746460937        2.13621D-09   -5.68D-14   10
       Virial theorem: -V/T =      2.008646
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
   14  Screening settings (-IFTHRS, DIFDEN)  -15    T
-  14    -148.746460937        2.75605D-10   -5.68D-14   10
+  14    -148.746460937        2.75601D-10    2.84D-14   10
       Virial theorem: -V/T =      2.008646
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
   15  Screening settings (-IFTHRS, DIFDEN)  -15    T
-  15    -148.746460937        5.59948D-11   -5.68D-14   10
+  15    -148.746460937        5.59954D-11    0.00D+00   10
 
  *** DIIS converged in  15 iterations !
 @    Converged SCF energy, gradient:   -148.746460936676    5.60D-11
@@ -3519,7 +3712,7 @@ Maximum number of iterations reset in numerical differentiation to    25
  *** GEOMETRY WALK STEP ACCEPTED.
 
 
- >>>> CPU and wall time for SCF :       3.765       3.794
+ >>>> CPU and wall time for SCF :       0.199       0.222
 
 
                        .-----------------------------------.
@@ -3538,17 +3731,17 @@ Maximum number of iterations reset in numerical differentiation to    25
 @    Final gradient norm:           0.000000000056
 
  
-     Date and time (Linux)  : Mon Nov 25 22:08:47 2013
-     Host name              : c9-1.local                              
+     Date and time (Linux)  : Tue Nov 12 20:39:55 2013
+     Host name              : c17-11.local                            
 
 
 
- >>>> Total CPU  time used in SIRIUS :      3.77 seconds
- >>>> Total wall time used in SIRIUS :      3.85 seconds
+ >>>> Total CPU  time used in SIRIUS :      0.20 seconds
+ >>>> Total wall time used in SIRIUS :      0.23 seconds
 
  
-     Date and time (Linux)  : Mon Nov 25 22:08:47 2013
-     Host name              : c9-1.local                              
+     Date and time (Linux)  : Tue Nov 12 20:39:55 2013
+     Host name              : c17-11.local                            
 
 
                      .---------------------------------------.
@@ -3570,9 +3763,11 @@ Maximum number of iterations reset in numerical differentiation to    25
 
       The molecular gradient
       Geometry optimization
-      Quadrupole moments
+      Magnetic susceptibilities
+      INFO - London orbitals are NOT used
       Direct calculation - no two-electron integrals written or read.
       Two-electron integrals will be calculated in parallel
+      Molecular rotational g-factor
       Natural orbital connection is used
       for perturbation dependent basis sets.
 
@@ -3595,8 +3790,8 @@ Maximum number of iterations reset in numerical differentiation to    25
 
 
  
-     Date and time (Linux)  : Mon Nov 25 22:08:47 2013
-     Host name              : c9-1.local                              
+     Date and time (Linux)  : Tue Nov 12 20:39:55 2013
+     Host name              : c17-11.local                            
 
  Largest deviation from tra-rot symmetry is in gradient element  4:  1.58E-10
 
@@ -3607,60 +3802,73 @@ Maximum number of iterations reset in numerical differentiation to    25
 
 
  
-     Date and time (Linux)  : Mon Nov 25 22:08:47 2013
-     Host name              : c9-1.local                              
+     Date and time (Linux)  : Tue Nov 12 20:39:55 2013
+     Host name              : c17-11.local                            
 
 
-        *****************************************************************
-        ************* ABACUS - Molecular quadrupole moments *************
-        *****************************************************************
+   ****************************************************************************
+   ************************ ABACUS - MAGNETIZABILITIES ************************
+   ****************************************************************************
 
 
-  Units:  C m**2/(10**(-40))   (SI) 
-          Debye*AAngstroem     (cgs)
+  Units:  JT**(-2)/(10**(-30))   (SI) 
+          ppm cm**(3) mol**(-1)  (cgs)
+
+ Calculation without London orbitals (GIAOs).
 
 
-  Principal values (au, SI and cgs) and axes:
-  -------------------------------------------
+  Magnetizabilities                    au          SI         cgs
+  ---------------------------------------------------------------
 
-  Q_aa         1.3163      5.9059      1.7705     -0.0005   -0.0002    1.0000
-  Q_bb         0.3661      1.6426      0.4924      0.7014    0.7128    0.0005
-  Q_cc        -1.6825     -7.5485     -2.2630      0.7128   -0.7014    0.0002
-
-
-                          Total quadrupole moments (au)
-                          -----------------------------
-
-                         Ex          Ey          Ez
-
-            Ex      -0.674755    1.024164   -0.000755
-            Ey       1.024164   -0.641593    0.000083
-            Ez      -0.000755    0.000083    1.316348
+  Isotropic magnetizability:      -8.8122   -695.3758    -41.8765
+  Diamagnetic contribution:      -10.9206   -861.7507    -51.8958
+  Paramagnetic contribution:       2.1084    166.3749     10.0193
+  1st anisotropy:                 -3.9424   -311.0999    -18.7349
+  2nd anisotropy:                  6.8072    537.1550     32.3482
 
 
 
-                 Total quadrupole moments (cgs, Debye*AAngstroem)
-                 ------------------------------------------------
+  Principal values (au, SI, and cgs) and axes:
+  --------------------------------------------
 
-                         Ex          Ey          Ez
-
-            Ex      -0.907568    1.377536   -0.001016
-            Ey       1.377536   -0.862965    0.000111
-            Ez      -0.001016    0.000111    1.770533
+  khi_aa     -10.7220   -846.0792    -50.9521      0.9997   -0.0249   -0.0005
+  khi_bb      -4.2741   -337.2724    -20.3110      0.0249    0.9997   -0.0002
+  khi_cc     -11.4405   -902.7758    -54.3664      0.0005    0.0002    1.0000
 
 
+                        Total magnetizability tensor (au)
+                        ---------------------------------
 
-                          Total quadrupole moments (SI)
-                          -----------------------------
+                       Bx                  By                  Bz
 
-                         Ex          Ey          Ez
-
-            Ex      -3.027322    4.594964   -0.003388
-            Ey       4.594964   -2.878542    0.000371
-            Ez      -0.003388    0.000371    5.905864
+  Bx       -10.718044233117      0.160236764129     -0.000424586765
+  By         0.160236764129     -4.278105656000     -0.001406086066
+  Bz        -0.000424586765     -0.001406086066    -11.440521264504
 
 
- Largest deviation from orthonormality of OMOs:0.319744E-13
+
+                     Diamagnetic magnetizability tensor (au)
+                     ---------------------------------------
+
+                       Bx                  By                  Bz
+
+  Bx       -14.214808133352      0.415989388199     -0.001011504129
+  By         0.415989388199     -5.075325304639     -0.002222018727
+  Bz        -0.001011504129     -0.002222018727    -13.471747417979
+
+
+
+                     Paramagnetic magnetizability tensor (au)
+                     ----------------------------------------
+
+                       Bx                  By                  Bz
+
+  Bx         3.496763900234     -0.255752624070      0.000586917364
+  By        -0.255752624070      0.797219648638      0.000815932661
+  Bz         0.000586917364      0.000815932661      2.031226153475
+
+
+ Largest deviation from orthonormality of OMOs:0.315303E-13
  - found for element    3   3
 
 
@@ -3675,12 +3883,12 @@ Maximum number of iterations reset in numerical differentiation to    25
  CPU time statistics for ABACUS
  ------------------------------
 
- REST       00:00:01     771 %
+ REST       00:00:01     609 %
 
 
 
- >>>> Total CPU  time used in ABACUS:   0.16 seconds
- >>>> Total wall time used in ABACUS:   0.20 seconds
+ >>>> Total CPU  time used in ABACUS:   0.20 seconds
+ >>>> Total wall time used in ABACUS:   0.27 seconds
 
 
                    .-------------------------------------------.
@@ -3713,7 +3921,7 @@ Maximum number of iterations reset in numerical differentiation to    25
      ************************************************************************
 
  >>>> Total CPU  time used in HERMIT:   0.01 seconds
- >>>> Total wall time used in HERMIT:   0.02 seconds
+ >>>> Total wall time used in HERMIT:   0.01 seconds
 
 
                         .----------------------------------.
@@ -3776,7 +3984,7 @@ Maximum number of iterations reset in numerical differentiation to    25
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
    8  Screening settings (-IFTHRS, DIFDEN)  -12    F
-   8    -148.748471383        3.81440D-06    5.49D-11    8
+   8    -148.748471383        3.81440D-06    5.50D-11    8
       Virial theorem: -V/T =      2.008681
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
@@ -3786,32 +3994,32 @@ Maximum number of iterations reset in numerical differentiation to    25
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
   10  Screening settings (-IFTHRS, DIFDEN)  -15    F
-  10    -148.748471383        6.38924D-08   -2.61D-12   10
+  10    -148.748471383        6.38923D-08   -2.59D-12   10
       Virial theorem: -V/T =      2.008681
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
   11  Screening settings (-IFTHRS, DIFDEN)  -15    T
-  11    -148.748471383        2.74152D-08   -1.14D-13   10
+  11    -148.748471383        2.74152D-08    0.00D+00   10
       Virial theorem: -V/T =      2.008681
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
   12  Screening settings (-IFTHRS, DIFDEN)  -15    T
-  12    -148.748471383        7.79820D-09    5.68D-14   10
+  12    -148.748471383        7.79822D-09   -5.68D-14   10
       Virial theorem: -V/T =      2.008681
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
   13  Screening settings (-IFTHRS, DIFDEN)  -15    T
-  13    -148.748471383        1.58289D-09   -2.84D-14   10
+  13    -148.748471383        1.58290D-09   -5.68D-14   10
       Virial theorem: -V/T =      2.008681
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
   14  Screening settings (-IFTHRS, DIFDEN)  -15    T
-  14    -148.748471383        2.39558D-10    1.14D-13   10
+  14    -148.748471383        2.39558D-10    1.71D-13   10
       Virial theorem: -V/T =      2.008681
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
   15  Screening settings (-IFTHRS, DIFDEN)  -15    T
-  15    -148.748471383        2.41589D-11   -5.68D-14   10
+  15    -148.748471383        2.41631D-11   -1.42D-13   10
 
  *** DIIS converged in  15 iterations !
 @    Converged SCF energy, gradient:   -148.748471383295    2.42D-11
@@ -3853,7 +4061,7 @@ Maximum number of iterations reset in numerical differentiation to    25
  *** GEOMETRY WALK STEP ACCEPTED.
 
 
- >>>> CPU and wall time for SCF :       0.150       0.166
+ >>>> CPU and wall time for SCF :       0.110       0.137
 
 
                        .-----------------------------------.
@@ -3872,17 +4080,17 @@ Maximum number of iterations reset in numerical differentiation to    25
 @    Final gradient norm:           0.000000000024
 
  
-     Date and time (Linux)  : Mon Nov 25 22:08:47 2013
-     Host name              : c9-1.local                              
+     Date and time (Linux)  : Tue Nov 12 20:39:56 2013
+     Host name              : c17-11.local                            
 
 
 
- >>>> Total CPU  time used in SIRIUS :      0.15 seconds
- >>>> Total wall time used in SIRIUS :      0.18 seconds
+ >>>> Total CPU  time used in SIRIUS :      0.11 seconds
+ >>>> Total wall time used in SIRIUS :      0.15 seconds
 
  
-     Date and time (Linux)  : Mon Nov 25 22:08:47 2013
-     Host name              : c9-1.local                              
+     Date and time (Linux)  : Tue Nov 12 20:39:56 2013
+     Host name              : c17-11.local                            
 
 
                      .---------------------------------------.
@@ -3904,9 +4112,11 @@ Maximum number of iterations reset in numerical differentiation to    25
 
       The molecular gradient
       Geometry optimization
-      Quadrupole moments
+      Magnetic susceptibilities
+      INFO - London orbitals are NOT used
       Direct calculation - no two-electron integrals written or read.
       Two-electron integrals will be calculated in parallel
+      Molecular rotational g-factor
       Natural orbital connection is used
       for perturbation dependent basis sets.
 
@@ -3929,8 +4139,8 @@ Maximum number of iterations reset in numerical differentiation to    25
 
 
  
-     Date and time (Linux)  : Mon Nov 25 22:08:47 2013
-     Host name              : c9-1.local                              
+     Date and time (Linux)  : Tue Nov 12 20:39:56 2013
+     Host name              : c17-11.local                            
 
  Largest deviation from tra-rot symmetry is in gradient element  6:  1.93E-10
 
@@ -3941,8 +4151,8 @@ Maximum number of iterations reset in numerical differentiation to    25
 
 
  
-     Date and time (Linux)  : Mon Nov 25 22:08:47 2013
-     Host name              : c9-1.local                              
+     Date and time (Linux)  : Tue Nov 12 20:39:56 2013
+     Host name              : c17-11.local                            
 
 
                              Molecular geometry (au)
@@ -4014,54 +4224,127 @@ Maximum number of iterations reset in numerical differentiation to    25
 
 
 
-        *****************************************************************
-        ************* ABACUS - Molecular quadrupole moments *************
-        *****************************************************************
+   ****************************************************************************
+   ************************ ABACUS - MAGNETIZABILITIES ************************
+   ****************************************************************************
 
 
-  Units:  C m**2/(10**(-40))   (SI) 
-          Debye*AAngstroem     (cgs)
+  Units:  JT**(-2)/(10**(-30))   (SI) 
+          ppm cm**(3) mol**(-1)  (cgs)
+
+ Calculation without London orbitals (GIAOs).
 
 
-  Principal values (au, SI and cgs) and axes:
-  -------------------------------------------
+  Magnetizabilities                    au          SI         cgs
+  ---------------------------------------------------------------
 
-  Q_aa         1.2848      5.7642      1.7281     -0.0003    0.0003    1.0000
-  Q_bb         0.3992      1.7908      0.5369      0.6864    0.7272   -0.0000
-  Q_cc        -1.6839     -7.5550     -2.2649      0.7272   -0.6864    0.0004
-
-
-                          Total quadrupole moments (au)
-                          -----------------------------
-
-                         Ex          Ey          Ez
-
-            Ex      -0.702479    1.039805   -0.000836
-            Ey       1.039805   -0.582290    0.000795
-            Ez      -0.000836    0.000795    1.284768
+  Isotropic magnetizability:      -8.7986   -694.3022    -41.8119
+  Diamagnetic contribution:      -10.8720   -857.9148    -51.6648
+  Paramagnetic contribution:       2.0734    163.6126      9.8530
+  1st anisotropy:                 -3.9408   -310.9721    -18.7272
+  2nd anisotropy:                  6.7925    535.9960     32.2784
 
 
 
-                 Total quadrupole moments (cgs, Debye*AAngstroem)
-                 ------------------------------------------------
+  Principal values (au, SI, and cgs) and axes:
+  --------------------------------------------
 
-                         Ex          Ey          Ez
-
-            Ex      -0.944858    1.398573   -0.001125
-            Ey       1.398573   -0.783200    0.001070
-            Ez      -0.001125    0.001070    1.728057
+  khi_aa     -10.6997   -844.3182    -50.8460      0.9996   -0.0281   -0.0006
+  khi_bb      -4.2703   -336.9715    -20.2929      0.0281    0.9996   -0.0001
+  khi_cc     -11.4258   -901.6169    -54.2966      0.0006    0.0001    1.0000
 
 
+                        Total magnetizability tensor (au)
+                        ---------------------------------
 
-                          Total quadrupole moments (SI)
-                          -----------------------------
+                       Bx                  By                  Bz
 
-                         Ex          Ey          Ez
+  Bx       -10.694641726289      0.180483110551     -0.000468962344
+  By         0.180483110551     -4.275378323463     -0.000776247624
+  Bz        -0.000468962344     -0.000776247624    -11.425836043219
 
-            Ex      -3.151706    4.665137   -0.003751
-            Ey       4.665137   -2.612473    0.003568
-            Ez      -0.003751    0.003568    5.764179
 
+
+                     Diamagnetic magnetizability tensor (au)
+                     ---------------------------------------
+
+                       Bx                  By                  Bz
+
+  Bx       -14.145578619256      0.427512519131     -0.001012433967
+  By         0.427512519131     -5.065491195805     -0.001754052663
+  Bz        -0.001012433967     -0.001754052663    -13.404978946618
+
+
+
+                     Paramagnetic magnetizability tensor (au)
+                     ----------------------------------------
+
+                       Bx                  By                  Bz
+
+  Bx         3.450936892967     -0.247029408581      0.000543471624
+  By        -0.247029408581      0.790112872342      0.000977805039
+  Bz         0.000543471624      0.000977805039      1.979142903399
+
+
+
+ ****************************************************************************************
+ ************************ ABACUS - MOLECULAR ROTATIONAL g-TENSOR ************************
+ ****************************************************************************************
+
+
+ Calculation without London orbitals.
+
+
+ Principal moments of inertia (a.u.) and principal axes
+ ------------------------------------------------------
+
+   IA    6.332219          0.035674    0.999363   -0.000081
+   IB   69.713656         -0.000989    0.000116    1.000000
+   IC   74.281118          0.999363   -0.035674    0.000993
+
+
+  Molecular rotational g-tensor
+  -----------------------------
+
+  Isotropic g-tensor       :       0.43504426
+  Nuclear contribution     :       0.70038596
+  Diamagnetic contribution :       0.00000000
+  Electronic contribution  :      -0.26534170
+  1st anisotropy:                  0.05879976
+  2nd anisotropy:                  0.00643979
+
+
+
+  Molecular rotational g-tensor in principal axis system (a.u.):
+  --------------------------------------------------------------
+
+   A            0.47424410      0.00001358     -0.00668873
+   B            0.00014950      0.43933745      0.00005181
+   C           -0.07846319      0.00005520      0.39155123
+
+
+  Nuclear contribution in principal axis system (a.u.):
+  -----------------------------------------------------
+
+   A            0.96792939      0.00007427     -0.01490835
+   B            0.00081763      0.55372219     -0.00000129
+   C           -0.17488476     -0.00000138      0.57950629
+
+
+  Electronic contribution in principal axis system (a.u.):
+  --------------------------------------------------------
+
+   A           -0.49368529     -0.00006069      0.00821962
+   B           -0.00066813     -0.11438475      0.00005310
+   C            0.09642157      0.00005658     -0.18795507
+
+
+  Diamagnetic contribution in principal axis system (a.u.):
+  ---------------------------------------------------------
+
+   A            0.00000000      0.00000000      0.00000000
+   B            0.00000000      0.00000000      0.00000000
+   C            0.00000000      0.00000000      0.00000000
 
 
    Interatomic separations (in Angstrom):
@@ -4103,7 +4386,7 @@ Maximum number of iterations reset in numerical differentiation to    25
 
 
 
- Largest deviation from orthonormality of OMOs:0.295319E-13
+ Largest deviation from orthonormality of OMOs:0.297540E-13
  - found for element    2   2
 
 
@@ -4121,8 +4404,8 @@ Maximum number of iterations reset in numerical differentiation to    25
 
 
 
- >>>> Total CPU  time used in ABACUS:   0.16 seconds
- >>>> Total wall time used in ABACUS:   0.25 seconds
+ >>>> Total CPU  time used in ABACUS:   0.21 seconds
+ >>>> Total wall time used in ABACUS:   0.28 seconds
 
 
                    .-------------------------------------------.
@@ -4149,7 +4432,7 @@ Maximum number of iterations reset in numerical differentiation to    25
                      `---------------------------------------'
 
  >>>> Total CPU  time used in HERMIT:   0.01 seconds
- >>>> Total wall time used in HERMIT:   0.02 seconds
+ >>>> Total wall time used in HERMIT:   0.01 seconds
 
 
                         .----------------------------------.
@@ -4212,42 +4495,42 @@ Maximum number of iterations reset in numerical differentiation to    25
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
    8  Screening settings (-IFTHRS, DIFDEN)  -12    T
-   8    -148.745275216        1.58989D-06   -3.41D-12    8
+   8    -148.745275216        1.58989D-06   -3.38D-12    8
       Virial theorem: -V/T =      2.008692
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
    9  Screening settings (-IFTHRS, DIFDEN)  -12    T
-   9    -148.745275216        2.22588D-07   -1.48D-12    9
+   9    -148.745275216        2.22588D-07   -1.51D-12    9
       Virial theorem: -V/T =      2.008692
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
   10  Screening settings (-IFTHRS, DIFDEN)  -15    F
-  10    -148.745275216        2.26177D-08    1.11D-12   10
+  10    -148.745275216        2.26178D-08    1.17D-12   10
       Virial theorem: -V/T =      2.008692
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
   11  Screening settings (-IFTHRS, DIFDEN)  -15    T
-  11    -148.745275216        9.63217D-09   -2.84D-14   10
+  11    -148.745275216        9.63259D-09    0.00D+00   10
       Virial theorem: -V/T =      2.008692
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
   12  Screening settings (-IFTHRS, DIFDEN)  -15    T
-  12    -148.745275216        3.00336D-09   -2.84D-14   10
+  12    -148.745275216        3.00336D-09   -5.68D-14   10
       Virial theorem: -V/T =      2.008692
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
   13  Screening settings (-IFTHRS, DIFDEN)  -15    T
-  13    -148.745275216        7.39638D-10    2.84D-14   10
+  13    -148.745275216        7.39639D-10    0.00D+00   10
       Virial theorem: -V/T =      2.008692
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
   14  Screening settings (-IFTHRS, DIFDEN)  -15    T
-  14    -148.745275216        1.33497D-10    0.00D+00   10
+  14    -148.745275216        1.33489D-10   -5.68D-14   10
       Virial theorem: -V/T =      2.008692
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
   15  Screening settings (-IFTHRS, DIFDEN)  -15    T
-  15    -148.745275216        1.24425D-11   -2.84D-14   10
+  15    -148.745275216        1.24409D-11    1.14D-13   10
 
  *** DIIS converged in  15 iterations !
 @    Converged SCF energy, gradient:   -148.745275216227    1.24D-11
@@ -4289,7 +4572,7 @@ Maximum number of iterations reset in numerical differentiation to    25
  *** GEOMETRY WALK STEP ACCEPTED.
 
 
- >>>> CPU and wall time for SCF :       0.627       0.649
+ >>>> CPU and wall time for SCF :       0.057       0.078
 
 
                        .-----------------------------------.
@@ -4308,17 +4591,17 @@ Maximum number of iterations reset in numerical differentiation to    25
 @    Final gradient norm:           0.000000000012
 
  
-     Date and time (Linux)  : Mon Nov 25 22:08:48 2013
-     Host name              : c9-1.local                              
+     Date and time (Linux)  : Tue Nov 12 20:39:56 2013
+     Host name              : c17-11.local                            
 
 
 
- >>>> Total CPU  time used in SIRIUS :      0.63 seconds
- >>>> Total wall time used in SIRIUS :      0.66 seconds
+ >>>> Total CPU  time used in SIRIUS :      0.06 seconds
+ >>>> Total wall time used in SIRIUS :      0.09 seconds
 
  
-     Date and time (Linux)  : Mon Nov 25 22:08:48 2013
-     Host name              : c9-1.local                              
+     Date and time (Linux)  : Tue Nov 12 20:39:56 2013
+     Host name              : c17-11.local                            
 
 
                      .---------------------------------------.
@@ -4340,9 +4623,11 @@ Maximum number of iterations reset in numerical differentiation to    25
 
       The molecular gradient
       Geometry optimization
-      Quadrupole moments
+      Magnetic susceptibilities
+      INFO - London orbitals are NOT used
       Direct calculation - no two-electron integrals written or read.
       Two-electron integrals will be calculated in parallel
+      Molecular rotational g-factor
       Natural orbital connection is used
       for perturbation dependent basis sets.
 
@@ -4365,10 +4650,10 @@ Maximum number of iterations reset in numerical differentiation to    25
 
 
  
-     Date and time (Linux)  : Mon Nov 25 22:08:48 2013
-     Host name              : c9-1.local                              
+     Date and time (Linux)  : Tue Nov 12 20:39:56 2013
+     Host name              : c17-11.local                            
 
- Largest deviation from tra-rot symmetry is in gradient element  3:  1.87E-10
+ Largest deviation from tra-rot symmetry is in gradient element  6:  1.87E-10
 
 
    ***************************************************************************
@@ -4377,60 +4662,73 @@ Maximum number of iterations reset in numerical differentiation to    25
 
 
  
-     Date and time (Linux)  : Mon Nov 25 22:08:48 2013
-     Host name              : c9-1.local                              
+     Date and time (Linux)  : Tue Nov 12 20:39:56 2013
+     Host name              : c17-11.local                            
 
 
-        *****************************************************************
-        ************* ABACUS - Molecular quadrupole moments *************
-        *****************************************************************
+   ****************************************************************************
+   ************************ ABACUS - MAGNETIZABILITIES ************************
+   ****************************************************************************
 
 
-  Units:  C m**2/(10**(-40))   (SI) 
-          Debye*AAngstroem     (cgs)
+  Units:  JT**(-2)/(10**(-30))   (SI) 
+          ppm cm**(3) mol**(-1)  (cgs)
+
+ Calculation without London orbitals (GIAOs).
 
 
-  Principal values (au, SI and cgs) and axes:
-  -------------------------------------------
+  Magnetizabilities                    au          SI         cgs
+  ---------------------------------------------------------------
 
-  Q_aa         1.2721      5.7072      1.7110     -0.0003    0.0002    1.0000
-  Q_bb         0.4154      1.8638      0.5587      0.6834    0.7301    0.0001
-  Q_cc        -1.6875     -7.5710     -2.2697      0.7301   -0.6834    0.0004
-
-
-                          Total quadrupole moments (au)
-                          -----------------------------
-
-                         Ex          Ey          Ez
-
-            Ex      -0.705391    1.049163   -0.000819
-            Ey       1.049163   -0.566686    0.000661
-            Ez      -0.000819    0.000661    1.272077
+  Isotropic magnetizability:      -8.8781   -700.5771    -42.1897
+  Diamagnetic contribution:      -11.0116   -868.9331    -52.3284
+  Paramagnetic contribution:       2.1335    168.3560     10.1386
+  1st anisotropy:                 -3.9780   -313.9059    -18.9039
+  2nd anisotropy:                  6.9079    545.1027     32.8269
 
 
 
-                 Total quadrupole moments (cgs, Debye*AAngstroem)
-                 ------------------------------------------------
+  Principal values (au, SI, and cgs) and axes:
+  --------------------------------------------
 
-                         Ex          Ey          Ez
-
-            Ex      -0.948775    1.411160   -0.001102
-            Ey       1.411160   -0.762212    0.000889
-            Ez      -0.001102    0.000889    1.710988
+  khi_aa     -10.8314   -854.7083    -51.4717      0.9996   -0.0286   -0.0007
+  khi_bb      -4.2729   -337.1753    -20.3052      0.0286    0.9996   -0.0001
+  khi_cc     -11.5301   -909.8477    -54.7923      0.0007    0.0001    1.0000
 
 
+                        Total magnetizability tensor (au)
+                        ---------------------------------
 
-                          Total quadrupole moments (SI)
-                          -----------------------------
+                       Bx                  By                  Bz
 
-                         Ex          Ey          Ez
-
-            Ex      -3.164774    4.707122   -0.003676
-            Ey       4.707122   -2.542466    0.002965
-            Ez      -0.003676    0.002965    5.707241
+  Bx       -10.826030046554      0.187271727945     -0.000486130035
+  By         0.187271727945     -4.278241788791     -0.000953108899
+  Bz        -0.000486130035     -0.000953108899    -11.530140834769
 
 
- Largest deviation from orthonormality of OMOs:0.328626E-13
+
+                     Diamagnetic magnetizability tensor (au)
+                     ---------------------------------------
+
+                       Bx                  By                  Bz
+
+  Bx       -14.350720302750      0.431292482062     -0.001015774876
+  By         0.431292482062     -5.072097931256     -0.001858628821
+  Bz        -0.001015774876     -0.001858628821    -13.612123333389
+
+
+
+                     Paramagnetic magnetizability tensor (au)
+                     ----------------------------------------
+
+                       Bx                  By                  Bz
+
+  Bx         3.524690256195     -0.244020754117      0.000529644841
+  By        -0.244020754117      0.793856142464      0.000905519923
+  Bz         0.000529644841      0.000905519923      2.081982498620
+
+
+ Largest deviation from orthonormality of OMOs:0.326406E-13
  - found for element   10  10
 
 
@@ -4448,8 +4746,8 @@ Maximum number of iterations reset in numerical differentiation to    25
 
 
 
- >>>> Total CPU  time used in ABACUS:   0.16 seconds
- >>>> Total wall time used in ABACUS:   0.18 seconds
+ >>>> Total CPU  time used in ABACUS:   0.19 seconds
+ >>>> Total wall time used in ABACUS:   0.30 seconds
 
 
                    .-------------------------------------------.
@@ -4476,7 +4774,7 @@ Maximum number of iterations reset in numerical differentiation to    25
                      `---------------------------------------'
 
  >>>> Total CPU  time used in HERMIT:   0.01 seconds
- >>>> Total wall time used in HERMIT:   0.01 seconds
+ >>>> Total wall time used in HERMIT:   0.02 seconds
 
 
                         .----------------------------------.
@@ -4544,37 +4842,37 @@ Maximum number of iterations reset in numerical differentiation to    25
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
    9  Screening settings (-IFTHRS, DIFDEN)  -12    T
-   9    -148.747511520        3.63879D-07   -8.53D-13    9
+   9    -148.747511520        3.63879D-07   -7.39D-13    9
       Virial theorem: -V/T =      2.008690
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
   10  Screening settings (-IFTHRS, DIFDEN)  -15    F
-  10    -148.747511520        1.05204D-07    1.71D-13   10
+  10    -148.747511520        1.05204D-07    1.14D-13   10
       Virial theorem: -V/T =      2.008690
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
   11  Screening settings (-IFTHRS, DIFDEN)  -15    T
-  11    -148.747511520        2.00049D-08    2.84D-14   10
+  11    -148.747511520        2.00050D-08   -5.68D-14   10
       Virial theorem: -V/T =      2.008690
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
   12  Screening settings (-IFTHRS, DIFDEN)  -15    T
-  12    -148.747511520        1.08708D-09   -2.84D-14   10
+  12    -148.747511520        1.08708D-09    5.68D-14   10
       Virial theorem: -V/T =      2.008690
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
   13  Screening settings (-IFTHRS, DIFDEN)  -15    T
-  13    -148.747511520        4.06819D-10    0.00D+00   10
+  13    -148.747511520        4.06818D-10   -5.68D-14   10
       Virial theorem: -V/T =      2.008690
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
   14  Screening settings (-IFTHRS, DIFDEN)  -15    T
-  14    -148.747511520        1.78139D-10   -8.53D-14   10
+  14    -148.747511520        1.78137D-10    0.00D+00   10
       Virial theorem: -V/T =      2.008690
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
   15  Screening settings (-IFTHRS, DIFDEN)  -15    T
-  15    -148.747511520        1.11894D-11    2.84D-14   10
+  15    -148.747511520        1.11929D-11    0.00D+00   10
 
  *** DIIS converged in  15 iterations !
 @    Converged SCF energy, gradient:   -148.747511519726    1.12D-11
@@ -4616,7 +4914,7 @@ Maximum number of iterations reset in numerical differentiation to    25
  *** GEOMETRY WALK STEP ACCEPTED.
 
 
- >>>> CPU and wall time for SCF :       0.264       0.285
+ >>>> CPU and wall time for SCF :       0.070       0.096
 
 
                        .-----------------------------------.
@@ -4635,17 +4933,17 @@ Maximum number of iterations reset in numerical differentiation to    25
 @    Final gradient norm:           0.000000000011
 
  
-     Date and time (Linux)  : Mon Nov 25 22:08:49 2013
-     Host name              : c9-1.local                              
+     Date and time (Linux)  : Tue Nov 12 20:39:56 2013
+     Host name              : c17-11.local                            
 
 
 
- >>>> Total CPU  time used in SIRIUS :      0.27 seconds
- >>>> Total wall time used in SIRIUS :      0.29 seconds
+ >>>> Total CPU  time used in SIRIUS :      0.07 seconds
+ >>>> Total wall time used in SIRIUS :      0.10 seconds
 
  
-     Date and time (Linux)  : Mon Nov 25 22:08:49 2013
-     Host name              : c9-1.local                              
+     Date and time (Linux)  : Tue Nov 12 20:39:56 2013
+     Host name              : c17-11.local                            
 
 
                      .---------------------------------------.
@@ -4667,9 +4965,11 @@ Maximum number of iterations reset in numerical differentiation to    25
 
       The molecular gradient
       Geometry optimization
-      Quadrupole moments
+      Magnetic susceptibilities
+      INFO - London orbitals are NOT used
       Direct calculation - no two-electron integrals written or read.
       Two-electron integrals will be calculated in parallel
+      Molecular rotational g-factor
       Natural orbital connection is used
       for perturbation dependent basis sets.
 
@@ -4692,8 +4992,8 @@ Maximum number of iterations reset in numerical differentiation to    25
 
 
  
-     Date and time (Linux)  : Mon Nov 25 22:08:49 2013
-     Host name              : c9-1.local                              
+     Date and time (Linux)  : Tue Nov 12 20:39:56 2013
+     Host name              : c17-11.local                            
 
  Largest deviation from tra-rot symmetry is in gradient element  1:  2.38E-10
 
@@ -4704,60 +5004,73 @@ Maximum number of iterations reset in numerical differentiation to    25
 
 
  
-     Date and time (Linux)  : Mon Nov 25 22:08:49 2013
-     Host name              : c9-1.local                              
+     Date and time (Linux)  : Tue Nov 12 20:39:56 2013
+     Host name              : c17-11.local                            
 
 
-        *****************************************************************
-        ************* ABACUS - Molecular quadrupole moments *************
-        *****************************************************************
+   ****************************************************************************
+   ************************ ABACUS - MAGNETIZABILITIES ************************
+   ****************************************************************************
 
 
-  Units:  C m**2/(10**(-40))   (SI) 
-          Debye*AAngstroem     (cgs)
+  Units:  JT**(-2)/(10**(-30))   (SI) 
+          ppm cm**(3) mol**(-1)  (cgs)
+
+ Calculation without London orbitals (GIAOs).
 
 
-  Principal values (au, SI and cgs) and axes:
-  -------------------------------------------
+  Magnetizabilities                    au          SI         cgs
+  ---------------------------------------------------------------
 
-  Q_aa         1.2347      5.5396      1.6607     -0.0003    0.0002    1.0000
-  Q_bb         0.4803      2.1550      0.6461      0.6916    0.7223    0.0000
-  Q_cc        -1.7151     -7.6947     -2.3068      0.7223   -0.6916    0.0004
-
-
-                          Total quadrupole moments (au)
-                          -----------------------------
-
-                         Ex          Ey          Ez
-
-            Ex      -0.665022    1.096657   -0.000796
-            Ey       1.096657   -0.569694    0.000751
-            Ez      -0.000796    0.000751    1.234715
+  Isotropic magnetizability:      -8.8366   -697.2986    -41.9923
+  Diamagnetic contribution:      -10.9368   -863.0288    -51.9728
+  Paramagnetic contribution:       2.1002    165.7302      9.9805
+  1st anisotropy:                 -3.9370   -310.6734    -18.7092
+  2nd anisotropy:                  6.8493    540.4812     32.5485
 
 
 
-                 Total quadrupole moments (cgs, Debye*AAngstroem)
-                 ------------------------------------------------
+  Principal values (au, SI, and cgs) and axes:
+  --------------------------------------------
 
-                         Ex          Ey          Ez
-
-            Ex      -0.894477    1.475041   -0.001070
-            Ey       1.475041   -0.766257    0.001011
-            Ez      -0.001070    0.001011    1.660734
+  khi_aa     -10.7781   -850.5038    -51.2185      0.9996   -0.0289   -0.0007
+  khi_bb      -4.2704   -336.9777    -20.2933      0.0289    0.9996   -0.0001
+  khi_cc     -11.4613   -904.4141    -54.4651      0.0008    0.0001    1.0000
 
 
+                        Total magnetizability tensor (au)
+                        ---------------------------------
 
-                          Total quadrupole moments (SI)
-                          -----------------------------
+                       Bx                  By                  Bz
 
-                         Ex          Ey          Ez
-
-            Ex      -2.983655    4.920207   -0.003570
-            Ey       4.920207   -2.555959    0.003371
-            Ez      -0.003570    0.003371    5.539614
+  Bx       -10.772650779512      0.188234245944     -0.000533513489
+  By         0.188234245944     -4.275835635619     -0.000780322935
+  Bz        -0.000533513489     -0.000780322935    -11.461284022724
 
 
- Largest deviation from orthonormality of OMOs:0.377476E-13
+
+                     Diamagnetic magnetizability tensor (au)
+                     ---------------------------------------
+
+                       Bx                  By                  Bz
+
+  Bx       -14.225776109888      0.435064703336     -0.001019076462
+  By         0.435064703336     -5.068179666433     -0.001729092090
+  Bz        -0.001019076462     -0.001729092090    -13.516515368165
+
+
+
+                     Paramagnetic magnetizability tensor (au)
+                     ----------------------------------------
+
+                       Bx                  By                  Bz
+
+  Bx         3.453125330376     -0.246830457393      0.000485562973
+  By        -0.246830457393      0.792344030814      0.000948769155
+  Bz         0.000485562973      0.000948769155      2.055231345441
+
+
+ Largest deviation from orthonormality of OMOs:0.375255E-13
  - found for element    5   5
 
 
@@ -4772,11 +5085,12 @@ Maximum number of iterations reset in numerical differentiation to    25
  CPU time statistics for ABACUS
  ------------------------------
 
+ REST       00:00:01     595 %
 
 
 
- >>>> Total CPU  time used in ABACUS:   0.15 seconds
- >>>> Total wall time used in ABACUS:   0.23 seconds
+ >>>> Total CPU  time used in ABACUS:   0.20 seconds
+ >>>> Total wall time used in ABACUS:   0.30 seconds
 
 
                    .-------------------------------------------.
@@ -4803,7 +5117,7 @@ Maximum number of iterations reset in numerical differentiation to    25
                      `---------------------------------------'
 
  >>>> Total CPU  time used in HERMIT:   0.01 seconds
- >>>> Total wall time used in HERMIT:   0.02 seconds
+ >>>> Total wall time used in HERMIT:   0.01 seconds
 
 
                         .----------------------------------.
@@ -4871,37 +5185,37 @@ Maximum number of iterations reset in numerical differentiation to    25
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
    9  Screening settings (-IFTHRS, DIFDEN)  -12    T
-   9    -148.746391549        6.11921D-07   -9.09D-13    9
+   9    -148.746391549        6.11921D-07   -8.53D-13    9
       Virial theorem: -V/T =      2.008690
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
   10  Screening settings (-IFTHRS, DIFDEN)  -15    F
-  10    -148.746391549        1.78805D-07   -5.68D-14   10
+  10    -148.746391549        1.78805D-07   -1.42D-13   10
       Virial theorem: -V/T =      2.008690
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
   11  Screening settings (-IFTHRS, DIFDEN)  -15    T
-  11    -148.746391549        1.96018D-08   -5.68D-14   10
+  11    -148.746391549        1.96035D-08   -1.14D-13   10
       Virial theorem: -V/T =      2.008690
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
   12  Screening settings (-IFTHRS, DIFDEN)  -15    T
-  12    -148.746391549        2.00142D-09   -2.84D-14   10
+  12    -148.746391549        2.00142D-09    2.84D-14   10
       Virial theorem: -V/T =      2.008690
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
   13  Screening settings (-IFTHRS, DIFDEN)  -15    T
-  13    -148.746391549        5.48114D-10    0.00D+00   10
+  13    -148.746391549        5.48114D-10   -1.14D-13   10
       Virial theorem: -V/T =      2.008690
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
   14  Screening settings (-IFTHRS, DIFDEN)  -15    T
-  14    -148.746391549        2.68777D-10   -2.84D-14   10
+  14    -148.746391549        2.68779D-10    1.71D-13   10
       Virial theorem: -V/T =      2.008690
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
   15  Screening settings (-IFTHRS, DIFDEN)  -15    T
-  15    -148.746391549        5.42643D-11    2.84D-14   10
+  15    -148.746391549        5.42664D-11   -1.14D-13   10
 
  *** DIIS converged in  15 iterations !
 @    Converged SCF energy, gradient:   -148.746391549217    5.43D-11
@@ -4943,7 +5257,7 @@ Maximum number of iterations reset in numerical differentiation to    25
  *** GEOMETRY WALK STEP ACCEPTED.
 
 
- >>>> CPU and wall time for SCF :       1.416       1.437
+ >>>> CPU and wall time for SCF :       0.077       0.106
 
 
                        .-----------------------------------.
@@ -4962,17 +5276,17 @@ Maximum number of iterations reset in numerical differentiation to    25
 @    Final gradient norm:           0.000000000054
 
  
-     Date and time (Linux)  : Mon Nov 25 22:08:50 2013
-     Host name              : c9-1.local                              
+     Date and time (Linux)  : Tue Nov 12 20:39:57 2013
+     Host name              : c17-11.local                            
 
 
 
- >>>> Total CPU  time used in SIRIUS :      1.42 seconds
- >>>> Total wall time used in SIRIUS :      1.45 seconds
+ >>>> Total CPU  time used in SIRIUS :      0.08 seconds
+ >>>> Total wall time used in SIRIUS :      0.11 seconds
 
  
-     Date and time (Linux)  : Mon Nov 25 22:08:50 2013
-     Host name              : c9-1.local                              
+     Date and time (Linux)  : Tue Nov 12 20:39:57 2013
+     Host name              : c17-11.local                            
 
 
                      .---------------------------------------.
@@ -4994,9 +5308,11 @@ Maximum number of iterations reset in numerical differentiation to    25
 
       The molecular gradient
       Geometry optimization
-      Quadrupole moments
+      Magnetic susceptibilities
+      INFO - London orbitals are NOT used
       Direct calculation - no two-electron integrals written or read.
       Two-electron integrals will be calculated in parallel
+      Molecular rotational g-factor
       Natural orbital connection is used
       for perturbation dependent basis sets.
 
@@ -5019,8 +5335,8 @@ Maximum number of iterations reset in numerical differentiation to    25
 
 
  
-     Date and time (Linux)  : Mon Nov 25 22:08:50 2013
-     Host name              : c9-1.local                              
+     Date and time (Linux)  : Tue Nov 12 20:39:57 2013
+     Host name              : c17-11.local                            
 
  Largest deviation from tra-rot symmetry is in gradient element  1:  2.35E-10
 
@@ -5031,61 +5347,74 @@ Maximum number of iterations reset in numerical differentiation to    25
 
 
  
-     Date and time (Linux)  : Mon Nov 25 22:08:50 2013
-     Host name              : c9-1.local                              
+     Date and time (Linux)  : Tue Nov 12 20:39:57 2013
+     Host name              : c17-11.local                            
 
 
-        *****************************************************************
-        ************* ABACUS - Molecular quadrupole moments *************
-        *****************************************************************
+   ****************************************************************************
+   ************************ ABACUS - MAGNETIZABILITIES ************************
+   ****************************************************************************
 
 
-  Units:  C m**2/(10**(-40))   (SI) 
-          Debye*AAngstroem     (cgs)
+  Units:  JT**(-2)/(10**(-30))   (SI) 
+          ppm cm**(3) mol**(-1)  (cgs)
+
+ Calculation without London orbitals (GIAOs).
 
 
-  Principal values (au, SI and cgs) and axes:
-  -------------------------------------------
+  Magnetizabilities                    au          SI         cgs
+  ---------------------------------------------------------------
 
-  Q_aa         1.3212      5.9277      1.7771     -0.0003    0.0002    1.0000
-  Q_bb         0.3347      1.5017      0.4502      0.6778    0.7353    0.0001
-  Q_cc        -1.6559     -7.4294     -2.2273      0.7353   -0.6778    0.0004
-
-
-                          Total quadrupole moments (au)
-                          -----------------------------
-
-                         Ex          Ey          Ez
-
-            Ex      -0.741494    0.992023   -0.000865
-            Ey       0.992023   -0.579719    0.000696
-            Ez      -0.000865    0.000696    1.321213
+  Isotropic magnetizability:      -8.8406   -697.6161    -42.0114
+  Diamagnetic contribution:      -10.9472   -863.8489    -52.0222
+  Paramagnetic contribution:       2.1066    166.2328     10.0108
+  1st anisotropy:                 -3.9818   -314.2057    -18.9219
+  2nd anisotropy:                  6.8517    540.6721     32.5600
 
 
 
-                 Total quadrupole moments (cgs, Debye*AAngstroem)
-                 ------------------------------------------------
+  Principal values (au, SI, and cgs) and axes:
+  --------------------------------------------
 
-                         Ex          Ey          Ez
-
-            Ex      -0.997335    1.334305   -0.001163
-            Ey       1.334305   -0.779742    0.000936
-            Ez      -0.001163    0.000936    1.777077
+  khi_aa     -10.7539   -848.5937    -51.1035      0.9996   -0.0278   -0.0005
+  khi_bb      -4.2728   -337.1680    -20.3047      0.0278    0.9996   -0.0001
+  khi_cc     -11.4952   -907.0865    -54.6260      0.0005    0.0001    1.0000
 
 
+                        Total magnetizability tensor (au)
+                        ---------------------------------
 
-                          Total quadrupole moments (SI)
-                          -----------------------------
+                       Bx                  By                  Bz
 
-                         Ex          Ey          Ez
-
-            Ex      -3.326750    4.450763   -0.003880
-            Ey       4.450763   -2.600941    0.003122
-            Ez      -0.003880    0.003122    5.927691
+  Bx       -10.748898434568      0.179864892342     -0.000419347786
+  By         0.179864892342     -4.277793457066     -0.000946710873
+  Bz        -0.000419347786     -0.000946710873    -11.495150163452
 
 
- Largest deviation from orthonormality of OMOs:0.517364E-13
- - found for element    5   5
+
+                     Diamagnetic magnetizability tensor (au)
+                     ---------------------------------------
+
+                       Bx                  By                  Bz
+
+  Bx       -14.270332186039      0.423871087072     -0.001009242935
+  By         0.423871087072     -5.070511187628     -0.001882847434
+  Bz        -0.001009242935     -0.001882847434    -13.500806379651
+
+
+
+                     Paramagnetic magnetizability tensor (au)
+                     ----------------------------------------
+
+                       Bx                  By                  Bz
+
+  Bx         3.521433751470     -0.244006194731      0.000589895148
+  By        -0.244006194731      0.792717730562      0.000936136561
+  Bz         0.000589895148      0.000936136561      2.005656216199
+
+
+ Largest deviation from orthonormality of OMOs:0.524025E-13
+ - found for element    8   8
 
 
        ********************************************************************
@@ -5107,16 +5436,27 @@ Maximum number of iterations reset in numerical differentiation to    25
        5          0.000026         0.000180        -0.002133
        6         -0.000336         0.000407        -0.240555
 
- Molecular quadrupole moment second derivatives:
- -----------------------------------------------
+ Magnetizability tensor second derivatives:
+ ------------------------------------------
 
  Mode      XX          XY          YY          XZ          YZ          ZZ
-   1     0.067819    0.009424    0.006962   -0.154217   -0.233783   -0.074781
-   2     0.069720   -0.000090    0.027704    0.154336    0.230336   -0.097424
-   3    -0.235179   -0.110039    0.533223    0.001383    0.011185   -0.298045
-   4    -0.286687   -0.279621    0.671876   -0.001322   -0.011575   -0.385189
-   5     0.040507   -0.014381   -0.057431    0.000055    0.000306    0.016925
-   6     0.582185   -0.129319   -0.232260   -0.001968   -0.003305   -0.349925
+   1     0.183272   -0.192735    1.233344   -0.236926   -0.395444    0.223519
+   2     0.141989   -0.135147    1.248860    0.237068    0.397530    0.191613
+   3    -1.199566    0.035169    0.532494   -0.006376    0.005066   -0.154570
+   4    -0.684924   -0.076780    0.794903    0.008520   -0.003296   -0.346666
+   5     0.079310   -0.022350    0.024548    0.000651   -0.000939    0.394896
+   6    -0.271666    0.115370    0.020956    0.001543   -0.000010    0.211972
+
+ Rotational g tensor second derivatives:
+ ---------------------------------------
+
+ Mode      XX          XY          YY          XZ          YZ          ZZ
+   1    -0.441650    0.342024   -0.018909    0.044511    0.029137   -0.011345
+   2    -0.646491   -0.341861   -0.022129    0.059073   -0.029197   -0.004081
+   3    -0.442893   -0.003883    0.008673   -0.010045    0.000234    0.061139
+   4    -0.572598    0.002711    0.009883    0.070284   -0.000446    0.028696
+   5    -0.009518    0.000516   -0.016820    0.013426   -0.000046   -0.009758
+   6    -0.145278    0.000547   -0.019262   -0.022963   -0.000078    0.009705
 
  WARNING: There are   1 negative frequencies at effective geometry
  These are ignored in the following analysis
@@ -5158,18 +5498,35 @@ Maximum number of iterations reset in numerical differentiation to    25
   Z        0.97738028           -0.00459292            0.97278737
 
 
-                         Molecular quadrupole moment (au)
-                         --------------------------------
+                              Magnetizabilities (au)
+                              ----------------------
 
     Effective geometry       <P^(0)_2>_eff      Vibrationally corrected
  -----------------------------------------------------------------------
 
- XX       -0.70398562           -0.00825547           -0.71224109
- XY        1.04450170           -0.00810764            1.03639406
- XZ       -0.00082779            0.00000830           -0.00081949
- YY       -0.57441612            0.02245658           -0.55195954
- YZ        0.00072770           -0.00003619            0.00069151
- ZZ        1.27840174           -0.01420111            1.26420064
+ XX      -10.76043502           -0.03198422          -10.79241924
+ XY        0.18390536           -0.00377751            0.18012784
+ XZ       -0.00047836            0.00008762           -0.00039074
+ YY       -4.27684074            0.04402080           -4.23281994
+ YZ       -0.00086350            0.00003563           -0.00082788
+ ZZ      -11.47848206            0.00310904          -11.47537302
+
+
+                               Rotational g tensor
+                               -------------------
+
+    Effective geometry       <P^(0)_2>_eff      Vibrationally corrected
+ -----------------------------------------------------------------------
+
+ AX        0.47386737           -0.02776227            0.44610510
+ BX        0.00019330           -0.00001852            0.00017478
+ CX       -0.08080038            0.00232808           -0.07847230
+ AY        0.00001739           -0.00000333            0.00001406
+ BY        0.43737456           -0.00035603            0.43701854
+ CY        0.00005407           -0.00000795            0.00004613
+ AZ       -0.00682660            0.00046495           -0.00636165
+ BZ        0.00005079           -0.00000757            0.00004322
+ CZ        0.39093590            0.00136186            0.39229775
 
  Numerical differentiation complete.
 
@@ -5177,12 +5534,11 @@ Maximum number of iterations reset in numerical differentiation to    25
  CPU time statistics for ABACUS
  ------------------------------
 
- REST       00:00:01     796 %
 
 
 
- >>>> Total CPU  time used in ABACUS:   0.16 seconds
- >>>> Total wall time used in ABACUS:   0.18 seconds
+ >>>> Total CPU  time used in ABACUS:   0.20 seconds
+ >>>> Total wall time used in ABACUS:   0.27 seconds
 
 
                    .-------------------------------------------.
@@ -5210,7 +5566,7 @@ Maximum number of iterations reset in numerical differentiation to    25
                      `---------------------------------------'
 
  >>>> Total CPU  time used in HERMIT:   0.01 seconds
- >>>> Total wall time used in HERMIT:   0.01 seconds
+ >>>> Total wall time used in HERMIT:   0.02 seconds
 
 
                         .----------------------------------.
@@ -5283,7 +5639,7 @@ Maximum number of iterations reset in numerical differentiation to    25
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
   10  Screening settings (-IFTHRS, DIFDEN)  -11    T
-  10    -148.799820759        1.19039D-06   -6.31D-12   10
+  10    -148.799820759        1.19039D-06   -6.48D-12   10
       Virial theorem: -V/T =      2.008737
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
@@ -5293,27 +5649,27 @@ Maximum number of iterations reset in numerical differentiation to    25
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
   12  Screening settings (-IFTHRS, DIFDEN)  -15    T
-  12    -148.799820759        2.54224D-08   -1.14D-13   10
+  12    -148.799820759        2.54224D-08   -5.68D-14   10
       Virial theorem: -V/T =      2.008737
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
   13  Screening settings (-IFTHRS, DIFDEN)  -15    T
-  13    -148.799820759        4.59643D-09   -5.68D-14   10
+  13    -148.799820759        4.59643D-09    0.00D+00   10
       Virial theorem: -V/T =      2.008737
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
   14  Screening settings (-IFTHRS, DIFDEN)  -15    T
-  14    -148.799820759        1.87357D-09    5.68D-14   10
+  14    -148.799820759        1.87357D-09    0.00D+00   10
       Virial theorem: -V/T =      2.008737
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
   15  Screening settings (-IFTHRS, DIFDEN)  -15    T
-  15    -148.799820759        1.27775D-10   -5.68D-14   10
+  15    -148.799820759        1.27774D-10   -2.84D-14   10
       Virial theorem: -V/T =      2.008737
 @      MULPOP O      -0.18; O      -0.18; H       0.18; H       0.18; 
  -----------------------------------------------------------------------------
   16  Screening settings (-IFTHRS, DIFDEN)  -15    T
-  16    -148.799820759        3.91385D-11    8.53D-14   10
+  16    -148.799820759        3.91460D-11   -2.84D-14   10
 
  *** DIIS converged in  16 iterations !
 @    Converged SCF energy, gradient:   -148.799820759077    3.91D-11
@@ -5355,7 +5711,7 @@ Maximum number of iterations reset in numerical differentiation to    25
  *** GEOMETRY WALK STEP ACCEPTED.
 
 
- >>>> CPU and wall time for SCF :       0.032       0.050
+ >>>> CPU and wall time for SCF :       0.033       0.053
 
 
                        .-----------------------------------.
@@ -5369,22 +5725,22 @@ Maximum number of iterations reset in numerical differentiation to    25
 
 @    Final HF energy:            -148.799820759077                 
 @    Nuclear repulsion:            35.972517685022
-@    Electronic energy:          -184.772338444099
+@    Electronic energy:          -184.772338444100
 
 @    Final gradient norm:           0.000000000039
 
  
-     Date and time (Linux)  : Mon Nov 25 22:08:51 2013
-     Host name              : c9-1.local                              
+     Date and time (Linux)  : Tue Nov 12 20:39:57 2013
+     Host name              : c17-11.local                            
 
 
 
- >>>> Total CPU  time used in SIRIUS :      0.03 seconds
+ >>>> Total CPU  time used in SIRIUS :      0.04 seconds
  >>>> Total wall time used in SIRIUS :      0.06 seconds
 
  
-     Date and time (Linux)  : Mon Nov 25 22:08:51 2013
-     Host name              : c9-1.local                              
+     Date and time (Linux)  : Tue Nov 12 20:39:57 2013
+     Host name              : c17-11.local                            
 
 
                      .---------------------------------------.
@@ -5405,8 +5761,8 @@ Maximum number of iterations reset in numerical differentiation to    25
 
 
  
-     Date and time (Linux)  : Mon Nov 25 22:08:51 2013
-     Host name              : c9-1.local                              
+     Date and time (Linux)  : Tue Nov 12 20:39:57 2013
+     Host name              : c17-11.local                            
 
 
    ***************************************************************************
@@ -5415,8 +5771,8 @@ Maximum number of iterations reset in numerical differentiation to    25
 
 
  
-     Date and time (Linux)  : Mon Nov 25 22:08:51 2013
-     Host name              : c9-1.local                              
+     Date and time (Linux)  : Tue Nov 12 20:39:57 2013
+     Host name              : c17-11.local                            
 
 
  CPU time statistics for ABACUS
@@ -5433,9 +5789,9 @@ Maximum number of iterations reset in numerical differentiation to    25
                    | End of Static Property Section (ABACUS) - |
                    `-------------------------------------------'
 
- >>>> Total CPU  time used in DALTON:  16.43 seconds
- >>>> Total wall time used in DALTON:  23.38 seconds
+ >>>> Total CPU  time used in DALTON:   4.65 seconds
+ >>>> Total wall time used in DALTON:   6.78 seconds
 
  
-     Date and time (Linux)  : Mon Nov 25 22:08:51 2013
-     Host name              : c9-1.local                              
+     Date and time (Linux)  : Tue Nov 12 20:39:57 2013
+     Host name              : c17-11.local                            
