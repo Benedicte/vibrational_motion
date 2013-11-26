@@ -169,6 +169,47 @@ def read_spinrot(filename, natom, nm):
 
     f.close()
     return second_deriv, property_type
+  
+def read_nucquad(filename, natom, nm):
+    
+    """Imports things needed from the DALTON.OUT that I need"""
+    
+    f = open(filename, 'r')
+    second_deriv = zeros((natom,nm,3,3))
+    property_type = 0
+    dummy = []
+    
+    finished = 0
+    while (finished == 0):
+        cur_line = f.readline()
+        if re.search('second derivatives for:',cur_line):
+            line_split = cur_line.split()
+            property_type = line_split[0] + line_split[1]
+            finished = 1
+            
+    for atom in range(natom):
+
+        dummy = f.readline()
+        dummy = f.readline()
+        dummy = f.readline()
+            
+        if atom != 0:
+            dummy = f.readline()
+            dummy = f.readline()
+                                
+        for mode in range(nm):
+            mline = f.readline()
+            mline = mline.split()
+            
+            second_deriv[atom][mode][0][0]= mline[1]
+            second_deriv[atom][mode][0][1]= mline[2] 
+            second_deriv[atom][mode][0][2]= mline[3] 
+            second_deriv[atom][mode][1][1]= mline[4]  
+            second_deriv[atom][mode][1][2]= mline[5]  
+            second_deriv[atom][mode][2][2]= mline[6]
+
+    f.close()
+    return second_deriv, property_type
     
 def read_3d_input(filename, nm):
     """Imports things needed from the DALTON.OUT that I need"""
@@ -222,7 +263,7 @@ def read_4d_input(filename, natom, nm):
     finished = 0
     while (finished == 0):
         cur_line = f.readline()
-        if re.search('second derivatives for',cur_line):
+        if re.search('second derivatives for:',cur_line):
             line_split = cur_line.split()
             property_type = line_split[0] + line_split[1]
             finished = 1
@@ -242,11 +283,14 @@ def read_4d_input(filename, natom, nm):
             mline = mline.split()
             
             second_deriv[atom][mode][0][0]= mline[1]
-            second_deriv[atom][mode][0][1]= mline[2]  
-            second_deriv[atom][mode][1][1]= mline[3]
-            second_deriv[atom][mode][0][2]= mline[4]  
-            second_deriv[atom][mode][1][2]= mline[5]  
-            second_deriv[atom][mode][2][2]= mline[6] 
+            second_deriv[atom][mode][0][1]= mline[2] 
+            second_deriv[atom][mode][0][2]= mline[3] 
+            second_deriv[atom][mode][1][0]= mline[4]
+            second_deriv[atom][mode][1][1]= mline[5]  
+            second_deriv[atom][mode][1][2]= mline[6]
+            second_deriv[atom][mode][2][0]= mline[7]
+            second_deriv[atom][mode][2][1]= mline[8]  
+            second_deriv[atom][mode][2][2]= mline[9]
 
     f.close()
     return second_deriv, property_type

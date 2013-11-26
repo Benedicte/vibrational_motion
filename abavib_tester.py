@@ -91,43 +91,35 @@ def main():
     hessian_temp = add(hessian, hessian_t) 
     hessian = subtract(hessian_temp , diag(hessian.diagonal()))
     
-    hessian_vib = read_hessian(hessian_vib_name, n_coords)
-    hessian_t = hessian.transpose()
-    hessian_temp = add(hessian_vib, hessian_t) 
-    hessian_vib = subtract(hessian_temp , diag(hessian_vib.diagonal()))
-    
-    eig, eigvec, freq = fundamental_freq(hessian, num_atoms_list, charge_list, coordinates, n_atoms)
-    cubic_force_field = read_cubic_force_field(cff_name, n_coords)
-    cff_correct = read_dalton() 
-    cff_norm, cff_norm_reduced = to_normal_coordinates_3D(cff_correct, correct_big_EVEC, n_atoms)
+    eig, eigvec, freq, eigvec_full = fundamental_freq(hessian, num_atoms_list, charge_list, coordinates, n_atoms)
+    cubic_force_field = read_cubic_force_field(cff_name, n_coords) 
+    cff_norm, cff_norm_reduced = to_normal_coordinates_3D(cubic_force_field, correct_big_EVEC, n_atoms)
     effective_geometry_norm = effective_geometry(cff_norm_reduced, freq, n_atoms)
     effective_geometry_cart = to_cartessian_coordinates(effective_geometry_norm, n_atoms, eigvec)
     
-    print "effective geometry"
-    print effective_geometry_cart
-    
     #dipole_moment_diff, dipole_moment_corrected = get_dipole_moment(dipole, n_nm, eig, dipole_pre, True)
    
+    shield_deriv, prop_type = read_4d_input(input_name + "SHIELD", 4, 6)
     shield = get_4D_property("Shield", shield_deriv, n_nm, n_atoms, EVAL, True)
     
-    nuc_quad_deriv, prop_type = read_4d_input(input_folder + "NUCQUAD", 4, 6)
+    nuc_quad_deriv, prop_type = read_nucquad(input_name + "NUCQUAD", 4, 6)
     nuc_quad = get_4D_property(prop_type, nuc_quad_deriv, n_nm, n_atoms, EVAL, True)
     
-    #spin_spin_deriv, prop_type = read_3d_input(input_folder + "SPIN-SPIN", 6)
+    #spin_spin_deriv, prop_type = read_3d_input(input_name + "SPIN-SPIN", 6)
     #spin_spin = get_3D_property(prop_type, spin_spin_deriv, n_nm, EVAL, True)
     #mol_quad = get_3D_property(prop_type, mol_quad_deriv, n_nm, eig, True)
     
-    mol_quad_deriv, prop_type = read_mol_quad(input_folder + "MOLQUAD", 6)
+    mol_quad_deriv, prop_type = read_mol_quad(input_name + "MOLQUAD", 6)
     mol_quad = get_3D_property(prop_type, mol_quad_deriv, 6, EVAL, True)
     
-    magnet_deriv, g_tensor_deriv = read_magnet("input/MAGNET", 6)
+    magnet_deriv, g_tensor_deriv = read_magnet(input_name + "MAGNET", 6)
     g_tensor = get_3D_property("g-tensor", g_tensor_deriv, n_nm, EVAL, True)  
     magnet = get_3D_property("magnet", magnet_deriv, n_nm, EVAL, True)
 
-    spinrot_deriv, prop_type = read_spinrot("input/SPIN-ROT", 4, 6)
+    spinrot_deriv, prop_type = read_spinrot(input_name + "SPIN-ROT", 4, 6)
     spinrot = get_4D_property(prop_type, spinrot_deriv, n_nm, n_atoms, EVAL, True) 
     
-    quartic_force_field = read_quartic_force_field(input_folder + 'quartic',12)   
+    quartic_force_field = read_quartic_force_field(input_name + 'quartic',12) 
     
     print "g-tensor"
     print g_tensor   
