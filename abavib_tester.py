@@ -114,8 +114,6 @@ def main():
     nuc_quad_deriv, prop_type = read_nucquad(input_name + "NUCQUAD", 4, 6)
     nuc_quad = get_4D_property(prop_type, nuc_quad_deriv, n_nm, n_atoms, EVAL, True)
     
-    print nuc_quad
-    
     #spin_spin_deriv, prop_type = read_3d_input(input_name + "SPIN-SPIN", 6)
     #spin_spin = get_3D_property(prop_type, spin_spin_deriv, n_nm, EVAL, True)
     #mol_quad = get_3D_property(prop_type, mol_quad_deriv, n_nm, eig, True)
@@ -123,8 +121,7 @@ def main():
     mol_quad_deriv, prop_type = read_mol_quad(input_name + "MOLQUAD", 6)
     mol_quad = get_3D_property(prop_type, mol_quad_deriv, 6, EVAL, True)
     
-    a = correct_nucquad.transpose()
-    print a
+    print mol_quad
     
     magnet_deriv, g_tensor_deriv = read_magnet(input_name + "MAGNET", 6)
     g_tensor = get_3D_property("g-tensor", g_tensor_deriv, n_nm, EVAL, True)  
@@ -138,8 +135,6 @@ def main():
     print "g-tensor"
     print g_tensor   
     print correct_g_tensor
-    
-    print hessian
     
 
 set_printoptions(suppress=True) #Avoid scientific notation when printing arrs

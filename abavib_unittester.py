@@ -58,6 +58,8 @@ class abavib_test(unittest.TestCase):
         self.shield = av.get_4D_property("Shield", shield_deriv, self.n_nm, self.n_atoms, EVAL, True)
         nuc_quad_deriv, self.prop_type = ri.read_nucquad(self.input_name + "NUCQUAD", self.n_atoms, self.n_nm)
         self.nuc_quad = av.get_4D_property(self.prop_type, nuc_quad_deriv, self.n_nm, self.n_atoms, EVAL, True)
+        mol_quad_deriv, self.prop_type = ri.read_mol_quad(self.input_name + "MOLQUAD", self.n_nm)
+        self.mol_quad = av.get_3D_property(self.prop_type, mol_quad_deriv, self.n_nm, EVAL, True)
 
 class read_molecule_test(abavib_test):        
     def test_coordinates(self):
@@ -246,7 +248,21 @@ class nuclear_quadrupole_test(abavib_test): #Checkout how to manage the whole "c
                             ,[0,0,0.01488815]]])
             
             self.assertTrue((nucquad_correct - self.nuc_quad < 0.05).all())
-    
+
+class molecular_quadrupole_test(abavib_test): #Checkout how to manage the whole "close enough" conundrum
+    def test_molecular_quadrupole(self):
+        
+        if(self.molecule == "h2o"):
+            self.assertTrue((False))
+            
+        elif(self.molecule == "h2o2"):
+            
+            molquad_correct = np.array([[-0.00825547,-0.00810764,0.0000083]
+                                ,[0, 0.02245658,-0.00003619]
+                                ,[0,0,-0.01420111]])
+            
+            self.assertTrue((molquad_correct - self.mol_quad < 0.005).all())
+            
 if __name__ == '__main__':
     unittest.main()
 
