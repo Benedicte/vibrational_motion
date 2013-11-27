@@ -156,6 +156,8 @@ def main():
     
     quartic_force_field = read_quartic_force_field(input_folder + 'quartic',12)   
     
+    print shield
+    
     print "g-tensor"
     print g_tensor   
     print correct_g_tensor
