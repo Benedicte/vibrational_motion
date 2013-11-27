@@ -110,7 +110,6 @@ def main():
    
     polari_deriv, prop_type = read_polari(input_name +"POLARI", n_nm)
     polari = get_3D_property(prop_type, polari_deriv, n_nm, EVAL, True)
-    print polari
     
     shield_deriv, prop_type = read_4d_input(input_name + "SHIELD", 4, 6)
     shield = get_4D_property("Shield", shield_deriv, n_nm, n_atoms, EVAL, True)
@@ -132,7 +131,7 @@ def main():
     spinrot = get_4D_property(prop_type, spinrot_deriv, n_nm, n_atoms, EVAL, True) 
     
     quartic_force_field = read_quartic_force_field(input_name + 'quartic',12) 
-    
+    print magnet
     print "g-tensor"
     print g_tensor   
     print correct_g_tensor

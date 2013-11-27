@@ -62,6 +62,9 @@ class abavib_test(unittest.TestCase):
         self.mol_quad = av.get_3D_property(self.prop_type, mol_quad_deriv, self.n_nm, EVAL, True)
         spinrot_deriv, self.prop_type = ri.read_spinrot(self.input_name + "SPIN-ROT", self.n_atoms, self.n_nm)
         self.spinrot = av.get_4D_property(self.prop_type, spinrot_deriv, self.n_nm, self.n_atoms, EVAL, True)
+        magnet_deriv, g_tensor_deriv = ri.read_magnet(self.input_name + "MAGNET", self.n_nm)
+        self.g_tensor = av.get_3D_property("g-tensor", g_tensor_deriv, self.n_nm, EVAL, True)  
+        self.magnet = av.get_3D_property("magnet", magnet_deriv, self.n_nm, EVAL, True)
 
 class read_molecule_test(abavib_test):        
     def test_coordinates(self):
@@ -252,6 +255,7 @@ class nuclear_quadrupole_test(abavib_test): #Checkout how to manage the whole "c
             self.assertTrue((nucquad_correct - self.nuc_quad < 0.05).all())
 
 class molecular_quadrupole_test(abavib_test): #Checkout how to manage the whole "close enough" conundrum
+    
     def test_molecular_quadrupole(self):
         
         if(self.molecule == "h2o"):
@@ -294,6 +298,20 @@ class polarizability_test(abavib_test): #Checkout how to manage the whole "close
             
             self.assertTrue((molquad_correct - self.mol_quad < 0.002).all())
             
+class magnetizability_test(abavib_test): #Checkout how to manage the whole "close enough" conundrum
+    def magnetizability(self):
+        
+        if(self.molecule == "h2o"):
+            self.assertTrue((False))
+            
+        elif(self.molecule == "h2o2"):
+            
+            correct_magnet = np. array([[-0.03198422,-0.00377751,0.00008762]
+                    ,[0,0.0440208,0.00003563]
+                    ,[0,0,0.00310904]])
+            
+            self.assertTrue((correct_magnet - self.magnet < 0.002).all())
+
 
 if __name__ == '__main__':
     unittest.main()
