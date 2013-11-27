@@ -60,6 +60,8 @@ class abavib_test(unittest.TestCase):
         self.nuc_quad = av.get_4D_property(self.prop_type, nuc_quad_deriv, self.n_nm, self.n_atoms, EVAL, True)
         mol_quad_deriv, self.prop_type = ri.read_mol_quad(self.input_name + "MOLQUAD", self.n_nm)
         self.mol_quad = av.get_3D_property(self.prop_type, mol_quad_deriv, self.n_nm, EVAL, True)
+        spinrot_deriv, self.prop_type = ri.read_spinrot(self.input_name + "SPIN-ROT", self.n_atoms, self.n_nm)
+        self.spinrot = av.get_4D_property(self.prop_type, spinrot_deriv, self.n_nm, self.n_atoms, EVAL, True)
 
 class read_molecule_test(abavib_test):        
     def test_coordinates(self):
@@ -230,7 +232,7 @@ class nuclear_quadrupole_test(abavib_test): #Checkout how to manage the whole "c
             self.assertTrue((False))
             
         elif(self.molecule == "h2o2"):
-            
+            # This might not have turned out correct
             nucquad_correct = np.array([[[0.00173516,-0.00266833, 0.01132919]
                             ,[0, -0.00676687,-0.01183273]
                             ,[0, 0, -0.01306435]]
@@ -262,10 +264,24 @@ class molecular_quadrupole_test(abavib_test): #Checkout how to manage the whole 
                                 ,[0,0,-0.01420111]])
             
             self.assertTrue((molquad_correct - self.mol_quad < 0.005).all())
+
+class spin_rotation_constants_test(abavib_test): #Checkout how to manage the whole "close enough" conundrum
+    def spin_rotation_constants_test(self):
+        
+        if(self.molecule == "h2o"):
+            self.assertTrue((False))
+            
+        elif(self.molecule == "h2o2"):
+            
+            correct_spinrot = array([[[0,0,0,],[0,0,0],[0,0,0]]
+                                    ,[[0,0,0],[0,0,0],[0,0,0]]
+                                    ,[[-0.21388431,-0.09999148,-0.05558241],[0.0334947,0.04560931,0.00337925],[0.00389405,0.00144877,-0.03279227]]
+                                    ,[[-0.1955979,0.10214155,-0.05945283],[-0.03304894,0.0453841,-0.0027541],[0.0032995,-0.00085245,-0.03244115]]])
+            
+            self.assertTrue((correct_spinrot - self.spinrot < 0.01).all())
             
 if __name__ == '__main__':
     unittest.main()
 
             
-            
-print shield_correct.transpose()
+

@@ -116,12 +116,9 @@ def main():
     
     #spin_spin_deriv, prop_type = read_3d_input(input_name + "SPIN-SPIN", 6)
     #spin_spin = get_3D_property(prop_type, spin_spin_deriv, n_nm, EVAL, True)
-    #mol_quad = get_3D_property(prop_type, mol_quad_deriv, n_nm, eig, True)
     
     mol_quad_deriv, prop_type = read_mol_quad(input_name + "MOLQUAD", 6)
     mol_quad = get_3D_property(prop_type, mol_quad_deriv, 6, EVAL, True)
-    
-    print mol_quad
     
     magnet_deriv, g_tensor_deriv = read_magnet(input_name + "MAGNET", 6)
     g_tensor = get_3D_property("g-tensor", g_tensor_deriv, n_nm, EVAL, True)  
@@ -129,6 +126,8 @@ def main():
 
     spinrot_deriv, prop_type = read_spinrot(input_name + "SPIN-ROT", 4, 6)
     spinrot = get_4D_property(prop_type, spinrot_deriv, n_nm, n_atoms, EVAL, True) 
+    a = correct_spinrot.transpose()
+    print a
     
     quartic_force_field = read_quartic_force_field(input_name + 'quartic',12) 
     
