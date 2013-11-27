@@ -32,7 +32,8 @@ dipole = np.array([[-0.048779,-0.282926,-0.008477],
 
 class abavib_test(unittest.TestCase):
     def setUp(self):
-        self.input_name = "input_h2o/"
+        self.molecule = "h2o2"
+        self.input_name = "input_" + self.molecule + "/"
         self.mol_name = self.input_name + 'MOLECULE.INP'
         self.cff_name = self.input_name + 'cubic_force_field'
         self.coordinates, self.masses,  self.num_atoms_list \
@@ -58,37 +59,80 @@ class abavib_test(unittest.TestCase):
 
 class read_molecule_test(abavib_test):        
     def test_coordinates(self):
-        self.correct_coordinates = [[-1.42157256,  2.28115327,  0.00554911],
-                        [ -0.13533793,  2.10700057,  0.07387382],
-                        [-2.02521896,  3.34965922, -0.41371135]]
-        self.correct_coordinates = np.array(self.correct_coordinates)
-        self.assertTrue((self.coordinates == self.correct_coordinates).all())
-    
-    def test_masses(self):
-        self.correct_masses = [15.9994, 1.00794, 1.00794]
-        self.assertSequenceEqual(self.masses, self.correct_masses)
         
+        if(self.molecule == "h2o"):
+            self.correct_coordinates = [[-1.42157256,  2.28115327,  0.00554911],
+                                        [ -0.13533793,  2.10700057,  0.07387382],
+                                        [-2.02521896,  3.34965922, -0.41371135]]
+            self.correct_coordinates = np.array(self.correct_coordinates)
+            self.assertTrue((self.coordinates == self.correct_coordinates).all())
+            
+        elif(self.molecule == "h2o2"):
+            self.correct_coordinates = np. array([[0.00000000,  1.40784586, -0.09885600]
+                                        ,[0.00000000, -1.40784586, -0.09885600]
+                                        ,[0.69081489,  1.72614891,  1.56891868]
+                                        ,[-0.69081489, -1.72614891,  1.56891868]])
+            self.assertTrue((self.coordinates == self.correct_coordinates).all())
+            
+    def test_masses(self):
+        
+        if(self.molecule == "h2o"):
+            self.correct_masses = [15.9994, 1.00794, 1.00794]
+            self.assertSequenceEqual(self.masses, self.correct_masses)
+            
+        elif(self.molecule == "h2o2"):
+            self.correct_masses = [15.9994, 15.9994, 1.00794, 1.00794]
+            self.assertSequenceEqual(self.masses, self.correct_masses)
+             
     def test_num_atoms_list(self):
-        self.assertSequenceEqual(self.num_atoms_list, [1,2])
+        
+        if(self.molecule == "h2o"):
+            self.assertSequenceEqual(self.num_atoms_list, [1,2])
+            
+        elif(self.molecule == "h2o2"):
+            self.assertSequenceEqual(self.num_atoms_list, [2,2])
+            
         
     def test_charge_list(self):
         self.assertSequenceEqual(self.charge_list, [8,1])
         
     def test_n_atoms(self):
-        self.assertEquals(self.n_atoms, 3)
+        
+        if(self.molecule == "h2o"):
+            self.assertEquals(self.n_atoms, 3)
+        elif(self.molecule == "h2o2"):
+            self.assertEquals(self.n_atoms, 4)
         
 class read_hessian_test(abavib_test):
     def test_hessian_values(self):
-        correct_hessian = np.array([[9.79479, -0.452448, 0.229158, -6.327811, -0.924135, 0.318151, -3.466978, 1.376583, -0.547309]
-        ,[ -0.452448, 32.105552, -11.992317, 0.767043, -10.749399, 3.928526, -0.314595, -21.356153, 8.06379]
-        ,[ 0.229158, -11.992317, 6.029794, -0.298792, 3.882729, -2.197041, 0.069634, 8.062308, -3.832753]
-        ,[ -6.327811, 0.767043, -0.298792, 6.541742, -1.005224, 0.392545, -0.213931, 0.238181, -0.093753]
-        ,[ -0.924135, -10.749399, 3.882729, -1.005224, 4.894784, -1.718158, 1.929359, 5.767001, -2.204113]
-        ,[ 0.318151, 3.928526, -2.197041, 0.392545, -1.718158, 1.177308, -0.710696, -2.20263, 1.019733]
-        ,[ -3.466978, -0.314595, 0.069634, -0.213931, 1.929359, -0.710696, 3.680909, -1.614764, 0.641062]
-        ,[ 1.376583, -21.356153, 8.062308, 0.238181, 5.767001, -2.20263, -1.614764, 15.589152, -5.859678]
-        ,[ -0.547309, 8.06379, -3.832753, -0.093753, -2.204113, 1.019733, 0.641062, -5.859678, 2.81302]])
-        self.assertTrue((self.hessian == correct_hessian).all())
+        
+        if(self.molecule == "h2o"):
+            correct_hessian = np.array([[9.79479, -0.452448, 0.229158, -6.327811, -0.924135, 0.318151, -3.466978, 1.376583, -0.547309]
+            ,[ -0.452448, 32.105552, -11.992317, 0.767043, -10.749399, 3.928526, -0.314595, -21.356153, 8.06379]
+            ,[ 0.229158, -11.992317, 6.029794, -0.298792, 3.882729, -2.197041, 0.069634, 8.062308, -3.832753]
+            ,[ -6.327811, 0.767043, -0.298792, 6.541742, -1.005224, 0.392545, -0.213931, 0.238181, -0.093753]
+            ,[ -0.924135, -10.749399, 3.882729, -1.005224, 4.894784, -1.718158, 1.929359, 5.767001, -2.204113]
+            ,[ 0.318151, 3.928526, -2.197041, 0.392545, -1.718158, 1.177308, -0.710696, -2.20263, 1.019733]
+            ,[ -3.466978, -0.314595, 0.069634, -0.213931, 1.929359, -0.710696, 3.680909, -1.614764, 0.641062]
+            ,[ 1.376583, -21.356153, 8.062308, 0.238181, 5.767001, -2.20263, -1.614764, 15.589152, -5.859678]
+            ,[ -0.547309, 8.06379, -3.832753, -0.093753, -2.204113, 1.019733, 0.641062, -5.859678, 2.81302]])
+            self.assertTrue((self.hessian == correct_hessian).all())
+            
+        elif(self.molecule == "h2o2"):
+            correct_hessian = np.array([[ 7.468672, -0.481556, 0.398409, -5.663545, 0.303342, -0.709184, -3.311649, 0.519999, -0.210195, 1.50652, -0.341785, 0.52097]
+            , [-0.481556, -1.703046, -1.095639, 0.312254, 4.50928, 0.950217, 0.125658, -2.762323, 0.277076, 0.043644, -0.043911, -0.131655]
+            , [ 0.398409, -1.095639, 6.687239, -0.070907, -0.950218, -4.993221, -0.235783, 1.232919, -1.848179, -0.052817, 0.812937, 0.154161]
+            , [-5.663545, 0.312254, -0.070907, 6.946056, -0.472644, 0.385633, 1.554707, -0.350697, 0.109883, -2.837218, 0.511087, -0.420659]
+            , [ 0.303342, 4.50928, -0.950218, -0.472644, -1.703046, 1.095639, 0.050912, -0.043911, 0.131655, 0.118389, -2.762323, -0.277076]
+            , [-0.709184, 0.950217, -4.993221, 0.385633, 1.095639, 6.687239, 0.657331, -0.812937, 0.154161, -0.36873, -1.232919, -1.848179]
+            , [-3.311649, 0.125658, -0.235783, 1.554707, 0.050912, 0.657331, 3.054322, -0.151584, 0.096644, -1.29738, -0.024987, -0.518191]
+            , [ 0.519999, -2.762323, 1.232919, -0.350697, -0.043911, -0.812937, -0.151584, 2.837786, -0.414356, -0.017718, -0.031552, -0.005626]
+            , [-0.210195, 0.277076, -1.848179, 0.109883, 0.131655, 0.154161, 0.096644, -0.414356, 1.682793, 0.003668, 0.005626, 0.011225]
+            , [ 1.506522, 0.043644, -0.052817, -2.837218, 0.118389, -0.36873, -1.29738, -0.017718, 0.003668, 2.628076, -0.144315, 0.41788]
+            , [-0.341785, -0.043911, 0.812937, 0.511087, -2.762323, -1.232919, -0.024987, -0.031552, 0.005626, -0.144315, 2.837786, 0.414356]
+            , [ 0.52097, -0.131655, 0.154161, -0.420659, -0.277076, -1.848179, -0.518191, -0.005626, 0.011225, 0.41788, 0.414356, 1.682793]])
+            
+            self.assertTrue((self.hessian == correct_hessian).all())
     
     def test_hessian_dimensions(self):
         self.assertTrue(self.hessian.shape == (self.n_coordinates, self.n_coordinates))
@@ -100,34 +144,83 @@ class hessian_trans_rot_test(abavib_test):
 class masswt_hessian_test(abavib_test):
     def test_something(self):
         self.assertTrue(True)
+ 
+class frequency_test(abavib_test):
+    def test_eigenvalues(self):
+        correct_eigenvalues = np.array([0.0003967267, 0.0003909715, 5.5175184e-005, 4.4395569e-005, 2.8355625e-005, 1])
+        self.assertTrue((correct_eigenvalues - self.eig < 0.05).all())
+        
+class effective_geometry_test(abavib_test):
+    def test_effective_geometry(self):
+        if(self.molecule == "h2o"):
+            correct_effective_geometry = np.array([[-1.4215725557, 2.2811532702, 0.0055491054]
+            ,[-0.135337927, 2.107000566, 0.0738738213]
+            ,[-2.025218957, 3.349659217, -0.4137113479]])
+            self.assertTrue((correct_effective_geometry - self.effective_geometry_cart < 0.5).all())
+            
+        if(self.molecule == "h2o2"):
+            correct_effective_geometry = np.array([[-0.00012007, 1.40873621, -0.10043595]
+            ,[0.00020733, -1.40863870, -0.10057873]
+            ,[0.69590721, 1.73453487, 1.59345500]
+            ,[-0.69729204, -1.73608239, 1.59679826]])
+            self.assertTrue((correct_effective_geometry - self.effective_geometry_cart < 0.5).all())
+        
+        self.assertTrue((correct_effective_geometry - self.effective_geometry_cart < 0.5).all())
         
 class dipole_test(abavib_test): #Checkout how to manage the whole "close enough" conundrum
     def test_dipole_corrections(self):
-        dipole_corrections_correct = np.array([-0.00013140, -0.00018092, 0.00007099])
-        self.assertTrue((dipole_corrections_correct - self.dipole_moment_diff < 0.0005).all())        
+        
+        if(self.molecule == "h2o"):
+            dipole_corrections_correct = np.array([-0.00013140, -0.00018092, 0.00007099])
+            self.assertTrue((dipole_corrections_correct - self.dipole_moment_diff < 0.0005).all())   
+            
+        elif(self.molecule == "h2o2"):
+            dipole_corrections_correct = np.array([-0.00001144, -0.00000350, -0.00459292])
+            self.assertTrue((dipole_corrections_correct - self.dipole_moment_diff < 0.0001).all()) 
         
     def test_dipole_moment(self):
-        dipole_moment_correct = np.array([0.37357035, 0.49114923, -0.19272230])
-        self.assertTrue((dipole_moment_correct - self.dipole_moment_corrected < 0.0005).all())
+        
+        if(self.molecule == "h2o"):
+            dipole_moment_correct = np.array([0.37357035, 0.49114923, -0.19272230])
+            self.assertTrue((dipole_moment_correct - self.dipole_moment_corrected < 0.005).all())
+            
+        elif(self.molecule == "h2o2"):
+            dipole_moment_correct = np.array([0.00025464, -0.00020485, 0.97278737])
+            self.assertTrue((dipole_moment_correct - self.dipole_moment_corrected < 0.05).all())
 
 class shield_test(abavib_test): #Checkout how to manage the whole "close enough" conundrum
     def test_shield(self):
-        shield_correct = np.array([[[-0.80608243, 0.21073704, 0.28992085]
-        ,[-0.33796272, -0.00832737, 0.04054263]
-        ,[0.13247249, 0.00326504, -0.01587188]]
-        ,[[-0.33689843, 0.01340778, 0.01821706]
-        ,[-1.10194286, 0.29981299, 0.23060641]
-        ,[-0.0892006, -0.00225043, 0.02512025]]
-        ,[[0.13222338, -0.00526279, -0.0071505]
-        ,[-0.08759976, -0.0023847, 0.02509715]
-        ,[-1.29295689, 0.29476779, 0.28489411]]])
         
-        print self.shield
+        if(self.molecule == "h2o"):
+            shield_correct = np.array([[[-0.80608243, 0.21073704, 0.28992085]
+            ,[-0.33796272, -0.00832737, 0.04054263]
+            ,[0.13247249, 0.00326504, -0.01587188]]
+            ,[[-0.33689843, 0.01340778, 0.01821706]
+            ,[-1.10194286, 0.29981299, 0.23060641]
+            ,[-0.0892006, -0.00225043, 0.02512025]]
+            ,[[0.13222338, -0.00526279, -0.0071505]
+            ,[-0.08759976, -0.0023847, 0.02509715]
+            ,[-1.29295689, 0.29476779, 0.28489411]]])
+            self.assertTrue((shield_correct - self.shield < 0.5).all())
+            
+        elif(self.molecule == "h2o2"):
+            
+            shield_correct = np.array([[[-2.73543218 , 1.29310207 , -1.89858102]
+            ,[ 0.23201889 , -11.10707143 , -0.74269857]
+            ,[-1.35752979 , 0.82513205 , -4.01976529]]
+            ,[[ -2.75685668 , 1.31036411 , 1.85157732]
+            ,[ 0.21430005 , -11.22126964 , 0.71749018]
+            ,[ 1.31818971 , -0.84225704 , -3.98227118]]
+            ,[[ -0.2278518 , 0.00750604 , -0.12086826]
+            ,[ -0.00043512 , -0.04561196 , -0.11442797]
+            ,[ -0.09115688 , 0.03692163 , -0.34873231]]
+            ,[[ -0.2255517 , 0.00613924 , 0.1193651]
+            ,[ -0.00031229 , -0.04107803 , 0.1134338]
+            ,[ 0.08987755 , -0.03594509 , -0.34278067]]])
+            self.assertTrue((shield_correct - self.shield < 0.5).all())        
+        
 
-        self.assertTrue((shield_correct - self.shield < 0.5).all())        
-        
-
-        
+    
 if __name__ == '__main__':
     unittest.main()
 
