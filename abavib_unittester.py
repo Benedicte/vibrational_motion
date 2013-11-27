@@ -312,6 +312,19 @@ class magnetizability_test(abavib_test): #Checkout how to manage the whole "clos
             
             self.assertTrue((correct_magnet - self.magnet < 0.002).all())
 
+class g_factor_test(abavib_test): #Checkout how to manage the whole "close enough" conundrum
+    def g_factor(self):
+        
+        if(self.molecule == "h2o"):
+            self.assertTrue((False))
+            
+        elif(self.molecule == "h2o2"):
+            
+            correct_g_factor = np.array([[-0.02776227,-0.00001852,0.00232808]
+                                        ,[-0.00000333,-0.00035603,-0.00000795]
+                                        ,[0.00046495,-0.00000757,0.00136186]])
+            
+            self.assertTrue((correct_g_factor - self.g_tensor < 0.002).all())
 
 if __name__ == '__main__':
     unittest.main()
