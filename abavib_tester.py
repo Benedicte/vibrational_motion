@@ -108,6 +108,10 @@ def main():
     
     dipole_moment_diff, dipole_moment_corrected = get_dipole_moment(dipole, n_nm, eig, dipole_pre, True)
    
+    polari_deriv, prop_type = read_polari(input_name +"POLARI", n_nm)
+    polari = get_3D_property(prop_type, polari_deriv, n_nm, EVAL, True)
+    print polari
+    
     shield_deriv, prop_type = read_4d_input(input_name + "SHIELD", 4, 6)
     shield = get_4D_property("Shield", shield_deriv, n_nm, n_atoms, EVAL, True)
     
@@ -126,8 +130,6 @@ def main():
 
     spinrot_deriv, prop_type = read_spinrot(input_name + "SPIN-ROT", 4, 6)
     spinrot = get_4D_property(prop_type, spinrot_deriv, n_nm, n_atoms, EVAL, True) 
-    a = correct_spinrot.transpose()
-    print a
     
     quartic_force_field = read_quartic_force_field(input_name + 'quartic',12) 
     

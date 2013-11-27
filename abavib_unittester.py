@@ -279,7 +279,22 @@ class spin_rotation_constants_test(abavib_test): #Checkout how to manage the who
                                     ,[[-0.1955979,0.10214155,-0.05945283],[-0.03304894,0.0453841,-0.0027541],[0.0032995,-0.00085245,-0.03244115]]])
             
             self.assertTrue((correct_spinrot - self.spinrot < 0.01).all())
+        
+class polarizability_test(abavib_test): #Checkout how to manage the whole "close enough" conundrum
+    def polarizability(self):
+        
+        if(self.molecule == "h2o"):
+            self.assertTrue((False))
             
+        elif(self.molecule == "h2o2"):
+            
+            correct_polari = array([[0.02969292,0.03673433,-0.00014646]
+                                    ,[0, 0.18001732,-0.0001547]
+                                    ,[0,0, 0.08188467]])
+            
+            self.assertTrue((molquad_correct - self.mol_quad < 0.002).all())
+            
+
 if __name__ == '__main__':
     unittest.main()
 
