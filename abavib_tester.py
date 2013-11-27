@@ -57,12 +57,19 @@ DIPOLE_PRE = array([0.00026608, -0.00020134, 0.97738028])
 
 dipole_pre = mat([ 0.37370174, 0.49133014, -0.19279329])
 
-correct_shield = array([[[-2.73543218,0.23201889,-1.35752979],[1.29310207,-11.10707143,0.82513205],[-1.89858102,-0.74269857,-4.01976529]]
-,[[-2.75685668,0.21430005,1.31818971],[1.31036411,-11.22126964,-0.84225704],[1.85157732,0.71749018,-3.98227118]]
-,[[-0.2278518,-0.00043512,-0.09115688],[0.00750604,-0.04561196,0.03692163],[-0.12086826,-0.11442797,-0.34873231]]
-,[[-0.2255517,-0.00031229,0.08987755],[0.00613924,-0.04107803,-0.03594509],[0.1193651,0.1134338,-0.34278067]]])
-
-correct_shield = correct_shield.transpose((0,2,1))
+shield_correct = array([[[-2.73543218 , 1.29310207 , -1.89858102]
+,[ 0.23201889 , -11.10707143 , -0.74269857]
+,[-1.35752979 , 0.82513205 , -4.01976529]]
+,[[ -2.75685668 , 1.31036411 , 1.85157732]
+,[ 0.21430005 , -11.22126964 , 0.71749018]
+,[ 1.31818971 , -0.84225704 , -3.98227118]]
+,[[ -0.2278518 , 0.00750604 , -0.12086826]
+,[ -0.00043512 , -0.04561196 , -0.11442797]
+,[ -0.09115688 , 0.03692163 , -0.34873231]]
+,[[ -0.2255517 , 0.00613924 , 0.1193651]
+,[ -0.00031229 , -0.04107803 , 0.1134338]
+,[ 0.08987755 , -0.03594509 , -0.34278067]]])
+   
 correct_MOLQUAD = array([-0.00825547,-0.00810764,0.0000083,0.02245658,-0.00003619,-0.01420111])
 correct_g_tensor = array([[-0.02776227,-0.00001852,0.00232808],[-0.00000333,-0.00035603,-0.00000795],[0.00046495,-0.00000757,0.00136186]])
 correct_magnet = array([-0.03198422,-0.00377751,0.00008762,0.0440208,0.00003563,0.00310904])
@@ -77,7 +84,7 @@ correct_nucquad = array([[0.00173516,-0.00266833,-0.00676687,0.01132919,-0.01183
 
 def main():
     
-    input_name = "input_h2o/"
+    input_name = "input_h2o2/"
     mol_name = input_name + 'MOLECULE.INP'
     hessian_name = input_name + 'hessian'
     cff_name = input_name + 'cubic_force_field'
@@ -95,12 +102,11 @@ def main():
     cubic_force_field = read_cubic_force_field(cff_name, n_coords) 
     cff_norm, cff_norm_reduced = to_normal_coordinates_3D(cubic_force_field, correct_big_EVEC, n_atoms)
     cff_norm1, cff_norm_reduced1 = to_normal_coordinates_3D(cubic_force_field, eigvec_full, n_atoms)
-    print cff_norm
-    print cff_norm1
+
     effective_geometry_norm = effective_geometry(cff_norm_reduced, freq, n_atoms)
     effective_geometry_cart = to_cartessian_coordinates(effective_geometry_norm, n_atoms, eigvec)
     
-    #dipole_moment_diff, dipole_moment_corrected = get_dipole_moment(dipole, n_nm, eig, dipole_pre, True)
+    dipole_moment_diff, dipole_moment_corrected = get_dipole_moment(dipole, n_nm, eig, dipole_pre, True)
    
     shield_deriv, prop_type = read_4d_input(input_name + "SHIELD", 4, 6)
     shield = get_4D_property("Shield", shield_deriv, n_nm, n_atoms, EVAL, True)

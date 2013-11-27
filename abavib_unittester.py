@@ -1,5 +1,6 @@
 import unittest
 import abavib as av
+import read_input as ri
 import numpy as np
 
 #The reason we use this one, is because there are any number of eigenvectors which are correct eigenvectors, for the purpose of testing
@@ -17,25 +18,43 @@ correct_big_EVEC = np.array([[-0.00131353,-0.00001741,0.00029587,-0.00016271,0.0
 ,[0.00155876,0.01350575,-0.01295232,0.01045877,-0.0058313,-0.00318957,-0.00129009,0.00147743,0.00397887,0.00301146,-0.0030557,-0.00027397]
 ,[-0.00430002,0.00883742,-0.0049825,-0.00945915,0.01610197,0.00043797,-0.00107585,-0.00085612,-0.00003714,0.00621373,0.00002214,0.00578462]])
 
+#This one should work, check out vs. Master
+EVAL = np.array([0.0003967267, 0.0003909715, 5.5175184e-005, 4.4395569e-005, 2.8355625e-005, 1])
+
+dipole_pre = np.array([ 0.37370174, 0.49133014, -0.19279329])
+
+dipole = np.array([[-0.048779,-0.282926,-0.008477],
+[0.048120,0.280315,-0.020823],
+[0.000943,0.000917,-0.080650],
+[-0.001330,-0.001029,-0.137956],
+[0.000026,0.000180,-0.002133],
+[-0.000336,0.000407,-0.240555]])
+
 class abavib_test(unittest.TestCase):
     def setUp(self):
         self.input_name = "input_h2o/"
         self.mol_name = self.input_name + 'MOLECULE.INP'
         self.cff_name = self.input_name + 'cubic_force_field'
         self.coordinates, self.masses,  self.num_atoms_list \
-          ,self.charge_list, self.n_atoms = av.read_molecule(self.mol_name)
+            ,self.charge_list, self.n_atoms = av.read_molecule(self.mol_name)
         self.n_coordinates = self.n_atoms * 3  
+        self.n_nm = self.n_coordinates - 6 
         hessian_name = self.input_name + 'hessian'
         self.hessian = av.read_hessian(hessian_name, self.n_atoms*3)
         hessian_t = self.hessian.transpose()
         hessian_temp = np.add(self.hessian, hessian_t) 
         self.hessian = np.subtract(hessian_temp , np.diag(self.hessian.diagonal()))
         self.eig, self.eigvec, self.freq, self.eigvec_full = \
-        av.fundamental_freq(self.hessian, self.num_atoms_list, self.charge_list, self.coordinates, self.n_atoms)
-        self.cubic_force_field = av.read_cubic_force_field(self.cff_name, self.n_coordinates) 
+            av.fundamental_freq(self.hessian, self.num_atoms_list, \
+            self.charge_list, self.coordinates, self.n_atoms)
+        self.cubic_force_field = av.read_cubic_force_field(self.cff_name,\
+         self.n_coordinates) 
         self.cff_norm, self.cff_norm_reduced = av.to_normal_coordinates_3D(self.cubic_force_field, correct_big_EVEC, self.n_atoms)
         effective_geometry_norm = av.effective_geometry(self.cff_norm_reduced, self.freq, self.n_atoms)
         self.effective_geometry_cart = av.to_cartessian_coordinates(effective_geometry_norm, self.n_atoms, self.eigvec)
+        self.dipole_moment_diff, self.dipole_moment_corrected = av.get_dipole_moment(dipole, self.n_nm, self.eig, dipole_pre, False)
+        shield_deriv, self.prop_type = ri.read_4d_input(self.input_name + "SHIELD", self.n_atoms, self.n_nm)
+        self.shield = av.get_4D_property("Shield", shield_deriv, self.n_nm, self.n_atoms, EVAL, True)
 
 class read_molecule_test(abavib_test):        
     def test_coordinates(self):
@@ -82,14 +101,32 @@ class masswt_hessian_test(abavib_test):
     def test_something(self):
         self.assertTrue(True)
         
-class dipole_test(abavib_test):
+class dipole_test(abavib_test): #Checkout how to manage the whole "close enough" conundrum
     def test_dipole_corrections(self):
         dipole_corrections_correct = np.array([-0.00013140, -0.00018092, 0.00007099])
-        self.assertTrue(True)        
+        self.assertTrue((dipole_corrections_correct - self.dipole_moment_diff < 0.0005).all())        
         
     def test_dipole_moment(self):
         dipole_moment_correct = np.array([0.37357035, 0.49114923, -0.19272230])
+        self.assertTrue((dipole_moment_correct - self.dipole_moment_corrected < 0.0005).all())
+
+class shield_test(abavib_test): #Checkout how to manage the whole "close enough" conundrum
+    def test_shield(self):
+        shield_correct = np.array([[[-0.80608243, 0.21073704, 0.28992085]
+        ,[-0.33796272, -0.00832737, 0.04054263]
+        ,[0.13247249, 0.00326504, -0.01587188]]
+        ,[[-0.33689843, 0.01340778, 0.01821706]
+        ,[-1.10194286, 0.29981299, 0.23060641]
+        ,[-0.0892006, -0.00225043, 0.02512025]]
+        ,[[0.13222338, -0.00526279, -0.0071505]
+        ,[-0.08759976, -0.0023847, 0.02509715]
+        ,[-1.29295689, 0.29476779, 0.28489411]]])
         
+        print self.shield
+
+        self.assertTrue((shield_correct - self.shield < 0.5).all())        
+        
+
         
 if __name__ == '__main__':
     unittest.main()

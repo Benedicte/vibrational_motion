@@ -154,6 +154,10 @@ def fundamental_freq(hessian, num_atoms_list, charge_list, molecule, n_atoms):
     v_args = v_reduced.argsort()[::-1]
     v_reduced = sort(array(v_reduced, double))
     v_reduced = v_reduced[::-1]
+    
+    for i in range(v_reduced.size):
+        if (v_reduced[i] < 0):
+            v_reduced[i] = 1
        
     La = dot(M_I, array(La, double))
     La_reduced =  La[:,:n_nm]
@@ -170,16 +174,6 @@ def fundamental_freq(hessian, num_atoms_list, charge_list, molecule, n_atoms):
     eqsign = lambda x, y: x*y > 0
     eqsign = vectorize(eqsign)
 
-    #print "\n\nIs the sign equal?\n"
-    #print eqsign(correct_EVEC, La_reduced)
-    #print "\n\nAbsolute error\n"
-    #print(absolute(correct_EVEC) - absolute(La_reduced))
-    #print "\n\nIs the absolute error less than 0.0001?\n"
-    #print(closevect(absolute(correct_EVEC) - absolute(La_reduced))) 
-    #print "\n\nRelative error of absolute values\n"
-    #print(reldiff(absolute(correct_EVEC),absolute(La_reduced)))
-    #print "\n\nRaw La\n"
-    
     return v_reduced, La_reduced, freq, La
 
 def to_normal_coordinates():
