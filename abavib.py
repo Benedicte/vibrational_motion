@@ -357,7 +357,7 @@ def get_dipole_moment(dipole_moment, n_nm, eig, pre_dipole_moment, write_to_file
     
     if (write_to_file == True):
 		
-        filename = os.path.abspath("/home/benedico/Dropbox/master/The Program/output/Dipole Moment")
+        filename = os.path.abspath("/home/benedicte/Dropbox/master/The Program/output/Dipole Moment")
         f = open(filename, "w")
         line = str(dipole_moment_corrected).strip('[]')
         f.write(line + "\n")

@@ -21,14 +21,14 @@ correct_big_EVEC = np.array([[-0.00131353,-0.00001741,0.00029587,-0.00016271,0.0
 #This one should work, check out vs. Master
 EVAL = np.array([0.0003967267, 0.0003909715, 5.5175184e-005, 4.4395569e-005, 2.8355625e-005, 1])
 
-dipole_pre = np.array([ 0.37370174, 0.49133014, -0.19279329])
+dipole_pre = np.array([ 0.00026608,-0.00020134,0.97738028])
 
-dipole = np.array([[-0.048779,-0.282926,-0.008477],
-[0.048120,0.280315,-0.020823],
-[0.000943,0.000917,-0.080650],
-[-0.001330,-0.001029,-0.137956],
-[0.000026,0.000180,-0.002133],
-[-0.000336,0.000407,-0.240555]])
+dipole = np.array([[-0.04877, -0.282926, -0.008477]
+,[0.04812, 0.280315, -0.020823]
+,[0.000943, 0.000917, -0.08065]
+,[-0.00133, -0.001029, -0.137956]
+,[0.000026, 0.00018, -0.002133]
+,[-0.000336, 0.000407, -0.240555]])
 
 class abavib_test(unittest.TestCase):
     def setUp(self):
@@ -56,6 +56,8 @@ class abavib_test(unittest.TestCase):
         self.dipole_moment_diff, self.dipole_moment_corrected = av.get_dipole_moment(dipole, self.n_nm, self.eig, dipole_pre, False)
         shield_deriv, self.prop_type = ri.read_4d_input(self.input_name + "SHIELD", self.n_atoms, self.n_nm)
         self.shield = av.get_4D_property("Shield", shield_deriv, self.n_nm, self.n_atoms, EVAL, True)
+        nuc_quad_deriv, self.prop_type = ri.read_nucquad(self.input_name + "NUCQUAD", self.n_atoms, self.n_nm)
+        self.nuc_quad = av.get_4D_property(self.prop_type, nuc_quad_deriv, self.n_nm, self.n_atoms, EVAL, True)
 
 class read_molecule_test(abavib_test):        
     def test_coordinates(self):
@@ -132,7 +134,7 @@ class read_hessian_test(abavib_test):
             , [-0.341785, -0.043911, 0.812937, 0.511087, -2.762323, -1.232919, -0.024987, -0.031552, 0.005626, -0.144315, 2.837786, 0.414356]
             , [ 0.52097, -0.131655, 0.154161, -0.420659, -0.277076, -1.848179, -0.518191, -0.005626, 0.011225, 0.41788, 0.414356, 1.682793]])
             
-            self.assertTrue((self.hessian == correct_hessian).all())
+            self.assertTrue((self.hessian - correct_hessian < 0.00001).all())
     
     def test_hessian_dimensions(self):
         self.assertTrue(self.hessian.shape == (self.n_coordinates, self.n_coordinates))
@@ -171,7 +173,7 @@ class dipole_test(abavib_test): #Checkout how to manage the whole "close enough"
     def test_dipole_corrections(self):
         
         if(self.molecule == "h2o"):
-            dipole_corrections_correct = np.array([-0.00013140, -0.00018092, 0.00007099])
+            dipole_corrections_correct = np.array([-0.00001144,-0.0000035,-0.00459292])
             self.assertTrue((dipole_corrections_correct - self.dipole_moment_diff < 0.0005).all())   
             
         elif(self.molecule == "h2o2"):
@@ -185,7 +187,7 @@ class dipole_test(abavib_test): #Checkout how to manage the whole "close enough"
             self.assertTrue((dipole_moment_correct - self.dipole_moment_corrected < 0.005).all())
             
         elif(self.molecule == "h2o2"):
-            dipole_moment_correct = np.array([0.00025464, -0.00020485, 0.97278737])
+            dipole_moment_correct = np.array([0.00025464,-0.00020485,0.97278737])
             self.assertTrue((dipole_moment_correct - self.dipole_moment_corrected < 0.05).all())
 
 class shield_test(abavib_test): #Checkout how to manage the whole "close enough" conundrum
@@ -219,8 +221,35 @@ class shield_test(abavib_test): #Checkout how to manage the whole "close enough"
             ,[ 0.08987755 , -0.03594509 , -0.34278067]]])
             self.assertTrue((shield_correct - self.shield < 0.5).all())        
         
-
+class nuclear_quadrupole_test(abavib_test): #Checkout how to manage the whole "close enough" conundrum
+    def test_nuclear_quadrupole(self):
+        
+        if(self.molecule == "h2o"):
+            self.assertTrue((False))
+            
+        elif(self.molecule == "h2o2"):
+            
+            nucquad_correct = np.array([[[0.00173516,-0.00266833, 0.01132919]
+                            ,[0, -0.00676687,-0.01183273]
+                            ,[0, 0, -0.01306435]]
+                            
+                            ,[[0.00177681,-0.0026176, 0.01120484]
+                            ,[0, 0.00675537, 0.01177362]
+                            ,[0, 0, -0.01298165]]
+                            
+                            ,[[-0.00844869, 0.00204556, -0.00631312]
+                            ,[0, 0.01162262,0.00461045]
+                            ,[0,0,0.01476181]]
+                            
+                            ,[[-0.00845538,0.00208702,-0.00643277]
+                            ,[0, -0.01167536,-0.00467444]
+                            ,[0,0,0.01488815]]])
+            
+            self.assertTrue((nucquad_correct - self.nuc_quad < 0.05).all())
     
 if __name__ == '__main__':
     unittest.main()
 
+            
+            
+print shield_correct.transpose()

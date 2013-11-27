@@ -98,8 +98,6 @@ def main():
     hessian_temp = add(hessian, hessian_t) 
     hessian = subtract(hessian_temp , diag(hessian.diagonal()))
     
-    print hessian
-    
     eig, eigvec, freq, eigvec_full = fundamental_freq(hessian, num_atoms_list, charge_list, coordinates, n_atoms)
     cubic_force_field = read_cubic_force_field(cff_name, n_coords) 
     cff_norm, cff_norm_reduced = to_normal_coordinates_3D(cubic_force_field, correct_big_EVEC, n_atoms)
@@ -113,10 +111,10 @@ def main():
     shield_deriv, prop_type = read_4d_input(input_name + "SHIELD", 4, 6)
     shield = get_4D_property("Shield", shield_deriv, n_nm, n_atoms, EVAL, True)
     
-    print shield
-    
     nuc_quad_deriv, prop_type = read_nucquad(input_name + "NUCQUAD", 4, 6)
     nuc_quad = get_4D_property(prop_type, nuc_quad_deriv, n_nm, n_atoms, EVAL, True)
+    
+    print nuc_quad
     
     #spin_spin_deriv, prop_type = read_3d_input(input_name + "SPIN-SPIN", 6)
     #spin_spin = get_3D_property(prop_type, spin_spin_deriv, n_nm, EVAL, True)
@@ -124,6 +122,9 @@ def main():
     
     mol_quad_deriv, prop_type = read_mol_quad(input_name + "MOLQUAD", 6)
     mol_quad = get_3D_property(prop_type, mol_quad_deriv, 6, EVAL, True)
+    
+    a = correct_nucquad.transpose()
+    print a
     
     magnet_deriv, g_tensor_deriv = read_magnet(input_name + "MAGNET", 6)
     g_tensor = get_3D_property("g-tensor", g_tensor_deriv, n_nm, EVAL, True)  
@@ -137,6 +138,8 @@ def main():
     print "g-tensor"
     print g_tensor   
     print correct_g_tensor
+    
+    print hessian
     
 
 set_printoptions(suppress=True) #Avoid scientific notation when printing arrs
