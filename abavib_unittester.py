@@ -223,7 +223,7 @@ class nuclear_quadrupole_test(abavib_test):
     def setUp(self):
         super(nuclear_quadrupole_test, self).setUp()
         nuc_quad_deriv, self.prop_type = ri.read_nucquad(self.input_name + "NUCQUAD", self.n_atoms, self.n_nm)
-        self.uncorrected_values, self.corrections, self.corrected_values = ri.read_DALTON_values_4d(self.input_name + "NUCQUAD", self.n_atoms)
+        self.uncorrected_values, self.corrections, self.corrected_values = ri.read_DALTON_values_4d_reduced(self.input_name + "NUCQUAD", self.n_atoms)
         self.nuc_quad_corrections, self.nuc_quad = av.get_4D_property(self.prop_type, nuc_quad_deriv, self.uncorrected_values, self.n_nm, self.n_atoms, EVAL, True)
         
     def test_nuclear_quadrupole_corrections(self):
@@ -264,24 +264,25 @@ class molecular_quadrupole_test(abavib_test):
             self.assertTrue(np.allclose(molquad_correct, self.mol_quad, rtol=0.03, atol=0)) #Slightly high tolerance needed
 
 class spin_rotation_constants_test(abavib_test): 
-    def setUp(self):
+    def setUp(self):            
         super(spin_rotation_constants_test, self).setUp()
         spinrot_deriv, self.prop_type = ri.read_spinrot(self.input_name + "SPIN-ROT", self.n_atoms, self.n_nm)
-        self.spinrot = av.get_4D_property(self.prop_type, spinrot_deriv, self.n_nm, self.n_atoms, EVAL, True) 
+        self.uncorrected_values, self.corrections, self.corrected_values = ri.read_DALTON_values_4d_full(self.input_name + "SPIN-ROT", self.n_atoms)
+        self.spinrot_corrections, self.spinrot = av.get_4D_property(self.prop_type, spinrot_deriv, self.uncorrected_values, self.n_nm, self.n_atoms, EVAL, True)
    
-    def test_spin_rotation_constants_test(self):
-        
+    def test_spin_rotation_correctiond_test(self):
         if(self.molecule == "h2o"):
             self.assertTrue((False))
             
         elif(self.molecule == "h2o2"):
+            self.assertTrue(np.allclose(self.spinrot_corrections, self.corrections, rtol=0.01, atol=0.0005)) 
             
-            correct_spinrot = np.array([[[0,0,0,],[0,0,0],[0,0,0]]
-                                    ,[[0,0,0],[0,0,0],[0,0,0]]
-                                    ,[[-0.21388431,-0.09999148,-0.05558241],[0.0334947,0.04560931,0.00337925],[0.00389405,0.00144877,-0.03279227]]
-                                    ,[[-0.1955979,0.10214155,-0.05945283],[-0.03304894,0.0453841,-0.0027541],[0.0032995,-0.00085245,-0.03244115]]])
+    def test_spin_rotation_constants_test(self):
+        if(self.molecule == "h2o"):
+            self.assertTrue((False))
             
-            self.assertTrue(np.allclose(correct_spinrot, self.spinrot, rtol=0.01, atol=0.0005)) 
+        elif(self.molecule == "h2o2"):
+            self.assertTrue(np.allclose(self.corrected_values, self.spinrot, rtol=0.01, atol=0.0005))
         
 class polarizability_test(abavib_test): 
     def setUp(self):
