@@ -113,7 +113,6 @@ def main():
     
     shield_deriv, prop_type = read_4d_input(input_name + "SHIELD", 4, 6)
     shield = get_4D_property("Shield", shield_deriv, n_nm, n_atoms, EVAL, True)
-    print shield
     
     nuc_quad_deriv, prop_type = read_nucquad(input_name + "NUCQUAD", 4, 6)
     nuc_quad = get_4D_property(prop_type, nuc_quad_deriv, n_nm, n_atoms, EVAL, True)
@@ -133,9 +132,10 @@ def main():
     
     quartic_force_field = read_quartic_force_field(input_name + 'quartic',12) 
 
-    print "g-tensor"
-    print g_tensor   
-    print correct_g_tensor
+    uncorrected_values, corrections, corrected_values = read_DALTON_values_4d(input_name + "NUCQUAD", 4)
+    
+    print uncorrected_values, corrections, corrected_values
+    
     
 
 set_printoptions(suppress=True) #Avoid scientific notation when printing arrs

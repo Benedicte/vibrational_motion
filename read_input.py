@@ -362,7 +362,76 @@ def read_quartic_force_field(filename, n_cord):
     
     return quartic_force_field
                 
+def read_DALTON_values_4d(filename, natom):
+    """ For testing purposes, extracts the correct values from DALTON"""
+    
+    f = open(filename, 'r')
+    
+    uncorrected_values = zeros((natom,3,3))
+    corrections = zeros((natom,3,3))
+    corrected_values = zeros((natom,3,3))
+    
+    dummy = []
+    
+    finished = 0
+    while (finished != 2):
+        cur_line = f.readline()
+        if not cur_line: raise Exception("Dalton file does not contain the values looked for")
+        if re.search('Vibrationally corrected',cur_line):
+            finished = finished + 1
+            
+    for atom in range(natom):
 
+        dummy = f.readline()
+        dummy = f.readline()
+            
+        if atom != 0:
+            dummy = f.readline()
+            dummy = f.readline()
+            dummy = f.readline()
+            dummy = f.readline()
+            dummy = f.readline()
+                                           
+        
+        mline = f.readline()
+        mline = mline.split()
+        
+        uncorrected_values[atom][0][0] = mline[1]
+        corrections[atom][0][0] = mline[2]
+        corrected_values[atom][0][0] = mline[3]
+        
+        mline = f.readline()
+        mline = mline.split()
+        uncorrected_values[atom][0][1] = mline[1]
+        corrections[atom][0][1] = mline[2]
+        corrected_values[atom][0][1] = mline[3]
+            
+        mline = f.readline()
+        mline = mline.split()
+        uncorrected_values[atom][0][2] = mline[1]
+        corrections[atom][0][2] = mline[2]
+        corrected_values[atom][0][2] = mline[3]
+        
+        mline = f.readline()
+        mline = mline.split()
+        uncorrected_values[atom][1][1] = mline[1]
+        corrections[atom][1][1] = mline[2]
+        corrected_values[atom][1][1] = mline[3]
+        
+        mline = f.readline()
+        mline = mline.split()
+        uncorrected_values[atom][1][2] = mline[1]
+        corrections[atom][1][2] = mline[2]
+        corrected_values[atom][1][2] = mline[3]
+        
+        mline = f.readline()
+        mline = mline.split()
+        uncorrected_values[atom][2][2] = mline[1]
+        corrections[atom][2][2] = mline[2]
+        corrected_values[atom][2][2] = mline[3]
+            
+    return uncorrected_values, corrections, corrected_values
+    
             
 
 
