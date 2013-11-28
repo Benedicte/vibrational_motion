@@ -315,25 +315,29 @@ class polarizability_test(abavib_test):
         elif(self.molecule == "h2o2"):
             self.assertTrue(np.allclose(self.corrected_values, self.polari, rtol=0.01, atol=0))
                            
-class magnetizability_test(abavib_test): #
+class magnetizability_test(abavib_test): 
 
     def setUp(self):
         super(magnetizability_test, self).setUp()
-        magnet_deriv, g_tensor_deriv = ri.read_magnet(self.input_name + "MAGNET", self.n_nm) 
-        self.magnet = av.get_3D_property("magnet", magnet_deriv, self.n_nm, EVAL, True)    
-    
-    def test_magnetizability(self):
+        magnet_deriv, g_tensor_deriv = ri.read_magnet(self.input_name + "MAGNET", self.n_nm)    
+        self.uncorrected_values, self.values_correction, self.corrected_values = ri.read_DALTON_values_3d_reduced(self.input_name + "MAGNET")
+        self.magnet_correction, self.magnet = av.get_3D_property("MAGNET", magnet_deriv, self.uncorrected_values, self.n_nm, EVAL, True)
+            
+    def test_magnetizability_corrections(self):
         
         if(self.molecule == "h2o"):
             self.assertTrue((False))
             
         elif(self.molecule == "h2o2"):
+            self.assertTrue(np.allclose(self.values_correction,self.magnet_correction, rtol=0.01, atol=0))
             
-            correct_magnet = np. array([[-0.03198422,-0.00377751,0.00008762]
-                    ,[0,0.0440208,0.00003563]
-                    ,[0,0,0.00310904]])
+    def test_magnetizability_values(self):
+        
+        if(self.molecule == "h2o"):
+            self.assertTrue((False))
             
-            self.assertTrue(np.allclose(correct_magnet,self.magnet, rtol=0.01, atol=0))
+        elif(self.molecule == "h2o2"):
+            self.assertTrue(np.allclose(self.corrected_values,self.magnet, rtol=0.01, atol=0))
 
 class g_factor_test(abavib_test): #
    
