@@ -272,8 +272,6 @@ class molecular_quadrupole_test(abavib_test):
             self.assertTrue((False))
             
         elif(self.molecule == "h2o2"):
-                                
-            print self.corrections
             self.assertTrue(np.allclose(self.corrected_values, self.mol_quad, rtol=0.02, atol=0.0003)) 
             
 class spin_rotation_constants_test(abavib_test): 
@@ -297,24 +295,26 @@ class spin_rotation_constants_test(abavib_test):
         elif(self.molecule == "h2o2"):
             self.assertTrue(np.allclose(self.corrected_values, self.spinrot, rtol=0.05, atol=0.005))
         
-class polarizability_test(abavib_test): #
+class polarizability_test(abavib_test): 
     def setUp(self):
         super(polarizability_test, self).setUp()
         polari_deriv, self.prop_type = ri.read_polari(self.input_name +"POLARI", self.n_nm)
-        self.polari = av.get_3D_property(self.prop_type, polari_deriv, self.n_nm, EVAL, True)
-        
-    def test_polarizability(self):
+        self.uncorrected_values, self.corrections, self.corrected_values = ri.read_DALTON_values_3d_reduced(self.input_name + "POLARI")
+        self.polari_correction, self.polari = av.get_3D_property(self.prop_type, polari_deriv, self.uncorrected_values, self.n_nm, EVAL, True)        
+    def test_polarizability_corrections(self):
         if(self.molecule == "h2o"):
             self.assertTrue((False))
             
         elif(self.molecule == "h2o2"):
+            self.assertTrue(np.allclose(self.corrections, self.polari_correction, rtol=0.01, atol=0))
+ 
+    def test_polarizability_values(self):
+        if(self.molecule == "h2o"):
+            self.assertTrue((False))
             
-            correct_polari = np.array([[0.02969292,0.03673433,-0.00014646]
-                                    ,[0, 0.18001732,-0.0001547]
-                                    ,[0,0, 0.08188467]])
-            
-            self.assertTrue(np.allclose(correct_polari, self.polari, rtol=0.01, atol=0))
-                
+        elif(self.molecule == "h2o2"):
+            self.assertTrue(np.allclose(self.corrected_values, self.polari, rtol=0.01, atol=0))
+                           
 class magnetizability_test(abavib_test): #
 
     def setUp(self):
