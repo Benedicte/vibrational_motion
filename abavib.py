@@ -302,22 +302,22 @@ def get_3D_property(property_type, pre_property, nm, eig, write_to_file):
         
     return corrected_property                 
 
-def get_4D_property(property_type, pre_property, n_nm, n_atom, eig, write_to_file):
+def get_4D_property(property_type, pre_property, uncorrected_property, n_nm, n_atom, eig, write_to_file):
     """ Corrects nuclear shieldings, nuclear spin -rotation correction, and nuclear quadropole moments"""
     m_e = 1822.8884796 # conversion factor from a.m.u to a.u 
     prefactor = 1/(4*m_e)
     
-    corrected_property = zeros((n_atom,3,3))
+    property_corrections = zeros((n_atom,3,3))
     
     for nm in range(n_nm):
         factor = 1/(sqrt(eig[nm])) # the reduced one
         for atom in range(n_atom):
             for i in range(3):
                 for j in range(3):
-                    corrected_property[atom,j,i] += pre_property[atom,nm,j,i]*factor
+                    property_corrections[atom,j,i] += pre_property[atom,nm,j,i]*factor
     
-    corrected_property = corrected_property*prefactor
-    #nuclear_shield_corrected = nuclear_shield + nuclear_shield_correction
+    property_corrections = property_corrections*prefactor
+    corrected_property = property_corrections + uncorrected_property
     
     if (write_to_file == True):
         filename = "output/" + property_type
@@ -336,7 +336,7 @@ def get_4D_property(property_type, pre_property, n_nm, n_atom, eig, write_to_fil
 
         f.close()
  
-    return corrected_property                    
+    return property_corrections, corrected_property                    
             
 def get_dipole_moment(dipole_moment, n_nm, eig, pre_dipole_moment, write_to_file):
     """" Calculates and return the dipole moment of a molecule given it 

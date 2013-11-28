@@ -19,7 +19,8 @@ correct_big_EVEC = np.array([[-0.00131353,-0.00001741,0.00029587,-0.00016271,0.0
 ,[-0.00430002,0.00883742,-0.0049825,-0.00945915,0.01610197,0.00043797,-0.00107585,-0.00085612,-0.00003714,0.00621373,0.00002214,0.00578462]])
 
 #This one should work, check out vs. Master, seems it doesn not. 
-EVAL = np.array([0.0003967267, 0.0003909715, 5.5175184e-005, 4.4395569e-005, 2.8355625e-005, 1])
+EVAL = np.array([0.0003967267, 0.0003909715, 5.5175184e-005, 4.4395569e-005, 2.8355625e-005, 1])       
+h2oEVAL = np.array([]) 
 
 dipole_pre = np.array([ 0.00026608,-0.00020134,0.97738028])
 
@@ -222,33 +223,27 @@ class nuclear_quadrupole_test(abavib_test):
     def setUp(self):
         super(nuclear_quadrupole_test, self).setUp()
         nuc_quad_deriv, self.prop_type = ri.read_nucquad(self.input_name + "NUCQUAD", self.n_atoms, self.n_nm)
-        self.nuc_quad = av.get_4D_property(self.prop_type, nuc_quad_deriv, self.n_nm, self.n_atoms, EVAL, True)
+        self.uncorrected_values, self.corrections, self.corrected_values = ri.read_DALTON_values_4d(self.input_name + "NUCQUAD", self.n_atoms)
+        self.nuc_quad_corrections, self.nuc_quad = av.get_4D_property(self.prop_type, nuc_quad_deriv, self.uncorrected_values, self.n_nm, self.n_atoms, EVAL, True)
         
-    def test_nuclear_quadrupole(self):
+    def test_nuclear_quadrupole_corrections(self):
         
         if(self.molecule == "h2o"):
             self.assertTrue((False))
             
         elif(self.molecule == "h2o2"):
             # This might not have turned out correct
-            nucquad_correct = np.array([[[0.00173516,-0.00266833, 0.01132919]
-                            ,[0, -0.00676687,-0.01183273]
-                            ,[0, 0, -0.01306435]]
-                            
-                            ,[[0.00177681,-0.0026176, 0.01120484]
-                            ,[0, 0.00675537, 0.01177362]
-                            ,[0, 0, -0.01298165]]
-                            
-                            ,[[-0.00844869, 0.00204556, -0.00631312]
-                            ,[0, 0.01162262,0.00461045]
-                            ,[0,0,0.01476181]]
-                            
-                            ,[[-0.00845538,0.00208702,-0.00643277]
-                            ,[0, -0.01167536,-0.00467444]
-                            ,[0,0,0.01488815]]])
+            self.assertTrue(np.allclose(self.corrections, self.nuc_quad_corrections, rtol=0.01, atol= 0.0001))
             
-            self.assertTrue(np.allclose(nucquad_correct, self.nuc_quad, rtol=0.01, atol= 0.0001))
-
+    def test_nuclear_quadrupole_corrected(self):
+        
+        if(self.molecule == "h2o"):
+            self.assertTrue((False))
+            
+        elif(self.molecule == "h2o2"):
+            # This might not have turned out correct
+            self.assertTrue(np.allclose(self.corrected_values, self.nuc_quad, rtol=0.01, atol= 0.0001))
+            
 class molecular_quadrupole_test(abavib_test): 
     def setUp(self):
         super(molecular_quadrupole_test, self).setUp()

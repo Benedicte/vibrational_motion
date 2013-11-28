@@ -133,8 +133,7 @@ def main():
     quartic_force_field = read_quartic_force_field(input_name + 'quartic',12) 
 
     uncorrected_values, corrections, corrected_values = read_DALTON_values_4d(input_name + "NUCQUAD", 4)
-    
-    print uncorrected_values, corrections, corrected_values
+    print eig
     
     
 

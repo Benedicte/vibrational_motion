@@ -408,15 +408,15 @@ def read_DALTON_values_4d(filename, natom):
             
         mline = f.readline()
         mline = mline.split()
-        uncorrected_values[atom][0][2] = mline[1]
-        corrections[atom][0][2] = mline[2]
-        corrected_values[atom][0][2] = mline[3]
-        
-        mline = f.readline()
-        mline = mline.split()
         uncorrected_values[atom][1][1] = mline[1]
         corrections[atom][1][1] = mline[2]
         corrected_values[atom][1][1] = mline[3]
+        
+        mline = f.readline()
+        mline = mline.split()
+        uncorrected_values[atom][0][2] = mline[1]
+        corrections[atom][0][2] = mline[2]
+        corrected_values[atom][0][2] = mline[3]
         
         mline = f.readline()
         mline = mline.split()
