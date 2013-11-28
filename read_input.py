@@ -542,6 +542,48 @@ def read_DALTON_values_3d_reduced(filename):
             
     return uncorrected_values, corrections, corrected_values
 
+def read_DALTON_values_3d_full(filename):
+    """ For testing purposes, extracts the correct values from DALTON"""
+    
+    f = open(filename, 'r')
+    
+    uncorrected_values = zeros((3,3))
+    corrections = zeros((3,3))
+    corrected_values = zeros((3,3))
+    
+    dummy = []
+    
+    finished = 0
+    while (finished != 3):
+        cur_line = f.readline()
+        if not cur_line: raise Exception("Dalton file does not contain the values looked for")
+        if re.search('Vibrationally corrected',cur_line):
+            finished = finished + 1
 
+    dummy = f.readline()
+    dummy = f.readline()
+
+                                           
+    for i in range(3):
+        mline = f.readline()
+        mline = mline.split()
+        
+        uncorrected_values[0][i] = mline[1]
+        corrections[0][i] = mline[2]
+        corrected_values[0][i] = mline[3]
+        
+        mline = f.readline()
+        mline = mline.split()
+        uncorrected_values[1][i] = mline[1]
+        corrections[1][i] = mline[2]
+        corrected_values[1][i] = mline[3]
+            
+        mline = f.readline()
+        mline = mline.split()
+        uncorrected_values[2][i] = mline[1]
+        corrections[2][i] = mline[2]
+        corrected_values[2][i] = mline[3]
+            
+    return uncorrected_values, corrections, corrected_values   
     
     

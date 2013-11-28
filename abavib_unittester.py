@@ -344,9 +344,10 @@ class g_factor_test(abavib_test): #
     def setUp(self):
         super(g_factor_test, self).setUp()
         magnet_deriv, g_tensor_deriv = ri.read_magnet(self.input_name + "MAGNET", self.n_nm)
-        self.g_tensor = av.get_3D_property("g-tensor", g_tensor_deriv, self.n_nm, EVAL, True)  
-    
-    def test_g_factor(self):
+        self.uncorrected_values, self.values_correction, self.corrected_values = ri.read_DALTON_values_3d_full(self.input_name + "MAGNET")
+        self.g_factor_correction, self.g_factor = av.get_3D_property("GFACTOR", magnet_deriv, self.uncorrected_values, self.n_nm, EVAL, True)
+        
+    def test_g_factor_corrections(self):
         
         if(self.molecule == "h2o"):
             self.assertTrue((False))
@@ -357,8 +358,17 @@ class g_factor_test(abavib_test): #
                                         ,[-0.00000333,-0.00035603,-0.00000795]
                                         ,[0.00046495,-0.00000757,0.00136186]])
             
-            self.assertTrue(np.allclose(correct_g_factor, self.g_tensor, rtol=0.01, atol=0))
+            self.assertTrue(np.allclose( self.corrected_values, self.values_correction, rtol=0.01, atol=0))
 
+    def test_g_factor_values(self):
+        
+        if(self.molecule == "h2o"):
+            self.assertTrue((False))
+            
+        elif(self.molecule == "h2o2"):            
+            self.assertTrue(np.allclose( self.g_factor_correction, self.g_factor, rtol=0.01, atol=0))
+            
+            
 if __name__ == '__main__':
     unittest.main()
 
