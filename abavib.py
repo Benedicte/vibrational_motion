@@ -270,20 +270,20 @@ def effective_geometry(cff_norm, frequencies, n_atoms):
 
     return molecular_geometry
 
-def get_3D_property(property_type, pre_property, nm, eig, write_to_file):
+def get_3D_property(property_type, pre_property, uncorrected_property, nm, eig, write_to_file):
     """ Corrects magnetizabilities, rotational g-factor, molecular quadropole moments, and indirect spin-spin coupling"""
 
     m_e = 1822.8884796 # conversion factor from a.m.u to a.u 
     prefactor = 1/(4*m_e)
-    corrected_property = zeros((3,3))
+    correction_property = zeros((3,3))
     for mode in range(nm):
         factor = 1/(sqrt(eig[mode])) # the reduced one
         for i in range(3):
             for j in range(3):
-                corrected_property[j,i] += pre_property[mode,j,i]*factor
+                correction_property[j,i] += pre_property[mode,j,i]*factor
     
-    corrected_property = corrected_property*prefactor
-    #nuclear_shield_corrected = nuclear_shield + nuclear_shield_correction
+    correction_property = correction_property*prefactor
+    corrected_property = uncorrected_property + correction_property 
  
     if (write_to_file == True):
 		
@@ -300,7 +300,7 @@ def get_3D_property(property_type, pre_property, nm, eig, write_to_file):
 
         f.close()
         
-    return corrected_property                 
+    return correction_property, corrected_property                 
 
 def get_4D_property(property_type, pre_property, uncorrected_property, n_nm, n_atom, eig, write_to_file):
     """ Corrects nuclear shieldings, nuclear spin -rotation correction, and nuclear quadropole moments"""
