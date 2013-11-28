@@ -18,7 +18,7 @@ correct_big_EVEC = np.array([[-0.00131353,-0.00001741,0.00029587,-0.00016271,0.0
 ,[0.00155876,0.01350575,-0.01295232,0.01045877,-0.0058313,-0.00318957,-0.00129009,0.00147743,0.00397887,0.00301146,-0.0030557,-0.00027397]
 ,[-0.00430002,0.00883742,-0.0049825,-0.00945915,0.01610197,0.00043797,-0.00107585,-0.00085612,-0.00003714,0.00621373,0.00002214,0.00578462]])
 
-#This one should work, check out vs. Master
+#This one should work, check out vs. Master, seems it doesn not. 
 EVAL = np.array([0.0003967267, 0.0003909715, 5.5175184e-005, 4.4395569e-005, 2.8355625e-005, 1])
 
 dipole_pre = np.array([ 0.00026608,-0.00020134,0.97738028])
@@ -164,11 +164,11 @@ class dipole_test(abavib_test):
         
         if(self.molecule == "h2o"):
             dipole_corrections_correct = np.array([-0.00001144,-0.0000035,-0.00459292])
-            self.assertTrue(np.allclose(dipole_corrections_correct, self.dipole_moment_diff, rtol=0.01, atol=0))
+            self.assertTrue(np.allclose(dipole_corrections_correct, self.dipole_moment_diff, rtol=0.05, atol=0.0005))
             
         elif(self.molecule == "h2o2"):
             dipole_corrections_correct = np.array([-0.00001144, -0.00000350, -0.00459292])
-            self.assertTrue(np.allclose(dipole_corrections_correct, self.dipole_moment_diff, rtol=0.01, atol=0))
+            self.assertTrue(np.allclose(dipole_corrections_correct, self.dipole_moment_diff, rtol=0.05, atol=0.0005))
         
     def test_dipole_moment(self):
         
@@ -216,7 +216,7 @@ class shield_test(abavib_test):
             ,[[ -0.2255517 , 0.00613924 , 0.1193651]
             ,[ -0.00031229 , -0.04107803 , 0.1134338]
             ,[ 0.08987755 , -0.03594509 , -0.34278067]]])
-            self.assertTrue(np.allclose(shield_correct, self.shield, rtol=0.1, atol=0))        
+            self.assertTrue(np.allclose(shield_correct, self.shield, rtol=0.03, atol=0.0005))        
         
 class nuclear_quadrupole_test(abavib_test): 
     def setUp(self):
@@ -247,7 +247,7 @@ class nuclear_quadrupole_test(abavib_test):
                             ,[0, -0.01167536,-0.00467444]
                             ,[0,0,0.01488815]]])
             
-            self.assertTrue(np.allclose(nucquad_correct, self.nuc_quad, rtol=0.06, atol=0))#high tolerance needed, check manually
+            self.assertTrue(np.allclose(nucquad_correct, self.nuc_quad, rtol=0.01, atol= 0.0001))
 
 class molecular_quadrupole_test(abavib_test): 
     def setUp(self):
@@ -281,12 +281,12 @@ class spin_rotation_constants_test(abavib_test):
             
         elif(self.molecule == "h2o2"):
             
-            correct_spinrot = array([[[0,0,0,],[0,0,0],[0,0,0]]
+            correct_spinrot = np.array([[[0,0,0,],[0,0,0],[0,0,0]]
                                     ,[[0,0,0],[0,0,0],[0,0,0]]
                                     ,[[-0.21388431,-0.09999148,-0.05558241],[0.0334947,0.04560931,0.00337925],[0.00389405,0.00144877,-0.03279227]]
                                     ,[[-0.1955979,0.10214155,-0.05945283],[-0.03304894,0.0453841,-0.0027541],[0.0032995,-0.00085245,-0.03244115]]])
             
-            self.assertTrue(np.allclose(correct_spinrot, self.spinrot, rtol=0.01, atol=0)) 
+            self.assertTrue(np.allclose(correct_spinrot, self.spinrot, rtol=0.01, atol=0.0005)) 
         
 class polarizability_test(abavib_test): 
     def setUp(self):
@@ -305,7 +305,7 @@ class polarizability_test(abavib_test):
                                     ,[0,0, 0.08188467]])
             
             self.assertTrue(np.allclose(correct_polari, self.polari, rtol=0.01, atol=0))
-            
+                
 class magnetizability_test(abavib_test): 
 
     def setUp(self):

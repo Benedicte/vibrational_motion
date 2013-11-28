@@ -113,12 +113,13 @@ def main():
     
     shield_deriv, prop_type = read_4d_input(input_name + "SHIELD", 4, 6)
     shield = get_4D_property("Shield", shield_deriv, n_nm, n_atoms, EVAL, True)
+    print shield
     
     nuc_quad_deriv, prop_type = read_nucquad(input_name + "NUCQUAD", 4, 6)
     nuc_quad = get_4D_property(prop_type, nuc_quad_deriv, n_nm, n_atoms, EVAL, True)
     
-    #spin_spin_deriv, prop_type = read_3d_input(input_name + "SPIN-SPIN", 6)
-    #spin_spin = get_3D_property(prop_type, spin_spin_deriv, n_nm, EVAL, True)
+    spin_spin_deriv, prop_type = read_3d_input(input_name + "SPIN-SPIN", 6)
+    spin_spin = get_3D_property(prop_type, spin_spin_deriv, n_nm, EVAL, True)
     
     mol_quad_deriv, prop_type = read_mol_quad(input_name + "MOLQUAD", 6)
     mol_quad = get_3D_property(prop_type, mol_quad_deriv, 6, EVAL, True)
@@ -131,7 +132,7 @@ def main():
     spinrot = get_4D_property(prop_type, spinrot_deriv, n_nm, n_atoms, EVAL, True) 
     
     quartic_force_field = read_quartic_force_field(input_name + 'quartic',12) 
-    print magnet
+
     print "g-tensor"
     print g_tensor   
     print correct_g_tensor
