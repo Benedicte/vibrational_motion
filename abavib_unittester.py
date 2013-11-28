@@ -155,7 +155,7 @@ class effective_geometry_test(abavib_test):
         
         self.assertTrue((correct_effective_geometry - self.effective_geometry_cart < 0.5).all())
         
-class dipole_test(abavib_test): #Checkout how to manage the whole "close enough" conundrum
+class dipole_test(abavib_test): 
     def setUp(self):
         super(dipole_test, self).setUp()
         self.dipole_moment_diff, self.dipole_moment_corrected = av.get_dipole_moment(dipole, self.n_nm, self.eig, dipole_pre, False)
@@ -164,23 +164,23 @@ class dipole_test(abavib_test): #Checkout how to manage the whole "close enough"
         
         if(self.molecule == "h2o"):
             dipole_corrections_correct = np.array([-0.00001144,-0.0000035,-0.00459292])
-            self.assertTrue((dipole_corrections_correct - self.dipole_moment_diff < 0.0005).all())   
+            self.assertTrue(np.allclose(dipole_corrections_correct, self.dipole_moment_diff, rtol=0.01, atol=0))
             
         elif(self.molecule == "h2o2"):
             dipole_corrections_correct = np.array([-0.00001144, -0.00000350, -0.00459292])
-            self.assertTrue((dipole_corrections_correct - self.dipole_moment_diff < 0.0001).all()) 
+            self.assertTrue(np.allclose(dipole_corrections_correct, self.dipole_moment_diff, rtol=0.01, atol=0))
         
     def test_dipole_moment(self):
         
         if(self.molecule == "h2o"):
             dipole_moment_correct = np.array([0.37357035, 0.49114923, -0.19272230])
-            self.assertTrue((dipole_moment_correct - self.dipole_moment_corrected < 0.005).all())
+            self.assertTrue(np.allclose(dipole_moment_correct, self.dipole_moment_corrected, rtol=0.01, atol=0))
             
         elif(self.molecule == "h2o2"):
             dipole_moment_correct = np.array([0.00025464,-0.00020485,0.97278737])
-            self.assertTrue((dipole_moment_correct - self.dipole_moment_corrected < 0.05).all())
+            self.assertTrue(np.allclose(dipole_moment_correct, self.dipole_moment_corrected, rtol=0.01, atol=0))
 
-class shield_test(abavib_test): #Checkout how to manage the whole "close enough" conundrum
+class shield_test(abavib_test): 
     def setUp(self):
         super(shield_test, self).setUp()
         shield_deriv, self.prop_type = ri.read_4d_input(self.input_name + "SHIELD", self.n_atoms, self.n_nm)
@@ -198,7 +198,9 @@ class shield_test(abavib_test): #Checkout how to manage the whole "close enough"
             ,[[0.13222338, -0.00526279, -0.0071505]
             ,[-0.08759976, -0.0023847, 0.02509715]
             ,[-1.29295689, 0.29476779, 0.28489411]]])
-            self.assertTrue((shield_correct - self.shield < 0.5).all())
+            shield_correct, self.shield
+            
+            self.assertTrue(np.allclose(shield_correct, self.shield, rtol=0.1, atol=0))
             
         elif(self.molecule == "h2o2"):
             
@@ -214,9 +216,9 @@ class shield_test(abavib_test): #Checkout how to manage the whole "close enough"
             ,[[ -0.2255517 , 0.00613924 , 0.1193651]
             ,[ -0.00031229 , -0.04107803 , 0.1134338]
             ,[ 0.08987755 , -0.03594509 , -0.34278067]]])
-            self.assertTrue((shield_correct - self.shield < 0.5).all())        
+            self.assertTrue(np.allclose(shield_correct, self.shield, rtol=0.1, atol=0))        
         
-class nuclear_quadrupole_test(abavib_test): #Checkout how to manage the whole "close enough" conundrum
+class nuclear_quadrupole_test(abavib_test): 
     def setUp(self):
         super(nuclear_quadrupole_test, self).setUp()
         nuc_quad_deriv, self.prop_type = ri.read_nucquad(self.input_name + "NUCQUAD", self.n_atoms, self.n_nm)
@@ -245,9 +247,9 @@ class nuclear_quadrupole_test(abavib_test): #Checkout how to manage the whole "c
                             ,[0, -0.01167536,-0.00467444]
                             ,[0,0,0.01488815]]])
             
-            self.assertTrue((nucquad_correct - self.nuc_quad < 0.05).all())
+            self.assertTrue(np.allclose(nucquad_correct, self.nuc_quad, rtol=0.06, atol=0))#high tolerance needed, check manually
 
-class molecular_quadrupole_test(abavib_test): #Checkout how to manage the whole "close enough" conundrum
+class molecular_quadrupole_test(abavib_test): 
     def setUp(self):
         super(molecular_quadrupole_test, self).setUp()
         mol_quad_deriv, self.prop_type = ri.read_mol_quad(self.input_name + "MOLQUAD", self.n_nm)
@@ -264,9 +266,9 @@ class molecular_quadrupole_test(abavib_test): #Checkout how to manage the whole 
                                 ,[0, 0.02245658,-0.00003619]
                                 ,[0,0,-0.01420111]])
             
-            self.assertTrue((molquad_correct - self.mol_quad < 0.005).all())
+            self.assertTrue(np.allclose(molquad_correct, self.mol_quad, rtol=0.03, atol=0)) #Slightly high tolerance needed
 
-class spin_rotation_constants_test(abavib_test): #Checkout how to manage the whole "close enough" conundrum
+class spin_rotation_constants_test(abavib_test): 
     def setUp(self):
         super(spin_rotation_constants_test, self).setUp()
         spinrot_deriv, self.prop_type = ri.read_spinrot(self.input_name + "SPIN-ROT", self.n_atoms, self.n_nm)
@@ -284,9 +286,9 @@ class spin_rotation_constants_test(abavib_test): #Checkout how to manage the who
                                     ,[[-0.21388431,-0.09999148,-0.05558241],[0.0334947,0.04560931,0.00337925],[0.00389405,0.00144877,-0.03279227]]
                                     ,[[-0.1955979,0.10214155,-0.05945283],[-0.03304894,0.0453841,-0.0027541],[0.0032995,-0.00085245,-0.03244115]]])
             
-            self.assertTrue((correct_spinrot - self.spinrot < 0.01).all())
+            self.assertTrue(np.allclose(correct_spinrot, self.spinrot, rtol=0.01, atol=0)) 
         
-class polarizability_test(abavib_test): #Checkout how to manage the whole "close enough" conundrum
+class polarizability_test(abavib_test): 
     def setUp(self):
         super(polarizability_test, self).setUp()
         polari_deriv, self.prop_type = ri.read_polari(self.input_name +"POLARI", self.n_nm)
@@ -304,7 +306,7 @@ class polarizability_test(abavib_test): #Checkout how to manage the whole "close
             
             self.assertTrue(np.allclose(correct_polari, self.polari, rtol=0.01, atol=0))
             
-class magnetizability_test(abavib_test): #Checkout how to manage the whole "close enough" conundrum
+class magnetizability_test(abavib_test): 
 
     def setUp(self):
         super(magnetizability_test, self).setUp()
@@ -324,7 +326,7 @@ class magnetizability_test(abavib_test): #Checkout how to manage the whole "clos
             
             self.assertTrue(np.allclose(correct_magnet,self.magnet, rtol=0.01, atol=0))
 
-class g_factor_test(abavib_test): #Checkout how to manage the whole "close enough" conundrum
+class g_factor_test(abavib_test): 
    
     def setUp(self):
         super(g_factor_test, self).setUp()
