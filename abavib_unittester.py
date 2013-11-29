@@ -3,52 +3,44 @@ import abavib as av
 import read_input as ri
 import numpy as np
 
-#The reason we use this one, is because there are any number of eigenvectors which are correct eigenvectors, for the purpose of testing
-#we use the same one that DALTON operates with
-correct_big_EVEC = np.array([[-0.00131353,-0.00001741,0.00029587,-0.00016271,0.00000038,0.00006501,0.00027175,0.00568992,-0.00000074,-0.00001015,0.00000448,-0.00006349]
-,[0.00007785,-0.00060863,-0.00084065,-0.00064259,-0.00032658,0.00406074,-0.00000384,-0.00000448,0.00401866,-0.00016465,0.00016675,0.00001509]
-,[-0.00018153,0.00151054,0.00052282,-0.000208,-0.00088988,-0.00002127,-0.00004001,-0.00007291,0.00003336,0.0001495,0.0055534,-0.00005365]
-,[0.00116367,0.00047638,-0.00027149,-0.00042556,0.00006439,-0.00006238,0.00569633,0.00000134,0.00000126,0.00004064,-0.00003141,0.00004909]
-,[0.00000617,-0.0007995,0.00059862,-0.0006688,0.00040987,-0.00405949,-0.00000384,-0.00000448,0.00401866,-0.00016465,0.00016675,0.00001509]
-,[0.00036161,-0.00151616,0.00016393,-0.00002019,-0.00098291,-0.00002758,0.00003536,0.00007269,-0.00003299,0.00553274,0.00009811,-0.00049504]
-,[0.01633121,-0.00137943,0.00208677,0.00294594,0.00196957,0.00042724,-0.00304474,0.00405091,0.00000712,0.00015899,0.00131398,0.01520468]
-,[-0.00289218,0.00884232,0.01679361,0.01035385,0.00450935,0.00316981,0.00137169,-0.0013139,0.00397985,0.00303638,-0.00307331,-0.00021873]
-,[0.00144209,-0.00874834,-0.00591666,0.01308062,0.01362057,0.00033726,0.0010712,0.00085591,0.00003751,-0.00053149,0.00562937,-0.0063333]
-,[-0.01395275,-0.00590483,-0.00247371,0.00639033,-0.0029974,-0.00046896,0.0036063,-0.00292382,0.00000957,0.00022126,0.00126997,0.0153427]
-,[0.00155876,0.01350575,-0.01295232,0.01045877,-0.0058313,-0.00318957,-0.00129009,0.00147743,0.00397887,0.00301146,-0.0030557,-0.00027397]
-,[-0.00430002,0.00883742,-0.0049825,-0.00945915,0.01610197,0.00043797,-0.00107585,-0.00085612,-0.00003714,0.00621373,0.00002214,0.00578462]])
-
-correct_EVEC = np.array([[-0.00131353,-0.00001741,0.00029587,-0.00016271,0.00000038,0.00006501]
-,[0.00007785,-0.00060863,-0.00084065,-0.00064259,-0.00032658,0.00406074]
-,[-0.00018153,0.00151054,0.00052282,-0.000208,-0.00088988,-0.00002127]
-,[0.00116367,0.00047638,-0.00027149,-0.00042556,0.00006439,-0.00006238]
-,[0.00000617,-0.0007995,0.00059862,-0.0006688,0.00040987,-0.00405949]
-,[0.00036161,-0.00151616,0.00016393,-0.00002019,-0.00098291,-0.00002758]
-,[0.01633121,-0.00137943,0.00208677,0.00294594,0.00196957,0.00042724]
-,[-0.00289218,0.00884232,0.01679361,0.01035385,0.00450935,0.00316981]
-,[0.00144209,-0.00874834,-0.00591666,0.01308062,0.01362057,0.00033726]
-,[-0.01395275,-0.00590483,-0.00247371,0.00639033,-0.0029974,-0.00046896]
-,[0.00155876,0.01350575,-0.01295232,0.01045877,-0.0058313,-0.00318957]
-,[-0.00430002,0.00883742,-0.0049825,-0.00945915,0.01610197,0.00043797]])
- 
-EVAL = np.array([0.0003967267, 0.0003909715, 5.5175184e-005, 4.4395569e-005, 2.8355625e-005, 1])       
-h2oEVAL = np.array([]) 
-
-#dipole_pre = np.array([ 0.00026608,-0.00020134,0.97738028])
-
-dipole = np.array([[-0.04877, -0.282926, -0.008477]
-,[0.04812, 0.280315, -0.020823]
-,[0.000943, 0.000917, -0.08065]
-,[-0.00133, -0.001029, -0.137956]
-,[0.000026, 0.00018, -0.002133]
-,[-0.000336, 0.000407, -0.240555]])
-
 class abavib_test(unittest.TestCase):
+    
     def setUp(self):
-        self.molecule = "h2o2"
+    
+    #The reason we use this one, is because there are any number of eigenvectors which are correct eigenvectors, for the purpose of testing
+    #we use the same one that DALTON operates with
+        self.eigvec_full = np.array([[-0.00131353,-0.00001741,0.00029587,-0.00016271,0.00000038,0.00006501,0.00027175,0.00568992,-0.00000074,-0.00001015,0.00000448,-0.00006349]
+                    ,[0.00007785,-0.00060863,-0.00084065,-0.00064259,-0.00032658,0.00406074,-0.00000384,-0.00000448,0.00401866,-0.00016465,0.00016675,0.00001509]
+                    ,[-0.00018153,0.00151054,0.00052282,-0.000208,-0.00088988,-0.00002127,-0.00004001,-0.00007291,0.00003336,0.0001495,0.0055534,-0.00005365]
+                    ,[0.00116367,0.00047638,-0.00027149,-0.00042556,0.00006439,-0.00006238,0.00569633,0.00000134,0.00000126,0.00004064,-0.00003141,0.00004909]
+                    ,[0.00000617,-0.0007995,0.00059862,-0.0006688,0.00040987,-0.00405949,-0.00000384,-0.00000448,0.00401866,-0.00016465,0.00016675,0.00001509]
+                    ,[0.00036161,-0.00151616,0.00016393,-0.00002019,-0.00098291,-0.00002758,0.00003536,0.00007269,-0.00003299,0.00553274,0.00009811,-0.00049504]
+                    ,[0.01633121,-0.00137943,0.00208677,0.00294594,0.00196957,0.00042724,-0.00304474,0.00405091,0.00000712,0.00015899,0.00131398,0.01520468]
+                    ,[-0.00289218,0.00884232,0.01679361,0.01035385,0.00450935,0.00316981,0.00137169,-0.0013139,0.00397985,0.00303638,-0.00307331,-0.00021873]
+                    ,[0.00144209,-0.00874834,-0.00591666,0.01308062,0.01362057,0.00033726,0.0010712,0.00085591,0.00003751,-0.00053149,0.00562937,-0.0063333]
+                    ,[-0.01395275,-0.00590483,-0.00247371,0.00639033,-0.0029974,-0.00046896,0.0036063,-0.00292382,0.00000957,0.00022126,0.00126997,0.0153427]
+                    ,[0.00155876,0.01350575,-0.01295232,0.01045877,-0.0058313,-0.00318957,-0.00129009,0.00147743,0.00397887,0.00301146,-0.0030557,-0.00027397]
+                    ,[-0.00430002,0.00883742,-0.0049825,-0.00945915,0.01610197,0.00043797,-0.00107585,-0.00085612,-0.00003714,0.00621373,0.00002214,0.00578462]])
+    
+        self.eigvec = np.array([[-0.00131353,-0.00001741,0.00029587,-0.00016271,0.00000038,0.00006501]
+        ,[0.00007785,-0.00060863,-0.00084065,-0.00064259,-0.00032658,0.00406074]
+        ,[-0.00018153,0.00151054,0.00052282,-0.000208,-0.00088988,-0.00002127]
+        ,[0.00116367,0.00047638,-0.00027149,-0.00042556,0.00006439,-0.00006238]
+        ,[0.00000617,-0.0007995,0.00059862,-0.0006688,0.00040987,-0.00405949]
+        ,[0.00036161,-0.00151616,0.00016393,-0.00002019,-0.00098291,-0.00002758]
+        ,[0.01633121,-0.00137943,0.00208677,0.00294594,0.00196957,0.00042724]
+        ,[-0.00289218,0.00884232,0.01679361,0.01035385,0.00450935,0.00316981]
+        ,[0.00144209,-0.00874834,-0.00591666,0.01308062,0.01362057,0.00033726]
+        ,[-0.01395275,-0.00590483,-0.00247371,0.00639033,-0.0029974,-0.00046896]
+        ,[0.00155876,0.01350575,-0.01295232,0.01045877,-0.0058313,-0.00318957]
+        ,[-0.00430002,0.00883742,-0.0049825,-0.00945915,0.01610197,0.00043797]])
+ 
+        self.eig = np.array([0.0003967267, 0.0003909715, 5.5175184e-005, 4.4395569e-005, 2.8355625e-005, 1]) 
+
+        self.molecule = "h2o"
         self.input_name = "input_" + self.molecule + "/"
         self.mol_name = self.input_name + 'MOLECULE.INP'
-        self.cff_name = self.input_name + 'cubic'
+        self.cff_name = self.input_name + 'cubic_force_field'
         self.coordinates, self.masses,  self.num_atoms_list \
             ,self.charge_list, self.n_atoms = av.read_molecule(self.mol_name)
         self.n_coordinates = self.n_atoms * 3  
@@ -61,11 +53,11 @@ class abavib_test(unittest.TestCase):
         self.eig, self.eigvec, self.freq, self.eigvec_full = \
             av.fundamental_freq(self.hessian, self.num_atoms_list, \
             self.charge_list, self.coordinates, self.n_atoms)
-        self.cubic_force_field = ri.read_cubic_force_field(self.cff_name,\
+        self.cubic_force_field = av.read_cubic_force_field(self.cff_name,#Remember to switch to ri. for h2o2\  
          self.n_coordinates) 
-        self.cff_norm, self.cff_norm_reduced = av.to_normal_coordinates_3D(self.cubic_force_field, correct_big_EVEC, self.n_atoms)
+        self.cff_norm, self.cff_norm_reduced = av.to_normal_coordinates_3D(self.cubic_force_field, self.eigvec_full, self.n_atoms)
         effective_geometry_norm = av.effective_geometry(self.cff_norm_reduced, self.freq, self.n_atoms)
-        self.effective_geometry_cart = av.to_cartessian_coordinates(effective_geometry_norm, self.n_atoms, correct_EVEC)
+        self.effective_geometry_cart = av.to_cartessian_coordinates(effective_geometry_norm, self.n_atoms, self.eigvec)
         
 class read_molecule_test(abavib_test):        
     def test_coordinates(self):
@@ -147,12 +139,15 @@ class read_hessian_test(abavib_test):
         self.assertTrue(self.hessian.shape == (self.n_coordinates, self.n_coordinates))
  
 class frequency_test(abavib_test):
+    
     def test_frequencies(self):
-        correct_frequency = np.array([0.0570, 0.0435, 0.0413, 0.0343, 0.0294, 0.0168, 0,0,0,0,0,0])
-        self.assertTrue(np.allclose(correct_frequency, self.freq, rtol=0.02, atol=0.0003)) 
+        if(self.molecule == "h2o2"):    
+            correct_frequency = np.array([0.0570, 0.0435, 0.0413, 0.0343, 0.0294, 0.0168, 0,0,0,0,0,0])
+            self.assertTrue(np.allclose(correct_frequency, self.freq, rtol=0.02, atol=0.0003)) 
         
     def test_eigvec(self):
-        correct_eigvec = np.array([[ -0.00131353, -0.00001741, 0.00029587, -0.00016271, 0.00000038, 0.00006501]
+        if(self.molecule == "h2o2"):
+            correct_eigvec = np.array([[ -0.00131353, -0.00001741, 0.00029587, -0.00016271, 0.00000038, 0.00006501]
                         ,[ 0.00007785, -0.00060863, -0.00084065, -0.00064259, -0.00032658, 0.00406074]
                         ,[ -0.00018153, 0.00151054, 0.00052282, -0.000208, -0.00088988, -0.00002127]
                         ,[ 0.00116367, 0.00047638, -0.00027149, -0.00042556, 0.00006439, -0.00006238]
@@ -165,11 +160,11 @@ class frequency_test(abavib_test):
                         ,[ 0.00155876, 0.01350575, -0.01295232, 0.01045877, -0.0058313, -0.00318957]
                         ,[ -0.00430002, 0.00883742, -0.0049825, -0.00945915, 0.01610197, 0.00043797]])
                         
-        vfunc = np.vectorize(np.absolute)
-        correct_eigvec = vfunc(correct_eigvec)
-        self.eigvec = vfunc(self.eigvec)
+            vfunc = np.vectorize(np.absolute)
+            correct_eigvec = vfunc(correct_eigvec)
+            self.eigvec = vfunc(self.eigvec)
         
-        self.assertTrue(np.allclose(correct_eigvec, self.eigvec, rtol=0.02, atol=0.0003))
+            self.assertTrue(np.allclose(correct_eigvec, self.eigvec, rtol=0.02, atol=0.0003))
   
 class cubic_force_field_test(abavib_test):
     def test_cff(self):
@@ -197,7 +192,7 @@ class dipole_test(abavib_test):
         super(dipole_test, self).setUp()
         dipole_derivative = ri.read_2d_input(self.input_name + "MAGNET")
         self.uncorrected_values, self.corrections, self.corrected_values = ri.read_DALTON_values_2d(self.input_name + "MAGNET")
-        self.dipole_moment_diff, self.dipole_moment_corrected = av.get_dipole_moment(dipole_derivative, self.n_nm, EVAL, self.uncorrected_values, False)
+        self.dipole_moment_diff, self.dipole_moment_corrected = av.get_dipole_moment(dipole_derivative, self.n_nm, self.eig, self.uncorrected_values, False)
         
     def test_dipole_corrections(self):
         
@@ -222,7 +217,7 @@ class shield_test(abavib_test):
         super(shield_test, self).setUp()
         shield_deriv, self.prop_type = ri.read_4d_input(self.input_name + "SHIELD", self.n_atoms, self.n_nm)
         self.uncorrected_values, self.corrections, self.corrected_values = ri.read_DALTON_values_4d_full(self.input_name + "SHIELD", self.n_atoms)
-        self.corrections_shield, self.shield = av.get_4D_property("Shield", shield_deriv, self.uncorrected_values, self.n_nm, self.n_atoms, EVAL, True)
+        self.corrections_shield, self.shield = av.get_4D_property("Shield", shield_deriv, self.uncorrected_values, self.n_nm, self.n_atoms, self.eig, True)
         
     def test_shield_corrections(self):
         
@@ -266,7 +261,7 @@ class nuclear_quadrupole_test(abavib_test):
         super(nuclear_quadrupole_test, self).setUp()
         nuc_quad_deriv, self.prop_type = ri.read_nucquad(self.input_name + "NUCQUAD", self.n_atoms, self.n_nm)
         self.uncorrected_values, self.corrections, self.corrected_values = ri.read_DALTON_values_4d_reduced(self.input_name + "NUCQUAD", self.n_atoms)
-        self.nuc_quad_corrections, self.nuc_quad = av.get_4D_property(self.prop_type, nuc_quad_deriv, self.uncorrected_values, self.n_nm, self.n_atoms, EVAL, True)
+        self.nuc_quad_corrections, self.nuc_quad = av.get_4D_property(self.prop_type, nuc_quad_deriv, self.uncorrected_values, self.n_nm, self.n_atoms, self.eig, True)
         
     def test_nuclear_quadrupole_corrections(self):
         
@@ -291,7 +286,7 @@ class molecular_quadrupole_test(abavib_test):
         super(molecular_quadrupole_test, self).setUp()
         mol_quad_deriv, self.prop_type = ri.read_mol_quad(self.input_name + "MOLQUAD", self.n_nm)
         self.uncorrected_values, self.corrections, self.corrected_values = ri.read_DALTON_values_3d_reduced(self.input_name + "MOLQUAD")
-        self.mol_quad_correction, self.mol_quad = av.get_3D_property(self.prop_type, mol_quad_deriv, self.uncorrected_values, self.n_nm, EVAL, True)
+        self.mol_quad_correction, self.mol_quad = av.get_3D_property(self.prop_type, mol_quad_deriv, self.uncorrected_values, self.n_nm, self.eig, True)
         
     def test_molecular_quadrupole_corrections(self):
         
@@ -314,7 +309,7 @@ class spin_rotation_constants_test(abavib_test):
         super(spin_rotation_constants_test, self).setUp()
         spinrot_deriv, self.prop_type = ri.read_spinrot(self.input_name + "SPIN-ROT", self.n_atoms, self.n_nm)
         self.uncorrected_values, self.corrections, self.corrected_values = ri.read_DALTON_values_4d_full(self.input_name + "SPIN-ROT", self.n_atoms)
-        self.spinrot_corrections, self.spinrot = av.get_4D_property(self.prop_type, spinrot_deriv, self.uncorrected_values, self.n_nm, self.n_atoms, EVAL, True)
+        self.spinrot_corrections, self.spinrot = av.get_4D_property(self.prop_type, spinrot_deriv, self.uncorrected_values, self.n_nm, self.n_atoms, self.eig, True)
    
     def test_spin_rotation_correctiond_test(self):
         if(self.molecule == "h2o"):
@@ -335,7 +330,7 @@ class polarizability_test(abavib_test):
         super(polarizability_test, self).setUp()
         polari_deriv, self.prop_type = ri.read_polari(self.input_name +"POLARI", self.n_nm)
         self.uncorrected_values, self.corrections, self.corrected_values = ri.read_DALTON_values_3d_reduced(self.input_name + "POLARI")
-        self.polari_correction, self.polari = av.get_3D_property(self.prop_type, polari_deriv, self.uncorrected_values, self.n_nm, EVAL, True)        
+        self.polari_correction, self.polari = av.get_3D_property(self.prop_type, polari_deriv, self.uncorrected_values, self.n_nm, self.eig, True)        
     def test_polarizability_corrections(self):
         if(self.molecule == "h2o"):
             self.assertTrue((False))
@@ -356,12 +351,12 @@ class magnetizability_test(abavib_test):
         super(magnetizability_test, self).setUp()
         magnet_deriv, g_tensor_deriv = ri.read_magnet(self.input_name + "MAGNET", self.n_nm)    
         self.uncorrected_values, self.values_correction, self.corrected_values = ri.read_DALTON_values_3d_reduced(self.input_name + "MAGNET")
-        self.magnet_correction, self.magnet = av.get_3D_property("MAGNET", magnet_deriv, self.uncorrected_values, self.n_nm, EVAL, True)
-            
+        self.magnet_correction, self.magnet = av.get_3D_property("MAGNET", magnet_deriv, self.uncorrected_values, self.n_nm, self.eig, True)  
+        print self.eig          
     def test_magnetizability_corrections(self):
         
         if(self.molecule == "h2o"):
-            self.assertTrue((False))
+            self.assertTrue(np.allclose(self.values_correction,self.magnet_correction, rtol=0.01, atol=0))
             
         elif(self.molecule == "h2o2"):
             self.assertTrue(np.allclose(self.values_correction,self.magnet_correction, rtol=0.01, atol=0))
@@ -369,7 +364,7 @@ class magnetizability_test(abavib_test):
     def test_magnetizability_values(self):
         
         if(self.molecule == "h2o"):
-            self.assertTrue((False))
+            self.assertTrue(np.allclose(self.corrected_values,self.magnet, rtol=0.01, atol=0))
             
         elif(self.molecule == "h2o2"):
             self.assertTrue(np.allclose(self.corrected_values,self.magnet, rtol=0.01, atol=0))
@@ -380,7 +375,7 @@ class g_factor_test(abavib_test):
         super(g_factor_test, self).setUp()
         magnet_deriv, g_tensor_deriv = ri.read_magnet(self.input_name + "MAGNET", self.n_nm)
         self.uncorrected_values, self.values_correction, self.corrected_values = ri.read_DALTON_values_3d_full(self.input_name + "MAGNET")
-        self.g_factor_correction, self.g_factor = av.get_3D_property("GFACTOR", magnet_deriv, self.uncorrected_values, self.n_nm, EVAL, True)
+        self.g_factor_correction, self.g_factor = av.get_3D_property("GFACTOR", magnet_deriv, self.uncorrected_values, self.n_nm, self.eig, True)
         
     def test_g_factor_corrections(self):
         
@@ -402,7 +397,6 @@ class g_factor_test(abavib_test):
             
         elif(self.molecule == "h2o2"):            
             self.assertTrue(np.allclose( self.g_factor_correction, self.g_factor, rtol=0.01, atol=0))
-            
             
 if __name__ == '__main__':
     unittest.main()
