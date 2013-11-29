@@ -39,7 +39,7 @@ def read_mol_quad(filename, nm):
     f.close()
     return second_deriv, "MOLQUAD"
     
-def read_magnet(filename, nm):
+def read_magnet_like(filename, nm):
     
     f = open(filename, 'r')
     second_deriv_magnet = zeros((nm,3,3))
@@ -48,10 +48,10 @@ def read_magnet(filename, nm):
     dummy = []
     
     finished = 0
-    while (finished == 0):
+    while (finished != 2):
         cur_line = f.readline()
-        if re.search('Magnetizability tensor second derivatives',cur_line):
-            finished = 1
+        if re.search('second derivatives',cur_line):
+            finished = finished + 1
     
     dummy = f.readline()
     dummy = f.readline()
@@ -211,6 +211,37 @@ def read_nucquad(filename, natom, nm):
     f.close()
     return second_deriv, property_type
 
+def read_optrot(filename, nm):
+    
+    f = open(filename, 'r')
+    second_deriv_optrot = zeros((nm,3,3))
+    dummy = []
+    
+    finished = 2
+    while (finished != 2):
+        cur_line = f.readline()
+        if re.search('second derivatives',cur_line):
+            finished = finished + 1
+    
+    dummy = f.readline()
+    dummy = f.readline()
+    dummy = f.readline()
+     
+    for mode in range(nm):
+        mline = f.readline()
+        mline = mline.split()
+        second_deriv_magnet[mode][0][0]= mline[1]
+        second_deriv_magnet[mode][0][1]= mline[2]  
+        second_deriv_magnet[mode][1][1]= mline[3]
+              
+        second_deriv_magnet[mode][0][2]= mline[4]  
+        second_deriv_magnet[mode][1][2]= mline[5]  
+        second_deriv_magnet[mode][2][2]= mline[6]
+        
+    f.close()
+    
+    return second_deriv_optrot, 
+        
 def read_2d_input(filename, nm):
     
     f = open(filename, 'r')
@@ -591,6 +622,7 @@ def read_DALTON_values_3d_full(filename):
 
                                            
     for i in range(3):
+        
         mline = f.readline()
         mline = mline.split()
         
