@@ -30,12 +30,11 @@ correct_EVEC = np.array([[-0.00131353,-0.00001741,0.00029587,-0.00016271,0.00000
 ,[-0.01395275,-0.00590483,-0.00247371,0.00639033,-0.0029974,-0.00046896]
 ,[0.00155876,0.01350575,-0.01295232,0.01045877,-0.0058313,-0.00318957]
 ,[-0.00430002,0.00883742,-0.0049825,-0.00945915,0.01610197,0.00043797]])
-
-#This one should work, check out vs. Master, seems it doesn not. 
+ 
 EVAL = np.array([0.0003967267, 0.0003909715, 5.5175184e-005, 4.4395569e-005, 2.8355625e-005, 1])       
 h2oEVAL = np.array([]) 
 
-dipole_pre = np.array([ 0.00026608,-0.00020134,0.97738028])
+#dipole_pre = np.array([ 0.00026608,-0.00020134,0.97738028])
 
 dipole = np.array([[-0.04877, -0.282926, -0.008477]
 ,[0.04812, 0.280315, -0.020823]
@@ -191,14 +190,14 @@ class effective_geometry_test(abavib_test):
             ,[0.0050923237, 0.0083859610, 0.0245363238]
             ,[-0.0064771454, -0.0099334764, 0.0278795793]])
             
-            print self.effective_geometry_cart
-            
             self.assertTrue(np.allclose(correct_effective_geometry, self.effective_geometry_cart, rtol=0.03, atol=0.0003))
         
 class dipole_test(abavib_test): 
     def setUp(self):
         super(dipole_test, self).setUp()
-        self.dipole_moment_diff, self.dipole_moment_corrected = av.get_dipole_moment(dipole, self.n_nm, self.eig, dipole_pre, False)
+        dipole_derivative = ri.read_2d_input(self.input_name + "MAGNET")
+        self.uncorrected_values, self.corrections, self.corrected_values = ri.read_DALTON_values_2d(self.input_name + "MAGNET")
+        self.dipole_moment_diff, self.dipole_moment_corrected = av.get_dipole_moment(dipole_derivative, self.n_nm, self.eig, self.uncorrected_values, False)
         
     def test_dipole_corrections(self):
         
@@ -207,8 +206,9 @@ class dipole_test(abavib_test):
             self.assertTrue(np.allclose(dipole_corrections_correct, self.dipole_moment_diff, rtol=0.05, atol=0.0005))
             
         elif(self.molecule == "h2o2"):
-            dipole_corrections_correct = np.array([-0.00001144, -0.00000350, -0.00459292])
-            self.assertTrue(np.allclose(dipole_corrections_correct, self.dipole_moment_diff, rtol=0.05, atol=0.0005))
+            print self.corrections
+            print self.dipole_moment_diff
+            self.assertTrue(np.allclose(self.corrections, self.dipole_moment_diff, rtol=0.05, atol=0.0005))
         
     def test_dipole_moment(self):
         
@@ -378,7 +378,7 @@ class magnetizability_test(abavib_test):
         elif(self.molecule == "h2o2"):
             self.assertTrue(np.allclose(self.corrected_values,self.magnet, rtol=0.01, atol=0))
 
-class g_factor_test(abavib_test): #
+class g_factor_test(abavib_test): 
    
     def setUp(self):
         super(g_factor_test, self).setUp()

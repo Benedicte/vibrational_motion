@@ -210,7 +210,33 @@ def read_nucquad(filename, natom, nm):
 
     f.close()
     return second_deriv, property_type
+
+def read_2d_input(filename):
     
+    f = open(filename, 'r')
+    second_deriv = zeros((6,3))
+    property_type = 0
+    dummy = []
+    
+    finished = 0
+    while (finished == 0):
+        cur_line = f.readline()
+        if re.search('second derivatives',cur_line):
+            finished = 1    
+    
+    dummy = f.readline()
+    dummy = f.readline()
+    
+    for mode in range(6):
+        mline = f.readline()
+        mline = mline.split()
+        second_deriv[mode][0] = mline[1]
+        second_deriv[mode][1] = mline[2]
+        second_deriv[mode][2] = mline[3]
+    
+    f.close()
+    return second_deriv    
+        
 def read_3d_input(filename, nm):
     """Imports things needed from the DALTON.OUT that I need"""
     
@@ -585,7 +611,35 @@ def read_DALTON_values_3d_full(filename):
         corrected_values[2][i] = mline[3]
             
     return uncorrected_values, corrections, corrected_values   
+
+def read_DALTON_values_2d(filename):
     
+    f = open(filename, 'r')
+    
+    uncorrected_values = zeros((3))
+    corrections = zeros((3))
+    corrected_values = zeros((3))
+    dummy = []
+    
+    finished = 0
+    while (finished == 0):
+        cur_line = f.readline()
+        if not cur_line: raise Exception("Dalton file does not contain the values looked for")
+        if re.search('Vibrationally corrected',cur_line):
+            finished = finished + 1
+
+    dummy = f.readline()
+    dummy = f.readline()
+    
+    for i in range(3):
+        mline = f.readline()
+        mline = mline.split()        
+        uncorrected_values[i] = mline[1]
+        corrections[i] = mline[2]
+        corrected_values[i] = mline[3]
+        
+    return uncorrected_values, corrections, corrected_values        
+
 def read_cubic_force_field(filename, n_cord):
     """Imports the quartic force field from DALTON"""
     
