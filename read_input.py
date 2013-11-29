@@ -211,7 +211,7 @@ def read_nucquad(filename, natom, nm):
     f.close()
     return second_deriv, property_type
 
-def read_2d_input(filename):
+def read_2d_input(filename, nm):
     
     f = open(filename, 'r')
     second_deriv = zeros((6,3))
@@ -227,7 +227,7 @@ def read_2d_input(filename):
     dummy = f.readline()
     dummy = f.readline()
     
-    for mode in range(6):
+    for mode in range(nm):
         mline = f.readline()
         mline = mline.split()
         second_deriv[mode][0] = mline[1]

@@ -239,24 +239,21 @@ class effective_geometry_test(abavib_test):
 class dipole_test(abavib_test): 
     def setUp(self):
         super(dipole_test, self).setUp()
-        dipole_derivative = ri.read_2d_input(self.input_name + "MAGNET")
-        self.uncorrected_values, self.corrections, self.corrected_values = ri.read_DALTON_values_2d(self.input_name + "MAGNET")
+        dipole_derivative = ri.read_2d_input(self.input_name + "SHIELD", self.n_nm)
+        self.uncorrected_values, self.corrections, self.corrected_values = ri.read_DALTON_values_2d(self.input_name + "SHIELD")
         self.dipole_moment_diff, self.dipole_moment_corrected = av.get_dipole_moment(dipole_derivative, self.n_nm, self.eig, self.uncorrected_values, False)
         
     def test_dipole_corrections(self):
         
         if(self.molecule == "h2o"):
-            dipole_corrections_correct = np.array([-0.00001144,-0.0000035,-0.00459292])
-            self.assertTrue(np.allclose(dipole_corrections_correct, self.dipole_moment_diff, rtol=0.05, atol=0.0005))
-            
+            self.assertTrue(np.allclose(self.corrections, self.dipole_moment_diff, rtol=0.05, atol=0.0005))            
         elif(self.molecule == "h2o2"):
             self.assertTrue(np.allclose(self.corrections, self.dipole_moment_diff, rtol=0.05, atol=0.0005))
         
     def test_dipole_moment(self):
         
         if(self.molecule == "h2o"):
-            dipole_moment_correct = np.array([0.37357035, 0.49114923, -0.19272230])
-            self.assertTrue(np.allclose(dipole_moment_correct, self.dipole_moment_corrected, rtol=0.01, atol=0))
+            self.assertTrue(np.allclose(self.corrected_values, self.dipole_moment_corrected, rtol=0.05, atol=0.0005))
             
         elif(self.molecule == "h2o2"):
             self.assertTrue(np.allclose(self.corrected_values, self.dipole_moment_corrected, rtol=0.01, atol=0))
@@ -330,23 +327,23 @@ class molecular_quadrupole_test(abavib_test):
         elif(self.molecule == "h2o2"):
             self.assertTrue(np.allclose(self.corrected_values, self.mol_quad, rtol=0.02, atol=0.0003)) 
             
-class spin_rotation_constants_test(abavib_test): 
+class spin_rotation_constants_test(abavib_test): #Issues with this and input reading
     def setUp(self):            
         super(spin_rotation_constants_test, self).setUp()
         spinrot_deriv, self.prop_type = ri.read_spinrot(self.input_name + "SPIN-ROT", self.n_atoms, self.n_nm)
         self.uncorrected_values, self.corrections, self.corrected_values = ri.read_DALTON_values_4d_full(self.input_name + "SPIN-ROT", self.n_atoms)
         self.spinrot_corrections, self.spinrot = av.get_4D_property(self.prop_type, spinrot_deriv, self.uncorrected_values, self.n_nm, self.n_atoms, self.eig, True)
    
-    def test_spin_rotation_correctiond_test(self):
+    def test_spin_rotation_correctiond_test(self): # Fro h2o we have some weird stars for the derivative
         if(self.molecule == "h2o"):
-            self.assertTrue((False))
+            self.assertTrue(np.allclose(self.spinrot_corrections, self.corrections, rtol=0.01, atol=0.0005))
             
         elif(self.molecule == "h2o2"):
             self.assertTrue(np.allclose(self.spinrot_corrections, self.corrections, rtol=0.01, atol=0.0005)) 
             
     def test_spin_rotation_constants_test(self): # I reaaally don't understand this one
         if(self.molecule == "h2o"):
-            self.assertTrue((False))
+            self.assertTrue(np.allclose(self.corrected_values, self.spinrot, rtol=0.05, atol=0.005))
             
         elif(self.molecule == "h2o2"):
             self.assertTrue(np.allclose(self.corrected_values, self.spinrot, rtol=0.05, atol=0.005))
