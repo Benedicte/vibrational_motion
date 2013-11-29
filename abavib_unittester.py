@@ -35,19 +35,18 @@ class abavib_test(unittest.TestCase):
         ,[0.00155876,0.01350575,-0.01295232,0.01045877,-0.0058313,-0.00318957]
         ,[-0.00430002,0.00883742,-0.0049825,-0.00945915,0.01610197,0.00043797]])
         
-        self.h2o.eigvec = np.array[[0.003447, -0.039874, -0.067216]
+        self.h2o_eigvec = np.array([[0.003447, -0.039874, -0.067216]
         ,[-0.072965, 0.008106, -0.017140]
         ,[0.028630, -0.003180, 0.006726]
-
         ,[-0.019459, 0.890699, 0.354563]
         ,[0.351730, -0.268710, 0.458153]
         ,[-0.138013, 0.105431, -0.179775]
-
         ,[-0.035255, -0.257865, 0.712205]
         ,[0.806271, 0.140066, -0.186130]
-        ,[-0.316368, -0.054958, 0.073029]]
+        ,[-0.316368, -0.054958, 0.073029]])
  
         self.eig = np.array([0.0003967267, 0.0003909715, 5.5175184e-005, 4.4395569e-005, 2.8355625e-005, 1]) 
+        self.h2o_eig = np.array([0.002359142, 0.0021216157, 1])
 
         self.molecule = "h2o"
         self.input_name = "input_" + self.molecule + "/"
@@ -209,7 +208,7 @@ class effective_geometry_test(abavib_test):
             correct_effective_geometry = np.array([[-1.4215725557, 2.2811532702, 0.0055491054]
             ,[-0.135337927, 2.107000566, 0.0738738213]
             ,[-2.025218957, 3.349659217, -0.4137113479]])
-            
+            print self.effective_geometry_cart
             self.assertTrue((correct_effective_geometry - self.effective_geometry_cart < 0.5).all())
             
         if(self.molecule == "h2o2"):
@@ -314,17 +313,17 @@ class nuclear_quadrupole_test(abavib_test):
             # This might not have turned out correct
             self.assertTrue(np.allclose(self.corrected_values, self.nuc_quad, rtol=0.01, atol= 0.0001))
             
-class molecular_quadrupole_test(abavib_test): 
+class molecular_quadrupole_test(abavib_test): #Switched the eig, BEWARE!!!
     def setUp(self):
         super(molecular_quadrupole_test, self).setUp()
         mol_quad_deriv, self.prop_type = ri.read_mol_quad(self.input_name + "MOLQUAD", self.n_nm)
         self.uncorrected_values, self.corrections, self.corrected_values = ri.read_DALTON_values_3d_reduced(self.input_name + "MOLQUAD")
-        self.mol_quad_correction, self.mol_quad = av.get_3D_property(self.prop_type, mol_quad_deriv, self.uncorrected_values, self.n_nm, self.eig, True)
+        self.mol_quad_correction, self.mol_quad = av.get_3D_property(self.prop_type, mol_quad_deriv, self.uncorrected_values, self.n_nm, self.h2o_eig, True)
         
     def test_molecular_quadrupole_corrections(self):
         
         if(self.molecule == "h2o"):
-            self.assertTrue((False))
+            self.assertTrue(np.allclose(self.corrections, self.mol_quad_correction, rtol=0.02, atol=0.0003))
             
         elif(self.molecule == "h2o2"):
             self.assertTrue(np.allclose(self.corrections, self.mol_quad_correction, rtol=0.02, atol=0.0003)) 
@@ -332,7 +331,7 @@ class molecular_quadrupole_test(abavib_test):
     def test_molecular_quadrupole_values(self):
         
         if(self.molecule == "h2o"):
-            self.assertTrue((False))
+            self.assertTrue(np.allclose(self.corrected_values, self.mol_quad, rtol=0.02, atol=0.0003))
             
         elif(self.molecule == "h2o2"):
             self.assertTrue(np.allclose(self.corrected_values, self.mol_quad, rtol=0.02, atol=0.0003)) 
