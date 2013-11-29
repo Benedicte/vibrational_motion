@@ -197,7 +197,7 @@ class dipole_test(abavib_test):
         super(dipole_test, self).setUp()
         dipole_derivative = ri.read_2d_input(self.input_name + "MAGNET")
         self.uncorrected_values, self.corrections, self.corrected_values = ri.read_DALTON_values_2d(self.input_name + "MAGNET")
-        self.dipole_moment_diff, self.dipole_moment_corrected = av.get_dipole_moment(dipole_derivative, self.n_nm, self.eig, self.uncorrected_values, False)
+        self.dipole_moment_diff, self.dipole_moment_corrected = av.get_dipole_moment(dipole_derivative, self.n_nm, EVAL, self.uncorrected_values, False)
         
     def test_dipole_corrections(self):
         
@@ -206,8 +206,6 @@ class dipole_test(abavib_test):
             self.assertTrue(np.allclose(dipole_corrections_correct, self.dipole_moment_diff, rtol=0.05, atol=0.0005))
             
         elif(self.molecule == "h2o2"):
-            print self.corrections
-            print self.dipole_moment_diff
             self.assertTrue(np.allclose(self.corrections, self.dipole_moment_diff, rtol=0.05, atol=0.0005))
         
     def test_dipole_moment(self):
@@ -217,8 +215,7 @@ class dipole_test(abavib_test):
             self.assertTrue(np.allclose(dipole_moment_correct, self.dipole_moment_corrected, rtol=0.01, atol=0))
             
         elif(self.molecule == "h2o2"):
-            dipole_moment_correct = np.array([0.00025464,-0.00020485,0.97278737])
-            self.assertTrue(np.allclose(dipole_moment_correct, self.dipole_moment_corrected, rtol=0.01, atol=0))
+            self.assertTrue(np.allclose(self.corrected_values, self.dipole_moment_corrected, rtol=0.01, atol=0))
 
 class shield_test(abavib_test): 
     def setUp(self):
