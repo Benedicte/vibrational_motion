@@ -586,4 +586,53 @@ def read_DALTON_values_3d_full(filename):
             
     return uncorrected_values, corrections, corrected_values   
     
+def read_cubic_force_field(filename, n_cord):
+    """Imports the quartic force field from DALTON"""
+    
+    f = open(filename, 'r')
+    cubic_force_field = zeros((n_cord, n_cord, n_cord))
+    dummy = []
+    
+    finished = 0
+    while (finished == 0):
+        cur_line = f.readline()
+        if re.search('Anharmonic force constants',cur_line):
+            finished = 1
+
+    for D3 in range(n_cord):
+        
+        dummy = f.readline()
+        dummy = f.readline()
+        dummy = f.readline()
+        
+        if(D3 != 0):
+            dummy = f.readline()
+            dummy = f.readline()
+            dummy = f.readline()
+        
+        for D2 in range(n_cord):
+            mline = f.readline()
+            mline = mline.split()
+            for D1 in range(5):
+                cubic_force_field[D3][D2][D1] = mline[D1 + 1]
+        
+        dummy = f.readline()
+        dummy = f.readline()
+            
+        for D2 in range(n_cord):
+            mline = f.readline()
+            mline = mline.split()
+            for D1 in range(5):
+                cubic_force_field[D3][D2][D1 + 5] = mline[D1 + 1]
+                
+        dummy = f.readline()
+        dummy = f.readline()
+            
+        for D2 in range(n_cord):
+            mline = f.readline()
+            mline = mline.split()
+            for D1 in range(2):
+                cubic_force_field[D3][D2][D1 + 10] = mline[D1 + 1]
+    f.close()
+    return cubic_force_field
     

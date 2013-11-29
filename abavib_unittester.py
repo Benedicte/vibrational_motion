@@ -18,6 +18,19 @@ correct_big_EVEC = np.array([[-0.00131353,-0.00001741,0.00029587,-0.00016271,0.0
 ,[0.00155876,0.01350575,-0.01295232,0.01045877,-0.0058313,-0.00318957,-0.00129009,0.00147743,0.00397887,0.00301146,-0.0030557,-0.00027397]
 ,[-0.00430002,0.00883742,-0.0049825,-0.00945915,0.01610197,0.00043797,-0.00107585,-0.00085612,-0.00003714,0.00621373,0.00002214,0.00578462]])
 
+correct_EVEC = np.array([[-0.00131353,-0.00001741,0.00029587,-0.00016271,0.00000038,0.00006501]
+,[0.00007785,-0.00060863,-0.00084065,-0.00064259,-0.00032658,0.00406074]
+,[-0.00018153,0.00151054,0.00052282,-0.000208,-0.00088988,-0.00002127]
+,[0.00116367,0.00047638,-0.00027149,-0.00042556,0.00006439,-0.00006238]
+,[0.00000617,-0.0007995,0.00059862,-0.0006688,0.00040987,-0.00405949]
+,[0.00036161,-0.00151616,0.00016393,-0.00002019,-0.00098291,-0.00002758]
+,[0.01633121,-0.00137943,0.00208677,0.00294594,0.00196957,0.00042724]
+,[-0.00289218,0.00884232,0.01679361,0.01035385,0.00450935,0.00316981]
+,[0.00144209,-0.00874834,-0.00591666,0.01308062,0.01362057,0.00033726]
+,[-0.01395275,-0.00590483,-0.00247371,0.00639033,-0.0029974,-0.00046896]
+,[0.00155876,0.01350575,-0.01295232,0.01045877,-0.0058313,-0.00318957]
+,[-0.00430002,0.00883742,-0.0049825,-0.00945915,0.01610197,0.00043797]])
+
 #This one should work, check out vs. Master, seems it doesn not. 
 EVAL = np.array([0.0003967267, 0.0003909715, 5.5175184e-005, 4.4395569e-005, 2.8355625e-005, 1])       
 h2oEVAL = np.array([]) 
@@ -36,7 +49,7 @@ class abavib_test(unittest.TestCase):
         self.molecule = "h2o2"
         self.input_name = "input_" + self.molecule + "/"
         self.mol_name = self.input_name + 'MOLECULE.INP'
-        self.cff_name = self.input_name + 'cubic_force_field'
+        self.cff_name = self.input_name + 'cubic'
         self.coordinates, self.masses,  self.num_atoms_list \
             ,self.charge_list, self.n_atoms = av.read_molecule(self.mol_name)
         self.n_coordinates = self.n_atoms * 3  
@@ -49,11 +62,11 @@ class abavib_test(unittest.TestCase):
         self.eig, self.eigvec, self.freq, self.eigvec_full = \
             av.fundamental_freq(self.hessian, self.num_atoms_list, \
             self.charge_list, self.coordinates, self.n_atoms)
-        self.cubic_force_field = av.read_cubic_force_field(self.cff_name,\
+        self.cubic_force_field = ri.read_cubic_force_field(self.cff_name,\
          self.n_coordinates) 
         self.cff_norm, self.cff_norm_reduced = av.to_normal_coordinates_3D(self.cubic_force_field, correct_big_EVEC, self.n_atoms)
         effective_geometry_norm = av.effective_geometry(self.cff_norm_reduced, self.freq, self.n_atoms)
-        self.effective_geometry_cart = av.to_cartessian_coordinates(effective_geometry_norm, self.n_atoms, self.eigvec)
+        self.effective_geometry_cart = av.to_cartessian_coordinates(effective_geometry_norm, self.n_atoms, correct_EVEC)
         
 class read_molecule_test(abavib_test):        
     def test_coordinates(self):
@@ -135,9 +148,33 @@ class read_hessian_test(abavib_test):
         self.assertTrue(self.hessian.shape == (self.n_coordinates, self.n_coordinates))
  
 class frequency_test(abavib_test):
-    def test_eigenvalues(self):
-        correct_eigenvalues = np.array([0.0003967267, 0.0003909715, 5.5175184e-005, 4.4395569e-005, 2.8355625e-005, 1])
-        self.assertTrue((correct_eigenvalues - self.eig < 0.05).all())
+    def test_frequencies(self):
+        correct_frequency = np.array([0.0570, 0.0435, 0.0413, 0.0343, 0.0294, 0.0168, 0,0,0,0,0,0])
+        self.assertTrue(np.allclose(correct_frequency, self.freq, rtol=0.02, atol=0.0003)) 
+        
+    def test_eigvec(self):
+        correct_eigvec = np.array([[ -0.00131353, -0.00001741, 0.00029587, -0.00016271, 0.00000038, 0.00006501]
+                        ,[ 0.00007785, -0.00060863, -0.00084065, -0.00064259, -0.00032658, 0.00406074]
+                        ,[ -0.00018153, 0.00151054, 0.00052282, -0.000208, -0.00088988, -0.00002127]
+                        ,[ 0.00116367, 0.00047638, -0.00027149, -0.00042556, 0.00006439, -0.00006238]
+                        ,[ 0.00000617, -0.0007995, 0.00059862, -0.0006688, 0.00040987, -0.00405949]
+                        ,[ 0.00036161, -0.00151616, 0.00016393, -0.00002019, -0.00098291, -0.00002758]
+                        ,[ 0.01633121, -0.00137943, 0.00208677, 0.00294594, 0.00196957, 0.00042724]
+                        ,[ -0.00289218, 0.00884232, 0.01679361, 0.01035385, 0.00450935, 0.00316981]
+                        ,[ 0.00144209, -0.00874834, -0.00591666, 0.01308062, 0.01362057, 0.00033726]
+                        ,[ -0.01395275, -0.00590483, -0.00247371, 0.00639033, -0.0029974, -0.00046896]
+                        ,[ 0.00155876, 0.01350575, -0.01295232, 0.01045877, -0.0058313, -0.00318957]
+                        ,[ -0.00430002, 0.00883742, -0.0049825, -0.00945915, 0.01610197, 0.00043797]])
+                        
+        vfunc = np.vectorize(np.absolute)
+        correct_eigvec = vfunc(correct_eigvec)
+        self.eigvec = vfunc(self.eigvec)
+        
+        self.assertTrue(np.allclose(correct_eigvec, self.eigvec, rtol=0.02, atol=0.0003))
+  
+class cubic_force_field_test(abavib_test):
+    def test_cff(self):
+        self.assertTrue(True)
         
 class effective_geometry_test(abavib_test):
     def test_effective_geometry(self):
@@ -145,16 +182,18 @@ class effective_geometry_test(abavib_test):
             correct_effective_geometry = np.array([[-1.4215725557, 2.2811532702, 0.0055491054]
             ,[-0.135337927, 2.107000566, 0.0738738213]
             ,[-2.025218957, 3.349659217, -0.4137113479]])
+            
             self.assertTrue((correct_effective_geometry - self.effective_geometry_cart < 0.5).all())
             
         if(self.molecule == "h2o2"):
-            correct_effective_geometry = np.array([[-0.00012007, 1.40873621, -0.10043595]
-            ,[0.00020733, -1.40863870, -0.10057873]
-            ,[0.69590721, 1.73453487, 1.59345500]
-            ,[-0.69729204, -1.73608239, 1.59679826]])
-            self.assertTrue((correct_effective_geometry - self.effective_geometry_cart < 0.5).all())
-        
-        self.assertTrue((correct_effective_geometry - self.effective_geometry_cart < 0.5).all())
+            correct_effective_geometry = np.array([[-0.0001200721, 0.0008903518, -0.0015799527]
+            ,[0.0002073285, -0.0007928443, -0.0017227255]
+            ,[0.0050923237, 0.0083859610, 0.0245363238]
+            ,[-0.0064771454, -0.0099334764, 0.0278795793]])
+            
+            print self.effective_geometry_cart
+            
+            self.assertTrue(np.allclose(correct_effective_geometry, self.effective_geometry_cart, rtol=0.03, atol=0.0003))
         
 class dipole_test(abavib_test): 
     def setUp(self):
