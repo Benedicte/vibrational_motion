@@ -34,6 +34,18 @@ class abavib_test(unittest.TestCase):
         ,[-0.01395275,-0.00590483,-0.00247371,0.00639033,-0.0029974,-0.00046896]
         ,[0.00155876,0.01350575,-0.01295232,0.01045877,-0.0058313,-0.00318957]
         ,[-0.00430002,0.00883742,-0.0049825,-0.00945915,0.01610197,0.00043797]])
+        
+        self.h2o.eigvec = np.array[[0.003447, -0.039874, -0.067216]
+        ,[-0.072965, 0.008106, -0.017140]
+        ,[0.028630, -0.003180, 0.006726]
+
+        ,[-0.019459, 0.890699, 0.354563]
+        ,[0.351730, -0.268710, 0.458153]
+        ,[-0.138013, 0.105431, -0.179775]
+
+        ,[-0.035255, -0.257865, 0.712205]
+        ,[0.806271, 0.140066, -0.186130]
+        ,[-0.316368, -0.054958, 0.073029]]
  
         self.eig = np.array([0.0003967267, 0.0003909715, 5.5175184e-005, 4.4395569e-005, 2.8355625e-005, 1]) 
 
@@ -139,12 +151,16 @@ class read_hessian_test(abavib_test):
         self.assertTrue(self.hessian.shape == (self.n_coordinates, self.n_coordinates))
  
 class frequency_test(abavib_test):
-    
+
     def test_frequencies(self):
         if(self.molecule == "h2o2"):    
             correct_frequency = np.array([0.0570, 0.0435, 0.0413, 0.0343, 0.0294, 0.0168, 0,0,0,0,0,0])
             self.assertTrue(np.allclose(correct_frequency, self.freq, rtol=0.02, atol=0.0003)) 
         
+        if(self.molecule == "h2o"):    
+            correct_frequency = np.array([0.1122, 0.0633, 0.0561, 0,0,0,0,0,0])
+            self.assertTrue(np.allclose(correct_frequency, self.freq, rtol=0.02, atol=0.0003))        
+    
     def test_eigvec(self):
         if(self.molecule == "h2o2"):
             correct_eigvec = np.array([[ -0.00131353, -0.00001741, 0.00029587, -0.00016271, 0.00000038, 0.00006501]
@@ -165,7 +181,24 @@ class frequency_test(abavib_test):
             self.eigvec = vfunc(self.eigvec)
         
             self.assertTrue(np.allclose(correct_eigvec, self.eigvec, rtol=0.02, atol=0.0003))
-  
+            
+        if(self.molecule == "h2o"):
+            
+            h2o_eigvec = np.array([[0.003447, -0.039874, -0.067216]
+            ,[-0.072965, 0.008106, -0.017140]
+            ,[0.028630, -0.003180, 0.006726]
+
+            ,[-0.019459, 0.890699, 0.354563]
+            ,[0.351730, -0.268710, 0.458153]
+            ,[-0.138013, 0.105431, -0.179775]
+
+            ,[-0.035255, -0.257865, 0.712205]
+            ,[0.806271, 0.140066, -0.186130]
+            ,[-0.316368, -0.054958, 0.073029]])
+            print self.eig
+        
+            self.assertTrue(np.allclose(h2o_eigvec, self.eigvec, rtol=0.02, atol=0.0003))
+            
 class cubic_force_field_test(abavib_test):
     def test_cff(self):
         self.assertTrue(True)
@@ -356,7 +389,9 @@ class magnetizability_test(abavib_test):
     def test_magnetizability_corrections(self):
         
         if(self.molecule == "h2o"):
-            self.assertTrue(np.allclose(self.values_correction,self.magnet_correction, rtol=0.01, atol=0))
+            self.assertTrue(np.allclose(self.values_correction,self.magnet_correction, rtol=0.03, atol=0.0003))
+            print self.values_correction
+            print self.magnet_correction
             
         elif(self.molecule == "h2o2"):
             self.assertTrue(np.allclose(self.values_correction,self.magnet_correction, rtol=0.01, atol=0))
