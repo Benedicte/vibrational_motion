@@ -79,9 +79,9 @@ class abavib_test(unittest.TestCase):
         hessian_t = self.hessian.transpose()
         hessian_temp = np.add(self.hessian, hessian_t) 
         self.hessian = np.subtract(hessian_temp , np.diag(self.hessian.diagonal()))
-        #self.eig, self.eigvec, self.freq, self.eigvec_full = \
-            #av.fundamental_freq(self.hessian, self.num_atoms_list, \
-            #self.charge_list, self.coordinates, self.n_atoms)
+        self.eig1, self.eigvec1, self.freq, self.eigvec_full1 = \
+            av.fundamental_freq(self.hessian, self.num_atoms_list, \
+            self.charge_list, self.coordinates, self.n_atoms)#Check out the 1s i made
         #self.cubic_force_field = av.read_cubic_force_field(self.cff_name,#Remember to switch to ri. for h2o2\  
          #self.n_coordinates) 
         #self.cff_norm, self.cff_norm_reduced = av.to_normal_coordinates_3D(self.cubic_force_field, self.eigvec_full, self.n_atoms)
@@ -175,9 +175,9 @@ class frequency_test(abavib_test):
             self.assertTrue(np.allclose(correct_frequency, self.freq, rtol=0.02, atol=0.0003)) 
 
         if(self.molecule == "h2o"):    
-            correct_frequency = np.array([0.048571, 0.046061, 0.0561, 0,0,0,0,0,0])
-            self.assertTrue(np.allclose(correct_frequency, self.freq, rtol=0.02, atol=0.0003)) 
-            print self.freq       
+            correct_frequency = np.array([0.037739, 0.045369, 0.025234, 0,0,0,0,0,0])
+
+            self.assertTrue(np.allclose(correct_frequency, self.freq, rtol=0.02, atol=0.0003))       
     
     def test_eigvec(self):
         if(self.molecule == "h2o2"):
