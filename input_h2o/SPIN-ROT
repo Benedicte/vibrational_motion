@@ -90,13 +90,13 @@
   Hans Agren,               KTH Stockholm,                Sweden      (SIRIUS module, MC-SCRF solvation model)
  --------------------------------------------------------------------------------
 
-     Date and time (Linux)  : Thu Nov  7 18:15:01 2013
-     Host name              : c18-14.local                            
+     Date and time (Linux)  : Fri Nov 29 19:43:37 2013
+     Host name              : c2-6.local                              
 
  * Work memory size             :   100000000 =  762.94 megabytes.
 
  * Directories for basis set searches:
-   1) /global/work/benedico/1888014.stallo-adm.uit.no/basis/
+   1) /global/work/benedico/1904876.stallo-adm.uit.no/basis/
 
 
 Compilation information
@@ -231,7 +231,7 @@ H    -2.02521896  3.34965922 -0.41371135
   Number of symmetry independent centers:    1
   Number of basis sets to read;    2
   Basis set file used for this atomic type with Z =   8 :
-     "/global/work/benedico/1888014.stallo-adm.uit.no/basis/STO-3G"
+     "/global/work/benedico/1904876.stallo-adm.uit.no/basis/STO-3G"
 
   Atomic type no.    2
   --------------------
@@ -239,7 +239,7 @@ H    -2.02521896  3.34965922 -0.41371135
   Number of symmetry independent centers:    2
   Number of basis sets to read;    2
   Basis set file used for this atomic type with Z =   1 :
-     "/global/work/benedico/1888014.stallo-adm.uit.no/basis/STO-3G"
+     "/global/work/benedico/1904876.stallo-adm.uit.no/basis/STO-3G"
 
 
                          SYMGRP: Point group information
@@ -367,7 +367,7 @@ WARNING: but "Angstrom" was not specified in .mol file
      ************************************************************************
 
  >>>> Total CPU  time used in HERMIT:   0.01 seconds
- >>>> Total wall time used in HERMIT:   0.02 seconds
+ >>>> Total wall time used in HERMIT:   0.52 seconds
 
 
                         .----------------------------------.
@@ -400,8 +400,8 @@ WARNING: but "Angstrom" was not specified in .mol file
  **********************************************************************
 
  
-     Date and time (Linux)  : Thu Nov  7 18:15:01 2013
-     Host name              : c18-14.local                            
+     Date and time (Linux)  : Fri Nov 29 19:43:39 2013
+     Host name              : c2-6.local                              
 
  Title lines from ".mol" input file:
      Water                                                                   
@@ -486,35 +486,30 @@ WARNING: but "Angstrom" was not specified in .mol file
 @      MULPOP O      -0.76; H       0.38; H       0.38; 
  -----------------------------------------------------------------------------
    7  Screening settings (-IFTHRS, DIFDEN)  -14    F
-   7    -74.5756429678        2.78918D-08   -1.42D-14    7
+   7    -74.5756429678        2.78897D-08    1.42D-14    7
       Virial theorem: -V/T =      1.985951
 @      MULPOP O      -0.76; H       0.38; H       0.38; 
  -----------------------------------------------------------------------------
    8  Screening settings (-IFTHRS, DIFDEN)  -14    T
-   8    -74.5756429678        1.58800D-09    4.26D-14    8
+   8    -74.5756429678        1.65579D-09   -1.42D-14    8
       Virial theorem: -V/T =      1.985951
 @      MULPOP O      -0.76; H       0.38; H       0.38; 
  -----------------------------------------------------------------------------
    9  Screening settings (-IFTHRS, DIFDEN)  -14    T
-   9    -74.5756429678        3.46847D-09    0.00D+00    9
+   9    -74.5756429678        4.79361D-10   -2.84D-14    9
       Virial theorem: -V/T =      1.985951
 @      MULPOP O      -0.76; H       0.38; H       0.38; 
  -----------------------------------------------------------------------------
   10  Screening settings (-IFTHRS, DIFDEN)  -14    T
-  10    -74.5756429678        5.90560D-10   -1.42D-14   10
+  10    -74.5756429678        1.47406D-10    2.84D-14   10
       Virial theorem: -V/T =      1.985951
 @      MULPOP O      -0.76; H       0.38; H       0.38; 
  -----------------------------------------------------------------------------
   11  Screening settings (-IFTHRS, DIFDEN)  -14    T
-  11    -74.5756429678        1.45313D-10    1.42D-14   10
-      Virial theorem: -V/T =      1.985951
-@      MULPOP O      -0.76; H       0.38; H       0.38; 
- -----------------------------------------------------------------------------
-  12  Screening settings (-IFTHRS, DIFDEN)  -14    T
-  12    -74.5756429678        1.87566D-13   -1.42D-14   10
+  11    -74.5756429678        2.81482D-11   -2.84D-14   10
 
- *** DIIS converged in  12 iterations !
-@    Converged SCF energy, gradient:    -74.575642967811    1.88D-13
+ *** DIIS converged in  11 iterations !
+@    Converged SCF energy, gradient:    -74.575642967811    2.81D-11
    - total time used in SIRFCK :              0.00 seconds
 
 
@@ -537,7 +532,7 @@ WARNING: but "Angstrom" was not specified in .mol file
 
  >>> Writing SIRIFC interface file <<<
 
- >>>> CPU and wall time for SCF :       0.095       0.301
+ >>>> CPU and wall time for SCF :       1.390       2.748
 
 
                        .-----------------------------------.
@@ -553,11 +548,11 @@ WARNING: but "Angstrom" was not specified in .mol file
 @    Nuclear repulsion:            12.755832880530
 @    Electronic energy:           -87.331475848341
 
-@    Final gradient norm:           0.000000000000
+@    Final gradient norm:           0.000000000028
 
  
-     Date and time (Linux)  : Thu Nov  7 18:15:01 2013
-     Host name              : c18-14.local                            
+     Date and time (Linux)  : Fri Nov 29 19:43:42 2013
+     Host name              : c2-6.local                              
 
  (Only coefficients >0.0100 are printed.)
 
@@ -570,17 +565,17 @@ WARNING: but "Angstrom" was not specified in .mol file
    3 O   :2px   -0.0034  -0.1084  -0.5319  -0.5251  -0.0000   0.3469  -1.0728
    4 O   :2py   -0.0046  -0.1441   0.3503  -0.6913  -0.3653   0.4506   0.7092
    5 O   :2pz    0.0018   0.0565  -0.1374   0.2713  -0.9309  -0.1768  -0.2783
-   6 H   :1s     0.0100  -0.1548  -0.3752  -0.1157  -0.0000  -1.1046   1.2532
+   6 H   :1s     0.0100  -0.1548  -0.3752  -0.1157   0.0000  -1.1046   1.2532
    7 H   :1s     0.0100  -0.1553   0.3745  -0.1154   0.0000  -1.0988  -1.2638
 
 
 
- >>>> Total CPU  time used in SIRIUS :      0.10 seconds
- >>>> Total wall time used in SIRIUS :      0.34 seconds
+ >>>> Total CPU  time used in SIRIUS :      1.40 seconds
+ >>>> Total wall time used in SIRIUS :      3.31 seconds
 
  
-     Date and time (Linux)  : Thu Nov  7 18:15:01 2013
-     Host name              : c18-14.local                            
+     Date and time (Linux)  : Fri Nov 29 19:43:42 2013
+     Host name              : c2-6.local                              
 
 
                      .---------------------------------------.
@@ -668,41 +663,20 @@ Maximum number of iterations reset in numerical differentiation to    19
 
 
  
-     Date and time (Linux)  : Thu Nov  7 18:15:01 2013
-     Host name              : c18-14.local                            
+     Date and time (Linux)  : Fri Nov 29 19:43:42 2013
+     Host name              : c2-6.local                              
 
  (ORTBVC) new orbital b-vector no.  2
  is removed because of linear dependence;
- norm of vector after Gram-Schmidt's orthogonalization 1.88728D-16
+ norm of vector after Gram-Schmidt's orthogonalization 1.99254D-16
 
  (ORTBVC) new orbital b-vector no.  3
  is removed because of linear dependence;
- norm of vector after Gram-Schmidt's orthogonalization 1.81842D-16
+ norm of vector after Gram-Schmidt's orthogonalization 1.60312D-16
 
  (ORTBVC) NBOSIM reduced from  3 to  1
 
-
-            +---------------------------------------------------------+
-            ! Gradient elements calculated directly and from symmetry !
-            +---------------------------------------------------------+
-
-
-
-        Coordinate    Direct calc.     Tra.-rot. sym.   Difference
-        ----------------------------------------------------------
-
-        O    x       -0.4815641596    -0.4815641596     0.0000000000
-        O    y       -0.6007330102    -0.6011273871     0.0003943768
-        O    z        0.2357221286     0.2358768759    -0.0001547474
-        H    y        0.0545384116     0.0549327884    -0.0003943768
-        H    z       -0.0214049252    -0.0215596725     0.0001547474
-        H    y        0.5461945986     0.5461945986    -0.0000000000
-
-
-
- >>> WARNING from TRAROT:
-
- Largest deviation from tra-rot symmetry is in gradient element  2:  3.94E-04
+ Largest deviation from tra-rot symmetry is in gradient element  2:  4.55E-11
 
 
    ***************************************************************************
@@ -711,10 +685,8 @@ Maximum number of iterations reset in numerical differentiation to    19
 
 
  
-     Date and time (Linux)  : Thu Nov  7 18:15:02 2013
-     Host name              : c18-14.local                            
-
- WARNING: warnings have been issued, please check the output above !
+     Date and time (Linux)  : Fri Nov 29 19:43:48 2013
+     Host name              : c2-6.local                              
 
 
                              Molecular geometry (au)
@@ -753,9 +725,9 @@ Maximum number of iterations reset in numerical differentiation to    19
                              Molecular gradient (au)
                              -----------------------
 
- O         -0.4815641596           -0.6007330102            0.2357221286
- H          0.6225411284            0.0545384116           -0.0214049252
- H         -0.1409769688            0.5461945986           -0.2143172034
+ O          0.5036717446            0.6793556558           -0.2665726125
+ H         -0.9268906618            0.1077008781           -0.0422528691
+ H          0.4232189171           -0.7870565340            0.3088254815
 
 
 
@@ -766,24 +738,24 @@ Maximum number of iterations reset in numerical differentiation to    19
 
            O    x      O    y      O    z      H    x      H    y      H    z
 
- O    x    9.627489
- O    y   -0.533065   31.994202
- O    z    0.209102  -12.018036    6.082258
+ O    x    4.072279
+ O    y   -2.425812    1.768498
+ O    z    0.951807   -1.284331   -1.000751
 
- H    x   -6.190838    0.739190   -0.290004    6.403808
- H    y   -0.884402  -10.658728    3.911620   -0.975484    4.875220
- H    z    0.347069    3.911129   -2.225976    0.382719   -1.697130    1.216142
+ H    x   -3.723701    0.734897   -0.288327    3.741135
+ H    y    0.561417    0.589927    0.061677   -0.646325   -0.571314
+ H    z   -0.220256    0.061676    0.722925    0.253573   -0.061903   -0.704800
 
- H    x   -3.436651   -0.206125    0.080902   -0.212970    1.859886   -0.729788
- H    y    1.417468  -21.335475    8.107913    0.236293    5.783108   -2.215018
- H    z   -0.556171    8.106907   -3.856281   -0.092715   -2.214012    1.009834
+ H    x   -0.348578    1.690915   -0.663480   -0.017435    0.084907   -0.033316
+ H    y    1.864395   -2.358426    1.222654   -0.088572   -0.018614    0.000227
+ H    z   -0.731551    1.222656    0.277826    0.034754    0.000226   -0.018125
 
 
            H    x      H    y      H    z
 
- H    x    3.649621
- H    y   -1.653761   15.552366
- H    z    0.648886   -5.892894    2.846447
+ H    x    0.366013
+ H    y   -1.775823    2.377039
+ H    z    0.696797   -1.222882   -0.259701
 
 
 
@@ -900,10 +872,10 @@ WARNING: but "Angstrom" was not specified in .mol file
                        Natural abundance:  99.730 %
 
  Center-of-mass coordinates (a.u.):   -1.383377    2.331199   -0.014088
-  Norm of projected gradient     1.184683
+  Norm of projected gradient     1.597726
 
- Largest deviation from orthonormality of OMOs:0.399680E-14
- - found for element    6   6
+ Largest deviation from orthonormality of OMOs:0.102141E-13
+ - found for element    1   1
 
 
        ********************************************************************
@@ -918,10 +890,10 @@ WARNING: but "Angstrom" was not specified in .mol file
 
 
                Column   1     Column   2     Column   3     Column   4     Column   5
-       1      -0.48156416    -0.60073301     0.23572213     0.62254113     0.05453841
+       1       0.50367174     0.67935566    -0.26657261    -0.92689066     0.10770088
 
                Column   6     Column   7     Column   8     Column   9
-       1      -0.02140493    -0.14097697     0.54619460    -0.21431720
+       1      -0.04225287     0.42321892    -0.78705653     0.30882548
     ==== End of matrix output ====
 
 
@@ -930,26 +902,26 @@ WARNING: but "Angstrom" was not specified in .mol file
 
 
                Column   1     Column   2     Column   3     Column   4     Column   5
-       1       9.50414024    -0.44913602     0.17615928    -6.26721975    -1.10911544
-       2      -0.44913602    31.75517859   -12.46023737     0.79343542   -10.41068925
-       3       0.17615928   -12.46023737     4.88920303    -0.31128250     4.08500216
-       4      -6.26721975     0.79343542    -0.31128250     6.47135699    -0.96518276
-       5      -1.10911544   -10.41068925     4.08500216    -0.96518276     4.58698940
-       6       0.43524903     4.08498719    -1.60288921     0.37867189    -1.79985610
-       7      -3.23692050    -0.34429941     0.13512322    -0.20413725     2.07429820
-       8       1.55825146   -21.34448934     8.37523521     0.17174734     5.82369985
-       9      -0.61140831     8.37525017    -3.28631381    -0.06738939    -2.28514606
+       1       4.20341627    -2.51102191     0.98525310    -3.63052155     0.81269298
+       2      -2.51102191     2.02461346    -0.79440726     0.67567520     0.32872841
+       3       0.98525310    -0.79440726     0.31170537    -0.26509595    -0.12899434
+       4      -3.63052155     0.67567520    -0.26509595     3.70725733    -0.60082640
+       5       0.81269298     0.32872841    -0.12899434    -0.60082640    -0.16941854
+       6      -0.31885960    -0.12899326     0.05061747     0.23572583     0.06648194
+       7      -0.57289472     1.83534670    -0.72015715    -0.07673578    -0.21186658
+       8       1.69832893    -2.35334187     0.92340159    -0.07484880    -0.15930987
+       9      -0.66639350     0.92340052    -0.36232284     0.02937012     0.06251240
 
                Column   6     Column   7     Column   8     Column   9
-       1       0.43524903    -3.23692050     1.55825146    -0.61140831
-       2       4.08498719    -0.34429941   -21.34448934     8.37525017
-       3      -1.60288921     0.13512322     8.37523521    -3.28631381
-       4       0.37867189    -0.20413725     0.17174734    -0.06738939
-       5      -1.79985610     2.07429820     5.82369985    -2.28514606
-       6       0.70623272    -0.81392093    -2.28513109     0.89665650
-       7      -0.81392093     3.44105774    -1.72999880     0.67879771
-       8      -2.28513109    -1.72999880    15.52078948    -6.09010412
-       9       0.89665650     0.67879771    -6.09010412     2.38965732
+       1      -0.31885960    -0.57289472     1.69832893    -0.66639350
+       2      -0.12899326     1.83534670    -2.35334187     0.92340052
+       3       0.05061747    -0.72015715     0.92340159    -0.36232284
+       4       0.23572583    -0.07673578    -0.07484880     0.02937012
+       5       0.06648194    -0.21186658    -0.15930987     0.06251240
+       6      -0.02608834     0.08313377     0.06251132    -0.02452913
+       7       0.08313377     0.64963051    -1.62348013     0.63702338
+       8       0.06251132    -1.62348013     2.51265174    -0.98591291
+       9      -0.02452913     0.63702338    -0.98591291     0.38685197
     ==== End of matrix output ====
 
 
@@ -973,12 +945,12 @@ WARNING: but "Angstrom" was not specified in .mol file
                   Bx             By             Bz
 
   H      x   181.43980502   -51.45486157    -0.00000023
-  H      y  -278.14095628   158.33176139    -0.00000248
+  H      y  -278.14095627   158.33176139    -0.00000248
   H      z    -0.00000083     0.00000024   160.82244500
                   Bx             By             Bz
 
   H      x   183.95682269    52.13925312     0.00000025
-  H      y   281.29235765   158.77808073     0.00000283
+  H      y   281.29235765   158.77808073     0.00000282
   H      z     0.00000035    -0.00000015   161.66086545
 
 
@@ -988,8 +960,8 @@ WARNING: but "Angstrom" was not specified in .mol file
 
 
 
- >>>> Total CPU  time used in ABACUS:   0.32 seconds
- >>>> Total wall time used in ABACUS:   0.44 seconds
+ >>>> Total CPU  time used in ABACUS:   0.35 seconds
+ >>>> Total wall time used in ABACUS:   6.55 seconds
 
 
                    .-------------------------------------------.
@@ -997,7 +969,7 @@ WARNING: but "Angstrom" was not specified in .mol file
                    `-------------------------------------------'
 
 
-@  Geometry walk step no.   0:  Molecular energy =    -74.575643   Molecular gradient =  1.184683
+@  Geometry walk step no.   0:  Molecular energy =    -74.575643   Molecular gradient =  1.597726
 
 
      @@>>>>>>>>>> Geometry walk iteration number:    1 <<<<<<<<<<
@@ -1016,7 +988,7 @@ WARNING: but "Angstrom" was not specified in .mol file
                      `---------------------------------------'
 
  >>>> Total CPU  time used in HERMIT:   0.01 seconds
- >>>> Total wall time used in HERMIT:   0.01 seconds
+ >>>> Total wall time used in HERMIT:   0.46 seconds
 
 
                         .----------------------------------.
@@ -1044,65 +1016,55 @@ WARNING: but "Angstrom" was not specified in .mol file
  Iter      Total energy        Error norm    Delta(E)  DIIS dim.
  -----------------------------------------------------------------------------
    1  Screening settings (-IFTHRS, DIFDEN)  -14    T
-   1    -74.6079311326        3.66584D-01   -3.23D-02    1
-      Virial theorem: -V/T =      1.986381
-@      MULPOP O      -0.75; H       0.38; H       0.37; 
+   1    -74.5724449171        4.75204D-01    3.20D-03    1
+      Virial theorem: -V/T =      1.985924
+@      MULPOP O      -0.76; H       0.40; H       0.36; 
  -----------------------------------------------------------------------------
    2  Screening settings (-IFTHRS, DIFDEN)   -7    F
-   2    -74.6096564316        2.85243D-02   -1.73D-03    2
-      Virial theorem: -V/T =      1.987212
-@      MULPOP O      -0.74; H       0.38; H       0.36; 
+   2    -74.5746280493        2.46490D-02   -2.18D-03    2
+      Virial theorem: -V/T =      1.985985
+@      MULPOP O      -0.76; H       0.39; H       0.37; 
  -----------------------------------------------------------------------------
    3  Screening settings (-IFTHRS, DIFDEN)   -7    T
-   3    -74.6097341065        7.55797D-03   -7.77D-05    3
-      Virial theorem: -V/T =      1.987179
-@      MULPOP O      -0.74; H       0.38; H       0.36; 
+   3    -74.5746564743        2.81618D-03   -2.84D-05    3
+      Virial theorem: -V/T =      1.985985
+@      MULPOP O      -0.76; H       0.39; H       0.37; 
  -----------------------------------------------------------------------------
-   4  Screening settings (-IFTHRS, DIFDEN)   -7    T
-   4    -74.6097418611        6.53580D-04   -7.75D-06    4
-      Virial theorem: -V/T =      1.987153
-@      MULPOP O      -0.74; H       0.38; H       0.36; 
+   4  Screening settings (-IFTHRS, DIFDEN)   -9    F
+   4    -74.5746571305        1.66254D-04   -6.56D-07    4
+      Virial theorem: -V/T =      1.985984
+@      MULPOP O      -0.76; H       0.39; H       0.37; 
  -----------------------------------------------------------------------------
-   5  Screening settings (-IFTHRS, DIFDEN)   -9    F
-   5    -74.6097419138        2.26617D-05   -5.28D-08    5
-      Virial theorem: -V/T =      1.987152
-@      MULPOP O      -0.74; H       0.38; H       0.36; 
+   5  Screening settings (-IFTHRS, DIFDEN)   -9    T
+   5    -74.5746571333        1.25864D-05   -2.78D-09    5
+      Virial theorem: -V/T =      1.985984
+@      MULPOP O      -0.76; H       0.39; H       0.37; 
  -----------------------------------------------------------------------------
    6  Screening settings (-IFTHRS, DIFDEN)  -11    F
-   6    -74.6097419139        3.11976D-06   -4.54D-11    6
-      Virial theorem: -V/T =      1.987152
-@      MULPOP O      -0.74; H       0.38; H       0.36; 
+   6    -74.5746571333        1.31618D-06   -1.92D-11    6
+      Virial theorem: -V/T =      1.985984
+@      MULPOP O      -0.76; H       0.39; H       0.37; 
  -----------------------------------------------------------------------------
    7  Screening settings (-IFTHRS, DIFDEN)  -14    F
-   7    -74.6097419139        1.48785D-07   -6.96D-13    7
-      Virial theorem: -V/T =      1.987152
-@      MULPOP O      -0.74; H       0.38; H       0.36; 
+   7    -74.5746571333        1.57459D-07   -2.42D-13    7
+      Virial theorem: -V/T =      1.985984
+@      MULPOP O      -0.76; H       0.39; H       0.37; 
  -----------------------------------------------------------------------------
    8  Screening settings (-IFTHRS, DIFDEN)  -14    T
-   8    -74.6097419139        2.87224D-08   -1.42D-14    8
-      Virial theorem: -V/T =      1.987152
-@      MULPOP O      -0.74; H       0.38; H       0.36; 
+   8    -74.5746571333        9.85620D-09   -1.42D-14    8
+      Virial theorem: -V/T =      1.985984
+@      MULPOP O      -0.76; H       0.39; H       0.37; 
  -----------------------------------------------------------------------------
    9  Screening settings (-IFTHRS, DIFDEN)  -14    T
-   9    -74.6097419139        1.55063D-09    2.84D-14    9
-      Virial theorem: -V/T =      1.987152
-@      MULPOP O      -0.74; H       0.38; H       0.36; 
+   9    -74.5746571333        3.67873D-10    1.42D-14    9
+      Virial theorem: -V/T =      1.985984
+@      MULPOP O      -0.76; H       0.39; H       0.37; 
  -----------------------------------------------------------------------------
   10  Screening settings (-IFTHRS, DIFDEN)  -14    T
-  10    -74.6097419139        3.98102D-10   -1.42D-14   10
-      Virial theorem: -V/T =      1.987152
-@      MULPOP O      -0.74; H       0.38; H       0.36; 
- -----------------------------------------------------------------------------
-  11  Screening settings (-IFTHRS, DIFDEN)  -14    T
-  11    -74.6097419139        3.24442D-10    0.00D+00   10
-      Virial theorem: -V/T =      1.987152
-@      MULPOP O      -0.74; H       0.38; H       0.36; 
- -----------------------------------------------------------------------------
-  12  Screening settings (-IFTHRS, DIFDEN)  -14    T
-  12    -74.6097419139        5.46849D-14   -1.42D-14   10
+  10    -74.5746571333        8.75920D-11    1.42D-14   10
 
- *** DIIS converged in  12 iterations !
-@    Converged SCF energy, gradient:    -74.609741913893    5.47D-14
+ *** DIIS converged in  10 iterations !
+@    Converged SCF energy, gradient:    -74.574657133300    8.76D-11
    - total time used in SIRFCK :              0.00 seconds
 
 
@@ -1115,13 +1077,13 @@ WARNING: but "Angstrom" was not specified in .mol file
 
  Sym       Hartree-Fock orbital energies
 
-  1    -20.23417263    -1.41674625    -0.82605433    -0.46086116    -0.42969990
-         0.86258313     1.18931848
+  1    -20.23655577    -1.42116627    -0.83721228    -0.46104561    -0.43238271
+         0.86852438     1.21390485
 
-    E(LUMO) :     0.86258313 au (symmetry 1)
-  - E(HOMO) :    -0.42969990 au (symmetry 1)
+    E(LUMO) :     0.86852438 au (symmetry 1)
+  - E(HOMO) :    -0.43238271 au (symmetry 1)
   ------------------------------------------
-    gap     :     1.29228302 au
+    gap     :     1.30090709 au
 
  >>> Writing SIRIFC interface file <<<
 
@@ -1134,13 +1096,13 @@ WARNING: but "Angstrom" was not specified in .mol file
 
 
  (SIRSTP) Close to convergence, ratio set to one.
- Energy difference; actual and predicted:   -3.40989D-02    0.00000D+00
+ Energy difference; actual and predicted:    9.85835D-04    0.00000D+00
 
 
  *** GEOMETRY WALK STEP ACCEPTED.
 
 
- >>>> CPU and wall time for SCF :       0.052       0.069
+ >>>> CPU and wall time for SCF :       1.598       2.721
 
 
                        .-----------------------------------.
@@ -1152,24 +1114,24 @@ WARNING: but "Angstrom" was not specified in .mol file
 @    Spatial symmetry:            1
 @    Total charge of molecule:    0
 
-@    Final HF energy:             -74.609741913893                 
-@    Nuclear repulsion:            12.575059179169
-@    Electronic energy:           -87.184801093061
+@    Final HF energy:             -74.574657133300                 
+@    Nuclear repulsion:            12.744413688353
+@    Electronic energy:           -87.319070821653
 
-@    Final gradient norm:           0.000000000000
-
- 
-     Date and time (Linux)  : Thu Nov  7 18:15:04 2013
-     Host name              : c18-14.local                            
-
-
-
- >>>> Total CPU  time used in SIRIUS :      0.05 seconds
- >>>> Total wall time used in SIRIUS :      0.08 seconds
+@    Final gradient norm:           0.000000000088
 
  
-     Date and time (Linux)  : Thu Nov  7 18:15:04 2013
-     Host name              : c18-14.local                            
+     Date and time (Linux)  : Fri Nov 29 19:43:53 2013
+     Host name              : c2-6.local                              
+
+
+
+ >>>> Total CPU  time used in SIRIUS :      1.60 seconds
+ >>>> Total wall time used in SIRIUS :      3.12 seconds
+
+ 
+     Date and time (Linux)  : Fri Nov 29 19:43:53 2013
+     Host name              : c2-6.local                              
 
 
                      .---------------------------------------.
@@ -1216,31 +1178,10 @@ WARNING: but "Angstrom" was not specified in .mol file
 
 
  
-     Date and time (Linux)  : Thu Nov  7 18:15:04 2013
-     Host name              : c18-14.local                            
+     Date and time (Linux)  : Fri Nov 29 19:43:53 2013
+     Host name              : c2-6.local                              
 
-
-            +---------------------------------------------------------+
-            ! Gradient elements calculated directly and from symmetry !
-            +---------------------------------------------------------+
-
-
-
-        Coordinate    Direct calc.     Tra.-rot. sym.   Difference
-        ----------------------------------------------------------
-
-        O    x       -0.2864861575    -0.2864861575     0.0000000000
-        O    y       -0.8576525221    -0.8527839719    -0.0048685502
-        O    z        0.3365318357     0.3346214931     0.0019103426
-        H    y        0.0853345691     0.0804660232     0.0048685459
-        H    z       -0.0334882108    -0.0315778682    -0.0019103426
-        H    y        0.7723179530     0.7723179487     0.0000000043
-
-
-
- >>> WARNING from TRAROT:
-
- Largest deviation from tra-rot symmetry is in gradient element  2:  4.87E-03
+ Largest deviation from tra-rot symmetry is in gradient element  6:  8.91E-11
 
 
    ***************************************************************************
@@ -1249,13 +1190,11 @@ WARNING: but "Angstrom" was not specified in .mol file
 
 
  
-     Date and time (Linux)  : Thu Nov  7 18:15:04 2013
-     Host name              : c18-14.local                            
+     Date and time (Linux)  : Fri Nov 29 19:43:57 2013
+     Host name              : c2-6.local                              
 
- WARNING: warnings have been issued, please check the output above !
-
- Largest deviation from orthonormality of OMOs:0.466294E-14
- - found for element    3   3
+ Largest deviation from orthonormality of OMOs:0.117684E-13
+ - found for element    1   1
 
 
        ********************************************************************
@@ -1272,8 +1211,8 @@ WARNING: but "Angstrom" was not specified in .mol file
 
 
 
- >>>> Total CPU  time used in ABACUS:   0.26 seconds
- >>>> Total wall time used in ABACUS:   0.33 seconds
+ >>>> Total CPU  time used in ABACUS:   0.27 seconds
+ >>>> Total wall time used in ABACUS:   4.40 seconds
 
 
                    .-------------------------------------------.
@@ -1281,7 +1220,7 @@ WARNING: but "Angstrom" was not specified in .mol file
                    `-------------------------------------------'
 
 
-@  Geometry walk step no.   1:  Molecular energy =    -74.609742   Molecular gradient =  1.408245
+@  Geometry walk step no.   1:  Molecular energy =    -74.574657   Molecular gradient =  1.629557
 
 
      @@>>>>>>>>>> Geometry walk iteration number:    2 <<<<<<<<<<
@@ -1300,7 +1239,7 @@ WARNING: but "Angstrom" was not specified in .mol file
                      `---------------------------------------'
 
  >>>> Total CPU  time used in HERMIT:   0.01 seconds
- >>>> Total wall time used in HERMIT:   0.01 seconds
+ >>>> Total wall time used in HERMIT:   0.47 seconds
 
 
                         .----------------------------------.
@@ -1328,60 +1267,60 @@ WARNING: but "Angstrom" was not specified in .mol file
  Iter      Total energy        Error norm    Delta(E)  DIIS dim.
  -----------------------------------------------------------------------------
    1  Screening settings (-IFTHRS, DIFDEN)  -14    T
-   1    -74.5272601444        7.64572D-01    8.25D-02    1
-      Virial theorem: -V/T =      1.986004
-@      MULPOP O      -0.76; H       0.37; H       0.39; 
+   1    -74.5569385627        9.54931D-01    1.77D-02    1
+      Virial theorem: -V/T =      1.985731
+@      MULPOP O      -0.76; H       0.36; H       0.40; 
  -----------------------------------------------------------------------------
    2  Screening settings (-IFTHRS, DIFDEN)   -6    F
-   2    -74.5347051257        5.86191D-02   -7.44D-03    2
-      Virial theorem: -V/T =      1.984476
-@      MULPOP O      -0.78; H       0.38; H       0.40; 
+   2    -74.5657608553        4.95018D-02   -8.82D-03    2
+      Virial theorem: -V/T =      1.985673
+@      MULPOP O      -0.76; H       0.37; H       0.40; 
  -----------------------------------------------------------------------------
    3  Screening settings (-IFTHRS, DIFDEN)   -6    T
-   3    -74.5350228873        1.51981D-02   -3.18D-04    3
-      Virial theorem: -V/T =      1.984567
-@      MULPOP O      -0.78; H       0.38; H       0.40; 
+   3    -74.5658749237        5.63934D-03   -1.14D-04    3
+      Virial theorem: -V/T =      1.985689
+@      MULPOP O      -0.76; H       0.37; H       0.40; 
  -----------------------------------------------------------------------------
    4  Screening settings (-IFTHRS, DIFDEN)   -8    F
-   4    -74.5350534328        1.26608D-03   -3.05D-05    4
-      Virial theorem: -V/T =      1.984618
-@      MULPOP O      -0.78; H       0.38; H       0.40; 
+   4    -74.5658775208        3.16609D-04   -2.60D-06    4
+      Virial theorem: -V/T =      1.985691
+@      MULPOP O      -0.76; H       0.37; H       0.40; 
  -----------------------------------------------------------------------------
-   5  Screening settings (-IFTHRS, DIFDEN)   -8    T
-   5    -74.5350536277        5.41312D-05   -1.95D-07    5
-      Virial theorem: -V/T =      1.984619
-@      MULPOP O      -0.78; H       0.38; H       0.40; 
+   5  Screening settings (-IFTHRS, DIFDEN)  -10    F
+   5    -74.5658775302        2.31715D-05   -9.44D-09    5
+      Virial theorem: -V/T =      1.985691
+@      MULPOP O      -0.76; H       0.37; H       0.40; 
  -----------------------------------------------------------------------------
-   6  Screening settings (-IFTHRS, DIFDEN)  -10    F
-   6    -74.5350536279        8.30626D-06   -2.72D-10    6
-      Virial theorem: -V/T =      1.984619
-@      MULPOP O      -0.78; H       0.38; H       0.40; 
+   6  Screening settings (-IFTHRS, DIFDEN)  -10    T
+   6    -74.5658775303        4.29716D-06   -6.00D-11    6
+      Virial theorem: -V/T =      1.985692
+@      MULPOP O      -0.76; H       0.37; H       0.40; 
  -----------------------------------------------------------------------------
-   7  Screening settings (-IFTHRS, DIFDEN)  -10    T
-   7    -74.5350536279        7.24326D-07   -6.82D-12    7
-      Virial theorem: -V/T =      1.984619
-@      MULPOP O      -0.78; H       0.38; H       0.40; 
+   7  Screening settings (-IFTHRS, DIFDEN)  -14    F
+   7    -74.5658775303        2.10171D-07   -1.69D-12    7
+      Virial theorem: -V/T =      1.985692
+@      MULPOP O      -0.76; H       0.37; H       0.40; 
  -----------------------------------------------------------------------------
-   8  Screening settings (-IFTHRS, DIFDEN)  -14    F
-   8    -74.5350536279        1.03226D-07    6.68D-13    8
-      Virial theorem: -V/T =      1.984619
-@      MULPOP O      -0.78; H       0.38; H       0.40; 
+   8  Screening settings (-IFTHRS, DIFDEN)  -14    T
+   8    -74.5658775303        1.92890D-08   -1.42D-14    8
+      Virial theorem: -V/T =      1.985692
+@      MULPOP O      -0.76; H       0.37; H       0.40; 
  -----------------------------------------------------------------------------
    9  Screening settings (-IFTHRS, DIFDEN)  -14    T
-   9    -74.5350536279        2.79998D-09   -1.42D-14    9
-      Virial theorem: -V/T =      1.984619
-@      MULPOP O      -0.78; H       0.38; H       0.40; 
+   9    -74.5658775303        4.09683D-10   -1.42D-14    9
+      Virial theorem: -V/T =      1.985692
+@      MULPOP O      -0.76; H       0.37; H       0.40; 
  -----------------------------------------------------------------------------
   10  Screening settings (-IFTHRS, DIFDEN)  -14    T
-  10    -74.5350536279        2.28148D-09   -1.42D-14   10
-      Virial theorem: -V/T =      1.984619
-@      MULPOP O      -0.78; H       0.38; H       0.40; 
+  10    -74.5658775303        1.08801D-10    1.42D-14   10
+      Virial theorem: -V/T =      1.985692
+@      MULPOP O      -0.76; H       0.37; H       0.40; 
  -----------------------------------------------------------------------------
   11  Screening settings (-IFTHRS, DIFDEN)  -14    T
-  11    -74.5350536279        6.36550D-11    0.00D+00   10
+  11    -74.5658775303        3.49047D-11    1.42D-14   10
 
  *** DIIS converged in  11 iterations !
-@    Converged SCF energy, gradient:    -74.535053627943    6.37D-11
+@    Converged SCF energy, gradient:    -74.565877530271    3.49D-11
    - total time used in SIRFCK :              0.00 seconds
 
 
@@ -1394,13 +1333,13 @@ WARNING: but "Angstrom" was not specified in .mol file
 
  Sym       Hartree-Fock orbital energies
 
-  1    -20.23972491    -1.42664978    -0.85083137    -0.46205820    -0.43589011
-         0.87946204     1.23990816
+  1    -20.23781821    -1.42323631    -0.83914069    -0.46191480    -0.43335426
+         0.87067649     1.21818468
 
-    E(LUMO) :     0.87946204 au (symmetry 1)
-  - E(HOMO) :    -0.43589011 au (symmetry 1)
+    E(LUMO) :     0.87067649 au (symmetry 1)
+  - E(HOMO) :    -0.43335426 au (symmetry 1)
   ------------------------------------------
-    gap     :     1.31535215 au
+    gap     :     1.30403076 au
 
  >>> Writing SIRIFC interface file <<<
 
@@ -1413,13 +1352,13 @@ WARNING: but "Angstrom" was not specified in .mol file
 
 
  (SIRSTP) Close to convergence, ratio set to one.
- Energy difference; actual and predicted:    7.46883D-02    0.00000D+00
+ Energy difference; actual and predicted:    8.77960D-03    0.00000D+00
 
 
  *** GEOMETRY WALK STEP ACCEPTED.
 
 
- >>>> CPU and wall time for SCF :       0.282       0.300
+ >>>> CPU and wall time for SCF :       1.565       2.802
 
 
                        .-----------------------------------.
@@ -1431,24 +1370,24 @@ WARNING: but "Angstrom" was not specified in .mol file
 @    Spatial symmetry:            1
 @    Total charge of molecule:    0
 
-@    Final HF energy:             -74.535053627943                 
-@    Nuclear repulsion:            12.946901724981
-@    Electronic energy:           -87.481955352925
+@    Final HF energy:             -74.565877530271                 
+@    Nuclear repulsion:            12.787127609475
+@    Electronic energy:           -87.353005139746
 
-@    Final gradient norm:           0.000000000064
-
- 
-     Date and time (Linux)  : Thu Nov  7 18:15:04 2013
-     Host name              : c18-14.local                            
-
-
-
- >>>> Total CPU  time used in SIRIUS :      0.28 seconds
- >>>> Total wall time used in SIRIUS :      0.31 seconds
+@    Final gradient norm:           0.000000000035
 
  
-     Date and time (Linux)  : Thu Nov  7 18:15:04 2013
-     Host name              : c18-14.local                            
+     Date and time (Linux)  : Fri Nov 29 19:44:02 2013
+     Host name              : c2-6.local                              
+
+
+
+ >>>> Total CPU  time used in SIRIUS :      1.57 seconds
+ >>>> Total wall time used in SIRIUS :      3.17 seconds
+
+ 
+     Date and time (Linux)  : Fri Nov 29 19:44:02 2013
+     Host name              : c2-6.local                              
 
 
                      .---------------------------------------.
@@ -1495,31 +1434,10 @@ WARNING: but "Angstrom" was not specified in .mol file
 
 
  
-     Date and time (Linux)  : Thu Nov  7 18:15:04 2013
-     Host name              : c18-14.local                            
+     Date and time (Linux)  : Fri Nov 29 19:44:02 2013
+     Host name              : c2-6.local                              
 
-
-            +---------------------------------------------------------+
-            ! Gradient elements calculated directly and from symmetry !
-            +---------------------------------------------------------+
-
-
-
-        Coordinate    Direct calc.     Tra.-rot. sym.   Difference
-        ----------------------------------------------------------
-
-        O    x       -0.7039837860    -0.7039837860     0.0000000000
-        O    y       -0.3195086865    -0.3276582739     0.0081495874
-        O    z        0.1253758048     0.1285735751    -0.0031977703
-        H    y        0.0205489474     0.0286985291    -0.0081495818
-        H    z       -0.0080686601    -0.0112664305     0.0031977703
-        H    y        0.2989597392     0.2989597448    -0.0000000056
-
-
-
- >>> WARNING from TRAROT:
-
- Largest deviation from tra-rot symmetry is in gradient element  2:  8.15E-03
+ Largest deviation from tra-rot symmetry is in gradient element  6:  8.12E-11
 
 
    ***************************************************************************
@@ -1528,13 +1446,11 @@ WARNING: but "Angstrom" was not specified in .mol file
 
 
  
-     Date and time (Linux)  : Thu Nov  7 18:15:05 2013
-     Host name              : c18-14.local                            
+     Date and time (Linux)  : Fri Nov 29 19:44:06 2013
+     Host name              : c2-6.local                              
 
- WARNING: warnings have been issued, please check the output above !
-
- Largest deviation from orthonormality of OMOs:0.395239E-13
- - found for element    1   1
+ Largest deviation from orthonormality of OMOs:0.228706E-13
+ - found for element    2   2
 
 
        ********************************************************************
@@ -1548,12 +1464,12 @@ WARNING: but "Angstrom" was not specified in .mol file
  CPU time statistics for ABACUS
  ------------------------------
 
- REST       00:00:02     427 %
+ REST       00:00:02     514 %
 
 
 
- >>>> Total CPU  time used in ABACUS:   0.36 seconds
- >>>> Total wall time used in ABACUS:   0.70 seconds
+ >>>> Total CPU  time used in ABACUS:   0.30 seconds
+ >>>> Total wall time used in ABACUS:   4.43 seconds
 
 
                    .-------------------------------------------.
@@ -1561,7 +1477,7 @@ WARNING: but "Angstrom" was not specified in .mol file
                    `-------------------------------------------'
 
 
-@  Geometry walk step no.   2:  Molecular energy =    -74.535054   Molecular gradient =  1.104046
+@  Geometry walk step no.   2:  Molecular energy =    -74.565878   Molecular gradient =  1.663942
 
 
      @@>>>>>>>>>> Geometry walk iteration number:    3 <<<<<<<<<<
@@ -1579,8 +1495,8 @@ WARNING: but "Angstrom" was not specified in .mol file
                      | Starting in Integral Section (HERMIT) |
                      `---------------------------------------'
 
- >>>> Total CPU  time used in HERMIT:   0.01 seconds
- >>>> Total wall time used in HERMIT:   0.01 seconds
+ >>>> Total CPU  time used in HERMIT:   0.00 seconds
+ >>>> Total wall time used in HERMIT:   0.45 seconds
 
 
                         .----------------------------------.
@@ -1608,60 +1524,65 @@ WARNING: but "Angstrom" was not specified in .mol file
  Iter      Total energy        Error norm    Delta(E)  DIIS dim.
  -----------------------------------------------------------------------------
    1  Screening settings (-IFTHRS, DIFDEN)  -14    T
-   1    -74.6224334021        5.65256D-01   -8.74D-02    1
-      Virial theorem: -V/T =      1.985685
-@      MULPOP O      -0.76; H       0.37; H       0.38; 
+   1    -74.6336649128        6.24928D-01   -6.78D-02    1
+      Virial theorem: -V/T =      1.986504
+@      MULPOP O      -0.74; H       0.37; H       0.37; 
  -----------------------------------------------------------------------------
    2  Screening settings (-IFTHRS, DIFDEN)   -6    F
-   2    -74.6264537335        4.24944D-02   -4.02D-03    2
-      Virial theorem: -V/T =      1.987895
-@      MULPOP O      -0.73; H       0.36; H       0.37; 
+   2    -74.6377789065        3.71794D-02   -4.11D-03    2
+      Virial theorem: -V/T =      1.988243
+@      MULPOP O      -0.73; H       0.36; H       0.36; 
  -----------------------------------------------------------------------------
    3  Screening settings (-IFTHRS, DIFDEN)   -8    F
-   3    -74.6266235253        1.14663D-02   -1.70D-04    3
-      Virial theorem: -V/T =      1.987844
-@      MULPOP O      -0.73; H       0.36; H       0.37; 
+   3    -74.6378746066        7.57871D-03   -9.57D-05    3
+      Virial theorem: -V/T =      1.988210
+@      MULPOP O      -0.73; H       0.36; H       0.36; 
  -----------------------------------------------------------------------------
    4  Screening settings (-IFTHRS, DIFDEN)   -8    T
-   4    -74.6266406426        1.04255D-03   -1.71D-05    4
-      Virial theorem: -V/T =      1.987796
-@      MULPOP O      -0.73; H       0.36; H       0.37; 
+   4    -74.6378812452        9.41624D-04   -6.64D-06    4
+      Virial theorem: -V/T =      1.988179
+@      MULPOP O      -0.73; H       0.36; H       0.36; 
  -----------------------------------------------------------------------------
    5  Screening settings (-IFTHRS, DIFDEN)   -8    T
-   5    -74.6266407821        1.45241D-05   -1.40D-07    5
-      Virial theorem: -V/T =      1.987796
-@      MULPOP O      -0.73; H       0.36; H       0.37; 
+   5    -74.6378813693        5.20555D-05   -1.24D-07    5
+      Virial theorem: -V/T =      1.988177
+@      MULPOP O      -0.73; H       0.36; H       0.36; 
  -----------------------------------------------------------------------------
-   6  Screening settings (-IFTHRS, DIFDEN)  -11    F
-   6    -74.6266407822        2.85921D-06   -1.05D-10    6
-      Virial theorem: -V/T =      1.987796
-@      MULPOP O      -0.73; H       0.36; H       0.37; 
+   6  Screening settings (-IFTHRS, DIFDEN)  -10    F
+   6    -74.6378813697        5.59827D-06   -4.25D-10    6
+      Virial theorem: -V/T =      1.988177
+@      MULPOP O      -0.73; H       0.36; H       0.36; 
  -----------------------------------------------------------------------------
-   7  Screening settings (-IFTHRS, DIFDEN)  -14    F
-   7    -74.6266407822        4.14754D-07   -8.24D-13    7
-      Virial theorem: -V/T =      1.987796
-@      MULPOP O      -0.73; H       0.36; H       0.37; 
+   7  Screening settings (-IFTHRS, DIFDEN)  -10    T
+   7    -74.6378813697        3.27242D-07    5.88D-12    7
+      Virial theorem: -V/T =      1.988177
+@      MULPOP O      -0.73; H       0.36; H       0.36; 
  -----------------------------------------------------------------------------
-   8  Screening settings (-IFTHRS, DIFDEN)  -14    T
-   8    -74.6266407822        3.90962D-08    0.00D+00    8
-      Virial theorem: -V/T =      1.987796
-@      MULPOP O      -0.73; H       0.36; H       0.37; 
+   8  Screening settings (-IFTHRS, DIFDEN)  -14    F
+   8    -74.6378813697        3.89022D-08   -8.26D-12    8
+      Virial theorem: -V/T =      1.988177
+@      MULPOP O      -0.73; H       0.36; H       0.36; 
  -----------------------------------------------------------------------------
    9  Screening settings (-IFTHRS, DIFDEN)  -14    T
-   9    -74.6266407822        8.21365D-10   -2.84D-14    9
-      Virial theorem: -V/T =      1.987796
-@      MULPOP O      -0.73; H       0.36; H       0.37; 
+   9    -74.6378813697        2.92395D-09    0.00D+00    9
+      Virial theorem: -V/T =      1.988177
+@      MULPOP O      -0.73; H       0.36; H       0.36; 
  -----------------------------------------------------------------------------
   10  Screening settings (-IFTHRS, DIFDEN)  -14    T
-  10    -74.6266407822        3.32706D-10    1.42D-14   10
-      Virial theorem: -V/T =      1.987796
-@      MULPOP O      -0.73; H       0.36; H       0.37; 
+  10    -74.6378813697        1.08152D-09    0.00D+00   10
+      Virial theorem: -V/T =      1.988177
+@      MULPOP O      -0.73; H       0.36; H       0.36; 
  -----------------------------------------------------------------------------
   11  Screening settings (-IFTHRS, DIFDEN)  -14    T
-  11    -74.6266407822        6.37098D-11   -2.84D-14   10
+  11    -74.6378813697        4.97041D-10   -1.42D-14   10
+      Virial theorem: -V/T =      1.988177
+@      MULPOP O      -0.73; H       0.36; H       0.36; 
+ -----------------------------------------------------------------------------
+  12  Screening settings (-IFTHRS, DIFDEN)  -14    T
+  12    -74.6378813697        1.15020D-13    0.00D+00   10
 
- *** DIIS converged in  11 iterations !
-@    Converged SCF energy, gradient:    -74.626640782224    6.37D-11
+ *** DIIS converged in  12 iterations !
+@    Converged SCF energy, gradient:    -74.637881369737    1.15D-13
    - total time used in SIRFCK :              0.00 seconds
 
 
@@ -1674,13 +1595,13 @@ WARNING: but "Angstrom" was not specified in .mol file
 
  Sym       Hartree-Fock orbital energies
 
-  1    -20.22812373    -1.40636383    -0.82566677    -0.45426516    -0.42577025
-         0.85160809     1.18957460
+  1    -20.22756882    -1.40501550    -0.82192758    -0.45437718    -0.42497673
+         0.84996742     1.18085191
 
-    E(LUMO) :     0.85160809 au (symmetry 1)
-  - E(HOMO) :    -0.42577025 au (symmetry 1)
+    E(LUMO) :     0.84996742 au (symmetry 1)
+  - E(HOMO) :    -0.42497673 au (symmetry 1)
   ------------------------------------------
-    gap     :     1.27737833 au
+    gap     :     1.27494415 au
 
  >>> Writing SIRIFC interface file <<<
 
@@ -1693,13 +1614,13 @@ WARNING: but "Angstrom" was not specified in .mol file
 
 
  (SIRSTP) Close to convergence, ratio set to one.
- Energy difference; actual and predicted:   -9.15872D-02    0.00000D+00
+ Energy difference; actual and predicted:   -7.20038D-02    0.00000D+00
 
 
  *** GEOMETRY WALK STEP ACCEPTED.
 
 
- >>>> CPU and wall time for SCF :       0.241       0.255
+ >>>> CPU and wall time for SCF :       1.584       2.921
 
 
                        .-----------------------------------.
@@ -1711,24 +1632,24 @@ WARNING: but "Angstrom" was not specified in .mol file
 @    Spatial symmetry:            1
 @    Total charge of molecule:    0
 
-@    Final HF energy:             -74.626640782224                 
-@    Nuclear repulsion:            12.471155200140
-@    Electronic energy:           -87.097795982364
+@    Final HF energy:             -74.637881369737                 
+@    Nuclear repulsion:            12.415659914004
+@    Electronic energy:           -87.053541283741
 
-@    Final gradient norm:           0.000000000064
-
- 
-     Date and time (Linux)  : Thu Nov  7 18:15:05 2013
-     Host name              : c18-14.local                            
-
-
-
- >>>> Total CPU  time used in SIRIUS :      0.24 seconds
- >>>> Total wall time used in SIRIUS :      0.35 seconds
+@    Final gradient norm:           0.000000000000
 
  
-     Date and time (Linux)  : Thu Nov  7 18:15:05 2013
-     Host name              : c18-14.local                            
+     Date and time (Linux)  : Fri Nov 29 19:44:11 2013
+     Host name              : c2-6.local                              
+
+
+
+ >>>> Total CPU  time used in SIRIUS :      1.59 seconds
+ >>>> Total wall time used in SIRIUS :      3.31 seconds
+
+ 
+     Date and time (Linux)  : Fri Nov 29 19:44:11 2013
+     Host name              : c2-6.local                              
 
 
                      .---------------------------------------.
@@ -1775,31 +1696,10 @@ WARNING: but "Angstrom" was not specified in .mol file
 
 
  
-     Date and time (Linux)  : Thu Nov  7 18:15:05 2013
-     Host name              : c18-14.local                            
+     Date and time (Linux)  : Fri Nov 29 19:44:11 2013
+     Host name              : c2-6.local                              
 
-
-            +---------------------------------------------------------+
-            ! Gradient elements calculated directly and from symmetry !
-            +---------------------------------------------------------+
-
-
-
-        Coordinate    Direct calc.     Tra.-rot. sym.   Difference
-        ----------------------------------------------------------
-
-        O    x       -0.7146683640    -0.7146683640     0.0000000000
-        O    y       -0.5231176389    -0.5272702404     0.0041526015
-        O    z        0.2052688978     0.2068983073    -0.0016294095
-        H    y       -0.0621165656    -0.0579639745    -0.0041525910
-        H    z        0.0243660726     0.0227366631     0.0016294095
-        H    y        0.5852342045     0.5852342150    -0.0000000105
-
-
-
- >>> WARNING from TRAROT:
-
- Largest deviation from tra-rot symmetry is in gradient element  2:  4.15E-03
+ Largest deviation from tra-rot symmetry is in gradient element  3:  1.01E-10
 
 
    ***************************************************************************
@@ -1808,13 +1708,11 @@ WARNING: but "Angstrom" was not specified in .mol file
 
 
  
-     Date and time (Linux)  : Thu Nov  7 18:15:06 2013
-     Host name              : c18-14.local                            
+     Date and time (Linux)  : Fri Nov 29 19:44:15 2013
+     Host name              : c2-6.local                              
 
- WARNING: warnings have been issued, please check the output above !
-
- Largest deviation from orthonormality of OMOs:0.128786E-13
- - found for element    2   2
+ Largest deviation from orthonormality of OMOs:0.119904E-13
+ - found for element    3   3
 
 
        ********************************************************************
@@ -1831,8 +1729,8 @@ WARNING: but "Angstrom" was not specified in .mol file
 
 
 
- >>>> Total CPU  time used in ABACUS:   0.30 seconds
- >>>> Total wall time used in ABACUS:   1.82 seconds
+ >>>> Total CPU  time used in ABACUS:   0.21 seconds
+ >>>> Total wall time used in ABACUS:   4.32 seconds
 
 
                    .-------------------------------------------.
@@ -1840,7 +1738,7 @@ WARNING: but "Angstrom" was not specified in .mol file
                    `-------------------------------------------'
 
 
-@  Geometry walk step no.   3:  Molecular energy =    -74.626641   Molecular gradient =  1.481203
+@  Geometry walk step no.   3:  Molecular energy =    -74.637881   Molecular gradient =  1.389164
 
 
      @@>>>>>>>>>> Geometry walk iteration number:    4 <<<<<<<<<<
@@ -1858,8 +1756,8 @@ WARNING: but "Angstrom" was not specified in .mol file
                      | Starting in Integral Section (HERMIT) |
                      `---------------------------------------'
 
- >>>> Total CPU  time used in HERMIT:   0.00 seconds
- >>>> Total wall time used in HERMIT:   0.01 seconds
+ >>>> Total CPU  time used in HERMIT:   0.01 seconds
+ >>>> Total wall time used in HERMIT:   0.44 seconds
 
 
                         .----------------------------------.
@@ -1887,65 +1785,65 @@ WARNING: but "Angstrom" was not specified in .mol file
  Iter      Total energy        Error norm    Delta(E)  DIIS dim.
  -----------------------------------------------------------------------------
    1  Screening settings (-IFTHRS, DIFDEN)  -14    T
-   1    -74.5078432028        8.26445D-01    1.19D-01    1
-      Virial theorem: -V/T =      1.986330
-@      MULPOP O      -0.76; H       0.39; H       0.37; 
+   1    -74.4956229821        8.18464D-01    1.42D-01    1
+      Virial theorem: -V/T =      1.986394
+@      MULPOP O      -0.76; H       0.38; H       0.38; 
  -----------------------------------------------------------------------------
    2  Screening settings (-IFTHRS, DIFDEN)   -6    F
-   2    -74.5151143754        4.76465D-02   -7.27D-03    2
-      Virial theorem: -V/T =      1.983816
-@      MULPOP O      -0.79; H       0.40; H       0.39; 
+   2    -74.5034745518        5.46695D-02   -7.85D-03    2
+      Virial theorem: -V/T =      1.983385
+@      MULPOP O      -0.80; H       0.40; H       0.40; 
  -----------------------------------------------------------------------------
-   3  Screening settings (-IFTHRS, DIFDEN)   -8    F
-   3    -74.5152567585        8.88785D-03   -1.42D-04    3
-      Virial theorem: -V/T =      1.983865
-@      MULPOP O      -0.79; H       0.40; H       0.39; 
+   3  Screening settings (-IFTHRS, DIFDEN)   -6    T
+   3    -74.5037158990        1.30956D-02   -2.41D-04    3
+      Virial theorem: -V/T =      1.983460
+@      MULPOP O      -0.80; H       0.40; H       0.40; 
  -----------------------------------------------------------------------------
-   4  Screening settings (-IFTHRS, DIFDEN)   -8    T
-   4    -74.5152644888        9.47717D-04   -7.73D-06    4
-      Virial theorem: -V/T =      1.983902
-@      MULPOP O      -0.79; H       0.40; H       0.39; 
+   4  Screening settings (-IFTHRS, DIFDEN)   -8    F
+   4    -74.5037356170        1.27464D-03   -1.97D-05    4
+      Virial theorem: -V/T =      1.983516
+@      MULPOP O      -0.80; H       0.40; H       0.40; 
  -----------------------------------------------------------------------------
    5  Screening settings (-IFTHRS, DIFDEN)   -8    T
-   5    -74.5152646094        6.35290D-05   -1.21D-07    5
-      Virial theorem: -V/T =      1.983904
-@      MULPOP O      -0.79; H       0.40; H       0.39; 
+   5    -74.5037358255        8.96404D-06   -2.09D-07    5
+      Virial theorem: -V/T =      1.983516
+@      MULPOP O      -0.80; H       0.40; H       0.40; 
  -----------------------------------------------------------------------------
-   6  Screening settings (-IFTHRS, DIFDEN)  -10    F
-   6    -74.5152646098        5.51923D-06   -4.14D-10    6
-      Virial theorem: -V/T =      1.983904
-@      MULPOP O      -0.79; H       0.40; H       0.39; 
+   6  Screening settings (-IFTHRS, DIFDEN)  -11    F
+   6    -74.5037358254        6.78975D-07    7.05D-11    6
+      Virial theorem: -V/T =      1.983516
+@      MULPOP O      -0.80; H       0.40; H       0.40; 
  -----------------------------------------------------------------------------
-   7  Screening settings (-IFTHRS, DIFDEN)  -10    T
-   7    -74.5152646098        3.59563D-07   -2.34D-12    7
-      Virial theorem: -V/T =      1.983904
-@      MULPOP O      -0.79; H       0.40; H       0.39; 
+   7  Screening settings (-IFTHRS, DIFDEN)  -14    F
+   7    -74.5037358254        1.03853D-07   -1.42D-14    7
+      Virial theorem: -V/T =      1.983516
+@      MULPOP O      -0.80; H       0.40; H       0.40; 
  -----------------------------------------------------------------------------
-   8  Screening settings (-IFTHRS, DIFDEN)  -14    F
-   8    -74.5152646098        4.18874D-08    1.85D-13    8
-      Virial theorem: -V/T =      1.983904
-@      MULPOP O      -0.79; H       0.40; H       0.39; 
+   8  Screening settings (-IFTHRS, DIFDEN)  -14    T
+   8    -74.5037358254        1.06688D-08    1.42D-14    8
+      Virial theorem: -V/T =      1.983516
+@      MULPOP O      -0.80; H       0.40; H       0.40; 
  -----------------------------------------------------------------------------
    9  Screening settings (-IFTHRS, DIFDEN)  -14    T
-   9    -74.5152646098        2.50353D-09   -4.26D-14    9
-      Virial theorem: -V/T =      1.983904
-@      MULPOP O      -0.79; H       0.40; H       0.39; 
+   9    -74.5037358254        1.00861D-09    2.84D-14    9
+      Virial theorem: -V/T =      1.983516
+@      MULPOP O      -0.80; H       0.40; H       0.40; 
  -----------------------------------------------------------------------------
   10  Screening settings (-IFTHRS, DIFDEN)  -14    T
-  10    -74.5152646098        7.33282D-10   -4.26D-14   10
-      Virial theorem: -V/T =      1.983904
-@      MULPOP O      -0.79; H       0.40; H       0.39; 
+  10    -74.5037358254        3.80885D-10    0.00D+00   10
+      Virial theorem: -V/T =      1.983516
+@      MULPOP O      -0.80; H       0.40; H       0.40; 
  -----------------------------------------------------------------------------
   11  Screening settings (-IFTHRS, DIFDEN)  -14    T
-  11    -74.5152646098        1.75351D-10    5.68D-14   10
-      Virial theorem: -V/T =      1.983904
-@      MULPOP O      -0.79; H       0.40; H       0.39; 
+  11    -74.5037358254        1.19441D-10   -2.84D-14   10
+      Virial theorem: -V/T =      1.983516
+@      MULPOP O      -0.80; H       0.40; H       0.40; 
  -----------------------------------------------------------------------------
   12  Screening settings (-IFTHRS, DIFDEN)  -14    T
-  12    -74.5152646098        7.33177D-14    0.00D+00   10
+  12    -74.5037358254        1.91328D-13    0.00D+00   10
 
  *** DIIS converged in  12 iterations !
-@    Converged SCF energy, gradient:    -74.515264609849    7.33D-14
+@    Converged SCF energy, gradient:    -74.503735825427    1.91D-13
    - total time used in SIRFCK :              0.00 seconds
 
 
@@ -1958,13 +1856,13 @@ WARNING: but "Angstrom" was not specified in .mol file
 
  Sym       Hartree-Fock orbital energies
 
-  1    -20.24617320    -1.43761927    -0.85127617    -0.46873201    -0.43998559
-         0.89103838     1.23900444
+  1    -20.24693009    -1.43867416    -0.85553857    -0.46872549    -0.44089389
+         0.89390515     1.24686747
 
-    E(LUMO) :     0.89103838 au (symmetry 1)
-  - E(HOMO) :    -0.43998559 au (symmetry 1)
+    E(LUMO) :     0.89390515 au (symmetry 1)
+  - E(HOMO) :    -0.44089389 au (symmetry 1)
   ------------------------------------------
-    gap     :     1.33102397 au
+    gap     :     1.33479904 au
 
  >>> Writing SIRIFC interface file <<<
 
@@ -1977,13 +1875,13 @@ WARNING: but "Angstrom" was not specified in .mol file
 
 
  (SIRSTP) Close to convergence, ratio set to one.
- Energy difference; actual and predicted:    1.11376D-01    0.00000D+00
+ Energy difference; actual and predicted:    1.34146D-01    0.00000D+00
 
 
  *** GEOMETRY WALK STEP ACCEPTED.
 
 
- >>>> CPU and wall time for SCF :       0.044       0.064
+ >>>> CPU and wall time for SCF :       1.610       2.951
 
 
                        .-----------------------------------.
@@ -1995,24 +1893,24 @@ WARNING: but "Angstrom" was not specified in .mol file
 @    Spatial symmetry:            1
 @    Total charge of molecule:    0
 
-@    Final HF energy:             -74.515264609849                 
-@    Nuclear repulsion:            13.058444712918
-@    Electronic energy:           -87.573709322767
+@    Final HF energy:             -74.503735825427                 
+@    Nuclear repulsion:            13.115239598897
+@    Electronic energy:           -87.618975424324
 
 @    Final gradient norm:           0.000000000000
 
  
-     Date and time (Linux)  : Thu Nov  7 18:15:07 2013
-     Host name              : c18-14.local                            
+     Date and time (Linux)  : Fri Nov 29 19:44:20 2013
+     Host name              : c2-6.local                              
 
 
 
- >>>> Total CPU  time used in SIRIUS :      0.05 seconds
- >>>> Total wall time used in SIRIUS :      0.07 seconds
+ >>>> Total CPU  time used in SIRIUS :      1.61 seconds
+ >>>> Total wall time used in SIRIUS :      3.32 seconds
 
  
-     Date and time (Linux)  : Thu Nov  7 18:15:07 2013
-     Host name              : c18-14.local                            
+     Date and time (Linux)  : Fri Nov 29 19:44:20 2013
+     Host name              : c2-6.local                              
 
 
                      .---------------------------------------.
@@ -2059,31 +1957,10 @@ WARNING: but "Angstrom" was not specified in .mol file
 
 
  
-     Date and time (Linux)  : Thu Nov  7 18:15:07 2013
-     Host name              : c18-14.local                            
+     Date and time (Linux)  : Fri Nov 29 19:44:20 2013
+     Host name              : c2-6.local                              
 
-
-            +---------------------------------------------------------+
-            ! Gradient elements calculated directly and from symmetry !
-            +---------------------------------------------------------+
-
-
-
-        Coordinate    Direct calc.     Tra.-rot. sym.   Difference
-        ----------------------------------------------------------
-
-        O    x       -0.2055461834    -0.2055461834    -0.0000000000
-        O    y       -0.6878407276    -0.6820377934    -0.0058029342
-        O    z        0.2698996705     0.2676226971     0.0022769734
-        H    y        0.1835097818     0.1777068585     0.0058029233
-        H    z       -0.0720083055    -0.0697313320    -0.0022769734
-        H    y        0.5043309458     0.5043309349     0.0000000110
-
-
-
- >>> WARNING from TRAROT:
-
- Largest deviation from tra-rot symmetry is in gradient element  2:  5.80E-03
+ Largest deviation from tra-rot symmetry is in gradient element  3:  9.39E-11
 
 
    ***************************************************************************
@@ -2092,12 +1969,10 @@ WARNING: but "Angstrom" was not specified in .mol file
 
 
  
-     Date and time (Linux)  : Thu Nov  7 18:15:08 2013
-     Host name              : c18-14.local                            
+     Date and time (Linux)  : Fri Nov 29 19:44:24 2013
+     Host name              : c2-6.local                              
 
- WARNING: warnings have been issued, please check the output above !
-
- Largest deviation from orthonormality of OMOs:0.317524E-13
+ Largest deviation from orthonormality of OMOs:0.910383E-14
  - found for element    1   1
 
 
@@ -2112,12 +1987,11 @@ WARNING: but "Angstrom" was not specified in .mol file
  CPU time statistics for ABACUS
  ------------------------------
 
- REST       00:00:01     460 %
 
 
 
- >>>> Total CPU  time used in ABACUS:   0.27 seconds
- >>>> Total wall time used in ABACUS:   0.58 seconds
+ >>>> Total CPU  time used in ABACUS:   0.26 seconds
+ >>>> Total wall time used in ABACUS:   4.45 seconds
 
 
                    .-------------------------------------------.
@@ -2125,7 +1999,7 @@ WARNING: but "Angstrom" was not specified in .mol file
                    `-------------------------------------------'
 
 
-@  Geometry walk step no.   4:  Molecular energy =    -74.515265   Molecular gradient =  0.990418
+@  Geometry walk step no.   4:  Molecular energy =    -74.503736   Molecular gradient =  1.835035
 
 
      @@>>>>>>>>>> Geometry walk iteration number:    5 <<<<<<<<<<
@@ -2144,7 +2018,7 @@ WARNING: but "Angstrom" was not specified in .mol file
                      `---------------------------------------'
 
  >>>> Total CPU  time used in HERMIT:   0.01 seconds
- >>>> Total wall time used in HERMIT:   0.01 seconds
+ >>>> Total wall time used in HERMIT:   0.47 seconds
 
 
                         .----------------------------------.
@@ -2172,65 +2046,60 @@ WARNING: but "Angstrom" was not specified in .mol file
  Iter      Total energy        Error norm    Delta(E)  DIIS dim.
  -----------------------------------------------------------------------------
    1  Screening settings (-IFTHRS, DIFDEN)  -14    T
-   1    -74.5629518521        6.15759D-01   -4.77D-02    1
-      Virial theorem: -V/T =      1.984485
-@      MULPOP O      -0.78; H       0.38; H       0.40; 
+   1    -74.5765788837        4.53193D-01   -7.28D-02    1
+      Virial theorem: -V/T =      1.984402
+@      MULPOP O      -0.77; H       0.39; H       0.39; 
  -----------------------------------------------------------------------------
-   2  Screening settings (-IFTHRS, DIFDEN)   -6    F
-   2    -74.5671606218        4.04079D-02   -4.21D-03    2
-      Virial theorem: -V/T =      1.985715
-@      MULPOP O      -0.76; H       0.37; H       0.39; 
+   2  Screening settings (-IFTHRS, DIFDEN)   -7    F
+   2    -74.5799989956        4.55687D-02   -3.42D-03    2
+      Virial theorem: -V/T =      1.986160
+@      MULPOP O      -0.75; H       0.38; H       0.38; 
  -----------------------------------------------------------------------------
-   3  Screening settings (-IFTHRS, DIFDEN)   -8    F
-   3    -74.5672902067        9.21291D-03   -1.30D-04    3
-      Virial theorem: -V/T =      1.985684
-@      MULPOP O      -0.76; H       0.37; H       0.39; 
+   3  Screening settings (-IFTHRS, DIFDEN)   -7    T
+   3    -74.5802291954        1.35187D-02   -2.30D-04    3
+      Virial theorem: -V/T =      1.986110
+@      MULPOP O      -0.76; H       0.38; H       0.38; 
  -----------------------------------------------------------------------------
-   4  Screening settings (-IFTHRS, DIFDEN)   -8    T
-   4    -74.5673010363        1.00347D-03   -1.08D-05    4
-      Virial theorem: -V/T =      1.985654
-@      MULPOP O      -0.76; H       0.37; H       0.39; 
+   4  Screening settings (-IFTHRS, DIFDEN)   -7    T
+   4    -74.5802540376        6.85998D-04   -2.48D-05    4
+      Virial theorem: -V/T =      1.986061
+@      MULPOP O      -0.76; H       0.38; H       0.38; 
  -----------------------------------------------------------------------------
-   5  Screening settings (-IFTHRS, DIFDEN)   -8    T
-   5    -74.5673011647        3.54767D-05   -1.28D-07    5
-      Virial theorem: -V/T =      1.985652
-@      MULPOP O      -0.76; H       0.37; H       0.39; 
+   5  Screening settings (-IFTHRS, DIFDEN)   -9    F
+   5    -74.5802540859        1.07058D-05   -4.84D-08    5
+      Virial theorem: -V/T =      1.986061
+@      MULPOP O      -0.76; H       0.38; H       0.38; 
  -----------------------------------------------------------------------------
    6  Screening settings (-IFTHRS, DIFDEN)  -11    F
-   6    -74.5673011649        4.76704D-06   -1.49D-10    6
-      Virial theorem: -V/T =      1.985652
-@      MULPOP O      -0.76; H       0.37; H       0.39; 
+   6    -74.5802540859        7.68541D-07   -7.08D-12    6
+      Virial theorem: -V/T =      1.986061
+@      MULPOP O      -0.76; H       0.38; H       0.38; 
  -----------------------------------------------------------------------------
    7  Screening settings (-IFTHRS, DIFDEN)  -14    F
-   7    -74.5673011649        1.50740D-07   -1.71D-12    7
-      Virial theorem: -V/T =      1.985652
-@      MULPOP O      -0.76; H       0.37; H       0.39; 
+   7    -74.5802540859        7.84280D-08   -4.26D-14    7
+      Virial theorem: -V/T =      1.986061
+@      MULPOP O      -0.76; H       0.38; H       0.38; 
  -----------------------------------------------------------------------------
    8  Screening settings (-IFTHRS, DIFDEN)  -14    T
-   8    -74.5673011649        3.01160D-08    2.84D-14    8
-      Virial theorem: -V/T =      1.985652
-@      MULPOP O      -0.76; H       0.37; H       0.39; 
+   8    -74.5802540859        7.15398D-09    2.84D-14    8
+      Virial theorem: -V/T =      1.986061
+@      MULPOP O      -0.76; H       0.38; H       0.38; 
  -----------------------------------------------------------------------------
    9  Screening settings (-IFTHRS, DIFDEN)  -14    T
-   9    -74.5673011649        2.19824D-09    0.00D+00    9
-      Virial theorem: -V/T =      1.985652
-@      MULPOP O      -0.76; H       0.37; H       0.39; 
+   9    -74.5802540859        6.21013D-10   -1.42D-14    9
+      Virial theorem: -V/T =      1.986061
+@      MULPOP O      -0.76; H       0.38; H       0.38; 
  -----------------------------------------------------------------------------
   10  Screening settings (-IFTHRS, DIFDEN)  -14    T
-  10    -74.5673011649        5.01255D-09    0.00D+00   10
-      Virial theorem: -V/T =      1.985652
-@      MULPOP O      -0.76; H       0.37; H       0.39; 
+  10    -74.5802540859        1.11592D-10    0.00D+00   10
+      Virial theorem: -V/T =      1.986061
+@      MULPOP O      -0.76; H       0.38; H       0.38; 
  -----------------------------------------------------------------------------
   11  Screening settings (-IFTHRS, DIFDEN)  -14    T
-  11    -74.5673011649        1.82746D-09    0.00D+00   10
-      Virial theorem: -V/T =      1.985652
-@      MULPOP O      -0.76; H       0.37; H       0.39; 
- -----------------------------------------------------------------------------
-  12  Screening settings (-IFTHRS, DIFDEN)  -14    T
-  12    -74.5673011649        3.08734D-14    0.00D+00   10
+  11    -74.5802540859        3.86853D-11    1.42D-14   10
 
- *** DIIS converged in  12 iterations !
-@    Converged SCF energy, gradient:    -74.567301164892    3.09D-14
+ *** DIIS converged in  11 iterations !
+@    Converged SCF energy, gradient:    -74.580254085946    3.87D-11
    - total time used in SIRFCK :              0.00 seconds
 
 
@@ -2243,13 +2112,13 @@ WARNING: but "Angstrom" was not specified in .mol file
 
  Sym       Hartree-Fock orbital energies
 
-  1    -20.24119536    -1.42951602    -0.83532123    -0.46675611    -0.43524427
-         0.87805176     1.20775593
+  1    -20.24025914    -1.42808110    -0.83159169    -0.46677474    -0.43433562
+         0.87690043     1.19892166
 
-    E(LUMO) :     0.87805176 au (symmetry 1)
-  - E(HOMO) :    -0.43524427 au (symmetry 1)
+    E(LUMO) :     0.87690043 au (symmetry 1)
+  - E(HOMO) :    -0.43433562 au (symmetry 1)
   ------------------------------------------
-    gap     :     1.31329603 au
+    gap     :     1.31123605 au
 
  >>> Writing SIRIFC interface file <<<
 
@@ -2262,13 +2131,13 @@ WARNING: but "Angstrom" was not specified in .mol file
 
 
  (SIRSTP) Close to convergence, ratio set to one.
- Energy difference; actual and predicted:   -5.20366D-02    0.00000D+00
+ Energy difference; actual and predicted:   -7.65183D-02    0.00000D+00
 
 
  *** GEOMETRY WALK STEP ACCEPTED.
 
 
- >>>> CPU and wall time for SCF :       0.117       0.134
+ >>>> CPU and wall time for SCF :       1.543       2.752
 
 
                        .-----------------------------------.
@@ -2280,24 +2149,24 @@ WARNING: but "Angstrom" was not specified in .mol file
 @    Spatial symmetry:            1
 @    Total charge of molecule:    0
 
-@    Final HF energy:             -74.567301164892                 
-@    Nuclear repulsion:            12.802243475498
-@    Electronic energy:           -87.369544640390
+@    Final HF energy:             -74.580254085946                 
+@    Nuclear repulsion:            12.744642685360
+@    Electronic energy:           -87.324896771306
 
-@    Final gradient norm:           0.000000000000
-
- 
-     Date and time (Linux)  : Thu Nov  7 18:15:08 2013
-     Host name              : c18-14.local                            
-
-
-
- >>>> Total CPU  time used in SIRIUS :      0.12 seconds
- >>>> Total wall time used in SIRIUS :      0.14 seconds
+@    Final gradient norm:           0.000000000039
 
  
-     Date and time (Linux)  : Thu Nov  7 18:15:08 2013
-     Host name              : c18-14.local                            
+     Date and time (Linux)  : Fri Nov 29 19:44:29 2013
+     Host name              : c2-6.local                              
+
+
+
+ >>>> Total CPU  time used in SIRIUS :      1.55 seconds
+ >>>> Total wall time used in SIRIUS :      3.13 seconds
+
+ 
+     Date and time (Linux)  : Fri Nov 29 19:44:29 2013
+     Host name              : c2-6.local                              
 
 
                      .---------------------------------------.
@@ -2344,31 +2213,10 @@ WARNING: but "Angstrom" was not specified in .mol file
 
 
  
-     Date and time (Linux)  : Thu Nov  7 18:15:08 2013
-     Host name              : c18-14.local                            
+     Date and time (Linux)  : Fri Nov 29 19:44:29 2013
+     Host name              : c2-6.local                              
 
-
-            +---------------------------------------------------------+
-            ! Gradient elements calculated directly and from symmetry !
-            +---------------------------------------------------------+
-
-
-
-        Coordinate    Direct calc.     Tra.-rot. sym.   Difference
-        ----------------------------------------------------------
-
-        O    x       -0.7702046217    -0.7702046217     0.0000000000
-        O    y       -0.4778781671    -0.4838418788     0.0059637116
-        O    z        0.1875180647     0.1898581267    -0.0023400619
-        H    y        0.1146331734     0.1205968756    -0.0059637022
-        H    z       -0.0449858991    -0.0473259611     0.0023400619
-        H    y        0.3632449938     0.3632450032    -0.0000000094
-
-
-
- >>> WARNING from TRAROT:
-
- Largest deviation from tra-rot symmetry is in gradient element  2:  5.96E-03
+ Largest deviation from tra-rot symmetry is in gradient element  2:  3.41E-10
 
 
    ***************************************************************************
@@ -2377,13 +2225,11 @@ WARNING: but "Angstrom" was not specified in .mol file
 
 
  
-     Date and time (Linux)  : Thu Nov  7 18:15:08 2013
-     Host name              : c18-14.local                            
+     Date and time (Linux)  : Fri Nov 29 19:44:33 2013
+     Host name              : c2-6.local                              
 
- WARNING: warnings have been issued, please check the output above !
-
- Largest deviation from orthonormality of OMOs:0.266454E-14
- - found for element    6   6
+ Largest deviation from orthonormality of OMOs:0.244249E-14
+ - found for element    7   7
 
 
        ********************************************************************
@@ -2397,11 +2243,12 @@ WARNING: but "Angstrom" was not specified in .mol file
  CPU time statistics for ABACUS
  ------------------------------
 
+ REST       00:00:02     473 %
 
 
 
- >>>> Total CPU  time used in ABACUS:   0.19 seconds
- >>>> Total wall time used in ABACUS:   0.26 seconds
+ >>>> Total CPU  time used in ABACUS:   0.33 seconds
+ >>>> Total wall time used in ABACUS:   4.43 seconds
 
 
                    .-------------------------------------------.
@@ -2409,7 +2256,7 @@ WARNING: but "Angstrom" was not specified in .mol file
                    `-------------------------------------------'
 
 
-@  Geometry walk step no.   5:  Molecular energy =    -74.567301   Molecular gradient =  1.239616
+@  Geometry walk step no.   5:  Molecular energy =    -74.580254   Molecular gradient =  1.616008
 
 
      @@>>>>>>>>>> Geometry walk iteration number:    6 <<<<<<<<<<
@@ -2428,7 +2275,7 @@ WARNING: but "Angstrom" was not specified in .mol file
                      `---------------------------------------'
 
  >>>> Total CPU  time used in HERMIT:   0.00 seconds
- >>>> Total wall time used in HERMIT:   0.01 seconds
+ >>>> Total wall time used in HERMIT:   0.44 seconds
 
 
                         .----------------------------------.
@@ -2456,65 +2303,60 @@ WARNING: but "Angstrom" was not specified in .mol file
  Iter      Total energy        Error norm    Delta(E)  DIIS dim.
  -----------------------------------------------------------------------------
    1  Screening settings (-IFTHRS, DIFDEN)  -14    T
-   1    -74.5765183843        5.79901D-01   -9.22D-03    1
-      Virial theorem: -V/T =      1.985607
-@      MULPOP O      -0.76; H       0.39; H       0.37; 
+   1    -74.5700445613        1.39195D-01    1.02D-02    1
+      Virial theorem: -V/T =      1.985733
+@      MULPOP O      -0.76; H       0.38; H       0.38; 
  -----------------------------------------------------------------------------
-   2  Screening settings (-IFTHRS, DIFDEN)   -6    F
-   2    -74.5808795172        4.49535D-02   -4.36D-03    2
-      Virial theorem: -V/T =      1.986115
-@      MULPOP O      -0.76; H       0.39; H       0.37; 
+   2  Screening settings (-IFTHRS, DIFDEN)   -7    F
+   2    -74.5723441188        4.78180D-02   -2.30D-03    2
+      Virial theorem: -V/T =      1.985761
+@      MULPOP O      -0.77; H       0.38; H       0.38; 
  -----------------------------------------------------------------------------
-   3  Screening settings (-IFTHRS, DIFDEN)   -8    F
-   3    -74.5810656064        1.12080D-02   -1.86D-04    3
-      Virial theorem: -V/T =      1.986174
-@      MULPOP O      -0.76; H       0.39; H       0.37; 
+   3  Screening settings (-IFTHRS, DIFDEN)   -7    T
+   3    -74.5726718213        2.60412D-03   -3.28D-04    3
+      Virial theorem: -V/T =      1.985883
+@      MULPOP O      -0.76; H       0.38; H       0.38; 
  -----------------------------------------------------------------------------
-   4  Screening settings (-IFTHRS, DIFDEN)   -8    T
-   4    -74.5810828198        1.10331D-03   -1.72D-05    4
-      Virial theorem: -V/T =      1.986195
-@      MULPOP O      -0.76; H       0.39; H       0.37; 
+   4  Screening settings (-IFTHRS, DIFDEN)   -9    F
+   4    -74.5726727009        2.45567D-04   -8.80D-07    4
+      Virial theorem: -V/T =      1.985889
+@      MULPOP O      -0.76; H       0.38; H       0.38; 
  -----------------------------------------------------------------------------
-   5  Screening settings (-IFTHRS, DIFDEN)   -8    T
-   5    -74.5810829700        3.49426D-05   -1.50D-07    5
-      Virial theorem: -V/T =      1.986198
-@      MULPOP O      -0.76; H       0.39; H       0.37; 
+   5  Screening settings (-IFTHRS, DIFDEN)   -9    T
+   5    -74.5726727055        8.37647D-06   -4.58D-09    5
+      Virial theorem: -V/T =      1.985890
+@      MULPOP O      -0.76; H       0.38; H       0.38; 
  -----------------------------------------------------------------------------
    6  Screening settings (-IFTHRS, DIFDEN)  -11    F
-   6    -74.5810829701        3.04710D-06   -1.01D-10    6
-      Virial theorem: -V/T =      1.986198
-@      MULPOP O      -0.76; H       0.39; H       0.37; 
+   6    -74.5726727055        3.48178D-07   -4.90D-12    6
+      Virial theorem: -V/T =      1.985890
+@      MULPOP O      -0.76; H       0.38; H       0.38; 
  -----------------------------------------------------------------------------
    7  Screening settings (-IFTHRS, DIFDEN)  -14    F
-   7    -74.5810829701        5.12297D-07   -9.09D-13    7
-      Virial theorem: -V/T =      1.986198
-@      MULPOP O      -0.76; H       0.39; H       0.37; 
+   7    -74.5726727055        2.19339D-08   -2.84D-14    7
+      Virial theorem: -V/T =      1.985890
+@      MULPOP O      -0.76; H       0.38; H       0.38; 
  -----------------------------------------------------------------------------
    8  Screening settings (-IFTHRS, DIFDEN)  -14    T
-   8    -74.5810829701        5.40903D-08   -1.42D-14    8
-      Virial theorem: -V/T =      1.986198
-@      MULPOP O      -0.76; H       0.39; H       0.37; 
+   8    -74.5726727055        9.32206D-10   -1.42D-14    8
+      Virial theorem: -V/T =      1.985890
+@      MULPOP O      -0.76; H       0.38; H       0.38; 
  -----------------------------------------------------------------------------
    9  Screening settings (-IFTHRS, DIFDEN)  -14    T
-   9    -74.5810829701        2.27703D-09    0.00D+00    9
-      Virial theorem: -V/T =      1.986198
-@      MULPOP O      -0.76; H       0.39; H       0.37; 
+   9    -74.5726727055        3.39971D-10    0.00D+00    9
+      Virial theorem: -V/T =      1.985890
+@      MULPOP O      -0.76; H       0.38; H       0.38; 
  -----------------------------------------------------------------------------
   10  Screening settings (-IFTHRS, DIFDEN)  -14    T
-  10    -74.5810829701        1.16979D-09    2.84D-14   10
-      Virial theorem: -V/T =      1.986198
-@      MULPOP O      -0.76; H       0.39; H       0.37; 
+  10    -74.5726727055        1.33471D-10    0.00D+00   10
+      Virial theorem: -V/T =      1.985890
+@      MULPOP O      -0.76; H       0.38; H       0.38; 
  -----------------------------------------------------------------------------
   11  Screening settings (-IFTHRS, DIFDEN)  -14    T
-  11    -74.5810829701        4.44859D-10    0.00D+00   10
-      Virial theorem: -V/T =      1.986198
-@      MULPOP O      -0.76; H       0.39; H       0.37; 
- -----------------------------------------------------------------------------
-  12  Screening settings (-IFTHRS, DIFDEN)  -14    T
-  12    -74.5810829701        1.40857D-14   -2.84D-14   10
+  11    -74.5726727055        6.10389D-11    2.84D-14   10
 
- *** DIIS converged in  12 iterations !
-@    Converged SCF energy, gradient:    -74.581082970141    1.41D-14
+ *** DIIS converged in  11 iterations !
+@    Converged SCF energy, gradient:    -74.572672705510    6.10D-11
    - total time used in SIRFCK :              0.00 seconds
 
 
@@ -2527,13 +2369,13 @@ WARNING: but "Angstrom" was not specified in .mol file
 
  Sym       Hartree-Fock orbital energies
 
-  1    -20.23190239    -1.41391267    -0.84077967    -0.45588934    -0.42998419
-         0.86400766     1.22045505
+  1    -20.23216157    -1.41463476    -0.84451988    -0.45572478    -0.43063181
+         0.86680426     1.22726061
 
-    E(LUMO) :     0.86400766 au (symmetry 1)
-  - E(HOMO) :    -0.42998419 au (symmetry 1)
+    E(LUMO) :     0.86680426 au (symmetry 1)
+  - E(HOMO) :    -0.43063181 au (symmetry 1)
   ------------------------------------------
-    gap     :     1.29399184 au
+    gap     :     1.29743607 au
 
  >>> Writing SIRIFC interface file <<<
 
@@ -2546,13 +2388,13 @@ WARNING: but "Angstrom" was not specified in .mol file
 
 
  (SIRSTP) Close to convergence, ratio set to one.
- Energy difference; actual and predicted:   -1.37818D-02    0.00000D+00
+ Energy difference; actual and predicted:    7.58138D-03    0.00000D+00
 
 
  *** GEOMETRY WALK STEP ACCEPTED.
 
 
- >>>> CPU and wall time for SCF :       0.080       0.094
+ >>>> CPU and wall time for SCF :       1.547       2.776
 
 
                        .-----------------------------------.
@@ -2564,24 +2406,24 @@ WARNING: but "Angstrom" was not specified in .mol file
 @    Spatial symmetry:            1
 @    Total charge of molecule:    0
 
-@    Final HF energy:             -74.581082970141                 
-@    Nuclear repulsion:            12.710499292488
-@    Electronic energy:           -87.291582262630
+@    Final HF energy:             -74.572672705510                 
+@    Nuclear repulsion:            12.757236934713
+@    Electronic energy:           -87.329909640223
 
-@    Final gradient norm:           0.000000000000
-
- 
-     Date and time (Linux)  : Thu Nov  7 18:15:09 2013
-     Host name              : c18-14.local                            
-
-
-
- >>>> Total CPU  time used in SIRIUS :      0.08 seconds
- >>>> Total wall time used in SIRIUS :      0.10 seconds
+@    Final gradient norm:           0.000000000061
 
  
-     Date and time (Linux)  : Thu Nov  7 18:15:09 2013
-     Host name              : c18-14.local                            
+     Date and time (Linux)  : Fri Nov 29 19:44:38 2013
+     Host name              : c2-6.local                              
+
+
+
+ >>>> Total CPU  time used in SIRIUS :      1.55 seconds
+ >>>> Total wall time used in SIRIUS :      3.16 seconds
+
+ 
+     Date and time (Linux)  : Fri Nov 29 19:44:38 2013
+     Host name              : c2-6.local                              
 
 
                      .---------------------------------------.
@@ -2628,31 +2470,10 @@ WARNING: but "Angstrom" was not specified in .mol file
 
 
  
-     Date and time (Linux)  : Thu Nov  7 18:15:09 2013
-     Host name              : c18-14.local                            
+     Date and time (Linux)  : Fri Nov 29 19:44:38 2013
+     Host name              : c2-6.local                              
 
-
-            +---------------------------------------------------------+
-            ! Gradient elements calculated directly and from symmetry !
-            +---------------------------------------------------------+
-
-
-
-        Coordinate    Direct calc.     Tra.-rot. sym.   Difference
-        ----------------------------------------------------------
-
-        O    x       -0.1933976739    -0.1933976739     0.0000000000
-        O    y       -0.7181768478    -0.7123808181    -0.0057960298
-        O    z        0.2818030015     0.2795287351     0.0022742663
-        H    y        0.0024915525    -0.0033044691     0.0057960216
-        H    z       -0.0009817922     0.0012924742    -0.0022742663
-        H    y        0.7156852953     0.7156852872     0.0000000081
-
-
-
- >>> WARNING from TRAROT:
-
- Largest deviation from tra-rot symmetry is in gradient element  2:  5.80E-03
+ Largest deviation from tra-rot symmetry is in gradient element  4:  3.58E-10
 
 
    ***************************************************************************
@@ -2661,13 +2482,11 @@ WARNING: but "Angstrom" was not specified in .mol file
 
 
  
-     Date and time (Linux)  : Thu Nov  7 18:15:09 2013
-     Host name              : c18-14.local                            
+     Date and time (Linux)  : Fri Nov 29 19:44:42 2013
+     Host name              : c2-6.local                              
 
- WARNING: warnings have been issued, please check the output above !
-
- Largest deviation from orthonormality of OMOs:0.133227E-14
- - found for element    1   1
+ Largest deviation from orthonormality of OMOs:0.310862E-14
+ - found for element    6   6
 
 
        ********************************************************************
@@ -2682,9 +2501,9 @@ WARNING: but "Angstrom" was not specified in .mol file
  Dipole moment second derivatives:
  ---------------------------------
      Mode          X                Y                Z
-       1          0.068127        -0.659013         0.258586
-       2         -0.211489         0.233957        -0.091799
-       3         -0.263770        -0.117887         0.046259
+       1          0.083445         0.020685        -0.008117
+       2         -0.123263        -0.080377         0.031540
+       3         -0.366672        -0.483183         0.189596
 
  Nuclear spin-rotation tensor second derivatives for: O     
  ------------------------------------------------------------
@@ -2698,17 +2517,20 @@ WARNING: but "Angstrom" was not specified in .mol file
  ------------------------------------------------------------
 
  Mode   Jxmx    Jxmy    Jxmz    Jymx    Jymy    Jymz    Jzmx    Jzmy    Jzmz
-   1   261.862  45.799   0.056  67.736-446.926  -0.021   0.002  -0.015-132.995
-   2  3217.710********   0.049-947.0411106.928  -0.019  -0.039   0.0731502.130
-   3    73.392********  -0.057 142.357  82.777   0.017  -0.010   0.020-136.971
+   1  2346.631 0.000   0.141-206.736-290.223  -0.045  -0.101   0.058 226.582
+   2  1539.974 0.000   0.035-510.4211249.325  -0.014   0.039   0.0111297.307
+   3  -343.507-690.481  -0.071 -19.543-211.004   0.024   0.072  -0.057-291.518
 
  Nuclear spin-rotation tensor second derivatives for: H     
  ------------------------------------------------------------
 
  Mode   Jxmx    Jxmy    Jxmz    Jymx    Jymy    Jymz    Jzmx    Jzmy    Jzmz
-   1  2515.3824814.125  -0.123 222.295 644.296   0.038   0.007   0.023 756.291
-   2  -220.457-176.135   0.208  25.244 536.366  -0.071   0.038  -0.031 416.444
-   3  1310.051 143.570   0.041 486.392-442.902  -0.015   0.005  -0.005  64.213
+   1  2852.7592243.232   0.096 318.566-189.664  -0.038   0.102   0.071 382.340
+   2  1097.3611837.654   0.098 401.5571152.854  -0.035  -0.040  -0.0681151.521
+   3  -345.976 690.751  -0.061  18.881-217.847   0.020  -0.072  -0.033-293.872
+
+ WARNING: There are   1 negative frequencies at effective geometry
+ These are ignored in the following analysis
 
 
           *************************************************************
@@ -2722,9 +2544,8 @@ WARNING: but "Angstrom" was not specified in .mol file
 
    mode   cm-1     hartrees 
   --------------------------
-   1   8282.66     0.037739
-   2   9957.45     0.045369
-   3   5538.19     0.025234
+   1  10660.17     0.048571
+   2  10109.26     0.046061
 
 
 
@@ -2740,9 +2561,9 @@ WARNING: but "Angstrom" was not specified in .mol file
     Effective geometry       <P^(0)_2>_eff      Vibrationally corrected
  -----------------------------------------------------------------------
 
-  X        0.37370174           -0.00182530            0.37187645
-  Y        0.49133014           -0.00232840            0.48900174
-  Z       -0.19279329            0.00091364           -0.19187964
+  X        0.37370174           -0.00013140            0.37357035
+  Y        0.49133014           -0.00018092            0.49114923
+  Z       -0.19279329            0.00007099           -0.19272230
 
 
                           Nuclear spin-rotation tensors
@@ -2767,29 +2588,29 @@ Atom : H
     Effective geometry       <P^(0)_2>_eff      Vibrationally corrected
  -----------------------------------------------------------------------
 
- Jxmx      181.43980502           11.07715304          192.51695806
- Jymx      -51.45486157           -1.84289682          -53.29775839
- Jzmx       -0.00000023           -0.00016350           -0.00016374
- Jxmy     -278.14095628          -17.96279799         -296.10375427
- Jymy      158.33176139            2.17179893          160.50356033
- Jzmy       -0.00000248            0.00027507            0.00027259
- Jxmz       -0.00000083            0.00004352            0.00004269
- Jymz        0.00000024           -0.00003807           -0.00003783
- Jzmz      160.82244500            3.31295932          164.13540432
+ Jxmx      181.43980502           11.21109931          192.65090433
+ Jymx      -51.45486157           -2.10349227          -53.55835384
+ Jzmx       -0.00000023           -0.00016823           -0.00016846
+ Jxmy     -278.14095627          -11.72570419         -289.86666047
+ Jymy      158.33176139            2.90033841          161.23209980
+ Jzmy       -0.00000248            0.00019603            0.00019355
+ Jxmz       -0.00000083            0.00050395            0.00050312
+ Jymz        0.00000024           -0.00016853           -0.00016829
+ Jzmz      160.82244500            4.50244291          165.32488791
 
 Atom : H     
     Effective geometry       <P^(0)_2>_eff      Vibrationally corrected
  -----------------------------------------------------------------------
 
- Jxmx      183.95682269           15.59476306          199.55158575
- Jymx       52.13925312            3.52766504           55.66691816
- Jzmx        0.00000025            0.00016782            0.00016808
- Jxmy      281.29235765           17.74277873          299.03513638
- Jymy      158.77808073            1.55562130          160.33370203
- Jzmy        0.00000283           -0.00003767           -0.00003484
- Jxmz        0.00000035            0.00040535            0.00040570
- Jymz       -0.00000015           -0.00015747           -0.00015762
- Jzmz      161.66086545            4.35626247          166.01712792
+ Jxmx      183.95682269           11.32233259          195.27915528
+ Jymx       52.13925312            2.09511229           54.23436541
+ Jzmx        0.00000025            0.00016755            0.00016780
+ Jxmy      281.29235765           11.80547517          293.09783283
+ Jymy      158.77808073            2.89703879          161.67511953
+ Jzmy        0.00000282           -0.00000108            0.00000174
+ Jxmz        0.00000035            0.00056498            0.00056533
+ Jymz       -0.00000015           -0.00021117           -0.00021132
+ Jzmz      161.66086545            4.50816827          166.16903371
 
  Numerical differentiation complete.
 
@@ -2800,8 +2621,8 @@ Atom : H
 
 
 
- >>>> Total CPU  time used in ABACUS:   0.18 seconds
- >>>> Total wall time used in ABACUS:   0.26 seconds
+ >>>> Total CPU  time used in ABACUS:   0.19 seconds
+ >>>> Total wall time used in ABACUS:   4.22 seconds
 
 
                    .-------------------------------------------.
@@ -2809,7 +2630,7 @@ Atom : H
                    `-------------------------------------------'
 
 
-@  Geometry walk step no.   6:  Molecular energy =    -74.581083   Molecular gradient =  1.270236
+@  Geometry walk step no.   6:  Molecular energy =    -74.572673   Molecular gradient =  1.572013
 
 
                           .-----------------------------.
@@ -2828,8 +2649,8 @@ Atom : H
                      | Starting in Integral Section (HERMIT) |
                      `---------------------------------------'
 
- >>>> Total CPU  time used in HERMIT:   0.00 seconds
- >>>> Total wall time used in HERMIT:   0.01 seconds
+ >>>> Total CPU  time used in HERMIT:   0.01 seconds
+ >>>> Total wall time used in HERMIT:   0.44 seconds
 
 
                         .----------------------------------.
@@ -2857,65 +2678,65 @@ Atom : H
  Iter      Total energy        Error norm    Delta(E)  DIIS dim.
  -----------------------------------------------------------------------------
    1  Screening settings (-IFTHRS, DIFDEN)  -14    T
-   1    -74.5697380978        9.92969D-01    1.13D-02    1
-      Virial theorem: -V/T =      1.986082
+   1    -74.5516723680        7.09034D-01    2.10D-02    1
+      Virial theorem: -V/T =      1.985653
 @      MULPOP O      -0.76; H       0.38; H       0.38; 
  -----------------------------------------------------------------------------
    2  Screening settings (-IFTHRS, DIFDEN)   -6    F
-   2    -74.6255573528        2.04411D-01   -5.58D-02    2
-      Virial theorem: -V/T =      1.986366
-@      MULPOP O      -0.74; H       0.44; H       0.30; 
+   2    -74.6061933051        2.24813D-01   -5.45D-02    2
+      Virial theorem: -V/T =      1.985770
+@      MULPOP O      -0.76; H       0.38; H       0.38; 
  -----------------------------------------------------------------------------
    3  Screening settings (-IFTHRS, DIFDEN)   -6    T
-   3    -74.6301688790        4.44982D-02   -4.61D-03    3
-      Virial theorem: -V/T =      1.985774
-@      MULPOP O      -0.74; H       0.46; H       0.29; 
+   3    -74.6124315699        1.53730D-02   -6.24D-03    3
+      Virial theorem: -V/T =      1.984875
+@      MULPOP O      -0.76; H       0.38; H       0.38; 
  -----------------------------------------------------------------------------
    4  Screening settings (-IFTHRS, DIFDEN)   -8    F
-   4    -74.6304322930        4.81519D-03   -2.63D-04    4
-      Virial theorem: -V/T =      1.985494
-@      MULPOP O      -0.75; H       0.46; H       0.29; 
+   4    -74.6124509178        1.65490D-03   -1.93D-05    4
+      Virial theorem: -V/T =      1.984667
+@      MULPOP O      -0.77; H       0.38; H       0.38; 
  -----------------------------------------------------------------------------
    5  Screening settings (-IFTHRS, DIFDEN)   -8    T
-   5    -74.6304349726        2.12999D-04   -2.68D-06    5
-      Virial theorem: -V/T =      1.985465
-@      MULPOP O      -0.75; H       0.46; H       0.29; 
+   5    -74.6124510833        3.07239D-04   -1.65D-07    5
+      Virial theorem: -V/T =      1.984687
+@      MULPOP O      -0.77; H       0.38; H       0.38; 
  -----------------------------------------------------------------------------
    6  Screening settings (-IFTHRS, DIFDEN)  -10    F
-   6    -74.6304349769        2.94207D-05   -4.23D-09    6
-      Virial theorem: -V/T =      1.985465
-@      MULPOP O      -0.75; H       0.46; H       0.29; 
+   6    -74.6124510895        1.31355D-05   -6.26D-09    6
+      Virial theorem: -V/T =      1.984691
+@      MULPOP O      -0.77; H       0.38; H       0.38; 
  -----------------------------------------------------------------------------
    7  Screening settings (-IFTHRS, DIFDEN)  -10    T
-   7    -74.6304349769        1.19446D-06   -7.99D-11    7
-      Virial theorem: -V/T =      1.985465
-@      MULPOP O      -0.75; H       0.46; H       0.29; 
+   7    -74.6124510895        3.73406D-07   -8.63D-12    7
+      Virial theorem: -V/T =      1.984691
+@      MULPOP O      -0.77; H       0.38; H       0.38; 
  -----------------------------------------------------------------------------
    8  Screening settings (-IFTHRS, DIFDEN)  -14    F
-   8    -74.6304349769        2.04718D-07   -9.95D-14    8
-      Virial theorem: -V/T =      1.985465
-@      MULPOP O      -0.75; H       0.46; H       0.29; 
+   8    -74.6124510895        7.80816D-09   -2.39D-12    8
+      Virial theorem: -V/T =      1.984691
+@      MULPOP O      -0.77; H       0.38; H       0.38; 
  -----------------------------------------------------------------------------
    9  Screening settings (-IFTHRS, DIFDEN)  -14    T
-   9    -74.6304349769        9.51359D-09    0.00D+00    9
-      Virial theorem: -V/T =      1.985465
-@      MULPOP O      -0.75; H       0.46; H       0.29; 
+   9    -74.6124510895        1.19346D-08   -1.42D-14    9
+      Virial theorem: -V/T =      1.984691
+@      MULPOP O      -0.77; H       0.38; H       0.38; 
  -----------------------------------------------------------------------------
   10  Screening settings (-IFTHRS, DIFDEN)  -14    T
-  10    -74.6304349769        6.61227D-10   -1.42D-14   10
-      Virial theorem: -V/T =      1.985465
-@      MULPOP O      -0.75; H       0.46; H       0.29; 
+  10    -74.6124510895        2.56335D-09    0.00D+00   10
+      Virial theorem: -V/T =      1.984691
+@      MULPOP O      -0.77; H       0.38; H       0.38; 
  -----------------------------------------------------------------------------
   11  Screening settings (-IFTHRS, DIFDEN)  -14    T
-  11    -74.6304349769        1.73358D-10    1.42D-14   10
-      Virial theorem: -V/T =      1.985465
-@      MULPOP O      -0.75; H       0.46; H       0.29; 
+  11    -74.6124510895        3.84412D-10    1.42D-14   10
+      Virial theorem: -V/T =      1.984691
+@      MULPOP O      -0.77; H       0.38; H       0.38; 
  -----------------------------------------------------------------------------
   12  Screening settings (-IFTHRS, DIFDEN)  -14    T
-  12    -74.6304349769        2.19449D-14    0.00D+00   10
+  12    -74.6124510895        1.93152D-12   -1.42D-14   10
 
  *** DIIS converged in  12 iterations !
-@    Converged SCF energy, gradient:    -74.630434976950    2.19D-14
+@    Converged SCF energy, gradient:    -74.612451089520    1.93D-12
    - total time used in SIRFCK :              0.00 seconds
 
 
@@ -2928,13 +2749,13 @@ Atom : H
 
  Sym       Hartree-Fock orbital energies
 
-  1    -20.26567953    -1.46603019    -0.82976024    -0.49531996    -0.45265742
-         0.84737873     1.30641233
+  1    -20.26105688    -1.45280501    -0.82237800    -0.50299055    -0.45142045
+         0.96651674     1.08001248
 
-    E(LUMO) :     0.84737873 au (symmetry 1)
-  - E(HOMO) :    -0.45265742 au (symmetry 1)
+    E(LUMO) :     0.96651674 au (symmetry 1)
+  - E(HOMO) :    -0.45142045 au (symmetry 1)
   ------------------------------------------
-    gap     :     1.30003615 au
+    gap     :     1.41793719 au
 
  >>> Writing SIRIFC interface file <<<
 
@@ -2947,13 +2768,13 @@ Atom : H
 
 
  (SIRSTP) Close to convergence, ratio set to one.
- Energy difference; actual and predicted:   -4.93520D-02    0.00000D+00
+ Energy difference; actual and predicted:   -3.97784D-02    0.00000D+00
 
 
  *** GEOMETRY WALK STEP ACCEPTED.
 
 
- >>>> CPU and wall time for SCF :       0.020       0.034
+ >>>> CPU and wall time for SCF :       0.032       1.280
 
 
                        .-----------------------------------.
@@ -2965,24 +2786,24 @@ Atom : H
 @    Spatial symmetry:            1
 @    Total charge of molecule:    0
 
-@    Final HF energy:             -74.630434976950                 
+@    Final HF energy:             -74.612451089520                 
 @    Nuclear repulsion:            12.755832880530
-@    Electronic energy:           -87.386267857479
+@    Electronic energy:           -87.368283970050
 
-@    Final gradient norm:           0.000000000000
-
- 
-     Date and time (Linux)  : Thu Nov  7 18:15:09 2013
-     Host name              : c18-14.local                            
-
-
-
- >>>> Total CPU  time used in SIRIUS :      0.02 seconds
- >>>> Total wall time used in SIRIUS :      0.04 seconds
+@    Final gradient norm:           0.000000000002
 
  
-     Date and time (Linux)  : Thu Nov  7 18:15:09 2013
-     Host name              : c18-14.local                            
+     Date and time (Linux)  : Fri Nov 29 19:44:45 2013
+     Host name              : c2-6.local                              
+
+
+
+ >>>> Total CPU  time used in SIRIUS :      0.04 seconds
+ >>>> Total wall time used in SIRIUS :      1.66 seconds
+
+ 
+     Date and time (Linux)  : Fri Nov 29 19:44:45 2013
+     Host name              : c2-6.local                              
 
 
                      .---------------------------------------.
@@ -3003,8 +2824,8 @@ Atom : H
 
 
  
-     Date and time (Linux)  : Thu Nov  7 18:15:09 2013
-     Host name              : c18-14.local                            
+     Date and time (Linux)  : Fri Nov 29 19:44:45 2013
+     Host name              : c2-6.local                              
 
 
    ***************************************************************************
@@ -3013,28 +2834,27 @@ Atom : H
 
 
  
-     Date and time (Linux)  : Thu Nov  7 18:15:09 2013
-     Host name              : c18-14.local                            
+     Date and time (Linux)  : Fri Nov 29 19:44:45 2013
+     Host name              : c2-6.local                              
 
 
  CPU time statistics for ABACUS
  ------------------------------
 
- REST       00:00:01     *** %
 
 
 
  >>>> Total CPU  time used in ABACUS:   0.00 seconds
- >>>> Total wall time used in ABACUS:   0.00 seconds
+ >>>> Total wall time used in ABACUS:   0.05 seconds
 
 
                    .-------------------------------------------.
                    | End of Static Property Section (ABACUS) - |
                    `-------------------------------------------'
 
- >>>> Total CPU  time used in DALTON:   2.97 seconds
- >>>> Total wall time used in DALTON:   8.13 seconds
+ >>>> Total CPU  time used in DALTON:  12.98 seconds
+ >>>> Total wall time used in DALTON:  1 minute   8 seconds
 
  
-     Date and time (Linux)  : Thu Nov  7 18:15:09 2013
-     Host name              : c18-14.local                            
+     Date and time (Linux)  : Fri Nov 29 19:44:45 2013
+     Host name              : c2-6.local                              

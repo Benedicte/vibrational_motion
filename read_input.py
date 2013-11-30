@@ -127,7 +127,7 @@ def read_polari(filename, nm):
     f.close()
     return second_deriv, property_type
 
-def read_spinrot(filename, natom, nm):
+def read_spinrot1(filename, natom, nm):
     """Imports things needed from the DALTON.OUT that I need"""
     
     f = open(filename, 'r')
@@ -169,7 +169,60 @@ def read_spinrot(filename, natom, nm):
 
     f.close()
     return second_deriv, property_type
-  
+
+def read_spinrot(filename, natom, nm):
+    """Imports things needed from the DALTON.OUT that I need"""
+    
+    f = open(filename, 'r')
+    second_deriv = zeros((natom,nm,3,3))
+    property_type = 0
+    dummy = []
+    values = zeros((9))
+    
+    finished = 0
+    while (finished == 0):
+        cur_line = f.readline()
+        if re.search('second derivatives for',cur_line):
+            line_split = cur_line.split()
+            property_type = line_split[0] + line_split[1]
+            finished = 1
+            
+    for atom in range(natom):
+
+        dummy = f.readline()
+        dummy = f.readline()
+        dummy = f.readline()
+            
+        if atom != 0:
+            dummy = f.readline()
+            dummy = f.readline()
+                                
+        for mode in range(nm):
+            mline = f.readline()
+            mline = mline.replace('********', '0.000') #This is just a theory
+            mline = mline.replace(' ', '')
+            
+            index1 = 1 #Before the decimal place
+            index2 = 0 #Which value we are at
+                
+            for i in range(len(mline)):                
+                if (mline[i] == '.'):
+                    values[index2] = mline[index1:i+4]
+                    index2 = index2 + 1
+                    index1 = i+4
+            second_deriv[atom][mode][0][0]= values[0]
+            second_deriv[atom][mode][0][1]= values[1] 
+            second_deriv[atom][mode][0][2]= values[2] 
+            second_deriv[atom][mode][1][0]= values[3]
+            second_deriv[atom][mode][1][1]= values[4]  
+            second_deriv[atom][mode][1][2]= values[5]
+            second_deriv[atom][mode][2][0]= values[6]
+            second_deriv[atom][mode][2][1]= values[7]  
+            second_deriv[atom][mode][2][2]= values[8] 
+
+    f.close()
+    return second_deriv, property_type
+      
 def read_nucquad(filename, natom, nm):
     
     """Imports things needed from the DALTON.OUT that I need"""

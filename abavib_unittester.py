@@ -333,16 +333,18 @@ class spin_rotation_constants_test(abavib_test): #Issues with this and input rea
         super(spin_rotation_constants_test, self).setUp()
         spinrot_deriv, self.prop_type = ri.read_spinrot(self.input_name + "SPIN-ROT", self.n_atoms, self.n_nm)
         self.uncorrected_values, self.corrections, self.corrected_values = ri.read_DALTON_values_4d_full(self.input_name + "SPIN-ROT", self.n_atoms)
-        self.spinrot_corrections, self.spinrot = av.get_4D_property(self.prop_type, spinrot_deriv, self.uncorrected_values, self.n_nm, self.n_atoms, self.eig, True)
-   
-    def test_spin_rotation_correctiond_test(self): # Fro h2o we have some weird stars for the derivative
+        self.spinrot_corrections, self.spinrot = av.get_4D_property(self.prop_type, spinrot_deriv, self.uncorrected_values, self.n_nm, self.n_atoms, self.eig, True)   
+        print self.corrections
+        
+    def test_spin_rotation_corrections_test(self): # For h2o we have some weird stars for the derivative
         if(self.molecule == "h2o"):
             self.assertTrue(np.allclose(self.spinrot_corrections, self.corrections, rtol=0.01, atol=0.0005))
-            
+            m = np.divide(self.spinrot_corrections,self.corrections) #Works for all but one value
+            print m
         elif(self.molecule == "h2o2"):
             self.assertTrue(np.allclose(self.spinrot_corrections, self.corrections, rtol=0.01, atol=0.0005)) 
             
-    def test_spin_rotation_constants_test(self): # I reaaally don't understand this one
+    def test_spin_rotation_constants_test(self): 
         if(self.molecule == "h2o"):
             self.assertTrue(np.allclose(self.corrected_values, self.spinrot, rtol=0.05, atol=0.005))
             
