@@ -65,6 +65,7 @@ class abavib_test(unittest.TestCase):
             ,[-0.316368, -0.054958, 0.073029,0,0,0]])
       
             self.eig = np.array([0.002359142, 0.0021216157, 1])
+
         
         self.input_name = "input_" + self.molecule + "/"
         self.mol_name = self.input_name + 'MOLECULE.INP'
@@ -373,6 +374,7 @@ class magnetizability_test(abavib_test):
 
     def setUp(self):
         super(magnetizability_test, self).setUp()
+        self.eig = np.array([0.0014242321, 0.0020583462, 0.0006367548])
         magnet_deriv, g_tensor_deriv = ri.read_magnet_like(self.input_name + "MAGNET", self.n_nm)    
         self.uncorrected_values, self.values_correction, self.corrected_values = ri.read_DALTON_values_3d_reduced(self.input_name + "MAGNET")
         self.magnet_correction, self.magnet = av.get_3D_property("MAGNET", magnet_deriv, self.uncorrected_values, self.n_nm, self.eig, True)         
@@ -396,12 +398,10 @@ class g_factor_test(abavib_test):
    
     def setUp(self):
         super(g_factor_test, self).setUp()
-        magnet_deriv, g_tensor_deriv = ri.read_magnet(self.input_name + "MAGNET", self.n_nm)
+        magnet_deriv, g_tensor_deriv = ri.read_magnet_like(self.input_name + "MAGNET", self.n_nm)
         self.uncorrected_values, self.values_correction, self.corrected_values = ri.read_DALTON_values_3d_full(self.input_name + "MAGNET")
         
         self.g_factor_correction, self.g_factor = av.get_3D_property("GFACTOR", magnet_deriv, self.uncorrected_values, self.n_nm, self.eig, True)
-        print self.values_correction
-        print self.g_factor_correction
                 
     def test_g_factor_corrections(self): 
         
