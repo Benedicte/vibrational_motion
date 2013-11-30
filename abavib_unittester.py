@@ -10,7 +10,7 @@ class abavib_test(unittest.TestCase):
     #The reason we use this one, is because there are any number of eigenvectors which are correct eigenvectors, for the purpose of testing
     #we use the same one that DALTON operates with
     
-        self.molecule = "h2o"
+        self.molecule = "h2o2"
         
         if(self.molecule == "h2o2"):
 
@@ -334,7 +334,6 @@ class spin_rotation_constants_test(abavib_test): #Issues with this and input rea
         spinrot_deriv, self.prop_type = ri.read_spinrot(self.input_name + "SPIN-ROT", self.n_atoms, self.n_nm)
         self.uncorrected_values, self.corrections, self.corrected_values = ri.read_DALTON_values_4d_full(self.input_name + "SPIN-ROT", self.n_atoms)
         self.spinrot_corrections, self.spinrot = av.get_4D_property(self.prop_type, spinrot_deriv, self.uncorrected_values, self.n_nm, self.n_atoms, self.eig, True)   
-        print self.corrections
         
     def test_spin_rotation_corrections_test(self): # For h2o we have some weird stars for the derivative
         if(self.molecule == "h2o"):
@@ -404,19 +403,13 @@ class g_factor_test(abavib_test):
         self.uncorrected_values, self.values_correction, self.corrected_values = ri.read_DALTON_values_3d_full(self.input_name + "MAGNET")
         
         self.g_factor_correction, self.g_factor = av.get_3D_property("GFACTOR", magnet_deriv, self.uncorrected_values, self.n_nm, self.eig, True)
+        
+        print self.g_factor_correction
+        print self.values_correction
                 
     def test_g_factor_corrections(self): 
-        
-        if(self.molecule == "h2o"):
-            self.assertTrue(np.allclose(self.g_factor_correction, self.values_correction, rtol=0.03, atol=0.003))
-            
-        elif(self.molecule == "h2o2"):
-            
-            correct_g_factor = np.array([[-0.02776227,-0.00001852,0.00232808]
-                                        ,[-0.00000333,-0.00035603,-0.00000795]
-                                        ,[0.00046495,-0.00000757,0.00136186]])
-            
-            self.assertTrue(np.allclose(self.g_factor_correction, self.values_correction, rtol=0.03, atol=0.003))
+
+        self.assertTrue(np.allclose(self.g_factor_correction, self.values_correction, rtol=0.03, atol=0.003))
 
     def test_g_factor_values(self):
         
