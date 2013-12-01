@@ -399,10 +399,10 @@ class g_factor_test(abavib_test):
    
     def setUp(self):
         super(g_factor_test, self).setUp()
-        magnet_deriv, g_tensor_deriv = ri.read_magnet_like(self.input_name + "MAGNET", self.n_nm)
+        magnet_deriv, g_tensor_deriv = ri.read_magnet(self.input_name + "MAGNET", self.n_nm)
         self.uncorrected_values, self.values_correction, self.corrected_values = ri.read_DALTON_values_3d_full(self.input_name + "MAGNET")
         
-        self.g_factor_correction, self.g_factor = av.get_3D_property("GFACTOR", magnet_deriv, self.uncorrected_values, self.n_nm, self.eig, True)
+        self.g_factor_correction, self.g_factor = av.get_3D_property("GFACTOR", g_tensor_deriv, self.uncorrected_values, self.n_nm, self.eig, True)
         
         print self.g_factor_correction
         print self.values_correction

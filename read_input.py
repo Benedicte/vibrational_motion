@@ -39,7 +39,7 @@ def read_mol_quad(filename, nm):
     f.close()
     return second_deriv, "MOLQUAD"
     
-def read_magnet_like(filename, nm):
+def read_magnet(filename, nm):
     
     f = open(filename, 'r')
     second_deriv_magnet = zeros((nm,3,3))
@@ -48,10 +48,10 @@ def read_magnet_like(filename, nm):
     dummy = []
     
     finished = 0
-    while (finished != 2):
+    while (finished == 0):
         cur_line = f.readline()
-        if re.search('second derivatives',cur_line):
-            finished = finished + 1
+        if re.search('Magnetizability tensor second derivatives',cur_line):
+            finished = 1
     
     dummy = f.readline()
     dummy = f.readline()
@@ -90,7 +90,7 @@ def read_magnet_like(filename, nm):
         
     f.close()
     
-    return second_deriv_magnet, second_deriv_g    
+    return second_deriv_magnet, second_deriv_g  
 
 def read_polari(filename, nm):
     """Imports things needed from the DALTON.OUT that I need"""
