@@ -10,7 +10,7 @@ class abavib_test(unittest.TestCase):
     #The reason we use this one, is because there are any number of eigenvectors which are correct eigenvectors, for the purpose of testing
     #we use the same one that DALTON operates with
     
-        self.molecule = "h2o2"
+        self.molecule = "fluoromethane"
         
         if(self.molecule == "h2o2"):
 
@@ -65,23 +65,25 @@ class abavib_test(unittest.TestCase):
             ,[-0.316368, -0.054958, 0.073029,0,0,0]])
       
             self.eig = np.array([0.002359142, 0.0021216157, 1])
+            
+        elif(self.molecule == "fluoromethane"):
+            self.eig = np.array([0.000156325, 0.000052708, 0.000083924, 0.000087366, 0.000049731, 0.000036663, 0.000105884, 0.000086732, 0.000035581])
 
-        
         self.input_name = "input_" + self.molecule + "/"
         self.mol_name = self.input_name + 'MOLECULE.INP'
-        self.cff_name = self.input_name + 'cubic_force_field'
-        self.coordinates, self.masses,  self.num_atoms_list \
-            ,self.charge_list, self.n_atoms = av.read_molecule(self.mol_name)
-        self.n_coordinates = self.n_atoms * 3  
-        self.n_nm = self.n_coordinates - 6 
-        hessian_name = self.input_name + 'hessian'
-        self.hessian = av.read_hessian(hessian_name, self.n_atoms*3)
-        hessian_t = self.hessian.transpose()
-        hessian_temp = np.add(self.hessian, hessian_t) 
-        self.hessian = np.subtract(hessian_temp , np.diag(self.hessian.diagonal()))
-        self.eig1, self.eigvec1, self.freq, self.eigvec_full1 = \
-            av.fundamental_freq(self.hessian, self.num_atoms_list, \
-            self.charge_list, self.coordinates, self.n_atoms)#Check out the 1s i made
+        #self.cff_name = self.input_name + 'cubic_force_field'
+        #self.coordinates, self.masses,  self.num_atoms_list \
+        #    ,self.charge_list, self.n_atoms = av.read_molecule(self.mol_name)
+        #self.n_coordinates = self.n_atoms * 3  
+        #self.n_nm = self.n_coordinates - 6 
+        #hessian_name = self.input_name + 'hessian'
+        #self.hessian = av.read_hessian(hessian_name, self.n_atoms*3)
+        #hessian_t = self.hessian.transpose()
+        #hessian_temp = np.add(self.hessian, hessian_t) 
+        #self.hessian = np.subtract(hessian_temp , np.diag(self.hessian.diagonal()))
+        #self.eig1, self.eigvec1, self.freq, self.eigvec_full1 = \
+        #    av.fundamental_freq(self.hessian, self.num_atoms_list, \
+        #    self.charge_list, self.coordinates, self.n_atoms)#Check out the 1s i made
         #self.cubic_force_field = av.read_cubic_force_field(self.cff_name,#Remember to switch to ri. for h2o2\  
          #self.n_coordinates) 
         #self.cff_norm, self.cff_norm_reduced = av.to_normal_coordinates_3D(self.cubic_force_field, self.eigvec_full, self.n_atoms)
@@ -376,7 +378,7 @@ class magnetizability_test(abavib_test):
     def setUp(self):
         super(magnetizability_test, self).setUp()
         self.eig = np.array([0.0014242321, 0.0020583462, 0.0006367548])
-        magnet_deriv, g_tensor_deriv = ri.read_magnet_like(self.input_name + "MAGNET", self.n_nm)    
+        magnet_deriv, g_tensor_deriv = ri.read_magnet(self.input_name + "MAGNET", self.n_nm)    
         self.uncorrected_values, self.values_correction, self.corrected_values = ri.read_DALTON_values_3d_reduced(self.input_name + "MAGNET")
         self.magnet_correction, self.magnet = av.get_3D_property("MAGNET", magnet_deriv, self.uncorrected_values, self.n_nm, self.eig, True)         
     def test_magnetizability_corrections(self):
@@ -424,7 +426,9 @@ class optical_rotation_test(abavib_test):
         super(optical_rotation_test, self).setUp()
         optrot_deriv = ri.read_optrot(self.input_name + "OPTROT", self.n_nm)    
         self.uncorrected_values, self.values_correction, self.corrected_values = ri.read_DALTON_values_3d_reduced(self.input_name + "OPTROT")
-        self.optrot_correction, self.optrot = av.get_3D_property("OPTROT", optrot_deriv, self.uncorrected_values, self.n_nm, self.eig, True)  
+        self.optrot_correction, self.optrot = av.get_3D_property("OPTROT", optrot_deriv, self.uncorrected_values, self.n_nm, self.eig, True)
+        print self.optrot_correction
+        print self.values_correction  
                
     def optical_rotation_corrections(self):
         

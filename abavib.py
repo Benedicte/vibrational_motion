@@ -91,7 +91,11 @@ def read_molecule(filename):
     
 def masswt_hessian(num_atoms_list, charge_list): 
     """returns mass (array)"""
-    atomicmass = {8.0: 15.994915, 1.0: 1.007825}
+    atomicmass = {9.0:18.998403, 8.0: 15.994915, 1.0: 1.007825}
+    
+    deuterium = 2.014102
+    tritinum = 3.016049
+    
     m_e = 1822.8884796 # conversion factor from a.m.u to a.u 
 
     M = zeros((3*sum(num_atoms_list),3*sum(num_atoms_list)))
