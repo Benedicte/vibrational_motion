@@ -88,7 +88,31 @@ def read_molecule(filename):
     coordinates = array(coordinates, double)
 
     return coordinates, mass, num_atoms_list, charge_list, sum(num_atoms_list)
+
+def mass_hessian(masses):
     
+    masses = array(masses)
+    m = zeros(3*len(masses))
+    m_e = 1822.8884796 # conversion factor from a.m.u to a.u 
+    identity_matrix = identity(3*len(masses))
+    
+    index = 0
+    for i in range(len(masses)):
+        m[index] = masses[i]
+        index = index +1
+        m[index] = masses[i]
+        index = index +1
+        m[index] = masses[i]
+        index = index +1
+        
+    m = m * m_e
+    m = 1/(sqrt(m))
+    
+    M = identity_matrix*m
+    print M
+    
+    return M
+        
 def masswt_hessian(num_atoms_list, charge_list): 
     """returns mass (array)"""
     atomicmass = {9.0:18.998403, 8.0: 15.994915, 1.0: 1.007825}
@@ -139,10 +163,10 @@ def read_eigenvector(filename, n_atoms):
     f.close()
     return eigenvector
     
-def fundamental_freq(hessian, num_atoms_list, charge_list, molecule, n_atoms): 
+def fundamental_freq(hessian, num_atoms_list, charge_list, molecule, n_atoms, masses): 
     """returns eigentvalues(array)"""
    
-    M_I = masswt_hessian(num_atoms_list, charge_list)
+    M_I = mass_hessian(masses)
     n_nm = 3 * n_atoms - 6
     linear = 0 
 

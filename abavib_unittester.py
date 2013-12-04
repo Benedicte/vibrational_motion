@@ -71,24 +71,24 @@ class abavib_test(unittest.TestCase):
 
         self.input_name = "input_" + self.molecule + "/"
         self.mol_name = self.input_name + 'MOLECULE.INP'
-        #self.cff_name = self.input_name + 'cubic_force_field'
-        #self.coordinates, self.masses,  self.num_atoms_list \
-        #    ,self.charge_list, self.n_atoms = av.read_molecule(self.mol_name)
-        #self.n_coordinates = self.n_atoms * 3  
-        #self.n_nm = self.n_coordinates - 6 
-        #hessian_name = self.input_name + 'hessian'
-        #self.hessian = av.read_hessian(hessian_name, self.n_atoms*3)
-        #hessian_t = self.hessian.transpose()
-        #hessian_temp = np.add(self.hessian, hessian_t) 
-        #self.hessian = np.subtract(hessian_temp , np.diag(self.hessian.diagonal()))
-        #self.eig1, self.eigvec1, self.freq, self.eigvec_full1 = \
-        #    av.fundamental_freq(self.hessian, self.num_atoms_list, \
-        #    self.charge_list, self.coordinates, self.n_atoms)#Check out the 1s i made
-        #self.cubic_force_field = av.read_cubic_force_field(self.cff_name,#Remember to switch to ri. for h2o2\  
-         #self.n_coordinates) 
-        #self.cff_norm, self.cff_norm_reduced = av.to_normal_coordinates_3D(self.cubic_force_field, self.eigvec_full, self.n_atoms)
-        #effective_geometry_norm = av.effective_geometry(self.cff_norm_reduced, self.freq, self.n_atoms)
-        #self.effective_geometry_cart = av.to_cartessian_coordinates(effective_geometry_norm, self.n_atoms, self.eigvec)
+        self.cff_name = self.input_name + 'cubic_force_field'
+        self.coordinates, self.masses,  self.num_atoms_list \
+            ,self.charge_list, self.n_atoms = av.read_molecule(self.mol_name)
+        self.n_coordinates = self.n_atoms * 3  
+        self.n_nm = self.n_coordinates - 6 
+        hessian_name = self.input_name + 'hessian'
+        self.hessian = av.read_hessian(hessian_name, self.n_atoms*3)
+        hessian_t = self.hessian.transpose()
+        hessian_temp = np.add(self.hessian, hessian_t) 
+        self.hessian = np.subtract(hessian_temp , np.diag(self.hessian.diagonal()))
+        self.eig1, self.eigvec1, self.freq, self.eigvec_full1 = \
+            av.fundamental_freq(self.hessian, self.num_atoms_list, \
+            self.charge_list, self.coordinates, self.n_atoms, self.masses)#Check out the 1s i made
+        self.cubic_force_field = ri.read_cubic_force_field(self.cff_name,#Remember to switch to av. for h2o\  
+         self.n_coordinates) 
+        self.cff_norm, self.cff_norm_reduced = av.to_normal_coordinates_3D(self.cubic_force_field, self.eigvec_full, self.n_atoms)
+        effective_geometry_norm = av.effective_geometry(self.cff_norm_reduced, self.freq, self.n_atoms)
+        self.effective_geometry_cart = av.to_cartessian_coordinates(effective_geometry_norm, self.n_atoms, self.eigvec)
         
 class read_molecule_test(abavib_test):        
     def test_coordinates(self):
@@ -341,7 +341,6 @@ class spin_rotation_constants_test(abavib_test): #Issues with this and input rea
         if(self.molecule == "h2o"):
             self.assertTrue(np.allclose(self.spinrot_corrections, self.corrections, rtol=0.01, atol=0.0005))
             m = np.divide(self.spinrot_corrections,self.corrections) #Works for all but one value
-            print m
         elif(self.molecule == "h2o2"):
             self.assertTrue(np.allclose(self.spinrot_corrections, self.corrections, rtol=0.01, atol=0.0005)) 
             
@@ -405,9 +404,6 @@ class g_factor_test(abavib_test):
         self.uncorrected_values, self.values_correction, self.corrected_values = ri.read_DALTON_values_3d_full(self.input_name + "MAGNET")
         
         self.g_factor_correction, self.g_factor = av.get_3D_property("GFACTOR", g_tensor_deriv, self.uncorrected_values, self.n_nm, self.eig, True)
-        
-        print self.g_factor_correction
-        print self.values_correction
                 
     def test_g_factor_corrections(self): 
 
@@ -426,9 +422,7 @@ class optical_rotation_test(abavib_test):
         super(optical_rotation_test, self).setUp()
         optrot_deriv = ri.read_optrot(self.input_name + "OPTROT", self.n_nm)    
         self.uncorrected_values, self.values_correction, self.corrected_values = ri.read_DALTON_values_3d_reduced(self.input_name + "OPTROT")
-        self.optrot_correction, self.optrot = av.get_3D_property("OPTROT", optrot_deriv, self.uncorrected_values, self.n_nm, self.eig, True)
-        print self.optrot_correction
-        print self.values_correction  
+        self.optrot_correction, self.optrot = av.get_3D_property("OPTROT", optrot_deriv, self.uncorrected_values, self.n_nm, self.eig, True) 
                
     def optical_rotation_corrections(self):
         
