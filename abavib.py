@@ -56,7 +56,7 @@ def read_molecule(filename):
     f = open(filename, 'r')
     charge_list = []
     num_atoms_list = []
-    atomicmass1 = {'O': 15.9994, 'H': 1.00794, 'C': 12.0107, 'F': 18.998403, 'D':2.01410178, 'T':3.0160492}
+    atomicmass1 = {'O': 15.9994, 'H': 1.00794}
 
     coordinates = [] # contains the [x,y,z] coordinates of the input atoms
     mass = []   # contains the corresponding masses of the atoms
@@ -79,7 +79,8 @@ def read_molecule(filename):
         for i in range(num_atoms):
             mline = f.readline().split()
             mass.append(atomicmass1[mline[0]])
-            coordinates.append(mline[1:4])
+            coordinates.append(mline[1:])
+
         atomtypes -= 1
 
     f.close()
@@ -106,31 +107,6 @@ def masswt_hessian(num_atoms_list, charge_list):
             s += 1
     return M
 
-def mass_hessian(masses):
-    
-    masses = array(masses)
-    m = zeros(3*len(masses))
-    m_e = 1822.8884796 # conversion factor from a.m.u to a.u 
-    identity_matrix = identity(3*len(masses))
-    
-    index = 0
-    for i in range(len(masses)):
-        m[index] = masses[i]
-        index = index +1
-        m[index] = masses[i]
-        index = index +1
-        m[index] = masses[i]
-        index = index +1
-        
-    m = m * m_e
-    m = 1/(sqrt(m))
-    
-    M = identity_matrix*m
-    print M
-    
-    return M
-    
-    
 def read_cubic_force_field(filename, n_coords):
     """returns the cubic force field (3d array)"""
     dummy = []
