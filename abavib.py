@@ -314,7 +314,7 @@ def get_3D_property(property_type, pre_property, uncorrected_property, nm, eig, 
     if (write_to_file == True):
 		
         filename = "output/" + property_type
-        f = open(filename, "w")
+        f = open(filename, "a")
 		
         line1 = str(corrected_property[0]).strip('[]')
         line2 = str(corrected_property[1]).strip('[]')
@@ -347,7 +347,7 @@ def get_4D_property(property_type, pre_property, uncorrected_property, n_nm, n_a
     
     if (write_to_file == True):
         filename = "output/" + property_type
-        f = open(filename, "w")
+        f = open(filename, "a")
         
         for atom in range(n_atom):
             line1 = str(corrected_property[atom][0]).strip('[]')
@@ -384,7 +384,7 @@ def get_dipole_moment(dipole_moment, n_nm, eig, pre_dipole_moment, write_to_file
     if (write_to_file == True):
 		
         filename = os.path.abspath("/home/benedicte/Dropbox/master/The Program/output/Dipole Moment")
-        f = open(filename, "w")
+        f = open(filename, "a")
         line = str(dipole_moment_corrected).strip('[]')
         f.write(line + "\n")
         f.close()

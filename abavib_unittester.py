@@ -10,7 +10,7 @@ class abavib_test(unittest.TestCase):
     #The reason we use this one, is because there are any number of eigenvectors which are correct eigenvectors, for the purpose of testing
     #we use the same one that DALTON operates with
     
-        self.molecule = "h2o"
+        self.molecule = "h2o2"
         
         if(self.molecule == "h2o2"):
 
