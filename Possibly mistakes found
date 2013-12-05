@@ -1,0 +1,4 @@
+
+Cannot use London orbitals when calculating .MAGNET and .GFACTOR
+
+There seems to be a switch between the derivative of the OPTROT and the output of the OPTROT

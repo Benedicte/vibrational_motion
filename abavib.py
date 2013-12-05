@@ -56,8 +56,8 @@ def read_molecule(filename):
     f = open(filename, 'r')
     charge_list = []
     num_atoms_list = []
-    atomicmass1 = {'O': 15.9994, 'H': 1.00794}
-
+    atomicmass1 = {'O': 15.9994, 'H': 1.00794, 'C':12.0107, 'D':2.013553212724,'T':3.0160492, 'F':18.998403}
+    
     coordinates = [] # contains the [x,y,z] coordinates of the input atoms
     mass = []   # contains the corresponding masses of the atoms
 
@@ -79,57 +79,45 @@ def read_molecule(filename):
         for i in range(num_atoms):
             mline = f.readline().split()
             mass.append(atomicmass1[mline[0]])
-            coordinates.append(mline[1:])
+            coordinates.append(mline[1:4])
 
         atomtypes -= 1
 
     f.close()
-
     coordinates = array(coordinates, double)
 
     return coordinates, mass, num_atoms_list, charge_list, sum(num_atoms_list)
 
-def read_dalton(): 
-    "For testing purposes"
+def mass_hessian(masses):
     
-    dummy = []
-    cubic_force_field = zeros((12, 12, 12))
+    masses = array(masses)
+    m = zeros(3*len(masses))
+    m_e = 1822.8884796 # conversion factor from a.m.u to a.u 
+    identity_matrix = identity(3*len(masses))
     
-    f = open("input/cff", 'r')
+    index = 0
+    for i in range(len(masses)):
+        m[index] = masses[i]
+        index = index +1
+        m[index] = masses[i]
+        index = index +1
+        m[index] = masses[i]
+        index = index +1
+        
+    m = m * m_e
+    m = 1/(sqrt(m))
     
-    for i in range(12):
-        dummy = f.readline()
-        dummy = f.readline()
-        dummy = f.readline()
-        dummy = f.readline()
-        dummy = f.readline()
-        dummy = f.readline()
-        for j in range(12):
-            a = f.readline().split()
-            for k in range(1,6):
-                cubic_force_field[i,j,k-1] = float(a[k])
-        dummy = f.readline()
-        dummy = f.readline()
+    M = identity_matrix*m
     
-        for j in range(12):
-            a = f.readline().split()
-            for k in range(1,6):
-                cubic_force_field[i,j,k+4] = float(a[k])
-                
-        dummy = f.readline()
-        dummy = f.readline()            
-                
-        for j in range(12):
-            a = f.readline().split()
-            for k in range(1,3):
-                cubic_force_field[i,j,k+9] = float(a[k])  
-  
-    f.close()
-    return cubic_force_field
-    
+    return M
+        
 def masswt_hessian(num_atoms_list, charge_list): 
     """returns mass (array)"""
-    atomicmass = {8.0: 15.994915, 1.0: 1.007825}
+    atomicmass = {9.0:18.998403, 8.0: 15.994915, 1.0: 1.007825}
+    
+    deuterium = 2.014102
+    tritinum = 3.016049
+    
     m_e = 1822.8884796 # conversion factor from a.m.u to a.u 
 
     M = zeros((3*sum(num_atoms_list),3*sum(num_atoms_list)))
@@ -173,10 +161,10 @@ def read_eigenvector(filename, n_atoms):
     f.close()
     return eigenvector
     
-def fundamental_freq(hessian, num_atoms_list, charge_list, molecule, n_atoms): 
+def fundamental_freq(hessian, num_atoms_list, charge_list, molecule, n_atoms, masses): 
     """returns eigentvalues(array)"""
    
-    M_I = masswt_hessian(num_atoms_list, charge_list)
+    M_I = mass_hessian(masses)
     n_nm = 3 * n_atoms - 6
     linear = 0 
 
@@ -186,12 +174,16 @@ def fundamental_freq(hessian, num_atoms_list, charge_list, molecule, n_atoms):
     hessian_proj = dot(M_I.transpose(), hessian_trans_rot(hessian, molecule, n_nm, n_atoms))
     hessian_proj = dot(hessian_proj, M_I)
     v, La = linalg.eig(hessian_proj)
-        
+
     v_reduced = v[:n_nm]
     
     v_args = v_reduced.argsort()[::-1]
     v_reduced = sort(array(v_reduced, double))
     v_reduced = v_reduced[::-1]
+    
+    for i in range(v_reduced.size):
+        if (v_reduced[i] < 0):
+            v_reduced[i] = 1
        
     La = dot(M_I, array(La, double))
     La_reduced =  La[:,:n_nm]
@@ -208,17 +200,7 @@ def fundamental_freq(hessian, num_atoms_list, charge_list, molecule, n_atoms):
     eqsign = lambda x, y: x*y > 0
     eqsign = vectorize(eqsign)
 
-    #print "\n\nIs the sign equal?\n"
-    #print eqsign(correct_EVEC, La_reduced)
-    #print "\n\nAbsolute error\n"
-    #print(absolute(correct_EVEC) - absolute(La_reduced))
-    #print "\n\nIs the absolute error less than 0.0001?\n"
-    #print(closevect(absolute(correct_EVEC) - absolute(La_reduced))) 
-    #print "\n\nRelative error of absolute values\n"
-    #print(reldiff(absolute(correct_EVEC),absolute(La_reduced)))
-    #print "\n\nRaw La\n"
-    
-    return v_reduced, La_reduced, freq
+    return v_reduced, La_reduced, freq, La
 
 def to_normal_coordinates():
     """returns normal coordinates (array)"""
@@ -249,7 +231,6 @@ def to_normal_coordinates_3D(cubic_force_field, eigvec, n_atoms):
                     temp = temp + cubic_force_field[kp,j,i]* eigvec[kp,k]
                 cff_norm[k,j,i]= temp
                 
-    
     for i in range(n_coords):
         for j in range(n_coords):
             for k in range(n_coords):
@@ -257,6 +238,7 @@ def to_normal_coordinates_3D(cubic_force_field, eigvec, n_atoms):
                 for jp in range(n_coords):
                     temp = temp + cff_norm[k,jp,i]* eigvec[jp,j]
                 cubic_force_field[k,j,i]= temp
+                
     for i in range(n_nm):
         for j in range(n_nm):
             for k in range(n_nm):
@@ -273,8 +255,6 @@ def to_cartessian_coordinates(normal_coords, n_atoms, eigvec):
     factor = sqrt(1822.8884796) #I DONT KNOW WHY?!
     
     n_nm = 3 * n_atoms - 6
-    
-    #cartessian_coordinates = zeros((4,3))
     
     correct_coords = mat([[-0.0001200721,0.0008903518,-0.0015799527]
     ,[0.0002073285,-0.0007928443,-0.0017227255]
@@ -298,7 +278,7 @@ def to_cartessian_coordinates(normal_coords, n_atoms, eigvec):
     
     #instead of reshape() this will fail if it cannot be done efficiently:
     cartessian_coordinates.shape = (n_atoms, 3) 
-        
+
     return cartessian_coordinates
 
 def effective_geometry(cff_norm, frequencies, n_atoms):
@@ -316,24 +296,24 @@ def effective_geometry(cff_norm, frequencies, n_atoms):
 
     return molecular_geometry
 
-def get_3D_property(property_type, pre_property, nm, eig, write_to_file):
+def get_3D_property(property_type, pre_property, uncorrected_property, nm, eig, write_to_file):
     """ Corrects magnetizabilities, rotational g-factor, molecular quadropole moments, and indirect spin-spin coupling"""
 
     m_e = 1822.8884796 # conversion factor from a.m.u to a.u 
     prefactor = 1/(4*m_e)
-    corrected_property = zeros((3,3))
+    correction_property = zeros((3,3))
     for mode in range(nm):
         factor = 1/(sqrt(eig[mode])) # the reduced one
         for i in range(3):
             for j in range(3):
-                corrected_property[j,i] += pre_property[mode,j,i]*factor
+                correction_property[j,i] += pre_property[mode,j,i]*factor
     
-    corrected_property = corrected_property*prefactor
-    #nuclear_shield_corrected = nuclear_shield + nuclear_shield_correction
+    correction_property = correction_property*prefactor
+    corrected_property = uncorrected_property + correction_property 
  
     if (write_to_file == True):
 		
-        filename = os.path.abspath("/home/benedicte/Dropbox/master/The Program/output/" + property_type)
+        filename = "output/" + property_type
         f = open(filename, "w")
 		
         line1 = str(corrected_property[0]).strip('[]')
@@ -346,27 +326,27 @@ def get_3D_property(property_type, pre_property, nm, eig, write_to_file):
 
         f.close()
         
-    return corrected_property                 
+    return correction_property, corrected_property                 
 
-def get_4D_property(property_type, pre_property, n_nm, n_atom, eig, write_to_file):
+def get_4D_property(property_type, pre_property, uncorrected_property, n_nm, n_atom, eig, write_to_file):
     """ Corrects nuclear shieldings, nuclear spin -rotation correction, and nuclear quadropole moments"""
     m_e = 1822.8884796 # conversion factor from a.m.u to a.u 
     prefactor = 1/(4*m_e)
     
-    corrected_property = zeros((n_atom,3,3))
+    property_corrections = zeros((n_atom,3,3))
     
     for nm in range(n_nm):
         factor = 1/(sqrt(eig[nm])) # the reduced one
         for atom in range(n_atom):
             for i in range(3):
                 for j in range(3):
-                    corrected_property[atom,j,i] += pre_property[atom,nm,j,i]*factor
+                    property_corrections[atom,j,i] += pre_property[atom,nm,j,i]*factor
     
-    corrected_property = corrected_property*prefactor
-    #nuclear_shield_corrected = nuclear_shield + nuclear_shield_correction
+    property_corrections = property_corrections*prefactor
+    corrected_property = property_corrections + uncorrected_property
     
     if (write_to_file == True):
-        filename = os.path.abspath("/home/benedicte/Dropbox/master/The Program/output/" + property_type)
+        filename = "output/" + property_type
         f = open(filename, "w")
         
         for atom in range(n_atom):
@@ -382,7 +362,7 @@ def get_4D_property(property_type, pre_property, n_nm, n_atom, eig, write_to_fil
 
         f.close()
  
-    return corrected_property                    
+    return property_corrections, corrected_property                    
             
 def get_dipole_moment(dipole_moment, n_nm, eig, pre_dipole_moment, write_to_file):
     """" Calculates and return the dipole moment of a molecule given it 
@@ -446,10 +426,10 @@ def get_polarizabilities(property_type, pre_property, n_nm, eig, polar):
                     corrected_property[ifreq,j,i] += pre_property[ifreq,nm,j,i]*factor
     
         corrected_property = corrected_property*prefactor
-	if (write_to_file == True):
+        if (write_to_file == True):
         
-		filename = os.path.abspath("/home/benedicte/Dropbox/master/The Program/output/" + property_type)
-        f = open(filename, "w")
+			filename = os.path.abspath("/home/benedico/Dropbox/master/The Program/output/" + property_type)
+			f = open(filename, "w")
         
         for atom in range(n_atom):
             line1 = str(corrected_property[atom][0]).strip('[]')
@@ -463,6 +443,7 @@ def get_polarizabilities(property_type, pre_property, n_nm, eig, polar):
             f.write("\n") # Seperates the 2D matrices making up the 3D matrix
 
         f.close()
+
     return corrected_property, "POLARI"
     
 def get_optical_rotation(property_type, pre_property1, pre_property2, n_nm, ifreq, eig, write_to_file):
