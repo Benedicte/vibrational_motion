@@ -3,15 +3,12 @@ import abavib as av
 import read_input as ri
 import numpy as np
 
-molecule = "h2o"
-input_name = "input_" + molecule + "/"
-output_file_name = "output/" + molecule
-open(output_file_name, 'w').close() # As we are appending to the output, the old results must be deleted before each run
+
     
 class abavib_test(unittest.TestCase):
     
     def setUp(self):
-        self.molecule = "h2o"
+        self.molecule = "h2o2"
         self.input_name = "input_" + self.molecule + "/"
         self.output_file_name = "output/" + self.molecule
     #The reason we use this one, is because there are any number of eigenvectors which are correct eigenvectors, for the purpose of testing
@@ -400,7 +397,8 @@ class magnetizability_test(abavib_test):
 
     def setUp(self):
         super(magnetizability_test, self).setUp()
-        self.eig = np.array([0.0014242321, 0.0020583462, 0.0006367548]) #For h20
+        if(self.molecule == "h2o"):
+            self.eig = np.array([0.0014242321, 0.0020583462, 0.0006367548])
         magnet_deriv, g_tensor_deriv = ri.read_magnet(self.input_name + "MAGNET", self.n_nm)    
         self.uncorrected_values, self.values_correction, self.corrected_values = ri.read_DALTON_values_3d_reduced(self.input_name + "MAGNET")
         self.magnet_correction, self.magnet = av.get_3D_property("MAGNET", magnet_deriv, self.uncorrected_values, self.n_nm, self.eig)         
@@ -431,6 +429,7 @@ class g_factor_test(abavib_test):
         self.uncorrected_values, self.values_correction, self.corrected_values = ri.read_DALTON_values_3d_full(self.input_name + "MAGNET")
         
         self.g_factor_correction, self.g_factor = av.get_3D_property("GFACTOR", g_tensor_deriv, self.uncorrected_values, self.n_nm, self.eig)
+        
                 
     def test_g_factor_corrections(self): 
 
@@ -443,12 +442,13 @@ class g_factor_test(abavib_test):
             self.assertTrue(np.allclose(self.corrected_values, self.g_factor, rtol=0.03, atol=0.003))        
         elif(self.molecule == "h2o2"):       
             ri.write_to_file(self.molecule, "g-factor", self.g_factor)
-            self.assertTrue(np.allclose(self.corrected_values, self.g_factor_correction, self.g_factor, rtol=0.03, atol=0.003))
- 
-
-
+            self.assertTrue(np.allclose(self.corrected_values, self.g_factor_correction, self.g_factor, rtol=0.03, atol=0.003))s
             
 if __name__ == '__main__':
+    molecule = "h2o2"
+    input_name = "input_" + molecule + "/"
+    output_file_name = "output/" + molecule
+    open(output_file_name, 'w').close() # As we are appending to the output, the old results must be deleted before each run
     unittest.main()
 
             
