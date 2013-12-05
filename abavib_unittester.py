@@ -3,15 +3,20 @@ import abavib as av
 import read_input as ri
 import numpy as np
 
+molecule = "h2o2"
+input_name = "input_" + molecule + "/"
+output_file_name = "output/" + molecule
+open(output_file_name, 'w').close() # As we are appending to the output, the old results must be deleted before each run
+    
 class abavib_test(unittest.TestCase):
     
     def setUp(self):
-    
+        self.molecule = "h2o2"
+        self.input_name = "input_" + self.molecule + "/"
+        self.output_file_name = "output/" + self.molecule
     #The reason we use this one, is because there are any number of eigenvectors which are correct eigenvectors, for the purpose of testing
     #we use the same one that DALTON operates with
     
-        self.molecule = "h2o2"
-        
         if(self.molecule == "h2o2"):
 
             self.eigvec_full = np.array([[-0.00131353,-0.00001741,0.00029587,-0.00016271,0.00000038,0.00006501,0.00027175,0.00568992,-0.00000074,-0.00001015,0.00000448,-0.00006349]
@@ -70,6 +75,7 @@ class abavib_test(unittest.TestCase):
             self.eig = np.array([0.000156325, 0.000052708, 0.000083924, 0.000087366, 0.000049731, 0.000036663, 0.000105884, 0.000086732, 0.000035581])
 
         self.input_name = "input_" + self.molecule + "/"
+        self.output_file_name = "output/" + self.molecule
         self.mol_name = self.input_name + 'MOLECULE.INP'
         self.cff_name = self.input_name + 'cubic_force_field'
         self.coordinates, self.masses,  self.num_atoms_list \
@@ -94,7 +100,8 @@ class abavib_test(unittest.TestCase):
         #effective_geometry_norm = av.effective_geometry(self.cff_norm_reduced, self.freq, self.n_atoms)
         #self.effective_geometry_cart = av.to_cartessian_coordinates(effective_geometry_norm, self.n_atoms, self.eigvec)
         
-class read_molecule_test(abavib_test):        
+class read_molecule_test(abavib_test):
+                
     def test_coordinates(self):
         
         if(self.molecule == "h2o"):
@@ -248,7 +255,7 @@ class dipole_test(abavib_test):
         super(dipole_test, self).setUp()
         dipole_derivative = ri.read_2d_input(self.input_name + "SHIELD", self.n_nm)
         self.uncorrected_values, self.corrections, self.corrected_values = ri.read_DALTON_values_2d(self.input_name + "SHIELD")
-        self.dipole_moment_diff, self.dipole_moment_corrected = av.get_dipole_moment(dipole_derivative, self.n_nm, self.eig, self.uncorrected_values, False)
+        self.dipole_moment_diff, self.dipole_moment_corrected = av.get_dipole_moment(dipole_derivative, self.n_nm, self.eig, self.uncorrected_values)
         
     def test_dipole_corrections(self):
         
@@ -260,9 +267,11 @@ class dipole_test(abavib_test):
     def test_dipole_moment(self):
         
         if(self.molecule == "h2o"):
-            self.assertTrue(np.allclose(self.corrected_values, self.dipole_moment_corrected, rtol=0.05, atol=0.0005))
+            ri.write_to_file(self.molecule, self.dipole_moment_corrected, self.dipole_moment_corrected)
+            self.assertTrue(np.allclose(self.corrected_values, "Dipole Moments", rtol=0.05, atol=0.0005))
             
         elif(self.molecule == "h2o2"):
+            ri.write_to_file(self.molecule, "Dipole Moments", self.dipole_moment_corrected)
             self.assertTrue(np.allclose(self.corrected_values, self.dipole_moment_corrected, rtol=0.01, atol=0))
 
 class shield_test(abavib_test): 

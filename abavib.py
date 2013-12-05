@@ -296,7 +296,7 @@ def effective_geometry(cff_norm, frequencies, n_atoms):
 
     return molecular_geometry
 
-def get_3D_property(property_type, pre_property, uncorrected_property, nm, eig, write_to_file):
+def get_3D_property(property_type, pre_property, uncorrected_property, nm, eig):
     """ Corrects magnetizabilities, rotational g-factor, molecular quadropole moments, and indirect spin-spin coupling"""
 
     m_e = 1822.8884796 # conversion factor from a.m.u to a.u 
@@ -310,25 +310,10 @@ def get_3D_property(property_type, pre_property, uncorrected_property, nm, eig, 
     
     correction_property = correction_property*prefactor
     corrected_property = uncorrected_property + correction_property 
- 
-    if (write_to_file == True):
-		
-        filename = "output/" + property_type
-        f = open(filename, "a")
-		
-        line1 = str(corrected_property[0]).strip('[]')
-        line2 = str(corrected_property[1]).strip('[]')
-        line3 = str(corrected_property[2]).strip('[]')
-		
-        f.write(line1 + "\n")
-        f.write(line2 + "\n")
-        f.write(line3 + "\n")
-
-        f.close()
         
     return correction_property, corrected_property                 
 
-def get_4D_property(property_type, pre_property, uncorrected_property, n_nm, n_atom, eig, write_to_file):
+def get_4D_property(property_type, pre_property, uncorrected_property, n_nm, n_atom, eig):
     """ Corrects nuclear shieldings, nuclear spin -rotation correction, and nuclear quadropole moments"""
     m_e = 1822.8884796 # conversion factor from a.m.u to a.u 
     prefactor = 1/(4*m_e)
@@ -344,27 +329,10 @@ def get_4D_property(property_type, pre_property, uncorrected_property, n_nm, n_a
     
     property_corrections = property_corrections*prefactor
     corrected_property = property_corrections + uncorrected_property
-    
-    if (write_to_file == True):
-        filename = "output/" + property_type
-        f = open(filename, "a")
-        
-        for atom in range(n_atom):
-            line1 = str(corrected_property[atom][0]).strip('[]')
-            line2 = str(corrected_property[atom][1]).strip('[]')
-            line3 = str(corrected_property[atom][2]).strip('[]')
-		
-            f.write(line1 + "\n")
-            f.write(line2 + "\n")
-            f.write(line3 + "\n")
-            
-            f.write("\n") # Seperates the 2D matrices making up the 3D matrix
-
-        f.close()
  
     return property_corrections, corrected_property                    
             
-def get_dipole_moment(dipole_moment, n_nm, eig, pre_dipole_moment, write_to_file):
+def get_dipole_moment(dipole_moment, n_nm, eig, pre_dipole_moment):
     """" Calculates and return the dipole moment of a molecule given it 
     is at the effective geomoetry. """
     m_e = 1822.8884796 # conversion factor from a.m.u to a.u 
@@ -380,14 +348,6 @@ def get_dipole_moment(dipole_moment, n_nm, eig, pre_dipole_moment, write_to_file
     
     dipole_moment_diff = dipole_moment_diff * prefactor
     dipole_moment_corrected = add(pre_dipole_moment, dipole_moment_diff)
-    
-    if (write_to_file == True):
-		
-        filename = os.path.abspath("/home/benedicte/Dropbox/master/The Program/output/Dipole Moment")
-        f = open(filename, "a")
-        line = str(dipole_moment_corrected).strip('[]')
-        f.write(line + "\n")
-        f.close()
     
     return dipole_moment_diff, dipole_moment_corrected
     
