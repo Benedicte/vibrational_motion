@@ -10,7 +10,7 @@ class abavib_test(unittest.TestCase):
     #The reason we use this one, is because there are any number of eigenvectors which are correct eigenvectors, for the purpose of testing
     #we use the same one that DALTON operates with
     
-        self.molecule = "fluoromethane"
+        self.molecule = "h2o"
         
         if(self.molecule == "h2o2"):
 
@@ -81,11 +81,15 @@ class abavib_test(unittest.TestCase):
         hessian_t = self.hessian.transpose()
         hessian_temp = np.add(self.hessian, hessian_t) 
         self.hessian = np.subtract(hessian_temp , np.diag(self.hessian.diagonal()))
-        #self.eig1, self.eigvec1, self.freq, self.eigvec_full1 = \
-        #    av.fundamental_freq(self.hessian, self.num_atoms_list, \
-        #    self.charge_list, self.coordinates, self.n_atoms, self.masses)#Check out the 1s i made
-        self.cubic_force_field = ri.read_cubic_force_field(self.cff_name,#Remember to switch to av. for h2o\  
-         self.n_coordinates) 
+        self.eig1, self.eigvec1, self.freq, self.eigvec_full1 = \
+            av.fundamental_freq(self.hessian, self.num_atoms_list, \
+            self.charge_list, self.coordinates, self.n_atoms, self.masses)#Check out the 1s i made
+        
+        if (self.molecule == "h2o"):
+            self.cubic_force_field = av.read_cubic_force_field(self.cff_name, self.n_coordinates) 
+        else:
+            self.cubic_force_field = ri.read_cubic_force_field(self.cff_name, self.n_coordinates) 
+            
         #self.cff_norm, self.cff_norm_reduced = av.to_normal_coordinates_3D(self.cubic_force_field, self.eigvec_full, self.n_atoms)
         #effective_geometry_norm = av.effective_geometry(self.cff_norm_reduced, self.freq, self.n_atoms)
         #self.effective_geometry_cart = av.to_cartessian_coordinates(effective_geometry_norm, self.n_atoms, self.eigvec)
@@ -376,7 +380,7 @@ class magnetizability_test(abavib_test):
 
     def setUp(self):
         super(magnetizability_test, self).setUp()
-        self.eig = np.array([0.0014242321, 0.0020583462, 0.0006367548])
+        self.eig = np.array([0.0014242321, 0.0020583462, 0.0006367548]) #For h20
         magnet_deriv, g_tensor_deriv = ri.read_magnet(self.input_name + "MAGNET", self.n_nm)    
         self.uncorrected_values, self.values_correction, self.corrected_values = ri.read_DALTON_values_3d_reduced(self.input_name + "MAGNET")
         self.magnet_correction, self.magnet = av.get_3D_property("MAGNET", magnet_deriv, self.uncorrected_values, self.n_nm, self.eig, True)         
