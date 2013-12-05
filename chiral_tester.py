@@ -3,6 +3,11 @@ import abavib as av
 import read_input as ri
 import numpy as np
 
+molecule = "fluoromethane"
+input_name = "input_" + molecule + "/"
+output_file_name = "output/" + molecule
+open(output_file_name, 'w').close() # As we are appending to the output, the old results must be deleted before each run
+
 class abavib_test(unittest.TestCase):
     
     def setUp(self):
@@ -162,7 +167,7 @@ class optical_rotation_test(abavib_test):
         super(optical_rotation_test, self).setUp()
         optrot_deriv = ri.read_optrot(self.input_name + "OPTROT", self.n_nm)    
         self.uncorrected_values, self.values_correction, self.corrected_values = ri.read_DALTON_values_3d_reduced(self.input_name + "OPTROT")
-        self.optrot_correction, self.optrot = av.get_3D_property("OPTROT", optrot_deriv, self.uncorrected_values, self.n_nm, self.eig, True) 
+        self.optrot_correction, self.optrot = av.get_3D_property("OPTROT", optrot_deriv, self.uncorrected_values, self.n_nm, self.eig) 
         print optrot_deriv
         print self.optrot
         print self.values_correction

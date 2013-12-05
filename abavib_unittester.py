@@ -3,7 +3,7 @@ import abavib as av
 import read_input as ri
 import numpy as np
 
-molecule = "h2o2"
+molecule = "h2o"
 input_name = "input_" + molecule + "/"
 output_file_name = "output/" + molecule
 open(output_file_name, 'w').close() # As we are appending to the output, the old results must be deleted before each run
@@ -11,7 +11,7 @@ open(output_file_name, 'w').close() # As we are appending to the output, the old
 class abavib_test(unittest.TestCase):
     
     def setUp(self):
-        self.molecule = "h2o2"
+        self.molecule = "h2o"
         self.input_name = "input_" + self.molecule + "/"
         self.output_file_name = "output/" + self.molecule
     #The reason we use this one, is because there are any number of eigenvectors which are correct eigenvectors, for the purpose of testing
