@@ -168,9 +168,6 @@ class optical_rotation_test(abavib_test):
         optrot_deriv = ri.read_optrot(self.input_name + "OPTROT", self.n_nm)    
         self.uncorrected_values, self.values_correction, self.corrected_values = ri.read_DALTON_values_3d_reduced(self.input_name + "OPTROT")
         self.optrot_correction, self.optrot = av.get_3D_property("OPTROT", optrot_deriv, self.uncorrected_values, self.n_nm, self.eig) 
-        print optrot_deriv
-        print self.optrot
-        print self.values_correction
                
     def test_optical_rotation_corrections(self):
         
