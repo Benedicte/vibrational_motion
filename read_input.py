@@ -828,7 +828,7 @@ def read_cubic_force_field_chiral(filename, n_cord): #Make this one generic
     f.close()
     return cubic_force_field
 
-def write_to_file(molecule, property_type, results):
+def write_to_file(molecule, property_type, results, n_atom = None):
     
         filename = "output/" + molecule
         f = open(filename, "a")

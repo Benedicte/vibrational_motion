@@ -267,7 +267,7 @@ class dipole_test(abavib_test):
     def test_dipole_moment(self):
         
         if(self.molecule == "h2o"):
-            ri.write_to_file(self.molecule, self.dipole_moment_corrected, self.dipole_moment_corrected)
+            ri.write_to_file(self.molecule, "Dipole Moments", self.dipole_moment_corrected)
             self.assertTrue(np.allclose(self.corrected_values, "Dipole Moments", rtol=0.05, atol=0.0005))
             
         elif(self.molecule == "h2o2"):
@@ -279,7 +279,7 @@ class shield_test(abavib_test):
         super(shield_test, self).setUp()
         shield_deriv, self.prop_type = ri.read_4d_input(self.input_name + "SHIELD", self.n_atoms, self.n_nm)
         self.uncorrected_values, self.corrections, self.corrected_values = ri.read_DALTON_values_4d_full(self.input_name + "SHIELD", self.n_atoms)
-        self.corrections_shield, self.shield = av.get_4D_property("Shield", shield_deriv, self.uncorrected_values, self.n_nm, self.n_atoms, self.eig, True)
+        self.corrections_shield, self.shield = av.get_4D_property("Shield", shield_deriv, self.uncorrected_values, self.n_nm, self.n_atoms, self.eig)
         
     def test_shield_corrections(self):
         
@@ -293,9 +293,11 @@ class shield_test(abavib_test):
     def test_shield_values(self):
         
         if(self.molecule == "h2o"):
+            ri.write_to_file(self.molecule, "Shield", self.shield, self.n_atoms)
             self.assertTrue(np.allclose(self.corrected_values, self.shield, rtol=0.01, atol= 0.03))
             
         elif(self.molecule == "h2o2"):
+            ri.write_to_file(self.molecule, "Shield", self.shield, self.n_atoms)
             self.assertTrue(np.allclose(self.corrected_values, self.shield, rtol=0.01, atol= 0.03))
             
 class nuclear_quadrupole_test(abavib_test): 
@@ -303,7 +305,7 @@ class nuclear_quadrupole_test(abavib_test):
         super(nuclear_quadrupole_test, self).setUp()
         nuc_quad_deriv, self.prop_type = ri.read_nucquad(self.input_name + "NUCQUAD", self.n_atoms, self.n_nm)
         self.uncorrected_values, self.corrections, self.corrected_values = ri.read_DALTON_values_4d_reduced(self.input_name + "NUCQUAD", self.n_atoms)
-        self.nuc_quad_corrections, self.nuc_quad = av.get_4D_property(self.prop_type, nuc_quad_deriv, self.uncorrected_values, self.n_nm, self.n_atoms, self.eig, True)
+        self.nuc_quad_corrections, self.nuc_quad = av.get_4D_property(self.prop_type, nuc_quad_deriv, self.uncorrected_values, self.n_nm, self.n_atoms, self.eig)
         
     def test_nuclear_quadrupole_corrections(self):
         
@@ -315,9 +317,11 @@ class nuclear_quadrupole_test(abavib_test):
     def test_nuclear_quadrupole_corrected(self):
         
         if(self.molecule == "h2o"):
+            ri.write_to_file(self.molecule, self.prop_type, self.nuc_quad, self.n_atoms)
             self.assertTrue(np.allclose(self.corrected_values, self.nuc_quad, rtol=0.03, atol= 0.0003))        
         
         elif(self.molecule == "h2o2"):
+            ri.write_to_file(self.molecule, self.prop_type, self.nuc_quad, self.n_atoms)
             self.assertTrue(np.allclose(self.corrected_values, self.nuc_quad, rtol=0.03, atol= 0.0003))
             
 class molecular_quadrupole_test(abavib_test):
@@ -325,7 +329,7 @@ class molecular_quadrupole_test(abavib_test):
         super(molecular_quadrupole_test, self).setUp()
         mol_quad_deriv, self.prop_type = ri.read_mol_quad(self.input_name + "MOLQUAD", self.n_nm)
         self.uncorrected_values, self.corrections, self.corrected_values = ri.read_DALTON_values_3d_reduced(self.input_name + "MOLQUAD")
-        self.mol_quad_correction, self.mol_quad = av.get_3D_property(self.prop_type, mol_quad_deriv, self.uncorrected_values, self.n_nm, self.eig, True)
+        self.mol_quad_correction, self.mol_quad = av.get_3D_property(self.prop_type, mol_quad_deriv, self.uncorrected_values, self.n_nm, self.eig)
         
     def test_molecular_quadrupole_corrections(self):
         
@@ -338,9 +342,11 @@ class molecular_quadrupole_test(abavib_test):
     def test_molecular_quadrupole_values(self):
         
         if(self.molecule == "h2o"):
+            ri.write_to_file(self.molecule, self.prop_type, self.mol_quad)
             self.assertTrue(np.allclose(self.corrected_values, self.mol_quad, rtol=0.02, atol=0.0003))
             
         elif(self.molecule == "h2o2"):
+            ri.write_to_file(self.molecule, self.prop_type, self.mol_quad)
             self.assertTrue(np.allclose(self.corrected_values, self.mol_quad, rtol=0.02, atol=0.0003)) 
             
 class spin_rotation_constants_test(abavib_test): #Issues with this and input reading
@@ -348,7 +354,7 @@ class spin_rotation_constants_test(abavib_test): #Issues with this and input rea
         super(spin_rotation_constants_test, self).setUp()
         spinrot_deriv, self.prop_type = ri.read_spinrot(self.input_name + "SPIN-ROT", self.n_atoms, self.n_nm)
         self.uncorrected_values, self.corrections, self.corrected_values = ri.read_DALTON_values_4d_full(self.input_name + "SPIN-ROT", self.n_atoms)
-        self.spinrot_corrections, self.spinrot = av.get_4D_property(self.prop_type, spinrot_deriv, self.uncorrected_values, self.n_nm, self.n_atoms, self.eig, True)   
+        self.spinrot_corrections, self.spinrot = av.get_4D_property(self.prop_type, spinrot_deriv, self.uncorrected_values, self.n_nm, self.n_atoms, self.eig)   
         
     def test_spin_rotation_corrections_test(self): # For h2o we have some weird stars for the derivative
         if(self.molecule == "h2o"):
@@ -359,9 +365,11 @@ class spin_rotation_constants_test(abavib_test): #Issues with this and input rea
             
     def test_spin_rotation_constants_test(self): 
         if(self.molecule == "h2o"):
+            ri.write_to_file(self.molecule, self.prop_type, self.spinrot, self.n_atoms)
             self.assertTrue(np.allclose(self.corrected_values, self.spinrot, rtol=0.05, atol=0.005))
             
         elif(self.molecule == "h2o2"):
+            ri.write_to_file(self.molecule, self.prop_type, self.spinrot, self.n_atoms)
             self.assertTrue(np.allclose(self.corrected_values, self.spinrot, rtol=0.05, atol=0.005))
         
 class polarizability_test(abavib_test): 
@@ -370,7 +378,8 @@ class polarizability_test(abavib_test):
         super(polarizability_test, self).setUp()
         polari_deriv, self.prop_type = ri.read_polari(self.input_name +"POLARI", self.n_nm)
         self.uncorrected_values, self.corrections, self.corrected_values = ri.read_DALTON_values_3d_reduced(self.input_name + "POLARI")
-        self.polari_correction, self.polari = av.get_3D_property(self.prop_type, polari_deriv, self.uncorrected_values, self.n_nm, self.eig, True)        
+        self.polari_correction, self.polari = av.get_3D_property(self.prop_type, polari_deriv, self.uncorrected_values, self.n_nm, self.eig)        
+   
     def test_polarizability_corrections(self):
         if(self.molecule == "h2o"):
             self.assertTrue(np.allclose(self.corrections, self.polari_correction, rtol=0.03, atol=0.0003))
@@ -380,9 +389,11 @@ class polarizability_test(abavib_test):
  
     def test_polarizability_values(self):
         if(self.molecule == "h2o"):
+            ri.write_to_file(self.molecule, self.prop_type, self.polari)
             self.assertTrue(np.allclose(self.corrected_values, self.polari, rtol=0.03, atol=0.0003))
             
         elif(self.molecule == "h2o2"):
+            ri.write_to_file(self.molecule, self.prop_type, self.polari)
             self.assertTrue(np.allclose(self.corrected_values, self.polari, rtol=0.03, atol=0.0003))
                            
 class magnetizability_test(abavib_test): 
@@ -392,7 +403,8 @@ class magnetizability_test(abavib_test):
         self.eig = np.array([0.0014242321, 0.0020583462, 0.0006367548]) #For h20
         magnet_deriv, g_tensor_deriv = ri.read_magnet(self.input_name + "MAGNET", self.n_nm)    
         self.uncorrected_values, self.values_correction, self.corrected_values = ri.read_DALTON_values_3d_reduced(self.input_name + "MAGNET")
-        self.magnet_correction, self.magnet = av.get_3D_property("MAGNET", magnet_deriv, self.uncorrected_values, self.n_nm, self.eig, True)         
+        self.magnet_correction, self.magnet = av.get_3D_property("MAGNET", magnet_deriv, self.uncorrected_values, self.n_nm, self.eig)         
+    
     def test_magnetizability_corrections(self):
         
         if(self.molecule == "h2o"):
@@ -404,9 +416,11 @@ class magnetizability_test(abavib_test):
     def test_magnetizability_values(self):
         
         if(self.molecule == "h2o"):
+            ri.write_to_file(self.molecule, "Magnetizability", self.magnet)
             self.assertTrue(np.allclose(self.corrected_values,self.magnet, rtol=0.01, atol=0))
             
         elif(self.molecule == "h2o2"):
+            ri.write_to_file(self.molecule, "Magnetizability", self.magnet)
             self.assertTrue(np.allclose(self.corrected_values,self.magnet, rtol=0.01, atol=0))
 
 class g_factor_test(abavib_test): 
@@ -416,7 +430,7 @@ class g_factor_test(abavib_test):
         magnet_deriv, g_tensor_deriv = ri.read_magnet(self.input_name + "MAGNET", self.n_nm)
         self.uncorrected_values, self.values_correction, self.corrected_values = ri.read_DALTON_values_3d_full(self.input_name + "MAGNET")
         
-        self.g_factor_correction, self.g_factor = av.get_3D_property("GFACTOR", g_tensor_deriv, self.uncorrected_values, self.n_nm, self.eig, True)
+        self.g_factor_correction, self.g_factor = av.get_3D_property("GFACTOR", g_tensor_deriv, self.uncorrected_values, self.n_nm, self.eig)
                 
     def test_g_factor_corrections(self): 
 
@@ -425,25 +439,13 @@ class g_factor_test(abavib_test):
     def test_g_factor_values(self):
         
         if(self.molecule == "h2o"):
+            ri.write_to_file(self.molecule, "g-factor", self.g_factor)
             self.assertTrue(np.allclose(self.corrected_values, self.g_factor, rtol=0.03, atol=0.003))        
-        elif(self.molecule == "h2o2"):            
+        elif(self.molecule == "h2o2"):       
+            ri.write_to_file(self.molecule, "g-factor", self.g_factor)
             self.assertTrue(np.allclose(self.corrected_values, self.g_factor_correction, self.g_factor, rtol=0.03, atol=0.003))
  
-class optical_rotation_test(abavib_test): 
 
-    def setUp(self):
-        super(optical_rotation_test, self).setUp()
-        optrot_deriv = ri.read_optrot(self.input_name + "OPTROT", self.n_nm)    
-        self.uncorrected_values, self.values_correction, self.corrected_values = ri.read_DALTON_values_3d_reduced(self.input_name + "OPTROT")
-        self.optrot_correction, self.optrot = av.get_3D_property("OPTROT", optrot_deriv, self.uncorrected_values, self.n_nm, self.eig, True) 
-               
-    def optical_rotation_corrections(self):
-        
-        self.assertTrue(np.allclose(self.values_correction, self.optrot_correction, rtol=0.03, atol=0.0003))
-            
-    def optical_rotation_values(self):
-        
-        self.assertTrue(np.allclose(self.corrected_values, self.optrot, rtol=0.01, atol=0))
 
             
 if __name__ == '__main__':

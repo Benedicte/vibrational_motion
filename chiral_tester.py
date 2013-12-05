@@ -172,7 +172,7 @@ class optical_rotation_test(abavib_test):
         self.assertTrue(np.allclose(self.values_correction, self.optrot_correction, rtol=0.03, atol=0.0003))
             
     def test_optical_rotation_values(self):
-        
+        ri.write_to_file(self.molecule, "Optical Rotation", self.optrot)
         self.assertTrue(np.allclose(self.corrected_values, self.optrot, rtol=0.01, atol=0)) 
 
             
