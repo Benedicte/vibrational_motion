@@ -270,8 +270,9 @@ def read_optrot(filename, nm):
     second_deriv_optrot = zeros((nm,3,3))
     dummy = []
     
-    finished = 2
-    while (finished != 2):
+    finished = 0
+    
+    while (finished != 3):
         cur_line = f.readline()
         if re.search('second derivatives',cur_line):
             finished = finished + 1
@@ -283,17 +284,16 @@ def read_optrot(filename, nm):
     for mode in range(nm):
         mline = f.readline()
         mline = mline.split()
-        second_deriv_magnet[mode][0][0]= mline[1]
-        second_deriv_magnet[mode][0][1]= mline[2]  
-        second_deriv_magnet[mode][1][1]= mline[3]
+        second_deriv_optrot[mode][0][0]= mline[1]
+        second_deriv_optrot[mode][0][1]= mline[2]  
+        second_deriv_optrot[mode][1][1]= mline[3]
               
-        second_deriv_magnet[mode][0][2]= mline[4]  
-        second_deriv_magnet[mode][1][2]= mline[5]  
-        second_deriv_magnet[mode][2][2]= mline[6]
+        second_deriv_optrot[mode][0][2]= mline[4]  
+        second_deriv_optrot[mode][1][2]= mline[5]  
+        second_deriv_optrot[mode][2][2]= mline[6]
         
     f.close()
-    
-    return second_deriv_optrot, 
+    return second_deriv_optrot
         
 def read_2d_input(filename, nm):
     

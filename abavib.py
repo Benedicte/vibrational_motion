@@ -56,8 +56,8 @@ def read_molecule(filename):
     f = open(filename, 'r')
     charge_list = []
     num_atoms_list = []
-    atomicmass1 = {'O': 15.9994, 'H': 1.00794}
-
+    atomicmass1 = {'O': 15.9994, 'H': 1.00794, 'C':12.0107, 'D':2.013553212724,'T':3.0160492, 'F':18.998403}
+    
     coordinates = [] # contains the [x,y,z] coordinates of the input atoms
     mass = []   # contains the corresponding masses of the atoms
 
@@ -79,12 +79,11 @@ def read_molecule(filename):
         for i in range(num_atoms):
             mline = f.readline().split()
             mass.append(atomicmass1[mline[0]])
-            coordinates.append(mline[1:])
+            coordinates.append(mline[1:4])
 
         atomtypes -= 1
 
     f.close()
-
     coordinates = array(coordinates, double)
 
     return coordinates, mass, num_atoms_list, charge_list, sum(num_atoms_list)
@@ -109,7 +108,6 @@ def mass_hessian(masses):
     m = 1/(sqrt(m))
     
     M = identity_matrix*m
-    print M
     
     return M
         

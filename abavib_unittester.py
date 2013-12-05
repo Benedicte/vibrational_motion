@@ -81,14 +81,14 @@ class abavib_test(unittest.TestCase):
         hessian_t = self.hessian.transpose()
         hessian_temp = np.add(self.hessian, hessian_t) 
         self.hessian = np.subtract(hessian_temp , np.diag(self.hessian.diagonal()))
-        self.eig1, self.eigvec1, self.freq, self.eigvec_full1 = \
-            av.fundamental_freq(self.hessian, self.num_atoms_list, \
-            self.charge_list, self.coordinates, self.n_atoms, self.masses)#Check out the 1s i made
+        #self.eig1, self.eigvec1, self.freq, self.eigvec_full1 = \
+        #    av.fundamental_freq(self.hessian, self.num_atoms_list, \
+        #    self.charge_list, self.coordinates, self.n_atoms, self.masses)#Check out the 1s i made
         self.cubic_force_field = ri.read_cubic_force_field(self.cff_name,#Remember to switch to av. for h2o\  
          self.n_coordinates) 
-        self.cff_norm, self.cff_norm_reduced = av.to_normal_coordinates_3D(self.cubic_force_field, self.eigvec_full, self.n_atoms)
-        effective_geometry_norm = av.effective_geometry(self.cff_norm_reduced, self.freq, self.n_atoms)
-        self.effective_geometry_cart = av.to_cartessian_coordinates(effective_geometry_norm, self.n_atoms, self.eigvec)
+        #self.cff_norm, self.cff_norm_reduced = av.to_normal_coordinates_3D(self.cubic_force_field, self.eigvec_full, self.n_atoms)
+        #effective_geometry_norm = av.effective_geometry(self.cff_norm_reduced, self.freq, self.n_atoms)
+        #self.effective_geometry_cart = av.to_cartessian_coordinates(effective_geometry_norm, self.n_atoms, self.eigvec)
         
 class read_molecule_test(abavib_test):        
     def test_coordinates(self):
