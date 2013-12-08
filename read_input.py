@@ -1,3 +1,27 @@
+"""
+Module for readind DALTON input and writing results to file.
+
+The functions of this module is:
+read_mol_quad(filename, nm)
+read_magnet(filename, nm)
+def read_polari(filename, nm)
+def read_spinrot(filename, natom, nm)
+read_nucquad(filename, natom, nm)
+def read_nucquad(filename, natom, nm)
+def read_optrot(filename, nm)
+def read_2d_input(filename, nm)
+def read_3d_input(filename, nm)
+read_4d_input(filename, natom, nm)
+read_quartic_force_field(filename, n_cord)
+read_DALTON_values_4d_reduced
+read_DALTON_values_4d_full
+read_DALTON_values_3d_reduced(filename)
+read_DALTON_values_3d_full(filename)
+read_cubic_force_field(filename, n_cord)
+read_cubic_force_field_chiral(filename, n_cord)
+write_to_file(molecule, property_type, results, n_atom = None)
+"""
+
 from numpy import array, zeros, add, subtract, diag
 import numpy as np
 import re
@@ -833,7 +857,7 @@ def write_to_file(molecule, property_type, results, n_atom = None):
         filename = "output/" + molecule
         f = open(filename, "a")
         f.write(property_type + "\n")
-		
+        
         if(results.ndim == 1):
             line = str(results).strip('[]')
             f.write(line + "\n")

@@ -8,10 +8,10 @@ filename = The filename of where a hessian is saved
 filename = the filename of where the MOLECULE.INP is saved
 filename = the filename of where the cubic force field is saved
 pre_property = the second derivative of the property vibrational 
-			   averaging is to be conducted one
+               averaging is to be conducted one
 uncorrected_property = the property before the vibrational averaging
 correct_propert = The property after the vibrational averaging, for 
-				  testing purposes
+                  testing purposes
 """
 
 from numpy import array, zeros, vstack, dot, identity, sqrt, set_printoptions, compress, reshape, multiply, divide, add, subtract, diag, absolute, sort, argsort, fliplr
@@ -20,13 +20,14 @@ import numpy as np
 import re # regular expressions
 import os
 from scipy import mat, linalg, double
+import pydoc
 
 def read_hessian(filename, n_coords): 
     """Reads a hessian from file.
     
     filename: The name of the file the hessian is contained in. 
     n_coords: The number of cartessian coordinates needed to express
-			  the location of the molecule ie. 3 * number of atoms 
+              the location of the molecule ie. 3 * number of atoms 
     return: A 2-dimensional np.array containg the hessian
     """
     dummy = []
@@ -49,9 +50,9 @@ def hessian_trans_rot(hessian, cart_coord, nr_normal_modes, n_atoms):
     
     hessian: The hessian of the molecule as an np.array
     nr_normal_modes: The number of normal modes of the molecule as an 
-					 int
-	n_atoms: The number of atoms the molecule consists of
-	return: The projected hessian as a 2 dimensional matrix  				 
+                     int
+    n_atoms: The number of atoms the molecule consists of
+    return: The projected hessian as a 2 dimensional matrix  				 
     """
 
     trans1 = [1,0,0]
@@ -87,12 +88,12 @@ def read_molecule(filename):
     information we need from it.
     
     filename: The name of the MOLECULE.INP file as saved in the input
-			  directory
-	return: The cartessian coordinates of the molecule as a list
-			The masses of the atoms as a list
-			The number of atoms as a list
-			The charge of the atoms as a list
-			The number of atoms in the molecule as an int
+              directory
+    return: The cartessian coordinates of the molecule as a list
+            The masses of the atoms as a list
+            The number of atoms as a list
+            The charge of the atoms as a list
+            The number of atoms in the molecule as an int
     """
     
     f = open(filename, 'r')
@@ -136,8 +137,8 @@ def mass_hessian(masses):
     the molecule are placed at the diagonal. This is a help function
     used to make a mass weighted hessian. 
     masses: The masses of the atoms in the molecule, can be recieved
-			from the read_molecule() function.
-	returns: The masses alond the diagonal of a 2 dimensional np.array
+            from the read_molecule() function.
+    returns: The masses alond the diagonal of a 2 dimensional np.array
     """
     
     masses = array(masses)
@@ -185,7 +186,7 @@ def read_cubic_force_field(filename, n_coords):
     
     filename: The name of the file the cubic force field is contained in 
     n_coords: The number of cartessian coordinates needed to express
-			  the location of the molecule ie. 3 * number of atoms 
+              the location of the molecule ie. 3 * number of atoms 
     return: A 3-dimensional np.array containg the cubic force field
     """
     dummy = []
@@ -211,9 +212,9 @@ def read_eigenvector(filename, n_atoms):
     f = open(filename, 'r')
     
     for i in range(12):
-    	a = f.readline().split()
-    	for j in range(6):
-    		eigenvector[i,j] = float(a[j])
+        a = f.readline().split()
+        for j in range(6):
+            eigenvector[i,j] = float(a[j])
     
     f.close()
     return eigenvector
@@ -227,13 +228,13 @@ def fundamental_freq(hessian, num_atoms_list, charge_list, coordinates, n_atoms,
     coordinates: The cartessian coordinates of the molecule as an np.array
     n_atoms: The number of atoms composing the molecule as an int
     masses: The masses of the atoms in a molecule along the diagonal of
-			an np.array
-	returns: The non-zero eigenvalues of the molecule as an np.array
-			 The normal coordinates of the molecule, ie. the eigenvectors
-			 corresponding the non-zero eigevalues as an np.array
-			 The fundalmental frequencies of the molecule as an np.array
-			 All the eigenvectos of the molecules, both the ones 
-			 corresponding the zero and non-zero eigenvalues as an np.array
+            an np.array
+    returns: The non-zero eigenvalues of the molecule as an np.array
+             The normal coordinates of the molecule, ie. the eigenvectors
+             corresponding the non-zero eigevalues as an np.array
+             The fundalmental frequencies of the molecule as an np.array
+             All the eigenvectos of the molecules, both the ones 
+             corresponding the zero and non-zero eigenvalues as an np.array
     """
    
     M_I = mass_hessian(masses)
@@ -279,13 +280,13 @@ def to_normal_coordinates_3D(cubic_force_field, eigvec, n_atoms):
     into cubic force field represented by normal coordinates
     
     cubic_force_field: A 3 dimenesional np.array of the cubic force field
-					   represented in cartessian coordinates
-	eigvec: The eigenvectors of the molecule corresponging to the non
-			zero eigenvalues, can be attained for fundamental_freq() (np.array)
-	n_atoms: The number of atoms constituting the molecule as an int
-	returns: The cubic force field in normal coordinates (np.array)
-	"""
-		
+                       represented in cartessian coordinates
+    eigvec: The eigenvectors of the molecule corresponging to the non
+            zero eigenvalues, can be attained for fundamental_freq() (np.array)
+    n_atoms: The number of atoms constituting the molecule as an int
+    returns: The cubic force field in normal coordinates (np.array)
+    """
+        
     n_coords = 3* n_atoms
     n_nm = 3 * n_atoms - 6
     cff_norm = zeros((n_coords, n_coords, n_coords)) 
@@ -323,8 +324,8 @@ def to_cartessian_coordinates(normal_coords, n_atoms, eigvec):
     normal coordinates: The normal coordinates of which are to be converted
     n_atoms: The number of atoms constituting the molecule as an int
     eigvec: The eigenvectors of the molecule corresponging to the non
-			zero eigenvalues, can be attained for fundamental_freq() (np.array)
-	returns: cartessian coordinates as an np.array.
+            zero eigenvalues, can be attained for fundamental_freq() (np.array)
+    returns: cartessian coordinates as an np.array.
     """
     factor = sqrt(1822.8884796) #I DONT KNOW WHY?!
     
@@ -356,14 +357,14 @@ def to_cartessian_coordinates(normal_coords, n_atoms, eigvec):
     return cartessian_coordinates
 
 def effective_geometry(cff_norm, frequencies, n_atoms):
-	"""Computes the effective geometry of a molecule.
-	
-	cff_norm: The cubic force field of the molecule in normal coordinates
-			  as an np.array
-	frequencies: The fundamental frequencies of the molecule as an np.array
-	n_atoms: The number of atoms constituting the molecule as an int
-	return: The effective geometry in normal coordinates as an np.arrays
-	"""
+    """Computes the effective geometry of a molecule.
+    
+    cff_norm: The cubic force field of the molecule in normal coordinates
+              as an np.array
+    frequencies: The fundamental frequencies of the molecule as an np.array
+    n_atoms: The number of atoms constituting the molecule as an int
+    return: The effective geometry in normal coordinates as an np.arrays
+    """
     factor = sqrt(1822.8884796)
     n_normal_coords = 3 * n_atoms
     n_nm = 3 * n_atoms - 6
@@ -385,13 +386,13 @@ def get_3D_property(property_type, pre_property, uncorrected_property, nm, eig):
     spin-spin coupling, these corrections are then added to the uncorrected
     propery
     property_type: The name of the first tensor property, used when
-				   writing to file
+                   writing to file
     pre_property: The second derivative of the property
     Uncorrected property: The property before the corrections
     nm: Number of normal modes for of the molecule
     eig: The non-zero eigenvalues of the molecules hessian
     returns: The corrections to the property, the corrected property as
-			 np.arrays
+             np.arrays
     """
 
     m_e = 1822.8884796 # conversion factor from a.m.u to a.u 
@@ -409,20 +410,20 @@ def get_3D_property(property_type, pre_property, uncorrected_property, nm, eig):
     return correction_property, corrected_property                 
 
 def get_4D_property(property_type, pre_property, uncorrected_property, n_nm, n_atom, eig):
-        """ Calculated the vibrationally averaged corrections for first 
+    """ Calculated the vibrationally averaged corrections for first 
     tensor properties. These properties are: nuclear shieldings, nuclear 
     spin -rotation correction, and nuclear quadropole moments, these 
     corrections are then added to the uncorrected propery
     
     property_type: The name of the first tensor property, used when
-				   writing to file
+                   writing to file
     pre_property: The second derivative of the property
     Uncorrected property: The property before the corrections
     nm: Number of normal modes for of the molecule
     eig: The non-zero eigenvalues of the molecules hessian
     n_atoms: The number of atoms constituting the molecule as an int
     returns: The corrections to the property, the corrected property as 
-			 np.arrays
+             np.arrays
     """
     
     m_e = 1822.8884796 # conversion factor from a.m.u to a.u 
@@ -471,14 +472,14 @@ def get_polarizabilities(property_type, pre_property, n_nm, eig, polar):
     """ Computes polarizability corrections and adds the corrections
     to the original value of the polarizabilty.
     property_type: The name of the first tensor property, used when
-				   writing to file
+                   writing to file
     pre_property: The second derivative of the property
     Uncorrected property: The property before the corrections
     nm: Number of normal modes for of the molecule
     eig: The non-zero eigenvalues of the molecules hessian
     polar: If the molecule is polar or not, as a bollean.
     returns: The corrections to the property, the corrected property as 
-			 np.arrays
+             np.arrays
     """
     
     if(polar):
@@ -498,14 +499,14 @@ def get_polarizabilities(property_type, pre_property, n_nm, eig, polar):
         corrected_property = corrected_property*prefactor
         if (write_to_file == True):
         
-			filename = os.path.abspath("/home/benedico/Dropbox/master/The Program/output/" + property_type)
-			f = open(filename, "w")
+            filename = os.path.abspath("/home/benedico/Dropbox/master/The Program/output/" + property_type)
+            f = open(filename, "w")
         
         for atom in range(n_atom):
             line1 = str(corrected_property[atom][0]).strip('[]')
             line2 = str(corrected_property[atom][1]).strip('[]')
             line3 = str(corrected_property[atom][2]).strip('[]')
-		
+        
             f.write(line1 + "\n")
             f.write(line2 + "\n")
             f.write(line3 + "\n")
@@ -518,9 +519,9 @@ def get_polarizabilities(property_type, pre_property, n_nm, eig, polar):
     
 
 
-    
 
-                 
-        
+
+             
+    
 
 
