@@ -442,7 +442,7 @@ class g_factor_test(abavib_test):
             self.assertTrue(np.allclose(self.corrected_values, self.g_factor, rtol=0.03, atol=0.003))        
         elif(self.molecule == "h2o2"):       
             ri.write_to_file(self.molecule, "g-factor", self.g_factor)
-            self.assertTrue(np.allclose(self.corrected_values, self.g_factor_correction, self.g_factor, rtol=0.03, atol=0.003))s
+            self.assertTrue(np.allclose(self.corrected_values, self.g_factor_correction, self.g_factor, rtol=0.03, atol=0.003))
             
 if __name__ == '__main__':
     molecule = "h2o2"
