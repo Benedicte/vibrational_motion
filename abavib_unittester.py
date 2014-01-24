@@ -274,7 +274,6 @@ class dipole_test(abavib_test):
 class shield_test(abavib_test): 
     def setUp(self):
         super(shield_test, self).setUp()
-        shield_deriv, self.prop_type = ri.read_4d_input(self.input_name + "SHIELD", self.n_atoms, self.n_nm)
         self.uncorrected_values, self.corrections, self.corrected_values = ri.read_DALTON_values_4d_full(self.input_name + "SHIELD", self.n_atoms)
         self.corrections_shield, self.shield = av.get_4D_property("Shield", shield_deriv, self.uncorrected_values, self.n_nm, self.n_atoms, self.eig)
         
