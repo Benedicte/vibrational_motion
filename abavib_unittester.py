@@ -2,12 +2,13 @@ import unittest
 import abavib as av
 import read_input as ri
 import numpy as np
+import sys
 
     
 class abavib_test(unittest.TestCase):
     
     def setUp(self):
-        self.molecule = "h2o2"
+        self.molecule = "h2o"
         self.input_name = "input_" + self.molecule + "/"
         self.output_file_name = "output/" + self.molecule
     #The reason we use this one, is because there are any number of eigenvectors which are correct eigenvectors, for the purpose of testing
@@ -426,8 +427,10 @@ class g_factor_test(abavib_test):
         super(g_factor_test, self).setUp()
         magnet_deriv, g_tensor_deriv = ri.read_magnet(self.input_name + "MAGNET", self.n_nm)
         self.uncorrected_values, self.values_correction, self.corrected_values = ri.read_DALTON_values_3d_full(self.input_name + "MAGNET")
-        
+        print self.uncorrected_values
         self.g_factor_correction, self.g_factor = av.get_3D_property("GFACTOR", g_tensor_deriv, self.uncorrected_values, self.n_nm, self.eig)
+        print self.corrected_values
+        print self.g_factor
         
                 
     def test_g_factor_corrections(self): 
@@ -439,15 +442,19 @@ class g_factor_test(abavib_test):
         if(self.molecule == "h2o"):
             ri.write_to_file(self.molecule, "g-factor", self.g_factor)
             self.assertTrue(np.allclose(self.corrected_values, self.g_factor, rtol=0.03, atol=0.003))        
+
         elif(self.molecule == "h2o2"):       
             ri.write_to_file(self.molecule, "g-factor", self.g_factor)
             self.assertTrue(np.allclose(self.corrected_values, self.g_factor_correction, self.g_factor, rtol=0.03, atol=0.003))
             
 if __name__ == '__main__':
-    molecule = "h2o2"
+    molecule = "h2o"
+    #arg = sys.argv[1]
+    #print arg
     input_name = "input_" + molecule + "/"
     output_file_name = "output/" + molecule
     open(output_file_name, 'w').close() # As we are appending to the output, the old results must be deleted before each run
+    
     unittest.main()
 
             
