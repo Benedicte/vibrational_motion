@@ -1,6 +1,5 @@
 """
-Module for readind DALTON input and writing results to file.
-
+Module for reading DALTON input  
 The functions of this module is:
 read_mol_quad(filename, nm)
 read_magnet(filename, nm)
@@ -22,10 +21,80 @@ read_cubic_force_field_chiral(filename, n_cord)
 write_to_file(molecule, property_type, results, n_atom = None)
 """
 
-from numpy import array, zeros, add, subtract, diag
+from numpy import array, zeros, add, subtract, diag, double
 import numpy as np
 import re
+import pydoc
 
+def read_molecule(filename): 
+    """Reads the MOLECULE.INP file generated be DALTON, and extracts the 
+    information we need from it.
+    
+    filename: The name of the MOLECULE.INP file as saved in the input
+              directory
+    return: The cartessian coordinates of the molecule as a list
+            The masses of the atoms as a list
+            The number of atoms as a list
+            The charge of the atoms as a list
+            The number of atoms in the molecule as an int
+    """
+    
+    f = open(filename, 'r')
+    charge_list = []
+    num_atoms_list = []
+    atomicmass1 = {'O': 15.9994, 'H': 1.00794, 'C':12.0107, 'D':2.013553212724,'T':3.0160492, 'F':18.998403}
+    
+    coordinates = [] # contains the [x,y,z] coordinates of the input atoms
+    mass = []   # contains the corresponding masses of the atoms
+
+    finished = 0
+
+    while (finished == 0): 
+        mline = re.search('(?<=ypes\=)\w+',f.readline())
+
+        if mline:
+            atomtypes = int(mline.group(0)) #The input file specifies how many different types of atoms are present
+            finished = 1
+    while(atomtypes > 0):
+        mline = f.readline()
+        charge = int(re.search('(?<=arge\=)\w+',mline).group(0))
+        num_atoms = int(re.search('(?<=toms\=)\w+',mline).group(0))
+        charge_list.append(charge)
+        num_atoms_list.append(num_atoms)
+
+        for i in range(num_atoms):
+            mline = f.readline().split()
+            mass.append(atomicmass1[mline[0]])
+            coordinates.append(mline[1:4])
+
+        atomtypes -= 1
+
+    f.close()
+    coordinates = array(coordinates, double)
+
+    return coordinates, mass, num_atoms_list, charge_list, sum(num_atoms_list)
+
+def read_hessian(filename, n_coords): 
+    """Reads a hessian from file.
+    
+    filename: The name of the file the hessian is contained in. 
+    n_coords: The number of cartessian coordinates needed to express
+              the location of the molecule ie. 3 * number of atoms 
+    return: A 2-dimensional np.array containg the hessian
+    """
+    dummy = []
+    f = open(filename, 'r')
+    hessian = zeros((n_coords, n_coords))
+
+    #dummy = f.readline()
+    for i in range(n_coords):
+        a = f.readline().split()
+        for j in range(n_coords):
+            hessian[i,j] = float(a[j])
+    f.close()
+
+    return hessian
+    
 def read_mol_quad(filename, nm):
     """Imports things needed from the DALTON.OUT that I need"""
     
@@ -800,15 +869,52 @@ def read_cubic_force_field(filename, n_cord): #Make this one generic
     f.close()
     return cubic_force_field
 
-def read_cubic_force_field_chiral(filename, n_cord): #Make this one generic
-        
-    """Imports the quartic force field from DALTON"""
+def read_cubic_force_field_h2o(filename, n_coords):
+    """
+    Reads the cubic force field calculated by DALTON from file.
     
+    filename: The name of the file the cubic force field is contained in 
+    n_coords: The number of cartessian coordinates needed to express
+              the location of the molecule ie. 3 * number of atoms 
+    return: A 3-dimensional np.array containg the cubic force field
+    """
+    dummy = []
+    cubic_force_field = zeros((n_coords, n_coords, n_coords))
+    f = open(filename, 'r')
+
+    for i in range(n_coords):
+        dummy = f.readline()
+        for j in range(n_coords):
+            a = f.readline().split()
+            for k in range(n_coords):
+                cubic_force_field[i,j,k] = float(a[k])
+    f.close()
+
+    return cubic_force_field
+    
+def read_eigenvector(filename, n_atoms):
+    
+    n_nm = 3*n_atoms - 6
+    eigenvector = zeros((12, 6))
+
+    f = open(filename, 'r')
+    
+    for i in range(12):
+        a = f.readline().split()
+        for j in range(6):
+            eigenvector[i,j] = float(a[j])
+    
+    f.close()
+    return eigenvector
+        
+def read_cubic_force_field_chiral(filename, n_cord): #Make this one generic
+    """Imports the chiral cubic force field from DALTON"""
+      
     f = open(filename, 'r')
     cubic_force_field = zeros((n_cord, n_cord, n_cord))
     dummy = []
     counter = n_cord # Make an if counting, and thus reading correctly..
-    
+
     finished = 0
     while (finished == 0):
         cur_line = f.readline()
@@ -852,36 +958,3 @@ def read_cubic_force_field_chiral(filename, n_cord): #Make this one generic
     f.close()
     return cubic_force_field
 
-def write_to_file(molecule, property_type, results, n_atom = None):
-    
-        filename = "output/" + molecule
-        f = open(filename, "a")
-        f.write(property_type + "\n")
-        
-        if(results.ndim == 1):
-            line = str(results).strip('[]')
-            f.write(line + "\n")
-            f.close()
-        
-        if(results.ndim == 2):
-            line1 = str(results[0]).strip('[]')
-            line2 = str(results[1]).strip('[]')
-            line3 = str(results[2]).strip('[]')
-            
-            f.write(line1 + "\n")
-            f.write(line2 + "\n")
-            f.write(line3 + "\n")
-
-            f.close()
-
-        if(results.ndim == 3):        
-            for atom in range(n_atom):
-                line1 = str(results[atom][0]).strip('[]')
-                line2 = str(results[atom][1]).strip('[]')
-                line3 = str(results[atom][2]).strip('[]')
-            
-                f.write(line1 + "\n")
-                f.write(line2 + "\n")
-                f.write(line3 + "\n")
-                
-                f.write("\n") # Seperates the 2D matrices making up the 3D matrix
