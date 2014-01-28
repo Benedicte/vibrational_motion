@@ -1,12 +1,13 @@
+import Molecule as mol
 import pydoc
 
 class Property:
     """The superclass for calculating properties of a molecule"""
-
-    def __init__(molecule):
-
-        m_e = 1822.8884796 # conversion factor from a.m.u to a.u 
-        prefactor = 1/(4*m_e)
+    
+    def __init__(self, molecule):
+        self.m_e = 1822.8884796 # conversion factor from a.m.u to a.u 
+        self.prefactor = 1/(4*self.m_e)
+        self.molecule = molecule
                 
     def __call__():
         raise NotImplementedError\
@@ -16,10 +17,8 @@ class Property:
         """"If the quartic force field is wanted, this function can be used 
         inside the call function where the new terms is simply added"""
         
-    
-    def write_to_file(molecule, property_type, results, n_atom = None):
-        
-        filename = "output/" + molecule
+    def write_to_file(self, property_type, results, n_atom = None):
+        filename = self.molecule.get_output_name()
         f = open(filename, "a")
         f.write(property_type + "\n")
         

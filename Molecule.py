@@ -27,11 +27,13 @@ class Molecule:
     def __init__(self, name):
     
         self.name = name
+        self.input_name = self.get_input_name()
         self.linear = 0
         self.n_atoms = ri.read_molecule(self.get_molecule_input_name())[4]
         self.n_coordinates = self.get_coordinates() 
         self.number_of_normal_modes = self.get_number_of_normal_modes()
         self.hessian = self.get_hessian()
+        
 
         self.eigenvalues,\
         self.eigenvectors,\
@@ -40,20 +42,20 @@ class Molecule:
         self.effective_geometry = self.get_effective_geometry()
     
     def get_input_name(self):
-        self.input_name = "input_" + self.name + "/"
-        return self.input_name
+        input_name = "input_" + self.name + "/"
+        return input_name
         
     def get_output_name(self):
-        self.output_file_name = "output/" + self.name
-        return self.output_file_name
+        output_file_name = "output/" + self.name
+        return output_file_name
         
     def get_molecule_input_name(self):
-        self.input_name = self.get_input_name()
+        input_name = self.get_input_name()
         molecule_input_name = self.input_name + 'MOLECULE.INP'
         return molecule_input_name
     
     def get_cubic_force_field_name(self):
-        self.input_name = self.get_input_name()
+        input_name = self.get_input_name()
         cff_name = self.input_name + 'cubic_force_field'
         return cff_name
         

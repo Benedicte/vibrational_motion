@@ -1,6 +1,6 @@
 import read_input as ri
 import Molecule as mol
-import Property as pr
+import Propertyclasses as pr
 import pydoc
 
 if __name__ == '__main__':
@@ -16,32 +16,48 @@ if __name__ == '__main__':
     molecule_name = raw_input('Which molecule should calculations be made for? (ex. h2o)')
     molecule = mol.Molecule(molecule_name)
 
-    prop = raw_input('Which property should be calculated?')
 
-    if(prop == "Dipole Moment"):
-        prop = pr.Property_1_Tensor(molecule)
-    elif(prop == "Magnetizability"):
-        prop = pr.Property_1_Tensor(molecule)
-    elif(prop == "g-factor"):
-        prop = pr.Property_1_Tensor(molecule)
-    elif(prop == "Nuclear spin-rotation"):
-        prop = pr.Property_1_Tensor(molecule)
-    elif(prop == "Molecular quadropole moment"):
-        prop = pr.Property_1_Tensor(molecule)
-    elif(prop == "Spin-spin coupling"):
-        prop = pr.Property_1_Tensor(molecule)
-    elif(prop == "Polarizability"):
-        prop = pr.Property_1_Tensor(molecule)
-    elif(prop == "Nuclear shielding"):
-        prop = pr.Property_1_Tensor(molecule)
-    elif(prop == "Nuclear spin correction"):
-        prop = pr.Property_1_Tensor(molecule)
-    elif(prop == "Nuclear quadropole moment"):
-        prop = pr.Property_1_Tensor(molecule)
-    elif(prop == "Optical rotation"):
-        prop = pr.Property_1_Tensor(molecule)
+    prop_name = raw_input('Which property should be calculated? For options enter "opt"')
+    
+    if(prop_name == "opt"):
+        print("Dipole Moment")
+        print("Magnetizability")
+        print("g-factor")
+        print("Nuclear spin-rotation")
+        print("Molecular quadropole moment")
+        print("Spin-spin coupling")
+        print("Polarizability")
+        print("Nuclear shielding")
+        print("Nuclear spin correction")
+        print("Nuclear quadropole moment")
+        print("Optical rotation")
+    
+    elif(prop_name == "Dipole Moment"):
+        prop = pr.Property_1_Tensor(molecule, prop_name)
+    elif(prop_name == "Magnetizability"):
+        prop = pr.Property_2_Tensor(molecule)
+    elif(prop_name == "g-factor"):
+        prop = pr.Property_2_Tensor(molecule)
+    elif(prop_name == "Nuclear spin-rotation"):
+        prop = pr.Property_2_Tensor(molecule)
+    elif(prop_name == "Molecular quadropole moment"):
+        prop = pr.Property_2_Tensor(molecule)
+    elif(prop_name == "Spin-spin coupling"):
+        prop = pr.Property_2_Tensor(molecule)
+    elif(prop_name == "Polarizability"):
+        prop = pr.Polarizability(molecule)
+    elif(prop_name == "Nuclear shielding"):
+        prop = pr.Property_3_Tensor(molecule)
+    elif(prop_name == "Nuclear spin correction"):
+        prop = pr.Property_3_Tensor(molecule)
+    elif(prop_name == "Nuclear quadropole moment"):
+        prop = pr.Property_3_Tensor(molecule)
+    elif(prop_name == "Optical rotation"):
+        prop = pr.Property_3_Tensor(molecule)
     else:
         print ("Not a supported property")
+        
+    prop()
 
 
 
