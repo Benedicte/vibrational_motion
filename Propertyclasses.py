@@ -6,7 +6,7 @@ import pydoc
 
 class Property_1_Tensor(Property):  
     def __init__(self, molecule, property_name):
-        Property.__init__(self, molecule)
+        Property.__init__(self, molecule, property_name)
         self.molecule = molecule
         self.property_name = property_name
     
@@ -39,12 +39,25 @@ class Property_1_Tensor(Property):
         pre_property = ri.read_2d_input(self.molecule.input_name + "/SHIELD", self.molecule.number_of_normal_modes)
         return pre_property
         
-        
     def get_uncorrected_property(self):
         uncorrected_property = ri.read_DALTON_values_2d(self.molecule.input_name + "SHIELD")[0]
         return uncorrected_property
 
-class Property_2_Tensor(Property):  
+class Property_2_Tensor(Property):
+    
+    def __init__(self, molecule, property_name):
+        Property.__init__(self, molecule, property_name)
+        self.molecule = molecule
+        self.property_name = property_name
+        self.name_dic = {"Magnetizability":"MAGNET", "g-factor": "GFACTOR",\
+         "Molecular quadropole moment": "MOLQUAD"}
+         
+        self.read_dic = {"Magnetizability":ri.read_MAGNET, "g-factor": ri.read_GFACTOR,\
+         "Molecular quadropole moment": ri.read_MOLQUAD}
+         
+        self.read_DALTON_dic = {"Magnetizability":ri.read_DALTON_MAGNET, "g-factor": ri.read_DALTON_GFACTOR,\
+         "Molecular quadropole moment": ri.read_DALTON_MOLQUAD}
+        
     def __call__(self):
         """ Calculated the vibrationally averaged corrections for first 
         tensor properties. These properties are: magnetizabilities, 
@@ -60,17 +73,46 @@ class Property_2_Tensor(Property):
         returns: The corrections to the property, the corrected property as
                  np.arrays
         """
+        pre_property = self.get_preproperty()
+        uncorrected_property = self.get_uncorrected_property() 
+        eigenvalues = self.molecule.eigenvalues
         correction_property = zeros((3,3))
-        for mode in range(nm):
-            factor = 1/(sqrt(eig[mode])) # the reduced one
+        
+        for mode in range(self.molecule.number_of_normal_modes):
+            factor = 1/(sqrt(eigenvalues[mode])) # the reduced one
             for i in range(3):
                 for j in range(3):
                     correction_property[j,i] += pre_property[mode,j,i]*factor
         
-        correction_property = correction_property*prefactor
+        correction_property = correction_property*self.prefactor
         corrected_property = uncorrected_property + correction_property 
+        
+        print(corrected_property)
+        #self.write_to_file(self.property_name, corrected_property, self.molecule.n_atoms)
             
         return correction_property, corrected_property  
+        
+    def get_preproperty(self):
+        read_property = self.read_dic[self.property_name]
+        molecule_path = self.molecule.input_name \
+                        + self.name_dic[self.property_name]
+        
+        pre_property  \
+        = read_property(molecule_path, self.molecule.number_of_normal_modes)
+        
+        return pre_property
+        
+        
+    def get_uncorrected_property(self):
+        
+        read_property = self.read_DALTON_dic[self.property_name]
+        molecule_path = self.molecule.input_name \
+                        + self.name_dic[self.property_name]
+        
+        uncorrected_property  \
+        = read_property(molecule_path)
+        
+        return uncorrected_property
 
 class Property_3_Tensor(Property):
     def __call__(self):

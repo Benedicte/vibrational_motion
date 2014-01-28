@@ -4,7 +4,7 @@ import pydoc
 class Property:
     """The superclass for calculating properties of a molecule"""
     
-    def __init__(self, molecule):
+    def __init__(self, molecule, property_name):
         self.m_e = 1822.8884796 # conversion factor from a.m.u to a.u 
         self.prefactor = 1/(4*self.m_e)
         self.molecule = molecule

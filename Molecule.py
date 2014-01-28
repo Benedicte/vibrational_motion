@@ -34,19 +34,20 @@ class Molecule:
         self.number_of_normal_modes = self.get_number_of_normal_modes()
         self.hessian = self.get_hessian()
         
-
         self.eigenvalues,\
         self.eigenvectors,\
         self.frequencies, \
         self.eigenvectors_full = self.diagonalize(self.hessian)#Check out the 1s i made
         self.effective_geometry = self.get_effective_geometry()
+        
+        open(self.get_output_name(), 'w').close() # As we are appending to the output, the old results must be deleted before each run
     
     def get_input_name(self):
         input_name = "input_" + self.name + "/"
         return input_name
         
     def get_output_name(self):
-        output_file_name = "output/" + self.name
+        output_file_name = "output/" + self.name 
         return output_file_name
         
     def get_molecule_input_name(self):

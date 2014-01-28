@@ -95,7 +95,7 @@ def read_hessian(filename, n_coords):
 
     return hessian
     
-def read_mol_quad(filename, nm):
+def read_MOLQUAD(filename, nm):
     """Imports things needed from the DALTON.OUT that I need"""
     
     f = open(filename, 'r')
@@ -130,9 +130,9 @@ def read_mol_quad(filename, nm):
     #second_deriv[mode] = subtract(second_deriv_temp , diag(second_deriv[mode].diagonal()))   
     
     f.close()
-    return second_deriv, "MOLQUAD"
+    return second_deriv
     
-def read_magnet(filename, nm):
+def read_MAGNET(filename, nm):
     
     f = open(filename, 'r')
     second_deriv_magnet = zeros((nm,3,3))
@@ -183,8 +183,61 @@ def read_magnet(filename, nm):
         
     f.close()
     
-    return second_deriv_magnet, second_deriv_g  
+    return second_deriv_magnet 
 
+def read_GFACTOR(filename, nm):
+    
+    f = open(filename, 'r')
+    second_deriv_magnet = zeros((nm,3,3))
+    second_deriv_g = zeros((nm,3,3))
+    property_type = 0
+    dummy = []
+    
+    finished = 0
+    while (finished == 0):
+        cur_line = f.readline()
+        if re.search('Magnetizability tensor second derivatives',cur_line):
+            finished = 1
+    
+    dummy = f.readline()
+    dummy = f.readline()
+    dummy = f.readline()
+     
+    for mode in range(nm):
+        mline = f.readline()
+        mline = mline.split()
+        second_deriv_magnet[mode][0][0]= mline[1]
+        second_deriv_magnet[mode][0][1]= mline[2]  
+        second_deriv_magnet[mode][1][1]= mline[3]
+              
+        second_deriv_magnet[mode][0][2]= mline[4]  
+        second_deriv_magnet[mode][1][2]= mline[5]  
+        second_deriv_magnet[mode][2][2]= mline[6]
+        
+    dummy = f.readline()
+    dummy = f.readline()
+    dummy = f.readline() 
+    dummy = f.readline()
+    dummy = f.readline()
+     
+    for mode in range(nm):
+        mline = f.readline()
+        mline = mline.split()
+        second_deriv_g[mode][0][0]= mline[1]
+        second_deriv_g[mode][0][1]= mline[2]  
+        second_deriv_g[mode][1][1]= mline[3]
+        second_deriv_g[mode][0][2]= mline[4]  
+        second_deriv_g[mode][1][2]= mline[5]  
+        second_deriv_g[mode][2][2]= mline[6]
+        
+        second_deriv_t = second_deriv_g[mode].transpose()
+        second_deriv_temp = add(second_deriv_g[mode], second_deriv_t) 
+        second_deriv_g[mode] = subtract(second_deriv_temp, diag(second_deriv_g[mode].diagonal())) 
+        
+    f.close()
+    
+    return second_deriv_g
+    
 def read_polari(filename, nm):
     """Imports things needed from the DALTON.OUT that I need"""
     
@@ -218,7 +271,7 @@ def read_polari(filename, nm):
         second_deriv[mode][2][2]= mline[6]   
         
     f.close()
-    return second_deriv, property_type
+    return second_deriv
 
 def read_spinrot1(filename, natom, nm):
     """Imports things needed from the DALTON.OUT that I need"""
@@ -263,7 +316,7 @@ def read_spinrot1(filename, natom, nm):
     f.close()
     return second_deriv, property_type
 
-def read_spinrot(filename, natom, nm):
+def read_SPINROT(filename, natom, nm):
     """Imports things needed from the DALTON.OUT that I need"""
     
     f = open(filename, 'r')
@@ -685,7 +738,7 @@ def read_DALTON_values_4d_full(filename, natom):
             
     return uncorrected_values, corrections, corrected_values   
     
-def read_DALTON_values_3d_reduced(filename):
+def read_DALTON_MAGNET(filename):
     """ For testing purposes, extracts the correct values from DALTON"""
     
     f = open(filename, 'r')
@@ -745,7 +798,67 @@ def read_DALTON_values_3d_reduced(filename):
             
     return uncorrected_values, corrections, corrected_values
 
-def read_DALTON_values_3d_full(filename):
+def read_DALTON_MOLQUAD(filename):
+    """ For testing purposes, extracts the correct values from DALTON"""
+    
+    f = open(filename, 'r')
+    
+    uncorrected_values = zeros((3,3))
+    corrections = zeros((3,3))
+    corrected_values = zeros((3,3))
+    
+    dummy = []
+    
+    finished = 0
+    while (finished != 2):
+        cur_line = f.readline()
+        if not cur_line: raise Exception("Dalton file does not contain the values looked for")
+        if re.search('Vibrationally corrected',cur_line):
+            finished = finished + 1
+
+    dummy = f.readline()
+    dummy = f.readline()
+    
+    
+    mline = f.readline()
+    mline = mline.split()
+    uncorrected_values[0][0] = mline[1]
+    corrections[0][0] = mline[2]
+    corrected_values[0][0] = mline[3]
+        
+    mline = f.readline()
+    mline = mline.split()
+    uncorrected_values[0][1] = mline[1]
+    corrections[0][1] = mline[2]
+    corrected_values[0][1] = mline[3]
+            
+    mline = f.readline()
+    mline = mline.split()
+    uncorrected_values[0][2] = mline[1]
+    corrections[0][2] = mline[2]
+    corrected_values[0][2] = mline[3]
+        
+    mline = f.readline()
+    mline = mline.split()
+    uncorrected_values[1][1] = mline[1]
+    corrections[1][1] = mline[2]
+    corrected_values[1][1] = mline[3]
+        
+    mline = f.readline()
+    mline = mline.split()
+    uncorrected_values[1][2] = mline[1]
+    corrections[1][2] = mline[2]
+    corrected_values[1][2] = mline[3]
+        
+    mline = f.readline()
+    mline = mline.split()
+    uncorrected_values[2][2] = mline[1]
+    corrections[2][2] = mline[2]
+    corrected_values[2][2] = mline[3]
+            
+    return uncorrected_values, corrections, corrected_values
+    
+def read_DALTON_GFACTOR(filename):
     """ For testing purposes, extracts the correct values from DALTON"""
     
     f = open(filename, 'r')

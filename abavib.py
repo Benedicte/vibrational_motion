@@ -35,25 +35,25 @@ if __name__ == '__main__':
     elif(prop_name == "Dipole Moment"):
         prop = pr.Property_1_Tensor(molecule, prop_name)
     elif(prop_name == "Magnetizability"):
-        prop = pr.Property_2_Tensor(molecule)
+        prop = pr.Property_2_Tensor(molecule, prop_name)
     elif(prop_name == "g-factor"):
-        prop = pr.Property_2_Tensor(molecule)
+        prop = pr.Property_2_Tensor(molecule, prop_name)
     elif(prop_name == "Nuclear spin-rotation"):
-        prop = pr.Property_2_Tensor(molecule)
+        prop = pr.Property_2_Tensor(molecule, prop_name)
     elif(prop_name == "Molecular quadropole moment"):
-        prop = pr.Property_2_Tensor(molecule)
+        prop = pr.Property_2_Tensor(molecule, prop_name)
     elif(prop_name == "Spin-spin coupling"):
-        prop = pr.Property_2_Tensor(molecule)
+        prop = pr.Property_2_Tensor(molecule, prop_name)
     elif(prop_name == "Polarizability"):
-        prop = pr.Polarizability(molecule)
+        prop = pr.Polarizability(molecule, prop_name)
     elif(prop_name == "Nuclear shielding"):
-        prop = pr.Property_3_Tensor(molecule)
+        prop = pr.Property_3_Tensor(molecule, prop_name)
     elif(prop_name == "Nuclear spin correction"):
-        prop = pr.Property_3_Tensor(molecule)
+        prop = pr.Property_3_Tensor(molecule, prop_name)
     elif(prop_name == "Nuclear quadropole moment"):
-        prop = pr.Property_3_Tensor(molecule)
+        prop = pr.Property_3_Tensor(molecule, prop_name)
     elif(prop_name == "Optical rotation"):
-        prop = pr.Property_3_Tensor(molecule)
+        prop = pr.Property_3_Tensor(molecule, prop_name)
     else:
         print ("Not a supported property")
         
