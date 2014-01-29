@@ -86,9 +86,8 @@ class Property_2_Tensor(Property):
         
         correction_property = correction_property*self.prefactor
         corrected_property = uncorrected_property + correction_property 
-        
-        print(corrected_property)
-        #self.write_to_file(self.property_name, corrected_property, self.molecule.n_atoms)
+    
+        self.write_to_file(self.property_name, corrected_property)
             
         return correction_property, corrected_property  
         
@@ -110,7 +109,7 @@ class Property_2_Tensor(Property):
                         + self.name_dic[self.property_name]
         
         uncorrected_property  \
-        = read_property(molecule_path)
+        = read_property(molecule_path)[0]
         
         return uncorrected_property
 
