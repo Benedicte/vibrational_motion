@@ -30,7 +30,7 @@ if __name__ == '__main__':
         print("Nuclear shielding")
         print("Nuclear spin correction")
         print("Nuclear quadropole moment")
-        print("Optical rotation")
+    s    print("Optical rotation")
     
     elif(prop_name == "Dipole Moment"):
         prop = pr.Property_1_Tensor(molecule, prop_name)
@@ -39,7 +39,7 @@ if __name__ == '__main__':
     elif(prop_name == "g-factor"):
         prop = pr.Property_2_Tensor(molecule, prop_name)
     elif(prop_name == "Nuclear spin-rotation"):
-        prop = pr.Property_2_Tensor(molecule, prop_name)
+        prop = pr.Property_3_Tensor(molecule, prop_name)
     elif(prop_name == "Molecular quadropole moment"):
         prop = pr.Property_2_Tensor(molecule, prop_name)
     elif(prop_name == "Spin-spin coupling"):
@@ -59,10 +59,3 @@ if __name__ == '__main__':
         
     prop()
 
-
-
-    #input_name = "input_" + molecule + "/"
-    #output_file_name = "output/" + molecule
-    #open(output_file_name, 'w').close() # As we are appending to the output, the old results must be deleted before each run
-
-    #unittest.main()

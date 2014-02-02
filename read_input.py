@@ -238,7 +238,7 @@ def read_GFACTOR(filename, nm):
     
     return second_deriv_g
     
-def read_polari(filename, nm):
+def read_POLARI(filename, nm):
     """Imports things needed from the DALTON.OUT that I need"""
     
     f = open(filename, 'r')
@@ -272,49 +272,6 @@ def read_polari(filename, nm):
         
     f.close()
     return second_deriv
-
-def read_spinrot1(filename, natom, nm):
-    """Imports things needed from the DALTON.OUT that I need"""
-    
-    f = open(filename, 'r')
-    second_deriv = zeros((natom,nm,3,3))
-    property_type = 0
-    dummy = []
-    
-    finished = 0
-    while (finished == 0):
-        cur_line = f.readline()
-        if re.search('second derivatives for',cur_line):
-            line_split = cur_line.split()
-            property_type = line_split[0] + line_split[1]
-            finished = 1
-            
-    for atom in range(natom):
-
-        dummy = f.readline()
-        dummy = f.readline()
-        dummy = f.readline()
-            
-        if atom != 0:
-            dummy = f.readline()
-            dummy = f.readline()
-                                
-        for mode in range(nm):
-            mline = f.readline()
-            mline = mline.split()
-            
-            second_deriv[atom][mode][0][0]= mline[1]
-            second_deriv[atom][mode][0][1]= mline[2] 
-            second_deriv[atom][mode][0][2]= mline[3] 
-            second_deriv[atom][mode][1][0]= mline[4]
-            second_deriv[atom][mode][1][1]= mline[5]  
-            second_deriv[atom][mode][1][2]= mline[6]
-            second_deriv[atom][mode][2][0]= mline[7]
-            second_deriv[atom][mode][2][1]= mline[8]  
-            second_deriv[atom][mode][2][2]= mline[9] 
-
-    f.close()
-    return second_deriv, property_type
 
 def read_SPINROT(filename, natom, nm):
     """Imports things needed from the DALTON.OUT that I need"""
@@ -369,7 +326,7 @@ def read_SPINROT(filename, natom, nm):
     f.close()
     return second_deriv, property_type
       
-def read_nucquad(filename, natom, nm):
+def read_NUCQUAD(filename, natom, nm):
     
     """Imports things needed from the DALTON.OUT that I need"""
     
@@ -410,7 +367,7 @@ def read_nucquad(filename, natom, nm):
     f.close()
     return second_deriv, property_type
 
-def read_optrot(filename, nm):
+def read_OPTROT(filename, nm):
     
     f = open(filename, 'r')
     second_deriv_optrot = zeros((nm,3,3))
@@ -466,49 +423,8 @@ def read_2d_input(filename, nm):
     
     f.close()
     return second_deriv    
-        
-def read_3d_input(filename, nm):
-    """Imports things needed from the DALTON.OUT that I need"""
-    
-    f = open(filename, 'r')
-    second_deriv = zeros((nm,3,3))
-    property_type = 0
-    dummy = []
-    
-    finished = 0
-    while (finished == 0):
-        cur_line = f.readline()
-        if re.search('second derivatives for',cur_line):
-            line_split = cur_line.split()
-            property_type = line_split[0] + line_split[1]
-            finished = 1
-            
-    for mode in range(nm):
 
-        dummy = f.readline()
-        dummy = f.readline()
-            
-        if mode != 0:
-            dummy = f.readline()
-            dummy = f.readline()
-            dummy = f.readline()
-            dummy = f.readline()
-            
-            dummy = f.readline()
-            dummy = f.readline()
-            dummy = f.readline()
-            dummy = f.readline()
-        
-        for i in range(3):
-            dummy = f.readline()
-            for j in range(3):
-                mline = f.readline()
-                mline = mline.split()
-                second_deriv[mode][i][j]= mline[2]
-    f.close()
-    return second_deriv, property_type
-
-def read_4d_input(filename, natom, nm):
+def read_SHIELD(filename, natom, nm):
     """Imports things needed from the DALTON.OUT that I need"""
     
     f = open(filename, 'r')
@@ -618,7 +534,7 @@ def read_quartic_force_field(filename, n_cord):
     
     return quartic_force_field
                 
-def read_DALTON_values_4d_reduced(filename, natom):
+def read_DALTON_NUCQUAD(filename, natom):
     """ For testing purposes, extracts the correct values from DALTON"""
     
     f = open(filename, 'r')
@@ -688,7 +604,7 @@ def read_DALTON_values_4d_reduced(filename, natom):
             
     return uncorrected_values, corrections, corrected_values
  
-def read_DALTON_values_4d_full(filename, natom):
+def read_DALTON_SHIELD(filename, natom):
     """ For testing purposes, extracts the correct values from DALTON"""
     
     f = open(filename, 'r')
@@ -737,8 +653,118 @@ def read_DALTON_values_4d_full(filename, natom):
             corrected_values[atom][2][i] = mline[3]
             
     return uncorrected_values, corrections, corrected_values   
+
+def read_DALTON_SPINROT(filename, natom):
+    """ For testing purposes, extracts the correct values from DALTON"""
+    
+    f = open(filename, 'r')
+    
+    uncorrected_values = zeros((natom,3,3))
+    corrections = zeros((natom,3,3))
+    corrected_values = zeros((natom,3,3))
+    
+    dummy = []
+    
+    finished = 0
+    while (finished != 2):
+        cur_line = f.readline()
+        if not cur_line: raise Exception("Dalton file does not contain the values looked for")
+        if re.search('Vibrationally corrected',cur_line):
+            finished = finished + 1
+            
+    for atom in range(natom):
+
+        dummy = f.readline()
+        dummy = f.readline()
+            
+        if atom != 0:
+            dummy = f.readline()
+            dummy = f.readline()
+            dummy = f.readline()
+                                           
+        for i in range(3):
+            mline = f.readline()
+            mline = mline.split()
+        
+            uncorrected_values[atom][0][i] = mline[1]
+            corrections[atom][0][i] = mline[2]
+            corrected_values[atom][0][i] = mline[3]
+        
+            mline = f.readline()
+            mline = mline.split()
+            uncorrected_values[atom][1][i] = mline[1]
+            corrections[atom][1][i] = mline[2]
+            corrected_values[atom][1][i] = mline[3]
+            
+            mline = f.readline()
+            mline = mline.split()
+            uncorrected_values[atom][2][i] = mline[1]
+            corrections[atom][2][i] = mline[2]
+            corrected_values[atom][2][i] = mline[3]
+            
+    return uncorrected_values, corrections, corrected_values  
     
 def read_DALTON_MAGNET(filename):
+    """ For testing purposes, extracts the correct values from DALTON"""
+    
+    f = open(filename, 'r')
+    
+    uncorrected_values = zeros((3,3))
+    corrections = zeros((3,3))
+    corrected_values = zeros((3,3))
+    
+    dummy = []
+    
+    finished = 0
+    while (finished != 2):
+        cur_line = f.readline()
+        if not cur_line: raise Exception("Dalton file does not contain the values looked for")
+        if re.search('Vibrationally corrected',cur_line):
+            finished = finished + 1
+
+    dummy = f.readline()
+    dummy = f.readline()
+    
+    
+    mline = f.readline()
+    mline = mline.split()
+    uncorrected_values[0][0] = mline[1]
+    corrections[0][0] = mline[2]
+    corrected_values[0][0] = mline[3]
+        
+    mline = f.readline()
+    mline = mline.split()
+    uncorrected_values[0][1] = mline[1]
+    corrections[0][1] = mline[2]
+    corrected_values[0][1] = mline[3]
+            
+    mline = f.readline()
+    mline = mline.split()
+    uncorrected_values[0][2] = mline[1]
+    corrections[0][2] = mline[2]
+    corrected_values[0][2] = mline[3]
+        
+    mline = f.readline()
+    mline = mline.split()
+    uncorrected_values[1][1] = mline[1]
+    corrections[1][1] = mline[2]
+    corrected_values[1][1] = mline[3]
+        
+    mline = f.readline()
+    mline = mline.split()
+    uncorrected_values[1][2] = mline[1]
+    corrections[1][2] = mline[2]
+    corrected_values[1][2] = mline[3]
+        
+    mline = f.readline()
+    mline = mline.split()
+    uncorrected_values[2][2] = mline[1]
+    corrections[2][2] = mline[2]
+    corrected_values[2][2] = mline[3]
+            
+    return uncorrected_values, corrections, corrected_values
+    
+def read_DALTON_OPTROT(filename):
     """ For testing purposes, extracts the correct values from DALTON"""
     
     f = open(filename, 'r')

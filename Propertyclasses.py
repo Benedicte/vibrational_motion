@@ -50,13 +50,13 @@ class Property_2_Tensor(Property):
         self.molecule = molecule
         self.property_name = property_name
         self.name_dic = {"Magnetizability":"MAGNET", "g-factor": "GFACTOR",\
-         "Molecular quadropole moment": "MOLQUAD"}
+         "Molecular quadropole moment": "MOLQUAD", "Optical rotation": "OPTROT"}
          
         self.read_dic = {"Magnetizability":ri.read_MAGNET, "g-factor": ri.read_GFACTOR,\
-         "Molecular quadropole moment": ri.read_MOLQUAD}
+         "Molecular quadropole moment": ri.read_MOLQUAD, "Optical rotation": ri.read_OPTROT}
          
         self.read_DALTON_dic = {"Magnetizability":ri.read_DALTON_MAGNET, "g-factor": ri.read_DALTON_GFACTOR,\
-         "Molecular quadropole moment": ri.read_DALTON_MOLQUAD}
+         "Molecular quadropole moment": ri.read_DALTON_MOLQUAD, "Optical rotation":ri.read_DALTON_OPTROT}
         
     def __call__(self):
         """ Calculated the vibrationally averaged corrections for first 
@@ -101,7 +101,6 @@ class Property_2_Tensor(Property):
         
         return pre_property
         
-        
     def get_uncorrected_property(self):
         
         read_property = self.read_DALTON_dic[self.property_name]
@@ -114,6 +113,21 @@ class Property_2_Tensor(Property):
         return uncorrected_property
 
 class Property_3_Tensor(Property):
+    
+    def __init__(self, molecule, property_name):
+        Property.__init__(self, molecule, property_name)
+        self.molecule = molecule
+        self.property_name = property_name
+
+        self.name_dic = {"Nuclear spin-rotation":"SPINROT", "Nuclear shielding": "SHIELD",\
+         "Nuclear quadropole moment": "NUCQUAD", "Optical rotation": "OPTROT"}
+         
+        self.read_dic = {"Nuclear spin-rotation":ri.read_NUCQUAD, "Nuclear shielding": ri.read_SHIELD,\
+         "Nuclear quadropole moment": ri.read_NUCQUAD, "Optical rotation": ri.read_OPTROT}
+         
+        self.read_DALTON_dic = {"Nuclear spin-rotation":ri.read_DALTON_SPINROT, "Nuclear shielding": ri.read_DALTON_SHIELD,\
+         "Nuclear quadropole moment": ri.read_DALTON_NUCQUAD, "Optical rotation": ri.read_DALTON_OPTROT}
+    
     def __call__(self):
         """ Calculated the vibrationally averaged corrections for first 
         tensor properties. These properties are: nuclear shieldings, nuclear 
@@ -129,20 +143,46 @@ class Property_3_Tensor(Property):
         n_atoms: The number of atoms constituting the molecule as an int
         returns: The corrections to the property, the corrected property as 
                  np.arrays"""
-        property_corrections = zeros((n_atom,3,3))
         
-        for nm in range(n_nm):
-            factor = 1/(sqrt(eig[nm])) # the reduced one
-            for atom in range(n_atom):
+        
+        property_corrections = zeros((self.molecule.n_atoms,3,3))
+        pre_property = self.get_preproperty()
+        uncorrected_property = self.get_uncorrected_property() 
+        eigenvalues = self.molecule.eigenvalues
+        
+        for nm in range(self.molecule.number_of_normal_modes):
+            factor = 1/(sqrt(eigenvalues[self.molecule.number_of_normal_modes])) # the reduced one
+            for atom in range(self.molecule.n_atoms):
                 for i in range(3):
                     for j in range(3):
-                        property_corrections[atom,j,i] += pre_property[atom,nm,j,i]*factor
+                        property_corrections[atom,j,i] += pre_property[atom,self.molecule.number_of_normal_modes,j,i]*factor
         
-        property_corrections = property_corrections*prefactor
+        property_corrections = property_corrections*self.prefactor
         corrected_property = property_corrections + uncorrected_property
  
         return property_corrections, corrected_property 
-       
+
+    def get_preproperty(self):
+        read_property = self.read_dic[self.property_name]
+        molecule_path = self.molecule.input_name \
+                        + self.name_dic[self.property_name]
+        
+        pre_property  \
+        = read_property(molecule_path, self.molecule.n_atoms, self.molecule.number_of_normal_modes)
+        
+        return pre_property
+        
+    def get_uncorrected_property(self):
+        
+        read_property = self.read_DALTON_dic[self.property_name]
+        molecule_path = self.molecule.input_name \
+                        + self.name_dic[self.property_name]
+        
+        uncorrected_property  \
+        = read_property(molecule_path, self.molecule.n_atoms)[0]
+        
+        return uncorrected_property
+
 class Polarizability:
 
     def __call__():
