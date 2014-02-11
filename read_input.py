@@ -31,7 +31,7 @@ def read_mol_quad(filename, nm):
     
     f = open(filename, 'r')
     second_deriv = zeros((nm,3,3))
-    property_type = 0
+    property_type = "Molecular Quadrupole Moment"
     dummy = []
     
     finished = 0
@@ -61,14 +61,14 @@ def read_mol_quad(filename, nm):
     #second_deriv[mode] = subtract(second_deriv_temp , diag(second_deriv[mode].diagonal()))   
     
     f.close()
-    return second_deriv, "MOLQUAD"
+    return second_deriv, property_type
     
 def read_magnet(filename, nm):
     
     f = open(filename, 'r')
     second_deriv_magnet = zeros((nm,3,3))
     second_deriv_g = zeros((nm,3,3))
-    property_type = 0
+    property_type = "Magnetizability"
     dummy = []
     
     finished = 0
@@ -121,7 +121,7 @@ def read_polari(filename, nm):
     
     f = open(filename, 'r')
     second_deriv = zeros((nm,3,3))
-    property_type = 0
+    property_type = "Polarizability"
     dummy = []
     
     finished = 0
@@ -129,7 +129,6 @@ def read_polari(filename, nm):
         cur_line = f.readline()
         if re.search('ty second derivatives',cur_line):
             line_split = cur_line.split()
-            property_type = line_split[0] + line_split[1]
             finished = 1
             
 
@@ -199,7 +198,7 @@ def read_spinrot(filename, natom, nm):
     
     f = open(filename, 'r')
     second_deriv = zeros((natom,nm,3,3))
-    property_type = 0
+    property_type = "Spin-Rotation Constants"
     dummy = []
     values = zeros((9))
     
@@ -208,7 +207,6 @@ def read_spinrot(filename, natom, nm):
         cur_line = f.readline()
         if re.search('second derivatives for',cur_line):
             line_split = cur_line.split()
-            property_type = line_split[0] + line_split[1]
             finished = 1
             
     for atom in range(natom):
@@ -253,7 +251,7 @@ def read_nucquad(filename, natom, nm):
     
     f = open(filename, 'r')
     second_deriv = zeros((natom,nm,3,3))
-    property_type = 0
+    property_type = "Nuclear Quadrupole Moment"
     dummy = []
     
     finished = 0
@@ -261,7 +259,6 @@ def read_nucquad(filename, natom, nm):
         cur_line = f.readline()
         if re.search('second derivatives for:',cur_line):
             line_split = cur_line.split()
-            property_type = line_split[0] + line_split[1]
             finished = 1
             
     for atom in range(natom):
@@ -391,7 +388,7 @@ def read_4d_input(filename, natom, nm):
     
     f = open(filename, 'r')
     second_deriv = zeros((natom,nm,3,3))
-    property_type = 0
+    property_type = "Nuclear Shieldings"
     dummy = []
     
     finished = 0
@@ -399,7 +396,6 @@ def read_4d_input(filename, natom, nm):
         cur_line = f.readline()
         if re.search('second derivatives for:',cur_line):
             line_split = cur_line.split()
-            property_type = line_split[0] + line_split[1]
             finished = 1
             
     for atom in range(natom):
@@ -852,36 +848,73 @@ def read_cubic_force_field_chiral(filename, n_cord): #Make this one generic
     f.close()
     return cubic_force_field
 
-def write_to_file(molecule, property_type, results, n_atom = None):
+def write_to_file(output_file_name, molecule, property_type, results, n_atom = None, atom_list = None):
     
-        filename = "output/" + molecule
+        filename = output_file_name
         f = open(filename, "a")
-        f.write(property_type + "\n")
+        results = np.around(results, decimals=4)
         
         if(results.ndim == 1):
+            
             line = str(results).strip('[]')
+            line = re.sub("\\s+", "&", line)
+            line = line + "\\\\"
+            f.write(property_type) 
+            f.write("& X& Y& Z \\\\" + "\n")
             f.write(line + "\n")
+            f.write("\hline" + "\n")
             f.close()
         
         if(results.ndim == 2):
+            f.write(property_type)
             line1 = str(results[0]).strip('[]')
+
             line2 = str(results[1]).strip('[]')
             line3 = str(results[2]).strip('[]')
             
-            f.write(line1 + "\n")
-            f.write(line2 + "\n")
-            f.write(line3 + "\n")
+            line1 = re.sub("\\s+", "&", line1)
+            line2 = re.sub("\\s+", "&", line2)
+            line3 = re.sub("\\s+", "&", line3)
+        
+            f.write( "& XX & XY & XZ\\\\" + "\n")
+            f.write(line1 + "\\\\" + "\n")
+            f.write(" & YX & YY & YZ\\\\" + "\n")
+            f.write(line2 + "\\\\" + "\n")
+            f.write("& ZX& ZY& ZZ \\\\" + "\n")
+            f.write(line3 + "\\\\" + "\n")
+            f.write("\hline" + "\n")
 
             f.close()
 
-        if(results.ndim == 3):        
+        if(results.ndim == 3): 
+            f.write(property_type + "\\\\" + "\n")       
             for atom in range(n_atom):
+                f.write("\hline"+ "\n" )
+                f.write("Atom: "+ atom_list[atom] ) 
+               
                 line1 = str(results[atom][0]).strip('[]')
                 line2 = str(results[atom][1]).strip('[]')
                 line3 = str(results[atom][2]).strip('[]')
             
-                f.write(line1 + "\n")
-                f.write(line2 + "\n")
-                f.write(line3 + "\n")
+                
+                line1 = re.sub("\\s+", "&", line1).strip("&")
+                
+                line2 = re.sub("\\s+", "&", line2).strip("&")
+                
+                line3 = re.sub("\\s+", "&", line3).strip("&")
+                f.write( "& XX & XY & XZ\\\\" + "\n")
+                f.write("&" + line1 + "\\\\" + "\n")
+                f.write(" & YX & YY & YZ\\\\" + "\n")
+                f.write("&" + line2 + "\\\\" + "\n")
+                f.write("& ZX& ZY& ZZ \\\\" + "\n")
+                f.write("&" + line3 + "\\\\" + "\n")
                 
                 f.write("\n") # Seperates the 2D matrices making up the 3D matrix
+            
+
+            f.write("\hline" + "\n")
+    
+        #f.write("\\end{tabular}")
+        f.close()
+        
+
