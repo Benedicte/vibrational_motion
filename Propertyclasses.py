@@ -19,7 +19,7 @@ class Property_1_Tensor(Property):
         moment as np.arrays"""
         
         pre_property = self.get_preproperty()
-        uncorrected_property = self.get_uncorrected_property()
+        self.uncorrected_property = self.get_uncorrected_property()
         eigenvalues = self.molecule.eigenvalues
         correction_property = zeros((3))
         eigenvalues = absolute(eigenvalues)
@@ -30,10 +30,11 @@ class Property_1_Tensor(Property):
             correction_property[1] += pre_property[i, 1]*factor
             correction_property[2] += pre_property[i, 2]*factor
         
-        correction_property = correction_property * self.prefactor
-        corrected_property = add(uncorrected_property, correction_property)
-        self.write_to_file(self.property_name, corrected_property)
-        return correction_property, corrected_property
+        self.correction_property = correction_property * self.prefactor
+        self.corrected_property = add(self.uncorrected_property, self.correction_property)
+        self.write_to_file(self.property_name)
+        print self.correction_property
+        return self.correction_property, self.corrected_property
         
     def get_preproperty(self):
         pre_property = ri.read_2d_input(self.molecule.input_name + "/SHIELD", self.molecule.number_of_normal_modes)
@@ -74,7 +75,7 @@ class Property_2_Tensor(Property):
                  np.arrays
         """
         pre_property = self.get_preproperty()
-        uncorrected_property = self.get_uncorrected_property() 
+        self.uncorrected_property = self.get_uncorrected_property() 
         eigenvalues = self.molecule.eigenvalues
         correction_property = zeros((3,3))
         
@@ -84,12 +85,12 @@ class Property_2_Tensor(Property):
                 for j in range(3):
                     correction_property[j,i] += pre_property[mode,j,i]*factor
         
-        correction_property = correction_property*self.prefactor
-        corrected_property = uncorrected_property + correction_property 
+        self.correction_property = correction_property*self.prefactor
+        self.corrected_property = self.uncorrected_property + self.correction_property 
     
-        self.write_to_file(self.property_name, corrected_property)
+        self.write_to_file(self.property_name)
             
-        return correction_property, corrected_property  
+        return self.correction_property, self.corrected_property  
         
     def get_preproperty(self):
         read_property = self.read_dic[self.property_name]
@@ -145,22 +146,25 @@ class Property_3_Tensor(Property):
                  np.arrays"""
         
         
-        property_corrections = zeros((self.molecule.n_atoms,3,3))
-        pre_property = self.get_preproperty()
-        uncorrected_property = self.get_uncorrected_property() 
+        correction_property = zeros((self.molecule.n_atoms,3,3))
+        pre_property = self.get_preproperty()[0]
+        self.uncorrected_property = self.get_uncorrected_property() 
         eigenvalues = self.molecule.eigenvalues
-        
+
         for nm in range(self.molecule.number_of_normal_modes):
-            factor = 1/(sqrt(eigenvalues[self.molecule.number_of_normal_modes])) # the reduced one
-            for atom in range(self.molecule.n_atoms):
+            factor = 1/(sqrt(eigenvalues[nm])) # the reduced one
+            for atm in range(4):
+                #self.molecule.n_atoms
                 for i in range(3):
                     for j in range(3):
-                        property_corrections[atom,j,i] += pre_property[atom,self.molecule.number_of_normal_modes,j,i]*factor
+                        correction_property[atm,j,i] += pre_property[atm,nm,j,i]*factor
+    
+        self.correction_property = correction_property*self.prefactor
+        self.corrected_property = self.correction_property + self.uncorrected_property
         
-        property_corrections = property_corrections*self.prefactor
-        corrected_property = property_corrections + uncorrected_property
+        self.write_to_file(self.property_name, self.molecule.n_atoms)
  
-        return property_corrections, corrected_property 
+        return self.correction_property, self.corrected_property 
 
     def get_preproperty(self):
         read_property = self.read_dic[self.property_name]

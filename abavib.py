@@ -14,6 +14,11 @@ if __name__ == '__main__':
     print("")
 
     molecule_name = raw_input('Which molecule should calculations be made for? (ex. h2o)')
+    if (molecule_name == ""):
+        molecule_name = "h2o2"
+    
+    dft = raw_input('at DFT or at HF level?')
+    
     molecule = mol.Molecule(molecule_name)
 
 
@@ -30,7 +35,7 @@ if __name__ == '__main__':
         print("Nuclear shielding")
         print("Nuclear spin correction")
         print("Nuclear quadropole moment")
-    s    print("Optical rotation")
+        print("Optical rotation")
     
     elif(prop_name == "Dipole Moment"):
         prop = pr.Property_1_Tensor(molecule, prop_name)
@@ -54,6 +59,16 @@ if __name__ == '__main__':
         prop = pr.Property_3_Tensor(molecule, prop_name)
     elif(prop_name == "Optical rotation"):
         prop = pr.Property_3_Tensor(molecule, prop_name)
+    elif(prop_name == "all"):
+        prop = pr.Property_1_Tensor(molecule, "Dipole Moment")
+        prop()
+        prop = pr.Property_3_Tensor(molecule, "Nuclear spin-rotation")
+        prop()
+        prop = pr.Property_2_Tensor(molecule, "Molecular quadropole moment")
+        prop()
+        prop = pr.Property_3_Tensor(molecule, "Nuclear shielding")
+        prop()
+        prop = pr.Property_3_Tensor(molecule, "Nuclear quadropole moment")
     else:
         print ("Not a supported property")
         

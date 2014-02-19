@@ -37,11 +37,13 @@ def read_molecule(filename):
             The number of atoms as a list
             The charge of the atoms as a list
             The number of atoms in the molecule as an int
+            The atoms making up the molecule as a list
     """
     
     f = open(filename, 'r')
     charge_list = []
     num_atoms_list = []
+    atom_list =[]
     atomicmass1 = {'O': 15.9994, 'H': 1.00794, 'C':12.0107, 'D':2.013553212724,'T':3.0160492, 'F':18.998403}
     
     coordinates = [] # contains the [x,y,z] coordinates of the input atoms
@@ -64,6 +66,7 @@ def read_molecule(filename):
 
         for i in range(num_atoms):
             mline = f.readline().split()
+            atom_list.append(mline[0])
             mass.append(atomicmass1[mline[0]])
             coordinates.append(mline[1:4])
 
@@ -72,7 +75,7 @@ def read_molecule(filename):
     f.close()
     coordinates = array(coordinates, double)
 
-    return coordinates, mass, num_atoms_list, charge_list, sum(num_atoms_list)
+    return coordinates, mass, num_atoms_list, charge_list, sum(num_atoms_list),  atom_list
 
 def read_hessian(filename, n_coords): 
     """Reads a hessian from file.
