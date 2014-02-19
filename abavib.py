@@ -19,6 +19,9 @@ if __name__ == '__main__':
     
     dft = raw_input('at DFT or at HF level?')
     
+    if(dft == "dft"):
+        molecule_name = "dft_" + molecule_name
+    
     molecule = mol.Molecule(molecule_name)
 
 
@@ -69,6 +72,7 @@ if __name__ == '__main__':
         prop = pr.Property_3_Tensor(molecule, "Nuclear shielding")
         prop()
         prop = pr.Property_3_Tensor(molecule, "Nuclear quadropole moment")
+
     else:
         print ("Not a supported property")
         

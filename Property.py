@@ -18,7 +18,6 @@ class Property:
         """"If the quartic force field precision is derired, this function can be used 
         inside the call function where the new terms is simply added as a correction"""
         
-        
 
     def write_to_file(self, property_type, n_atom = None):
         """ Writes the resutls to file. It writes the uncorrected property

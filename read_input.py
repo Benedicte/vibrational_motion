@@ -103,7 +103,7 @@ def read_MOLQUAD(filename, nm):
     
     f = open(filename, 'r')
     second_deriv = zeros((nm,3,3))
-    property_type = 0
+    property_type = "Molecular Quadrupole Moment"
     dummy = []
     
     finished = 0
@@ -133,6 +133,7 @@ def read_MOLQUAD(filename, nm):
     #second_deriv[mode] = subtract(second_deriv_temp , diag(second_deriv[mode].diagonal()))   
     
     f.close()
+
     return second_deriv
     
 def read_MAGNET(filename, nm):
@@ -140,7 +141,7 @@ def read_MAGNET(filename, nm):
     f = open(filename, 'r')
     second_deriv_magnet = zeros((nm,3,3))
     second_deriv_g = zeros((nm,3,3))
-    property_type = 0
+    property_type = "Magnetizability"
     dummy = []
     
     finished = 0
@@ -191,15 +192,16 @@ def read_MAGNET(filename, nm):
 def read_GFACTOR(filename, nm):
     
     f = open(filename, 'r')
-    second_deriv_magnet = zeros((nm,3,3))
-    second_deriv_g = zeros((nm,3,3))
-    property_type = 0
+    second_deriv = zeros((nm,3,3))
+    property_type = "Polarizability"
     dummy = []
     
     finished = 0
     while (finished == 0):
         cur_line = f.readline()
-        if re.search('Magnetizability tensor second derivatives',cur_line):
+
+        if re.search('ty second derivatives',cur_line):
+            line_split = cur_line.split()
             finished = 1
     
     dummy = f.readline()
@@ -281,7 +283,7 @@ def read_SPINROT(filename, natom, nm):
     
     f = open(filename, 'r')
     second_deriv = zeros((natom,nm,3,3))
-    property_type = 0
+    property_type = "Spin-Rotation Constants"
     dummy = []
     values = zeros((9))
     
@@ -290,7 +292,6 @@ def read_SPINROT(filename, natom, nm):
         cur_line = f.readline()
         if re.search('second derivatives for',cur_line):
             line_split = cur_line.split()
-            property_type = line_split[0] + line_split[1]
             finished = 1
             
     for atom in range(natom):
@@ -335,7 +336,7 @@ def read_NUCQUAD(filename, natom, nm):
     
     f = open(filename, 'r')
     second_deriv = zeros((natom,nm,3,3))
-    property_type = 0
+    property_type = "Nuclear Quadrupole Moment"
     dummy = []
     
     finished = 0
@@ -343,7 +344,6 @@ def read_NUCQUAD(filename, natom, nm):
         cur_line = f.readline()
         if re.search('second derivatives for:',cur_line):
             line_split = cur_line.split()
-            property_type = line_split[0] + line_split[1]
             finished = 1
             
     for atom in range(natom):
@@ -432,7 +432,7 @@ def read_SHIELD(filename, natom, nm):
     
     f = open(filename, 'r')
     second_deriv = zeros((natom,nm,3,3))
-    property_type = 0
+    property_type = "Nuclear Shieldings"
     dummy = []
     
     finished = 0
@@ -440,7 +440,6 @@ def read_SHIELD(filename, natom, nm):
         cur_line = f.readline()
         if re.search('second derivatives for:',cur_line):
             line_split = cur_line.split()
-            property_type = line_split[0] + line_split[1]
             finished = 1
             
     for atom in range(natom):
