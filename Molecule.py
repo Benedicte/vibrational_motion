@@ -262,7 +262,7 @@ class Molecule:
                     cff_norm[k,j,i]= temp
         
         reldiff = vectorize(lambda x, y: x/y) 
-        return cff_norm, cff_norm[:,:6,:6]  
+        return cff_norm, cff_norm[:,:self.number_of_normal_modes,:self.number_of_normal_modes]  
 
     def get_effective_geometry(self):
         """Converts normal coordinates into cartessian coordinates.

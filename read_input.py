@@ -374,11 +374,14 @@ def read_OPTROT(filename, nm):
     
     f = open(filename, 'r')
     second_deriv_optrot = zeros((nm,3,3))
+    second_deriv_optrot1 = zeros((nm,3,3))
+    second_deriv_optrot2 = zeros((nm,3,3))
+    
     dummy = []
     
     finished = 0
     
-    while (finished != 3):
+    while (finished != 2):
         cur_line = f.readline()
         if re.search('second derivatives',cur_line):
             finished = finished + 1
@@ -397,9 +400,47 @@ def read_OPTROT(filename, nm):
         second_deriv_optrot[mode][0][2]= mline[4]  
         second_deriv_optrot[mode][1][2]= mline[5]  
         second_deriv_optrot[mode][2][2]= mline[6]
-        
+    
+    i = 0
+    while(i < 19):
+        dummy = f.readline()
+        i = i+1
+
+    for mode in range(nm):
+        mline = f.readline()
+        mline = mline.split()
+        second_deriv_optrot1[mode][0][0]= mline[1]
+        second_deriv_optrot1[mode][0][1]= mline[2]  
+        second_deriv_optrot1[mode][1][1]= mline[3]
+              
+        second_deriv_optrot1[mode][0][2]= mline[4]  
+        second_deriv_optrot1[mode][1][2]= mline[5]  
+        second_deriv_optrot1[mode][2][2]= mline[6]
+    
+    i = 0     
+    while(i < 19):
+        dummy = f.readline()
+        i = i+1 
+    
+    for mode in range(nm):
+        mline = f.readline()
+        mline = mline.split()
+        second_deriv_optrot2[mode][0][0]= mline[1]
+        second_deriv_optrot2[mode][0][1]= mline[2]  
+        second_deriv_optrot2[mode][1][1]= mline[3]
+              
+        second_deriv_optrot2[mode][0][2]= mline[4]  
+        second_deriv_optrot2[mode][1][2]= mline[5]  
+        second_deriv_optrot2[mode][2][2]= mline[6]
+    
     f.close()
-    return second_deriv_optrot
+    
+    print second_deriv_optrot[0]
+    print second_deriv_optrot1[0]
+    print second_deriv_optrot2[8]
+    
+    
+    return second_deriv_optrot, second_deriv_optrot1, second_deriv_optrot2
         
 def read_2d_input(filename, nm):
     
@@ -771,9 +812,9 @@ def read_DALTON_OPTROT(filename):
     
     f = open(filename, 'r')
     
-    uncorrected_values = zeros((3,3))
-    corrections = zeros((3,3))
-    corrected_values = zeros((3,3))
+    uncorrected_values = zeros((3,3,3))
+    corrections = zeros((3,3,3))
+    corrected_values = zeros((3,3,3))
     
     dummy = []
     
@@ -784,46 +825,51 @@ def read_DALTON_OPTROT(filename):
         if re.search('Vibrationally corrected',cur_line):
             finished = finished + 1
 
-    dummy = f.readline()
-    dummy = f.readline()
-    
-    
-    mline = f.readline()
-    mline = mline.split()
-    uncorrected_values[0][0] = mline[1]
-    corrections[0][0] = mline[2]
-    corrected_values[0][0] = mline[3]
-        
-    mline = f.readline()
-    mline = mline.split()
-    uncorrected_values[0][1] = mline[1]
-    corrections[0][1] = mline[2]
-    corrected_values[0][1] = mline[3]
+    for i in range(3):
+        dummy = f.readline()
+        dummy = f.readline()
+        mline = f.readline()
+        mline = mline.split()
+        uncorrected_values[i][0][0] = mline[1]
+        corrections[i][0][0] = mline[2]
+        corrected_values[i][0][0] = mline[3]
             
-    mline = f.readline()
-    mline = mline.split()
-    uncorrected_values[0][2] = mline[1]
-    corrections[0][2] = mline[2]
-    corrected_values[0][2] = mline[3]
-        
-    mline = f.readline()
-    mline = mline.split()
-    uncorrected_values[1][1] = mline[1]
-    corrections[1][1] = mline[2]
-    corrected_values[1][1] = mline[3]
-        
-    mline = f.readline()
-    mline = mline.split()
-    uncorrected_values[1][2] = mline[1]
-    corrections[1][2] = mline[2]
-    corrected_values[1][2] = mline[3]
-        
-    mline = f.readline()
-    mline = mline.split()
-    uncorrected_values[2][2] = mline[1]
-    corrections[2][2] = mline[2]
-    corrected_values[2][2] = mline[3]
+        mline = f.readline()
+        mline = mline.split()
+        uncorrected_values[i][0][1] = mline[1]
+        corrections[i][0][1] = mline[2]
+        corrected_values[i][0][1] = mline[3]
+                
+        mline = f.readline()
+        mline = mline.split()
+        uncorrected_values[i][0][2] = mline[1]
+        corrections[i][0][2] = mline[2]
+        corrected_values[i][0][2] = mline[3]
             
+        mline = f.readline()
+        mline = mline.split()
+        uncorrected_values[i][1][1] = mline[1]
+        corrections[i][1][1] = mline[2]
+        corrected_values[i][1][1] = mline[3]
+            
+        mline = f.readline()
+        mline = mline.split()
+        uncorrected_values[i][1][2] = mline[1]
+        corrections[i][1][2] = mline[2]
+        corrected_values[i][1][2] = mline[3]
+            
+        mline = f.readline()
+        mline = mline.split()
+        uncorrected_values[i][2][2] = mline[1]
+        corrections[i][2][2] = mline[2]
+        corrected_values[i][2][2] = mline[3]
+        
+        dummy = f.readline()
+        dummy = f.readline()
+        dummy = f.readline()
+        dummy = f.readline()
+        dummy = f.readline()
+                   
     return uncorrected_values, corrections, corrected_values
 
 def read_DALTON_MOLQUAD(filename):

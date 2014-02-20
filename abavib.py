@@ -15,7 +15,8 @@ if __name__ == '__main__':
 
     molecule_name = raw_input('Which molecule should calculations be made for? (ex. h2o)')
     if (molecule_name == ""):
-        molecule_name = "h2o2"
+        molecule_name = "fluoromethane"
+        molecule_name = "fluoromethane"
     
     dft = raw_input('at DFT or at HF level?')
     
@@ -61,7 +62,7 @@ if __name__ == '__main__':
     elif(prop_name == "Nuclear quadropole moment"):
         prop = pr.Property_3_Tensor(molecule, prop_name)
     elif(prop_name == "Optical rotation"):
-        prop = pr.Property_3_Tensor(molecule, prop_name)
+        prop = pr.Property_2_Tensor(molecule, prop_name)
     elif(prop_name == "all"):
         prop = pr.Property_1_Tensor(molecule, "Dipole Moment")
         prop()

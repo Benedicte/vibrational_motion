@@ -74,23 +74,68 @@ class Property_2_Tensor(Property):
         returns: The corrections to the property, the corrected property as
                  np.arrays
         """
-        pre_property = self.get_preproperty()
-        self.uncorrected_property = self.get_uncorrected_property() 
-        eigenvalues = self.molecule.eigenvalues
-        correction_property = zeros((3,3))
-        
-        for mode in range(self.molecule.number_of_normal_modes):
-            factor = 1/(sqrt(eigenvalues[mode])) # the reduced one
-            for i in range(3):
-                for j in range(3):
-                    correction_property[j,i] += pre_property[mode,j,i]*factor
-        
-        self.correction_property = correction_property*self.prefactor
-        self.corrected_property = self.uncorrected_property + self.correction_property 
-    
-        self.write_to_file(self.property_name)
+        if(self.molecule.name == "fluoromethane"):
+            pre_property1, pre_property2, pre_property3 = self.get_preproperty()
+            self.uncorrected_property = self.get_uncorrected_property() 
+            self.uncorrected_property1 = self.uncorrected_property[0]
+            self.uncorrected_property2 = self.uncorrected_property[1]
+            self.uncorrected_property3 = self.uncorrected_property[2]
             
-        return self.correction_property, self.corrected_property  
+            eigenvalues = self.molecule.eigenvalues
+            
+            correction_property1 = zeros((3,3))
+            correction_property2 = zeros((3,3))
+            correction_property3 = zeros((3,3))
+            
+            for mode in range(self.molecule.number_of_normal_modes):
+                factor = 1/(sqrt(eigenvalues[mode])) # the reduced one
+                for i in range(3):
+                    for j in range(3):
+                        correction_property1[j,i] += pre_property1[mode,j,i]*factor
+                        
+            self.correction_property1 = correction_property1*self.prefactor
+            self.corrected_property1 = self.uncorrected_property1 + self.correction_property1
+            
+            for mode in range(self.molecule.number_of_normal_modes):
+                factor = 1/(sqrt(eigenvalues[mode])) # the reduced one
+                for i in range(3):
+                    for j in range(3):
+                        correction_property2[j,i] += pre_property2[mode,j,i]*factor
+
+            self.correction_property2 = correction_property2*self.prefactor
+            self.corrected_property2 = self.uncorrected_property2 + self.correction_property2
+            
+            for mode in range(self.molecule.number_of_normal_modes):
+                factor = 1/(sqrt(eigenvalues[mode])) # the reduced one
+                for i in range(3):
+                    for j in range(3):
+                        correction_property3[j,i] += pre_property3[mode,j,i]*factor
+       
+            self.correction_property3 = correction_property3*self.prefactor
+            self.corrected_property3 = self.uncorrected_property3 + self.correction_property3
+        
+            self.write_to_file(self.property_name)
+                
+            return 
+        
+        else:
+            pre_property = self.get_preproperty()
+            self.uncorrected_property = self.get_uncorrected_property() 
+            eigenvalues = self.molecule.eigenvalues
+            correction_property = zeros((3,3))
+            
+            for mode in range(self.molecule.number_of_normal_modes):
+                factor = 1/(sqrt(eigenvalues[mode])) # the reduced one
+                for i in range(3):
+                    for j in range(3):
+                        correction_property[j,i] += pre_property[mode,j,i]*factor
+            
+            self.correction_property = correction_property*self.prefactor
+            self.corrected_property = self.uncorrected_property + self.correction_property 
+        
+            self.write_to_file(self.property_name)
+                
+            return self.correction_property, self.corrected_property  
         
     def get_preproperty(self):
         read_property = self.read_dic[self.property_name]
@@ -100,7 +145,15 @@ class Property_2_Tensor(Property):
         pre_property  \
         = read_property(molecule_path, self.molecule.number_of_normal_modes)
         
-        return pre_property
+        if(self.molecule.input_name == "fluoromethane"): # Switch this with property name
+            pre_property1, pre_property2, pre_property3   \
+            = read_property(molecule_path, self.molecule.number_of_normal_modes)
+            return  pre_property1, pre_property2, pre_property3
+        
+        else:
+            pre_property  \
+            = read_property(molecule_path, self.molecule.number_of_normal_modes)
+            return pre_property
         
     def get_uncorrected_property(self):
         
