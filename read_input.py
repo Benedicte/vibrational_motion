@@ -1005,57 +1005,6 @@ def read_DALTON_values_2d(filename):
         
     return uncorrected_values, corrections, corrected_values        
 
-def read_cubic_force_field(filename, n_cord): #Make this one generic
-    """Imports the quartic force field from DALTON"""
-    
-    f = open(filename, 'r')
-    cubic_force_field = zeros((n_cord, n_cord, n_cord))
-    dummy = []
-    counter = n_cord # Make an if counting, and thus reading correctly..
-    
-    finished = 0
-    while (finished == 0):
-        cur_line = f.readline()
-        if re.search('Anharmonic force constants',cur_line):
-            finished = 1
-
-    for D3 in range(n_cord):
-        
-        dummy = f.readline()
-        dummy = f.readline()
-        dummy = f.readline()
-        
-        if(D3 != 0):
-            dummy = f.readline()
-            dummy = f.readline()
-            dummy = f.readline()
-        
-        for D2 in range(n_cord):
-            mline = f.readline()
-            mline = mline.split()
-            for D1 in range(5):
-                cubic_force_field[D3][D2][D1] = mline[D1 + 1]
-        
-        dummy = f.readline()
-        dummy = f.readline()
-            
-        for D2 in range(n_cord):
-            mline = f.readline()
-            mline = mline.split()
-            for D1 in range(5):
-                cubic_force_field[D3][D2][D1 + 5] = mline[D1 + 1]
-                
-        dummy = f.readline()
-        dummy = f.readline()
-            
-        for D2 in range(n_cord):
-            mline = f.readline()
-            mline = mline.split()
-            for D1 in range(2):
-                cubic_force_field[D3][D2][D1 + 10] = mline[D1 + 1]
-    f.close()
-    return cubic_force_field
-
 def read_cubic_force_field_h2o(filename, n_coords):
     """
     Reads the cubic force field calculated by DALTON from file.
@@ -1094,8 +1043,8 @@ def read_eigenvector(filename, n_atoms):
     f.close()
     return eigenvector
         
-def read_cubic_force_field_chiral(filename, n_cord): #Make this one generic
-    """Imports the chiral cubic force field from DALTON"""
+def read_cubic_force_field(filename, n_cord):
+    """Imports the cubic force field from DALTON"""
       
     f = open(filename, 'r')
     cubic_force_field = zeros((n_cord, n_cord, n_cord))
@@ -1116,32 +1065,22 @@ def read_cubic_force_field_chiral(filename, n_cord): #Make this one generic
         
         if(D3 != 0):
             dummy = f.readline()
+        
+        j = 0
+        while(j < n_cord):
+        
+            for D2 in range(n_cord):
+                mline = f.readline()
+                mline = mline.split()
+                for D1 in range(min(5,n_cord - j)):
+                    cubic_force_field[D3][D2][D1 + j] = mline[D1 + 1]
+                    
             dummy = f.readline()
             dummy = f.readline()
-        
-        for D2 in range(n_cord):
-            mline = f.readline()
-            mline = mline.split()
-            for D1 in range(5):
-                cubic_force_field[D3][D2][D1] = mline[D1 + 1]
-        
-        dummy = f.readline()
-        dummy = f.readline()
             
-        for D2 in range(n_cord):
-            mline = f.readline()
-            mline = mline.split()
-            for D1 in range(5):
-                cubic_force_field[D3][D2][D1 + 5] = mline[D1 + 1]
-                
-        dummy = f.readline()
-        dummy = f.readline()
-            
-        for D2 in range(n_cord):
-            mline = f.readline()
-            mline = mline.split()
-            for D1 in range(5):
-                cubic_force_field[D3][D2][D1 + 10] = mline[D1 + 1]
+            j = j + 5
+        
     f.close()
+    print cubic_force_field
     return cubic_force_field
 

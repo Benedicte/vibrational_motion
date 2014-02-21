@@ -292,7 +292,8 @@ class Molecule:
         #            cartessian_coordinates[atom, coor] += normal_coords[i]*eigvec[cor,i]*factor
         #            cor = cor+1            
        
-
+        print ("effective geometry")
+        print (cartessian_coordinates)
         return cartessian_coordinates
 
     def effective_geometry_norm(self, cff_norm):
