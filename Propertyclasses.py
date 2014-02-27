@@ -42,6 +42,9 @@ class Property_1_Tensor(Property):
         
     def get_uncorrected_property(self):
         uncorrected_property = ri.read_DALTON_values_2d(self.molecule.input_name + "SHIELD")[0]
+        #print uncorrected_property
+        #uncorrected_property = self.molecule.hessian_trans_rot(uncorrected_property, self.molecule.coordinates, self.molecule.number_of_normal_modes, self.molecule.n_atoms)
+        print uncorrected_property
         return uncorrected_property
 
 class Property_2_Tensor(Property):

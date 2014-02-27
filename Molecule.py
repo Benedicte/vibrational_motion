@@ -31,6 +31,7 @@ class Molecule:
         self.input_name = self.get_input_name()
         self.linear = 0
         self.n_atoms = ri.read_molecule(self.get_molecule_input_name())[4]
+        self.coordinates = ri.read_molecule(self.get_molecule_input_name())[0] 
         self.atom_list = ri.read_molecule(self.get_molecule_input_name())[5]
         self.n_coordinates = self.get_coordinates() 
         self.number_of_normal_modes = self.get_number_of_normal_modes()
