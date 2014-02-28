@@ -37,6 +37,11 @@ class Property:
         
         #f.write("& & Effective geometry &  $<P^{(0)}_2>_{eff}$ &  Vibrationally corrected \\\\" + "\n") 
         
+        corrected_property = np.around(self.corrected_property, decimals=4)
+        correction_property = np.around(self.correction_property, decimals=4)
+        uncorrected_property = np.around(self.uncorrected_property, decimals=4)
+        f.write(property_type) 
+        
         if(property_type == "Optical rotation"):
             
             corrected_property = np.around(self.corrected_property1, decimals=4)
@@ -95,10 +100,7 @@ class Property:
             #line = str(results).strip('[]')
             #line = re.sub("\\s+", "&", line)
             #line = line + "\\\\"
-            corrected_property = np.around(self.corrected_property, decimals=4)
-            correction_property = np.around(self.correction_property, decimals=4)
-            uncorrected_property = np.around(self.uncorrected_property, decimals=4)
-            f.write(property_type) 
+            
             f.write("& X & " + str(uncorrected_property[0]) + "&" + str(correction_property[0]) + "&" +str(corrected_property[0])+"\\\\  \n")
             f.write("& Y &" + str(uncorrected_property[1]) + "&" +str(correction_property[1]) + "&" +str(corrected_property[1])+"\\\\  \n")
             f.write("& Z &" + str(uncorrected_property[2]) + "&" +str(correction_property[2]) + "&" +str(corrected_property[2])+"\\\\  \n")
@@ -107,10 +109,6 @@ class Property:
             f.close()
         
         if(corrected_property.ndim == 2):
-            corrected_property = np.around(self.corrected_property, decimals=4)
-            correction_property = np.around(self.correction_property, decimals=4)
-            uncorrected_property = np.around(self.uncorrected_property, decimals=4)
-            f.write(property_type)
         
             f.write( "& XX " + "&"+ str(uncorrected_property[0][0]) + "&" + str(correction_property[0][0]) + "&" +str(corrected_property[0][0])+ "\\\\ \n")
             f.write( "& XY " + "&"+ str(uncorrected_property[0][1]) + "&" + str(correction_property[0][1]) + "&" +str(corrected_property[0][1])+ "\\\\ \n")
@@ -128,9 +126,7 @@ class Property:
             f.close()
 
         if(corrected_property.ndim == 3): 
-            corrected_property = np.around(self.corrected_property, decimals=4)
-            correction_property = np.around(self.correction_property, decimals=4)
-            uncorrected_property = np.around(self.uncorrected_property, decimals=4)
+            
             f.write(property_type + "\\\\" + "\n")       
             for atom in range(n_atom):
                 f.write("\hline"+ "\n" )
