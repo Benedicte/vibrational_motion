@@ -179,7 +179,7 @@ class Property_3_Tensor(Property):
         self.name_dic = {"Nuclear spin-rotation":"SPINROT", "Nuclear shielding": "SHIELD",\
          "Nuclear quadropole moment": "NUCQUAD", "Optical rotation": "OPTROT"}
          
-        self.read_dic = {"Nuclear spin-rotation":ri.read_NUCQUAD, "Nuclear shielding": ri.read_SHIELD,\
+        self.read_dic = {"Nuclear spin-rotation":ri.read_SPINROT, "Nuclear shielding": ri.read_SHIELD,\
          "Nuclear quadropole moment": ri.read_NUCQUAD, "Optical rotation": ri.read_OPTROT}
          
         self.read_DALTON_dic = {"Nuclear spin-rotation":ri.read_DALTON_SPINROT, "Nuclear shielding": ri.read_DALTON_SHIELD,\
