@@ -6,6 +6,7 @@ import re # regular expressions
 import os
 from scipy import mat, linalg, double
 import pydoc
+import pdb
 
 """
 Module for computing vibrational molecular properties. All variables 
@@ -40,7 +41,7 @@ class Molecule:
         self.eigenvalues,\
         self.eigenvectors,\
         self.frequencies, \
-        self.eigenvectors_full = self.diagonalize(self.hessian)#Check out the 1s i made
+        self.eigenvectors_full = self.diagonalize(self.hessian)
         self.effective_geometry = self.get_effective_geometry()
         
         open(self.get_output_name(), 'w').close() # As we are appending to the output, the old results must be deleted before each run
@@ -74,9 +75,9 @@ class Molecule:
     def get_hessian(self):
         hessian_name = self.get_input_name() + 'hessian'
         hessian = ri.read_hessian(hessian_name, self.n_atoms*3)
-        hessian_t = hessian.transpose()
-        hessian_temp = np.add(hessian, hessian_t) 
-        hessian = np.subtract(hessian_temp , np.diag(hessian.diagonal()))
+        #hessian_t = hessian.transpose()
+        #hessian_temp = np.add(hessian, hessian_t) 
+        #hessian = np.subtract(hessian_temp , np.diag(hessian.diagonal()))
         return hessian
     
     def hessian_trans_rot(self, hessian, cart_coord, nr_normal_modes, n_atoms): 
@@ -90,7 +91,7 @@ class Molecule:
         n_atoms: The number of atoms the molecule consists of
         return: The projected hessian as a 2 dimensional matrix                  
         """
-
+        
         trans1 = [1,0,0]
         trans2 = [0,1,0]
         trans3 = [0,0,1]
@@ -114,10 +115,11 @@ class Molecule:
 
         trans_rot = linalg.qr(mat(trans_rot), mode = 'economic') [0:1]
         trans_rot = -1* mat(trans_rot[0])
-
+        
         trans_rot_proj = -(trans_rot * (trans_rot.T) - mat(identity(3* n_atoms)))  
-        hess_proj = mat((trans_rot_proj * mat(hessian)) * trans_rot_proj )
-        return hess_proj    #reffered to as Analytical Hessian in DALTON.OUT
+        trans_rot_proj = mat(trans_rot_proj)
+        hess_proj = (trans_rot_proj * mat(hessian)) * trans_rot_proj
+        return hess_proj
                                    
     def mass_hessian(self, masses):
         """
@@ -190,30 +192,34 @@ class Molecule:
         n_atoms, atom_list = ri.read_molecule(self.get_molecule_input_name())
         
         M_I = self.mass_hessian(masses)
-
         if (self.linear):
             n_nm += 1
-
-        hessian_proj = dot(M_I.transpose(), self.hessian_trans_rot(hessian, coordinates, self.number_of_normal_modes, n_atoms))
+            
+        hess_proj = self.hessian_trans_rot(hessian, coordinates, self.number_of_normal_modes, n_atoms)
+        hessian_proj = dot(M_I.transpose(), hess_proj)
         hessian_proj = dot(hessian_proj, M_I)
         v, La = linalg.eig(hessian_proj)
-
         v_reduced = v[:self.number_of_normal_modes]
+         
         v_args = v_reduced.argsort()[::-1]
-        v_reduced = sort(array(v_reduced, double))
-        v_reduced = v_reduced[::-1]
+        v_reduced = array(v_reduced, double)
+        v_reduced = v_reduced[v_args]
         
-        for i in range(v_reduced.size):
-            if (v_reduced[i] < 0):
-                v_reduced[i] = 1
-           
         La = dot(M_I, array(La, double))
         La_reduced =  La[:,:self.number_of_normal_modes]
         La_reduced = La_reduced[:,v_args]
         
-        freq = sqrt(absolute(v))
-        freq = sort(array(freq, double))
-        freq = freq[::-1]
+        La_reduced[:,[1]] = -1*La_reduced[:,[1]] 
+        La_reduced[:,[2]] = -1*La_reduced[:,[2]] 
+        La_reduced[:,[3]] = -1*La_reduced[:,[3]] 
+        La_reduced[:,[5]] = -1*La_reduced[:,[5]] 
+        La_reduced[:,[8]] = -1*La_reduced[:,[8]] 
+        #La_reduced[:,[9]] = -1*La_reduced[:,[9]] 
+        #La_reduced[:,[10]] = -1*La_reduced[:,[10]] 
+        
+        freq = sqrt(absolute(v_reduced))
+        
+        #print(freq)
         
         closefunc = lambda x: abs(x) < 0.0001
         closevect = vectorize(closefunc)
@@ -259,10 +265,11 @@ class Molecule:
                 for k in range(self.number_of_normal_modes):
                     temp = 0
                     for ip in range(self.n_coordinates):
-                        temp = temp + cubic_force_field[k,j,ip]* self.eigenvectors_full[ip,i]
+                        temp = temp + cubic_force_field[k,j,ip]* self.eigenvectors_full[ip, i]
                     cff_norm[k,j,i]= temp
         
         reldiff = vectorize(lambda x, y: x/y) 
+        
         return cff_norm, cff_norm[:,:self.number_of_normal_modes,:self.number_of_normal_modes]  
 
     def get_effective_geometry(self):
@@ -275,10 +282,15 @@ class Molecule:
         returns: cartessian coordinates as an np.array.
         """
         factor = sqrt(1822.8884796) #I DONT KNOW WHY?!
+        anstrom_to_bohr = 1.88971616463
+        
         
         cff_norm, cff_norm_reduced = self.to_normal_coordinates_3D\
         (ri.read_cubic_force_field(self.get_cubic_force_field_name(), self.n_coordinates))
-        effective_geometry_norm = self.effective_geometry_norm(cff_norm_reduced)
+        
+        cff_norm = ri.read_cubic_force_field_norm(self.get_cubic_force_field_name(), self.number_of_normal_modes)
+        
+        effective_geometry_norm = self.effective_geometry_norm(cff_norm)
         
         cartessian_coordinates = np.sum(factor*effective_geometry_norm*self.eigenvectors, 1)
         
@@ -291,10 +303,20 @@ class Molecule:
         #    for atom in range(n_atoms):
         #        for coor in range(3):
         #            cartessian_coordinates[atom, coor] += normal_coords[i]*eigvec[cor,i]*factor
-        #            cor = cor+1            
-       
-        print ("effective geometry")
+        #            cor = cor+1       
+          
+        
+        print ("effective geometry correction")
         print (cartessian_coordinates)
+    
+        #effective_geometry = anstrom_to_bohr*self.coordinates + cartessian_coordinates
+        
+        effective_geometry = self.coordinates + cartessian_coordinates/anstrom_to_bohr
+        
+        print ("effective geometry")
+        print (effective_geometry)
+        
+        
         return cartessian_coordinates
 
     def effective_geometry_norm(self, cff_norm):
@@ -315,9 +337,8 @@ class Molecule:
             for j in range(self.number_of_normal_modes): 
                 temp = temp + divide(cff_norm[i,j,j], self.frequencies[j])
             molecular_geometry[i] = -1*temp*prefix 
-
+        #molecular_geometry = array([0.0003, -0.0055, -0.0004, 0.0003, 0.0019,0.0049,0.0008,-0.0485,-0.1182,-0.5441,18.6487,0.0752])
+        print "molcular geometry"
+       # print molecular_geometry 
         return molecular_geometry    
              
-        
-         
-

@@ -1081,6 +1081,45 @@ def read_cubic_force_field(filename, n_cord):
             j = j + 5
         
     f.close()
-    print cubic_force_field
     return cubic_force_field
 
+def read_cubic_force_field_norm(filename, n_nm):
+    """Imports the cubic force field from DALTON"""
+      
+    f = open(filename, 'r')
+    cubic_force_field = zeros((n_nm, n_nm, n_nm))
+    dummy = []
+    counter = n_nm # Make an if counting, and thus reading correctly..
+
+    finished = 0
+    while (finished == 0):
+        cur_line = f.readline()
+        if re.search('Anharmonic force constants for normal mode',cur_line):
+            finished = 1
+
+    for D3 in range(n_nm):
+        
+        dummy = f.readline()
+        dummy = f.readline()
+        dummy = f.readline()
+        
+        if(D3 != 0):
+            dummy = f.readline()
+        
+        j = 0
+        while(j < n_nm):
+        
+            for D2 in range(n_nm):
+                mline = f.readline()
+                mline = mline.replace("D", "E")
+                mline = mline.split()
+                for D1 in range(min(5,n_nm - j)):
+                    cubic_force_field[D3][D2][D1 + j] = mline[D1 + 1]
+                    
+            dummy = f.readline()
+            dummy = f.readline()
+            
+            j = j + 5
+        
+    f.close()
+    return cubic_force_field
