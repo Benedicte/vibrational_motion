@@ -990,20 +990,38 @@ def read_DALTON_values_2d(filename):
         
     return uncorrected_values, corrections, corrected_values        
     
-def read_eigenvector(filename, n_atoms):
+def read_eigenvector(filename, n_cord):
     """ For testing purposes, extracts the correct values from DALTON"""
     
-    n_nm = 3*n_atoms - 6
-    eigenvector = zeros((12, 6))
-
     f = open(filename, 'r')
+    eigenvector = zeros((n_cord, n_cord))
+    dummy = []
+    counter = n_cord # Make an if counting, and thus reading correctly..
+
+    finished = 0
+    while (finished == 0):
+        cur_line = f.readline()
+        if re.search('The eigenvectors',cur_line):
+            finished = 1
+            
+    dummy = f.readline()
+    dummy = f.readline()
     
-    for i in range(12):
-        a = f.readline().split()
-        for j in range(6):
-            eigenvector[i,j] = float(a[j])
-    
+    j = 0
+    while(j < n_cord):
+        for D2 in range(n_cord):
+            mline = f.readline()
+            mline = mline.split()
+            for D1 in range(min(5,n_cord - j)):
+                eigenvector[D2][D1 + j] = mline[D1 + 1]
+        
+        dummy = f.readline()
+        dummy = f.readline()
+        
+        j = j + 5
+        
     f.close()
+    print(eigenvector)
     return eigenvector
         
 def read_cubic_force_field(filename, n_cord):
@@ -1044,6 +1062,7 @@ def read_cubic_force_field(filename, n_cord):
             j = j + 5
         
     f.close()
+    
     return cubic_force_field
     
 def read_cubic_force_field_anal(filename, n_cord):

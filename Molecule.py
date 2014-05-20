@@ -54,7 +54,7 @@ class Molecule:
         
         test1 = ri.read_cubic_force_field(self.get_cubic_force_field_name1(), self.n_coordinates)
         
-        print(test-test1)
+        #print(test-test1)
         
         
         self.effective_geometry = self.get_effective_geometry()
@@ -252,18 +252,12 @@ class Molecule:
         v_reduced = array(v_reduced, double)
         v_reduced = v_reduced[v_args]
         
-        La = dot(M_I, array(La, double))
+        #La = dot(M_I, array(La, double))
+        #La_reduced = La_reduced[:,v_args]
+    
+        La = ri.read_eigenvector(self.get_cubic_force_field_name1(), self.n_coordinates)
         La_reduced =  La[:,:self.number_of_normal_modes]
-        La_reduced = La_reduced[:,v_args]
-        
-        #La_reduced[:,[1]] = -1*La_reduced[:,[1]] 
-        #La_reduced[:,[2]] = -1*La_reduced[:,[2]] 
-        #La_reduced[:,[3]] = -1*La_reduced[:,[3]] 
-        #La_reduced[:,[4]] = -1*La_reduced[:,[4]] 
-        #La_reduced[:,[7]] = -1*La_reduced[:,[7]] 
-        #La_reduced[:,[0]] = -1*La_reduced[:,[0]] 
-        #La_reduced[:,[10]] = -1*La_reduced[:,[10]] 
-        
+    
         freq = sqrt(absolute(v_reduced))
         
         closefunc = lambda x: abs(x) < 0.0001
@@ -274,9 +268,6 @@ class Molecule:
         eqsign = vectorize(eqsign)
 
         return v_reduced, La_reduced, freq, v, La
-
-    def to_normal_coordinates_2D(self):
-        return 0
         
     def to_normal_coordinates_3D(self, cubic_force_field):
         """Converts a cubic force field represented by cartessian coordinates
@@ -291,20 +282,24 @@ class Molecule:
         """
         
         cubic_force_field_clone = copy(cubic_force_field)
+        cff_norm = zeros((self.n_coordinates,self.n_coordinates,self.n_coordinates))
         
-        cubic_force_field_clone = transpose(cubic_force_field_clone)
         
-        cubic_force_field_clone = dot(cubic_force_field_clone, self.eigenvectors_full)
-        cubic_force_field_clone = transpose(cubic_force_field_clone,(0,2,1))
+        #cubic_force_field_clone = transpose(cubic_force_field_clone)
         
-        cubic_force_field_clone = dot(cubic_force_field_clone,self.eigenvectors_full)
-        cubic_force_field_clone = transpose(cubic_force_field_clone,(2,1,0))
+        #cubic_force_field_clone = dot(cubic_force_field_clone, self.eigenvectors_full)
+        #cubic_force_field_clone = transpose(cubic_force_field_clone,(0,2,1))
         
-        eigenvectors_full_clone = self.eigenvectors_full[:,:self.number_of_normal_modes]
-        cubic_force_field_clone = cubic_force_field_clone[:self.number_of_normal_modes,:self.number_of_normal_modes,:]
+        #cubic_force_field_clone = dot(cubic_force_field_clone,self.eigenvectors_full)
+        #cubic_force_field_clone = transpose(cubic_force_field_clone,(2,1,0))
         
-        cubic_force_field_clone = dot(cubic_force_field_clone, eigenvectors_full_clone)
-        cff_norm = transpose(cubic_force_field_clone, (1,0,2))
+        #eigenvectors_full_clone = self.eigenvectors_full[:,:self.number_of_normal_modes]
+        #cubic_force_field_clone = cubic_force_field_clone[:self.number_of_normal_modes,:self.number_of_normal_modes,:]
+        
+        #cubic_force_field_clone = dot(cubic_force_field_clone, eigenvectors_full_clone)
+        #cff_norm1 = transpose(cubic_force_field_clone, (1,0,2))
+        
+        #print(cff_norm1)
         
         
         #test = zeros((self.n_coordinates,self.n_coordinates,self.n_coordinates))
@@ -318,36 +313,36 @@ class Molecule:
         #                    for kp in range(self.number_of_normal_modes):
         #                        temp = temp + cubic_force_field[ip,jp,kp]* self.eigenvectors_full[kp,k]*self.eigenvectors_full[jp,j]*self.eigenvectors_full[ip,i]
         #            test[k,j,i]= temp 
-
-        return cff_norm 
+        
         
         # Fortran like implementation:
         
-        #for i in range(self.n_coordinates):
-        #    for j in range(self.n_coordinates):
-        #        for k in range(self.n_coordinates):
-        #            temp = 0
-        #            for kp in range(self.n_coordinates):
-        #                temp = temp + cubic_force_field_clone[kp,j,i]* self.eigenvectors_full[kp,k]
-        #            cff_norm[k,j,i]= temp 
+        for i in range(self.n_coordinates):
+            for j in range(self.n_coordinates):
+                for k in range(self.n_coordinates):
+                    temp = 0
+                    for kp in range(self.n_coordinates):
+                        temp = temp + cubic_force_field_clone[kp,j,i]* self.eigenvectors_full[kp,k]
+                    cff_norm[k,j,i]= temp
+                    
+        for i in range(self.n_coordinates):
+            for j in range(self.n_coordinates):
+                for k in range(self.n_coordinates):
+                    temp = 0
+                    for jp in range(self.n_coordinates):
+                        temp = temp + cff_norm[k,jp,i]* self.eigenvectors_full[jp,j]
+                    cubic_force_field_clone[k,j,i]= temp
+                    
+        for i in range(self.number_of_normal_modes):
+            for j in range(self.number_of_normal_modes):
+                for k in range(self.number_of_normal_modes):
+                    temp = 0
+                    for ip in range(self.n_coordinates):
+                        temp = temp + cubic_force_field_clone[k,j,ip]* self.eigenvectors_full[ip, i]
+                    cff_norm[k,j,i]= temp
         
-        #for i in range(self.n_coordinates):
-        #    for j in range(self.n_coordinates):
-        #        for k in range(self.n_coordinates):
-        #            temp = 0
-        #            for jp in range(self.n_coordinates):
-        #                temp = temp + cff_norm[k,jp,i]* self.eigenvectors_full[jp,j]
-        #            cubic_force_field_clone[k,j,i]= temp
-        
-        #for i in range(self.number_of_normal_modes):
-        #    for j in range(self.number_of_normal_modes):
-        #        for k in range(self.number_of_normal_modes):
-        #            temp = 0
-        #            for ip in range(self.n_coordinates):
-        #                temp = temp + cubic_force_field_clone1[k,j,ip]* self.eigenvectors_full[ip, i]
-        #            cff_norm[k,j,i]= temp
-
-    return cff_norm 
+        #print(cff_norm)
+        return cff_norm 
 
     def to_normal_coordinates_4D(self, quartic_force_field):
         """Converts a quartic force field represented by cartessina coordinates
@@ -396,6 +391,7 @@ class Molecule:
         factor = sqrt(1822.8884796) #I DONT KNOW WHY?!
         anstrom_to_bohr = 1.88971616463
         
+       
         effective_geometry_norm = self.effective_geometry_norm(self.cff_norm)
         
         cartessian_coordinates = np.sum(factor*effective_geometry_norm*self.eigenvectors, 1)
