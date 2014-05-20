@@ -1,6 +1,6 @@
 import read_input as ri
 from numpy import array, zeros, vstack, dot, identity, sqrt, set_printoptions, compress, reshape, multiply, divide, add, subtract, diag, absolute, sort, argsort, fliplr
-from numpy import vectorize, diff
+from numpy import vectorize, diff, copy, transpose
 import numpy as np
 import re # regular expressions
 import os
@@ -17,7 +17,7 @@ The parameters needed in this modeule is:
 filename = The filename of where a hessian is saved
 filename = the filename of where the MOLECULE.INP is saved
 filename = the filename of where the cubic force field is saved
-pre_property = the second derivative of the property vibrational 
+pre_property = the second derivative of the property vibrational
                averaging is to be conducted one
 uncorrected_property = the property before the vibrational averaging
 correct_propert = The property after the vibrational averaging, for 
@@ -41,43 +41,84 @@ class Molecule:
         self.eigenvalues,\
         self.eigenvectors,\
         self.frequencies, \
+        self.eigenvalues_full, \
         self.eigenvectors_full = self.diagonalize(self.hessian)
-        self.effective_geometry = self.get_effective_geometry()
         
+        #self.cff_norm = self.to_normal_coordinates_3D\
+        #(ri.read_cubic_force_field_anal(self.get_cubic_force_field_name(), self.n_coordinates))
+        
+        self.cff_norm = self.to_normal_coordinates_3D\
+        (ri.read_cubic_force_field(self.get_cubic_force_field_name1(), self.n_coordinates))
+        
+        test = ri.read_cubic_force_field_anal(self.get_cubic_force_field_name(), self.n_coordinates)
+        
+        test1 = ri.read_cubic_force_field(self.get_cubic_force_field_name1(), self.n_coordinates)
+        
+        print(test-test1)
+        
+        
+        self.effective_geometry = self.get_effective_geometry()
         open(self.get_output_name(), 'w').close() # As we are appending to the output, the old results must be deleted before each run
     
     def get_input_name(self):
+        """Returns the name of the directory the input files are to be 
+        read are found."""
         input_name = "input_" + self.name + "/"
         return input_name
         
     def get_output_name(self):
+        """Returns the name of the directory the output information is to
+        be saved in."""
         output_file_name = "output/" + self.name 
         return output_file_name
+
+    def get_cubic_force_field_name1(self):
+        """Returns the  name of the file containing the cubic force field
+         of the molecule"""
+        input_name = self.get_input_name()
+        cff_name = self.input_name + 'effective geometry'
+        return cff_name
         
+    def get_cubic_force_field_name(self):
+        """Returns the  name of the file containing the cubic force field
+         of the molecule"""
+        input_name = self.get_input_name()
+        cff_name = self.input_name + 'cubic_force_field'
+        return cff_name
+
     def get_molecule_input_name(self):
+        """Returns the  name of the file containing the geometry of the
+         molecule in cartessian coordinates"""
         input_name = self.get_input_name()
         molecule_input_name = self.input_name + 'MOLECULE.INP'
         return molecule_input_name
     
-    def get_cubic_force_field_name(self):
+        """Returns the  name of the file containing the cubic force field
+         of the molecule"""
         input_name = self.get_input_name()
         cff_name = self.input_name + 'cubic_force_field'
         return cff_name
         
     def get_coordinates(self):
+        """Returns the number of coordinates of the molecule"""
         n_coordinates = self.n_atoms * 3
         return n_coordinates
         
     def get_number_of_normal_modes(self):
+        """Returns the number of normal modes of the molecule"""
         number_of_normal_modes = self.n_coordinates - 6
+        
+        if(self.name == "hf"):
+            number_of_normal_modes = self.n_coordinates - 5
+            
+        print(number_of_normal_modes)
+            
         return number_of_normal_modes
         
     def get_hessian(self):
+        """Returns the hessian of the molecule"""
         hessian_name = self.get_input_name() + 'hessian'
         hessian = ri.read_hessian(hessian_name, self.n_atoms*3)
-        #hessian_t = hessian.transpose()
-        #hessian_temp = np.add(hessian, hessian_t) 
-        #hessian = np.subtract(hessian_temp , np.diag(hessian.diagonal()))
         return hessian
     
     def hessian_trans_rot(self, hessian, cart_coord, nr_normal_modes, n_atoms): 
@@ -99,7 +140,6 @@ class Molecule:
         trans_rot = zeros((3* n_atoms, 6))
 
         for atom in range(n_atoms):
-
             ij = atom*3
             trans_rot[ij, 0] = 1.0
             trans_rot[ij + 1, 1] = 1.0
@@ -110,15 +150,16 @@ class Molecule:
             trans_rot[ij + 2, 4] = cart_coord[atom, 1]
             trans_rot[ij, 5] = cart_coord[atom, 2]
             trans_rot[ij + 2, 5] = -1* cart_coord[atom, 0]
-
             ij = ij + 3
-
+        
         trans_rot = linalg.qr(mat(trans_rot), mode = 'economic') [0:1]
         trans_rot = -1* mat(trans_rot[0])
-        
         trans_rot_proj = -(trans_rot * (trans_rot.T) - mat(identity(3* n_atoms)))  
         trans_rot_proj = mat(trans_rot_proj)
-        hess_proj = (trans_rot_proj * mat(hessian)) * trans_rot_proj
+        
+        
+        hess_proj = (trans_rot_proj * mat(hessian)) * trans_rot_proj 
+        hess_proj = mat(hess_proj)
         return hess_proj
                                    
     def mass_hessian(self, masses):
@@ -153,11 +194,15 @@ class Molecule:
         return M
             
     def masswt_hessian(self, num_atoms_list, charge_list): 
-        """returns mass (array)"""
+        """
+        Converts the hessian into the mass weighted hessian
+        num_atoms_list: A list of the number of atoms of each type
+        charge list: A list of the charges of each atom 
+        returns the mass weighted hessian (np.array)"""
         atomicmass = {9.0:18.998403, 8.0: 15.994915, 1.0: 1.007825}
         
         deuterium = 2.014102
-        tritinum = 3.016049
+        tritinum = 3.016
         
         m_e = 1822.8884796 # conversion factor from a.m.u to a.u 
 
@@ -194,11 +239,13 @@ class Molecule:
         M_I = self.mass_hessian(masses)
         if (self.linear):
             n_nm += 1
-            
+        
         hess_proj = self.hessian_trans_rot(hessian, coordinates, self.number_of_normal_modes, n_atoms)
+        
         hessian_proj = dot(M_I.transpose(), hess_proj)
         hessian_proj = dot(hessian_proj, M_I)
         v, La = linalg.eig(hessian_proj)
+    
         v_reduced = v[:self.number_of_normal_modes]
          
         v_args = v_reduced.argsort()[::-1]
@@ -209,17 +256,15 @@ class Molecule:
         La_reduced =  La[:,:self.number_of_normal_modes]
         La_reduced = La_reduced[:,v_args]
         
-        La_reduced[:,[1]] = -1*La_reduced[:,[1]] 
-        La_reduced[:,[2]] = -1*La_reduced[:,[2]] 
-        La_reduced[:,[3]] = -1*La_reduced[:,[3]] 
-        La_reduced[:,[5]] = -1*La_reduced[:,[5]] 
-        La_reduced[:,[8]] = -1*La_reduced[:,[8]] 
-        #La_reduced[:,[9]] = -1*La_reduced[:,[9]] 
+        #La_reduced[:,[1]] = -1*La_reduced[:,[1]] 
+        #La_reduced[:,[2]] = -1*La_reduced[:,[2]] 
+        #La_reduced[:,[3]] = -1*La_reduced[:,[3]] 
+        #La_reduced[:,[4]] = -1*La_reduced[:,[4]] 
+        #La_reduced[:,[7]] = -1*La_reduced[:,[7]] 
+        #La_reduced[:,[0]] = -1*La_reduced[:,[0]] 
         #La_reduced[:,[10]] = -1*La_reduced[:,[10]] 
         
         freq = sqrt(absolute(v_reduced))
-        
-        #print(freq)
         
         closefunc = lambda x: abs(x) < 0.0001
         closevect = vectorize(closefunc)
@@ -228,50 +273,117 @@ class Molecule:
         eqsign = lambda x, y: x*y > 0
         eqsign = vectorize(eqsign)
 
-        return v_reduced, La_reduced, freq, La
+        return v_reduced, La_reduced, freq, v, La
 
+    def to_normal_coordinates_2D(self):
+        return 0
+        
     def to_normal_coordinates_3D(self, cubic_force_field):
-        """Converts cubic force fields represented by cartessina coordinates
-        into cubic force field represented by normal coordinates
+        """Converts a cubic force field represented by cartessian coordinates
+        into a cubic force field represented by normal coordinates
         
         cubic_force_field: A 3 dimenesional np.array of the cubic force field
                            represented in cartessian coordinates
-        eigvec: The eigenvectors of the molecule corresponging to the non
+        self.eigenvectors_full: The eigenvectors of the molecule corresponding to the non-
                 zero eigenvalues, can be attained for fundamental_freq() (np.array)
         n_atoms: The number of atoms constituting the molecule as an int
-        returns: The cubic force field in normal coordinates (np.array)
+        returns: The cubic force field in normal coordinates (3D np.array)
+        """
+        
+        cubic_force_field_clone = copy(cubic_force_field)
+        
+        cubic_force_field_clone = transpose(cubic_force_field_clone)
+        
+        cubic_force_field_clone = dot(cubic_force_field_clone, self.eigenvectors_full)
+        cubic_force_field_clone = transpose(cubic_force_field_clone,(0,2,1))
+        
+        cubic_force_field_clone = dot(cubic_force_field_clone,self.eigenvectors_full)
+        cubic_force_field_clone = transpose(cubic_force_field_clone,(2,1,0))
+        
+        eigenvectors_full_clone = self.eigenvectors_full[:,:self.number_of_normal_modes]
+        cubic_force_field_clone = cubic_force_field_clone[:self.number_of_normal_modes,:self.number_of_normal_modes,:]
+        
+        cubic_force_field_clone = dot(cubic_force_field_clone, eigenvectors_full_clone)
+        cff_norm = transpose(cubic_force_field_clone, (1,0,2))
+        
+        
+        #test = zeros((self.n_coordinates,self.n_coordinates,self.n_coordinates))
+        
+        #for i in range(self.n_coordinates):
+        #    for j in range(self.n_coordinates):
+        #        for k in range(self.n_coordinates):
+        #            temp = 0
+        #            for ip in range(self.number_of_normal_modes):
+        #                for jp in range(self.number_of_normal_modes):
+        #                    for kp in range(self.number_of_normal_modes):
+        #                        temp = temp + cubic_force_field[ip,jp,kp]* self.eigenvectors_full[kp,k]*self.eigenvectors_full[jp,j]*self.eigenvectors_full[ip,i]
+        #            test[k,j,i]= temp 
+
+        return cff_norm 
+        
+        # Fortran like implementation:
+        
+        #for i in range(self.n_coordinates):
+        #    for j in range(self.n_coordinates):
+        #        for k in range(self.n_coordinates):
+        #            temp = 0
+        #            for kp in range(self.n_coordinates):
+        #                temp = temp + cubic_force_field_clone[kp,j,i]* self.eigenvectors_full[kp,k]
+        #            cff_norm[k,j,i]= temp 
+        
+        #for i in range(self.n_coordinates):
+        #    for j in range(self.n_coordinates):
+        #        for k in range(self.n_coordinates):
+        #            temp = 0
+        #            for jp in range(self.n_coordinates):
+        #                temp = temp + cff_norm[k,jp,i]* self.eigenvectors_full[jp,j]
+        #            cubic_force_field_clone[k,j,i]= temp
+        
+        #for i in range(self.number_of_normal_modes):
+        #    for j in range(self.number_of_normal_modes):
+        #        for k in range(self.number_of_normal_modes):
+        #            temp = 0
+        #            for ip in range(self.n_coordinates):
+        #                temp = temp + cubic_force_field_clone1[k,j,ip]* self.eigenvectors_full[ip, i]
+        #            cff_norm[k,j,i]= temp
+
+    return cff_norm 
+
+    def to_normal_coordinates_4D(self, quartic_force_field):
+        """Converts a quartic force field represented by cartessina coordinates
+        into a quartic force field represented by normal coordinates
+        
+        quartic_force_field: A 4 dimenesional np.array of the quartic force field
+                           represented in cartessian coordinates
+        self.eigenvectors_full: The eigenvectors of the molecule corresponding to the non-
+                zero eigenvalues, can be attained from fundamental_freq() (np.array)
+        n_atoms: The number of atoms constituting the molecule as an int
+        returns: The quartic force field in normal coordinates ( 4d np.array)
         """
             
-        cff_norm = zeros((self.n_coordinates, self.n_coordinates, self.n_coordinates)) 
-
-        for i in range(self.n_coordinates):
-            for j in range(self.n_coordinates):
-                for k in range(self.n_coordinates):
-                    temp = 0
-                    for kp in range(self.n_coordinates):
-                        temp = temp + cubic_force_field[kp,j,i]* self.eigenvectors_full[kp,k]
-                    cff_norm[k,j,i]= temp
-                    
-        for i in range(self.n_coordinates):
-            for j in range(self.n_coordinates):
-                for k in range(self.n_coordinates):
-                    temp = 0
-                    for jp in range(self.n_coordinates):
-                        temp = temp + cff_norm[k,jp,i]* self.eigenvectors_full[jp,j]
-                    cubic_force_field[k,j,i]= temp
-                    
-        for i in range(self.number_of_normal_modes):
-            for j in range(self.number_of_normal_modes):
-                for k in range(self.number_of_normal_modes):
-                    temp = 0
-                    for ip in range(self.n_coordinates):
-                        temp = temp + cubic_force_field[k,j,ip]* self.eigenvectors_full[ip, i]
-                    cff_norm[k,j,i]= temp
+        qff_norm = zeros((self.n_coordinates, self.n_coordinates, self.n_coordinates, self.n_coordinates)) 
         
-        reldiff = vectorize(lambda x, y: x/y) 
+        quartic_force_field_clone = copy(quartic_force_field)
+        quartic_force_field_clone = transpose(quartic_force_field_clone)
         
-        return cff_norm, cff_norm[:,:self.number_of_normal_modes,:self.number_of_normal_modes]  
-
+        quartic_force_field_clone = dot(quartic_force_field_clone, self.eigenvectors_full)
+        quartic_force_field_clone = transpose(quartic_force_field_clone,(0,3,2,1))
+        
+        quartic_force_field_clone = dot(quartic_force_field_clone,self.eigenvectors_full)
+        quartic_force_field_clone = transpose(quartic_force_field_clone,(3,2,1,0))
+        
+        quartic_force_field_clone = dot(quartic_force_field_clone, self.eigenvectors_full)
+        quartic_force_field_clone = transpose(quartic_force_field_clone,(2,1,0,3))
+        
+        self.eigenvectors_full = self.eigenvectors_full[:self.number_of_normal_modes,:self.number_of_normal_modes]
+        quartic_force_field_clone = quartic_force_field_clone\
+            [:self.number_of_normal_modes,:self.number_of_normal_modes,:self.number_of_normal_modes,:self.number_of_normal_modes]
+        
+        quartic_force_field_clone = dot(quartic_force_field_clone,self.eigenvectors_full)
+        qff_norm = transpose(quartic_force_field_clone, (1,0,3,2))
+        
+        return qff_norm 
+        
     def get_effective_geometry(self):
         """Converts normal coordinates into cartessian coordinates.
         
@@ -284,40 +396,20 @@ class Molecule:
         factor = sqrt(1822.8884796) #I DONT KNOW WHY?!
         anstrom_to_bohr = 1.88971616463
         
-        
-        cff_norm, cff_norm_reduced = self.to_normal_coordinates_3D\
-        (ri.read_cubic_force_field(self.get_cubic_force_field_name(), self.n_coordinates))
-        
-        cff_norm = ri.read_cubic_force_field_norm(self.get_cubic_force_field_name(), self.number_of_normal_modes)
-        
-        effective_geometry_norm = self.effective_geometry_norm(cff_norm)
+        effective_geometry_norm = self.effective_geometry_norm(self.cff_norm)
         
         cartessian_coordinates = np.sum(factor*effective_geometry_norm*self.eigenvectors, 1)
         
         #instead of reshape() this will fail if it cannot be done efficiently:
         cartessian_coordinates.shape = (self.n_atoms, 3) 
         
-        # Fortran like implementation:
-        #for i in range(n_nm):
-        #    cor = 0
-        #    for atom in range(n_atoms):
-        #        for coor in range(3):
-        #            cartessian_coordinates[atom, coor] += normal_coords[i]*eigvec[cor,i]*factor
-        #            cor = cor+1       
-          
-        
-        print ("effective geometry correction")
-        print (cartessian_coordinates)
-    
-        #effective_geometry = anstrom_to_bohr*self.coordinates + cartessian_coordinates
-        
         effective_geometry = self.coordinates + cartessian_coordinates/anstrom_to_bohr
         
+        print(cartessian_coordinates)
         print ("effective geometry")
         print (effective_geometry)
         
-        
-        return cartessian_coordinates
+        return effective_geometry
 
     def effective_geometry_norm(self, cff_norm):
         """Computes the effective geometry of a molecule.
@@ -337,8 +429,6 @@ class Molecule:
             for j in range(self.number_of_normal_modes): 
                 temp = temp + divide(cff_norm[i,j,j], self.frequencies[j])
             molecular_geometry[i] = -1*temp*prefix 
-        #molecular_geometry = array([0.0003, -0.0055, -0.0004, 0.0003, 0.0019,0.0049,0.0008,-0.0485,-0.1182,-0.5441,18.6487,0.0752])
-        print "molcular geometry"
-       # print molecular_geometry 
+
         return molecular_geometry    
              

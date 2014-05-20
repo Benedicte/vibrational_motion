@@ -1,0 +1,182 @@
+\hypertarget{classelement_1_1Element}{\section{element.\+Element Class Reference}
+\label{classelement_1_1Element}\index{element.\+Element@{element.\+Element}}
+}
+Inheritance diagram for element.\+Element\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classelement_1_1Element}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classelement_1_1Element_afdc7b7986e3d6aad311573f3c2534b85}{def {\bfseries \+\_\+\+\_\+init\+\_\+\+\_\+}}\label{classelement_1_1Element_afdc7b7986e3d6aad311573f3c2534b85}
+
+\item 
+\hypertarget{classelement_1_1Element_a742f94002c18f60d4a3c384b51925c69}{def {\bfseries \+\_\+\+\_\+str\+\_\+\+\_\+}}\label{classelement_1_1Element_a742f94002c18f60d4a3c384b51925c69}
+
+\item 
+\hypertarget{classelement_1_1Element_ae1907c0f9d227680d5adbbe043319439}{def {\bfseries \+\_\+\+\_\+repr\+\_\+\+\_\+}}\label{classelement_1_1Element_ae1907c0f9d227680d5adbbe043319439}
+
+\item 
+def \hyperlink{classelement_1_1Element_a03f0d947587085800e751ca03b6be838}{nominalmass}
+\item 
+def \hyperlink{classelement_1_1Element_a724eecca89aa1b702bc28e4f677c153b}{neutrons}
+\item 
+def \hyperlink{classelement_1_1Element_ad8a714b6fff3ff4fecfaaa18a0a154b0}{exactmass}
+\item 
+def \hyperlink{classelement_1_1Element_a79948ad87c3aca7399fc020751237816}{eleconfig\+\_\+dict}
+\item 
+def \hyperlink{classelement_1_1Element_aaf89f4509db83e7b508684d406e6c424}{eleshells}
+\item 
+def \hyperlink{classelement_1_1Element_afa89449c3f12453d39aba4c0b4c3231b}{description}
+\item 
+def \hyperlink{classelement_1_1Element_a5b38ca7d1691ffca9dc6f1a52c479dec}{validate}
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classelement_1_1Element_aaeca0589842140bcf2d857b869a45eb6}{{\bfseries number}}\label{classelement_1_1Element_aaeca0589842140bcf2d857b869a45eb6}
+
+\item 
+\hypertarget{classelement_1_1Element_ac338f4eb7a42fcdb7568b5d65cbb2536}{{\bfseries symbol}}\label{classelement_1_1Element_ac338f4eb7a42fcdb7568b5d65cbb2536}
+
+\item 
+\hypertarget{classelement_1_1Element_ae50faae6487ac44a57bf588d19c03153}{{\bfseries name}}\label{classelement_1_1Element_ae50faae6487ac44a57bf588d19c03153}
+
+\item 
+\hypertarget{classelement_1_1Element_acaf8dec84fb6f0e21a9e18e0ac0f9603}{{\bfseries electrons}}\label{classelement_1_1Element_acaf8dec84fb6f0e21a9e18e0ac0f9603}
+
+\item 
+\hypertarget{classelement_1_1Element_aeb808cc01a4c2f63a8291abe5674d904}{{\bfseries protons}}\label{classelement_1_1Element_aeb808cc01a4c2f63a8291abe5674d904}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\begin{DoxyVerb}Chemical element.
+
+Attributes
+----------
+number : int
+    Atomic number
+symbol : str of length 1 or 2
+    Chemical symbol
+name : str
+    Name in english
+group : int
+    Group in periodic table
+period : int
+    Period in periodic table
+block : int
+    Block in periodic table
+series : int
+    Index to chemical series
+protons : int
+    Number of protons
+neutrons : int
+    Number of neutrons in the most abundant naturally occurring stable
+    isotope
+nominalmass : int
+    Mass number of the most abundant naturally occurring stable isotope
+electrons : int
+    Number of electrons
+mass : float
+    Relative atomic mass. Ratio of the average mass of atoms
+    of the element to 1/12 of the mass of an atom of 12C
+exactmass : float
+    Relative atomic mass calculated from the isotopic composition
+eleneg : float
+    Electronegativity (Pauling scale)
+covrad : float
+    Covalent radius in Angstrom
+atmrad :
+    Atomic radius in Angstrom
+vdwrad : float
+    Van der Waals radius in Angstrom
+tboil : float
+    Boiling temperature in K
+tmelt : float
+    Melting temperature in K
+density : float
+    Density at 295K in g/cm3 respectively g/L
+oxistates : str
+    Oxidation states
+eleaffin : float
+    Electron affinity in eV
+eleconfig : str
+    Ground state electron configuration
+eleconfig_dict : dict
+    Ground state electron configuration (shell, subshell): electrons
+eleshells : int
+    Number of electrons per shell
+ionenergy : tuple
+    Ionization energies in eV
+isotopes : dict
+    Isotopic composition.
+    keys: isotope mass number
+    values: Isotope(relative atomic mass, abundance)\end{DoxyVerb}
+ 
+
+\subsection{Member Function Documentation}
+\hypertarget{classelement_1_1Element_afa89449c3f12453d39aba4c0b4c3231b}{\index{element\+::\+Element@{element\+::\+Element}!description@{description}}
+\index{description@{description}!element\+::\+Element@{element\+::\+Element}}
+\subsubsection[{description}]{\setlength{\rightskip}{0pt plus 5cm}def element.\+Element.\+description (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}}\label{classelement_1_1Element_afa89449c3f12453d39aba4c0b4c3231b}
+\begin{DoxyVerb}Return text description of element.\end{DoxyVerb}
+ \hypertarget{classelement_1_1Element_a79948ad87c3aca7399fc020751237816}{\index{element\+::\+Element@{element\+::\+Element}!eleconfig\+\_\+dict@{eleconfig\+\_\+dict}}
+\index{eleconfig\+\_\+dict@{eleconfig\+\_\+dict}!element\+::\+Element@{element\+::\+Element}}
+\subsubsection[{eleconfig\+\_\+dict}]{\setlength{\rightskip}{0pt plus 5cm}def element.\+Element.\+eleconfig\+\_\+dict (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}}\label{classelement_1_1Element_a79948ad87c3aca7399fc020751237816}
+\begin{DoxyVerb}Return electron configuration as dict.\end{DoxyVerb}
+ \hypertarget{classelement_1_1Element_aaf89f4509db83e7b508684d406e6c424}{\index{element\+::\+Element@{element\+::\+Element}!eleshells@{eleshells}}
+\index{eleshells@{eleshells}!element\+::\+Element@{element\+::\+Element}}
+\subsubsection[{eleshells}]{\setlength{\rightskip}{0pt plus 5cm}def element.\+Element.\+eleshells (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}}\label{classelement_1_1Element_aaf89f4509db83e7b508684d406e6c424}
+\begin{DoxyVerb}Return number of electrons in shell as tuple.\end{DoxyVerb}
+ \hypertarget{classelement_1_1Element_ad8a714b6fff3ff4fecfaaa18a0a154b0}{\index{element\+::\+Element@{element\+::\+Element}!exactmass@{exactmass}}
+\index{exactmass@{exactmass}!element\+::\+Element@{element\+::\+Element}}
+\subsubsection[{exactmass}]{\setlength{\rightskip}{0pt plus 5cm}def element.\+Element.\+exactmass (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}}\label{classelement_1_1Element_ad8a714b6fff3ff4fecfaaa18a0a154b0}
+\begin{DoxyVerb}Return relative atomic mass calculated from isotopic composition.\end{DoxyVerb}
+ \hypertarget{classelement_1_1Element_a724eecca89aa1b702bc28e4f677c153b}{\index{element\+::\+Element@{element\+::\+Element}!neutrons@{neutrons}}
+\index{neutrons@{neutrons}!element\+::\+Element@{element\+::\+Element}}
+\subsubsection[{neutrons}]{\setlength{\rightskip}{0pt plus 5cm}def element.\+Element.\+neutrons (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}}\label{classelement_1_1Element_a724eecca89aa1b702bc28e4f677c153b}
+\begin{DoxyVerb}Return number neutrons in most abundant natural stable isotope.\end{DoxyVerb}
+ \hypertarget{classelement_1_1Element_a03f0d947587085800e751ca03b6be838}{\index{element\+::\+Element@{element\+::\+Element}!nominalmass@{nominalmass}}
+\index{nominalmass@{nominalmass}!element\+::\+Element@{element\+::\+Element}}
+\subsubsection[{nominalmass}]{\setlength{\rightskip}{0pt plus 5cm}def element.\+Element.\+nominalmass (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}}\label{classelement_1_1Element_a03f0d947587085800e751ca03b6be838}
+\begin{DoxyVerb}Return mass number of most abundant natural stable isotope.\end{DoxyVerb}
+ \hypertarget{classelement_1_1Element_a5b38ca7d1691ffca9dc6f1a52c479dec}{\index{element\+::\+Element@{element\+::\+Element}!validate@{validate}}
+\index{validate@{validate}!element\+::\+Element@{element\+::\+Element}}
+\subsubsection[{validate}]{\setlength{\rightskip}{0pt plus 5cm}def element.\+Element.\+validate (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}}\label{classelement_1_1Element_a5b38ca7d1691ffca9dc6f1a52c479dec}
+\begin{DoxyVerb}Check consistency of data. Raise Error on failure.\end{DoxyVerb}
+ 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+element.\+py\end{DoxyCompactItemize}

@@ -44,7 +44,7 @@ def read_molecule(filename):
     charge_list = []
     num_atoms_list = []
     atom_list =[]
-    atomicmass1 = {'O': 15.9994, 'H': 1.00794, 'C':12.0107, 'D':2.013553212724,'T':3.0160492, 'F':18.998403}
+    atomicmass1 = {'O': 15.9994, 'H': 1.00794, 'C':12.0107, 'D':2.013553212724,'T':3.0160492, 'F':18.998403, 'Cl': 34.96885268, 'N': 14.00674}
     
     coordinates = [] # contains the [x,y,z] coordinates of the input atoms
     mass = []   # contains the corresponding masses of the atoms
@@ -99,7 +99,7 @@ def read_hessian(filename, n_coords):
     return hessian
     
 def read_MOLQUAD(filename, nm):
-    """Imports things needed from the DALTON.OUT that I need"""
+    """Reads and returns the second derivative of the property"""
     
     f = open(filename, 'r')
     second_deriv = zeros((nm,3,3))
@@ -137,6 +137,7 @@ def read_MOLQUAD(filename, nm):
     return second_deriv
     
 def read_MAGNET(filename, nm):
+    """Reads and returns the second derivative of the property"""
     
     f = open(filename, 'r')
     second_deriv_magnet = zeros((nm,3,3))
@@ -190,6 +191,7 @@ def read_MAGNET(filename, nm):
     return second_deriv_magnet 
 
 def read_GFACTOR(filename, nm):
+    """Reads and returns the second derivative of the property"""
     
     f = open(filename, 'r')
     second_deriv = zeros((nm,3,3))
@@ -244,7 +246,7 @@ def read_GFACTOR(filename, nm):
     return second_deriv_g
     
 def read_POLARI(filename, nm):
-    """Imports things needed from the DALTON.OUT that I need"""
+    """Reads and returns the second derivative of the property"""
     
     f = open(filename, 'r')
     second_deriv = zeros((nm,3,3))
@@ -279,7 +281,7 @@ def read_POLARI(filename, nm):
     return second_deriv
 
 def read_SPINROT(filename, natom, nm):
-    """Imports things needed from the DALTON.OUT that I need"""
+    """Reads and returns the second derivative of the property"""
     
     f = open(filename, 'r')
     second_deriv = zeros((natom,nm,3,3))
@@ -331,6 +333,7 @@ def read_SPINROT(filename, natom, nm):
     return second_deriv, property_type
       
 def read_NUCQUAD(filename, natom, nm):
+    """Reads and returns the second derivative of the property"""
     
     """Imports things needed from the DALTON.OUT that I need"""
     
@@ -371,6 +374,7 @@ def read_NUCQUAD(filename, natom, nm):
     return second_deriv, property_type
 
 def read_OPTROT(filename, nm):
+    """Reads and returns the second derivative of the property"""
     
     f = open(filename, 'r')
     second_deriv_optrot = zeros((nm,3,3))
@@ -443,6 +447,7 @@ def read_OPTROT(filename, nm):
     return second_deriv_optrot, second_deriv_optrot1, second_deriv_optrot2
         
 def read_2d_input(filename, nm):
+    """Reads and returns the second derivative of the property"""
     
     f = open(filename, 'r')
     second_deriv = zeros((6,3))
@@ -469,7 +474,7 @@ def read_2d_input(filename, nm):
     return second_deriv    
 
 def read_SHIELD(filename, natom, nm):
-    """Imports things needed from the DALTON.OUT that I need"""
+    """Reads and returns the second derivative of the property"""
     
     f = open(filename, 'r')
     second_deriv = zeros((natom,nm,3,3))
@@ -509,72 +514,51 @@ def read_SHIELD(filename, natom, nm):
 
     f.close()
     return second_deriv, property_type
+
+def read_quartic_force_field1(filename, n_cord):
     
-def read_quartic_force_field(filename, n_cord):
-    """Imports the quartic force field from DALTON"""
-    
+    """Reads and returns the quartic force field in cartessian coordinates
+    as a 4 dimensional np.array"""
+      
     f = open(filename, 'r')
     quartic_force_field = zeros((n_cord, n_cord, n_cord, n_cord))
     dummy = []
-    
+    counter = n_cord # Make an if counting, and thus reading correctly..
+
     finished = 0
     while (finished == 0):
         cur_line = f.readline()
-        if re.search('Numerical fourth derivative of energy in symmetry coordinates',cur_line):
+        if re.search('Fourth derivative of energy in symmetry coordinates',cur_line):
             finished = 1
-    
-    dummy = f.readline()
-    dummy = f.readline()
-    dummy = f.readline()
-    dummy = f.readline()
-    dummy = f.readline()
-    dummy = f.readline()
-    
-    for D4 in range(n_cord):
-        
-        dummy = f.readline()
-        dummy = f.readline()
-        dummy = f.readline()
-        for D3 in range(n_cord):
-            dummy = f.readline()
-            dummy = f.readline()
-            for D2 in range(n_cord):
-                mline = f.readline()
-                values = zeros((n_cord))
-                mline = mline.replace(' ', '')
-                
-                index1 = 0 #Before the decimal place
-                index2 = 0 #Which value we are at
-                
-                for i in range(len(mline)):                
-                    if (mline[i] == '.'):
-                        values[index2] = mline[index1:i+7]
-                        index2 = index2 + 1
-                        index1 = i+7
-                    
-                for D1 in range(6):
-                    quartic_force_field[D4][D3][D2][D1] = values[D1]
-        
-            dummy = f.readline()
-            
-            for D2 in range(n_cord):
-                mline = f.readline()
-                values = zeros((n_cord))
-                mline = mline.replace(' ', '')
-                
-                index1 = 0 #Before the decimal place
-                index2 = 0 #Which value we are at
-                
-                for i in range(len(mline)):                
-                    if (mline[i] == '.'):
-                        values[index2] = mline[index1:i+7]
-                        index2 = index2 + 1
-                        index1 = i+7
 
-                for D1 in range(6):
-                    quartic_force_field[D4][D3][D2][D1 + 6] = values[D1]
-    f.close()
+    for D4 in range(n_cord):
+        dummy = f.readline()
+        dummy = f.readline()
+        dummy = f.readline()
+        
+        if(D4 == 0):
+                
+                dummy = f.readline()
+                dummy = f.readline()
+                dummy = f.readline()
+                dummy = f.readline()
     
+        for D3 in range(n_cord):
+            j = 0
+            while(j < n_cord-1):
+                for D2 in range(n_cord):
+                    mline = f.readline()
+                    #print(mline)
+                    mline = mline.split()
+                    for D1 in range(min(6,n_cord - j)):
+                        quartic_force_field[D4][D3][D2][D1] = mline[D1]
+                
+                dummy = f.readline()
+                dummy = f.readline()
+                
+                j = j + 5
+        
+    f.close()
     return quartic_force_field
                 
 def read_DALTON_NUCQUAD(filename, natom):
@@ -978,6 +962,7 @@ def read_DALTON_GFACTOR(filename):
     return uncorrected_values, corrections, corrected_values   
 
 def read_DALTON_values_2d(filename):
+    """ For testing purposes, extracts the correct values from DALTON"""
     
     f = open(filename, 'r')
     
@@ -1004,31 +989,9 @@ def read_DALTON_values_2d(filename):
         corrected_values[i] = mline[3]
         
     return uncorrected_values, corrections, corrected_values        
-
-def read_cubic_force_field_h2o(filename, n_coords):
-    """
-    Reads the cubic force field calculated by DALTON from file.
-    
-    filename: The name of the file the cubic force field is contained in 
-    n_coords: The number of cartessian coordinates needed to express
-              the location of the molecule ie. 3 * number of atoms 
-    return: A 3-dimensional np.array containg the cubic force field
-    """
-    dummy = []
-    cubic_force_field = zeros((n_coords, n_coords, n_coords))
-    f = open(filename, 'r')
-
-    for i in range(n_coords):
-        dummy = f.readline()
-        for j in range(n_coords):
-            a = f.readline().split()
-            for k in range(n_coords):
-                cubic_force_field[i,j,k] = float(a[k])
-    f.close()
-
-    return cubic_force_field
     
 def read_eigenvector(filename, n_atoms):
+    """ For testing purposes, extracts the correct values from DALTON"""
     
     n_nm = 3*n_atoms - 6
     eigenvector = zeros((12, 6))
@@ -1044,10 +1007,67 @@ def read_eigenvector(filename, n_atoms):
     return eigenvector
         
 def read_cubic_force_field(filename, n_cord):
-    """Imports the cubic force field from DALTON"""
+    """Reads and returns the cubic force field in cartessian coordinates
+    as a 4 dimensional np.array"""
       
     f = open(filename, 'r')
     cubic_force_field = zeros((n_cord, n_cord, n_cord))
+    dummy = []
+    counter = n_cord # Make an if counting, and thus reading correctly..
+
+    finished = 0
+    while (finished == 0):
+        cur_line = f.readline()
+        if re.search('Anharmonic force constants',cur_line):
+            finished = 1
+
+    for D3 in range(n_cord):
+        
+        dummy = f.readline()
+        dummy = f.readline()
+        dummy = f.readline()
+        
+        if(D3 != 0):
+            dummy = f.readline()
+        
+        j = 0
+        while(j < n_cord):
+            for D2 in range(n_cord):
+                mline = f.readline()
+                mline = mline.split()
+                for D1 in range(min(5,n_cord - j)):
+                    cubic_force_field[D3][D2][D1 + j] = mline[D1 + 1]
+            
+            dummy = f.readline()
+            dummy = f.readline()
+            
+            j = j + 5
+        
+    f.close()
+    return cubic_force_field
+    
+def read_cubic_force_field_anal(filename, n_cord):
+    """Reads and returns the cubic force field in cartessian coordinates
+    as a 3 dimensional np.array"""
+    f = open(filename, 'r')
+    cubic_force_field = zeros((n_cord, n_cord, n_cord))
+    dummy = []
+        
+    for D3 in range(n_cord):
+        dummy = f.readline()
+        for D2 in range(n_cord):
+            mline = f.readline()
+            mline = mline.split()
+            for D1 in range(n_cord):
+                cubic_force_field[D3][D2][D1] = mline[D1]
+    f.close()
+    return cubic_force_field
+
+def read_cubic_force_field_norm(filename, n_nm):
+    """ For testing purposes, extracts the correct values from DALTON"""
+    
+    f = open(filename, 'r')
+    cubic_force_field = zeros((n_m))
     dummy = []
     counter = n_cord # Make an if counting, and thus reading correctly..
 
@@ -1082,44 +1102,4 @@ def read_cubic_force_field(filename, n_cord):
         
     f.close()
     return cubic_force_field
-
-def read_cubic_force_field_norm(filename, n_nm):
-    """Imports the cubic force field from DALTON"""
-      
-    f = open(filename, 'r')
-    cubic_force_field = zeros((n_nm, n_nm, n_nm))
-    dummy = []
-    counter = n_nm # Make an if counting, and thus reading correctly..
-
-    finished = 0
-    while (finished == 0):
-        cur_line = f.readline()
-        if re.search('Anharmonic force constants for normal mode',cur_line):
-            finished = 1
-
-    for D3 in range(n_nm):
-        
-        dummy = f.readline()
-        dummy = f.readline()
-        dummy = f.readline()
-        
-        if(D3 != 0):
-            dummy = f.readline()
-        
-        j = 0
-        while(j < n_nm):
-        
-            for D2 in range(n_nm):
-                mline = f.readline()
-                mline = mline.replace("D", "E")
-                mline = mline.split()
-                for D1 in range(min(5,n_nm - j)):
-                    cubic_force_field[D3][D2][D1 + j] = mline[D1 + 1]
-                    
-            dummy = f.readline()
-            dummy = f.readline()
-            
-            j = j + 5
-        
-    f.close()
-    return cubic_force_field
+    

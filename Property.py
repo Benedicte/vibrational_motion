@@ -1,5 +1,6 @@
 import Molecule as mol
 import numpy as np
+import read_input as ri
 import pydoc
 
 class Property:
@@ -9,16 +10,24 @@ class Property:
         self.m_e = 1822.8884796 # conversion factor from a.m.u to a.u 
         self.prefactor = 1/(4*self.m_e)
         self.molecule = molecule
+        self.freq = self.molecule.frequencies
                 
     def __call__():
+        """The superclass for the call function, raises a NotImplementedError."""
         raise NotImplementedError\
         ('___call__ missing in class %s' % self.__class__.__name__)
     
-    def quartic_precision():
-        """"If the quartic force field precision is derired, this function can be used 
-        inside the call function where the new terms is simply added as a correction"""
-        
+    def quartic_precision(cff_norm, qff_norm, prop_deriv):
+        """The superclass for the quartic_precision function, raises a NotImplementedError."""
+        raise NotImplementedError\
+        ('___call__ missing in class %s' % self.__class__.__name__)
 
+    def get_quartic_force_field(self):
+        """Returns the quartic force field in cartessian coordinates as 
+        a 4D np.array"""
+        qff = ri.read_quartic_force_field1(self.molecule.input_name + "/quartic", self.molecule.n_coordinates)
+        return(qff)
+        
     def write_to_file(self, property_type, n_atom = None):
         """ Writes the resutls to file. It writes the uncorrected property
         the property corrections and the corrected property. Instead of 

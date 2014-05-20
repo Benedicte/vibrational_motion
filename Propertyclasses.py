@@ -4,25 +4,27 @@ import read_input as ri
 from numpy import array, zeros, absolute, add, sqrt
 import pydoc
 
-class Property_1_Tensor(Property):  
+class Property_1_Tensor(Property):
+    """" Calculates the corrections to the dipole moment
+    uncorrected_property: The uncorrected dipole moment
+    n_nm: The number of normal modes of the molecule
+    pre_property: The second derivative of the dipole moment
+    return: The corrections to the dipole moment, the corrected dipole 
+    moment as np.arrays"""  
     def __init__(self, molecule, property_name):
         Property.__init__(self, molecule, property_name)
         self.molecule = molecule
         self.property_name = property_name
     
     def __call__(self): 
-        """" Calculates the corrections to the dipole moment
-        uncorrected_property: The uncorrected dipole moment
-        n_nm: The number of normal modes of the molecule
-        pre_property: The second derivative of the dipole moment
-        return: The corrections to the dipole moment, the corrected dipole 
-        moment as np.arrays"""
         
         pre_property = self.get_preproperty()
+        self.freq = 0.0185
         self.uncorrected_property = self.get_uncorrected_property()
         eigenvalues = self.molecule.eigenvalues
         correction_property = zeros((3))
-        eigenvalues = absolute(eigenvalues)
+        #eigenvalues = absolute(eigenvalues)
+        eigenvalues = array([0.00034225]) 
         
         for i in range(self.molecule.number_of_normal_modes):
             factor = 1/(sqrt(eigenvalues[i])) # the reduced one
@@ -33,21 +35,103 @@ class Property_1_Tensor(Property):
         self.correction_property = correction_property * self.prefactor
         self.corrected_property = add(self.uncorrected_property, self.correction_property)
         self.write_to_file(self.property_name)
-        print self.correction_property
-        return self.correction_property, self.corrected_property
         
+        print("0th order correction")
+        print self.corrected_property
+        
+        qff = self.get_quartic_force_field()
+        qff_norm = self.molecule.to_normal_coordinates_4D(qff)
+        
+        quartic_correction = self.quartic_precision(pre_property, qff_norm)
+        
+        second_corrrection = self.corrected_property + quartic_correction 
+        
+        print("Second order Corrected")
+        print(second_corrrection)
+        
+        
+        return self.correction_property, self.corrected_property
+    
+    def quartic_precision(self, prop_deriv, qff_norm): # Not even close to complete
+        """" Calculates the corrections to the dipole moment
+        uncorrected_property: The uncorrected dipole moment
+        pre_property: The second derivative of the dipole moment
+        return: The corrections to the dipole moment, the corrected dipole 
+        moment as np.arrays correcting to a second order perurbation 
+        of the wavefunction"""
+        
+        prop_grad = [0]
+        
+        cff_norm = array([[[0.00002662753]]])
+        self.freq = array([0.0185])
+        
+        self.freq =array([0.00034225])
+        qff_norm = array([[[[10.345714]]]])
+        
+        first_a3 = zeros((self.molecule.number_of_normal_modes, self.molecule.number_of_normal_modes, self.molecule.number_of_normal_modes))
+        second_a2 = zeros((self.molecule.number_of_normal_modes, self.molecule.number_of_normal_modes, self.molecule.number_of_normal_modes))
+        second_b11 = zeros((self.molecule.number_of_normal_modes, self.molecule.number_of_normal_modes, self.molecule.number_of_normal_modes))
+        second_b31 = zeros((self.molecule.number_of_normal_modes, self.molecule.number_of_normal_modes, self.molecule.number_of_normal_modes))
+        
+        quartic_correction = zeros((3))
+        
+        for a in range(3):
+            for i in range(self.molecule.number_of_normal_modes):
+                first_a3[i] = sqrt(3.0)*cff_norm[i][i][i]/36**(5.0/2)
+                
+                prefix_1 = 3*sqrt(3)*first_a3[i]/(8*sqrt(2))*self.freq[i]**(5.0/2)
+                prefix_2 = sqrt(2)/(32.0*self.freq[i]**3)
+                second_a2 += prefix_1*cff_norm[i][i][i] - prefix_2*qff_norm[i][i][i][i]
+               
+                for m in range(self.molecule.number_of_normal_modes):
+                    prefix_3 = sqrt(2.0)/(8*self.freq[m]*self.freq[i]**2)
+                    second_a2 += prefix_3*qff_norm[i][i][m][m]
+                
+                quartic_correction[a]= second_a2[i]*sqrt(2.0)*prop_deriv[i][a]/(4*self.freq[i]) + first_a3[i]**2 * prop_deriv[i][a]/(3*self.freq[i])\
+                        - prop_grad[i]*1/(2*self.freq[i])
+                 
+            for i in range(self.molecule.number_of_normal_modes):    
+                for j in range(self.molecule.number_of_normal_modes):
+                    prefix_1= 1/(32*self.freq[i]**(3.0/2) * self.freq[j]**0.5*(self.freq[i] + self.freq[j]))
+                    second_b11[i][j] += prefix_1*qff_norm[i][i][i][j]
+                    
+                    prefix_1= sqrt(6.0)/(96*self.freq[i]**(3/2) * self.freq[j]**0.5*(3*self.freq[i] + self.freq[j]))
+                    second_b31[i][j] += prefix_1*qff_norm[i][i][i][j]
+                    
+                    for m in range(self.molecule.number_of_normal_modes):
+                        prefix_2 = 1/sqrt(2.0) * self.freq[m]*2*self.freq[i]**(1.0/2)*sqrt(2.0)*self.freq[j]**(1.0/2)*(self.freq[i]+self.freq[j])
+                        second_b11[i][j] += prefix_2*qff_norm[i][i][i][j]
+                
+                    quartic_correction[a] = second_b11[i][j]*prop_deriv[i][a]/(4*self.freq[i]**(1.0/2)*self.freq[j]**(1.0/2)) \
+                                + second_b31[i][j]*sqrt(2.0)*prop_deriv[i][a]/(4*self.freq[j])
+        
+        quartic_correction = quartic_correction*self.prefactor
+        
+        print("2nd order correction")
+        print quartic_correction        
+        return quartic_correction
+            
     def get_preproperty(self):
         pre_property = ri.read_2d_input(self.molecule.input_name + "/SHIELD", self.molecule.number_of_normal_modes)
         return pre_property
         
+    def get_prop_grad(self):
+        prop_grad = 5
+        return prop_grad
+    
     def get_uncorrected_property(self):
         uncorrected_property = ri.read_DALTON_values_2d(self.molecule.input_name + "SHIELD")[0]
-        #print uncorrected_property
         #uncorrected_property = self.molecule.hessian_trans_rot(uncorrected_property, self.molecule.coordinates, self.molecule.number_of_normal_modes, self.molecule.n_atoms)
-        print uncorrected_property
         return uncorrected_property
-
+            
 class Property_2_Tensor(Property):
+    """" Calculates the corrections to the g-factors, nuclear spin-rotations,
+    ,molecular quadropole moments, and spin-spin couplings
+    uncorrected_property: The uncorrected property
+    n_nm: The number of normal modes of the molecule
+    pre_property: The second derivative of the property
+    return: The corrections to the property, the corrected property 
+    as np.arrays""" 
     
     def __init__(self, molecule, property_name):
         Property.__init__(self, molecule, property_name)
@@ -137,9 +221,71 @@ class Property_2_Tensor(Property):
             self.corrected_property = self.uncorrected_property + self.correction_property 
         
             self.write_to_file(self.property_name)
+            
+            qff = self.get_quartic_force_field()
+            qff_norm = self.molecule.to_normal_coordinates_4D(qff)
+        
+            quartic_correction = self.quartic_precision(pre_property, qff_norm)
                 
             return self.correction_property, self.corrected_property  
+
+    def quartic_precision(self, prop_deriv, qff_norm):
+        """" Calculates the corrections to the dipole moment
+        uncorrected_property: The uncorrected dipole moment
+        pre_property: The second derivative of the dipole moment
+        return: The corrections to the dipole moment, the corrected dipole 
+        moment as np.arrays correcting to a second order perurbation 
+        of the wavefunction"""
+       
+        prop_grad = [0] 
+        cff_norm = array([[[0.00002662753]]])
+        self.freq = array([0.0185])
+            
+        self.freq =array([0.00034225])
+            
+        first_a3 = zeros((self.molecule.number_of_normal_modes, self.molecule.number_of_normal_modes, self.molecule.number_of_normal_modes))
+        second_a2 = zeros((self.molecule.number_of_normal_modes, self.molecule.number_of_normal_modes, self.molecule.number_of_normal_modes))
+        second_b11 = zeros((self.molecule.number_of_normal_modes, self.molecule.number_of_normal_modes, self.molecule.number_of_normal_modes))
+        second_b31 = zeros((self.molecule.number_of_normal_modes, self.molecule.number_of_normal_modes, self.molecule.number_of_normal_modes))
+            
+        quartic_correction = zeros((3,3))
         
+        for i in range(self.molecule.number_of_normal_modes):
+            for b in range(3):
+                for a in range(3):
+                    first_a3[i] = sqrt(3.0)*cff_norm[i][i][i]/36**(5.0/2)
+                    
+                    prefix_1 = 3*sqrt(3)*first_a3[i]/(8*sqrt(2))*self.freq[i]**(5.0/2)
+                    prefix_2 = sqrt(2)/(32.0*self.freq[i]**3)
+                    second_a2 += prefix_1*cff_norm[i][i][i] - prefix_2*qff_norm[i][i][i][i]
+                   
+                    for m in range(self.molecule.number_of_normal_modes):
+                        prefix_3 = sqrt(2.0)/(8*self.freq[m]*self.freq[i]**2)
+                        second_a2 += prefix_3*qff_norm[i][i][m][m]
+                    
+                    quartic_correction[a][b]= second_a2[i]*sqrt(2.0)*prop_deriv[i][a][b]/(4*self.freq[i]) + first_a3[i]**2 * prop_deriv[i][a][b]/(3*self.freq[i])\
+                            - prop_grad[i]*1/(2*self.freq[i])
+                     
+                for i in range(self.molecule.number_of_normal_modes):    
+                    for j in range(self.molecule.number_of_normal_modes):
+                        prefix_1= 1/(32*self.freq[i]**(3.0/2) * self.freq[j]**0.5*(self.freq[i] + self.freq[j]))
+                        second_b11[i][j] += prefix_1*qff_norm[i][i][i][j]
+                        
+                        prefix_1= sqrt(6.0)/(96*self.freq[i]**(3/2) * self.freq[j]**0.5*(3*self.freq[i] + self.freq[j]))
+                        second_b31[i][j] += prefix_1*qff_norm[i][i][i][j]
+                        
+                        for m in range(self.molecule.number_of_normal_modes):
+                            prefix_2 = 1/sqrt(2.0) * self.freq[m]*2*self.freq[i]**(1.0/2)*sqrt(2.0)*self.freq[j]**(1.0/2)*(self.freq[i]+self.freq[j])
+                            second_b11[i][j] += prefix_2*qff_norm[i][i][i][j]
+                    
+                    quartic_correction[a][b] = second_b11[i][j]*prop_deriv[i][a][b]/(4*self.freq[i]**(1.0/2)*self.freq[j]**(1.0/2)) \
+                                + second_b31[i][j]*sqrt(2.0)*prop_deriv[i][a][b]/(4*self.freq[j])
+        
+        quartic_correction = quartic_correction*self.prefactor
+        print("2nd order correction")
+        print quartic_correction        
+        return quartic_correction
+                
     def get_preproperty(self):
         read_property = self.read_dic[self.property_name]
         molecule_path = self.molecule.input_name \
@@ -170,6 +316,13 @@ class Property_2_Tensor(Property):
         return uncorrected_property
 
 class Property_3_Tensor(Property):
+    """" Calculates the corrections to the nuclear shieldings,
+    nuclear spin correction, nuclear quadropole moment, and optical rotation 
+    uncorrected_property: The uncorrected property
+    n_nm: The number of normal modes of the molecule
+    pre_property: The second derivative of the property
+    return: The corrections to the property, the corrected property 
+    as np.arrays"""
     
     def __init__(self, molecule, property_name):
         Property.__init__(self, molecule, property_name)
@@ -207,21 +360,85 @@ class Property_3_Tensor(Property):
         self.uncorrected_property = self.get_uncorrected_property() 
         eigenvalues = self.molecule.eigenvalues
 
-        for nm in range(self.molecule.number_of_normal_modes):
-            factor = 1/(sqrt(eigenvalues[nm])) # the reduced one
-            for atm in range(4):
-                #self.molecule.n_atoms
-                for i in range(3):
-                    for j in range(3):
-                        correction_property[atm,j,i] += pre_property[atm,nm,j,i]*factor
+        #for nm in range(self.molecule.number_of_normal_modes):
+            #factor = 1/(sqrt(eigenvalues[nm])) # the reduced one
+        #    for atm in range(self.molecule.n_atoms):
+        #        for i in range(3):
+        #            for j in range(3):
+        #                correction_property[atm,j,i] += pre_property[atm,nm,j,i]*factor
     
-        self.correction_property = correction_property*self.prefactor
-        self.corrected_property = self.correction_property + self.uncorrected_property
+        #self.correction_property = correction_property*self.prefactor
+        #self.corrected_property = self.correction_property + self.uncorrected_property
         
-        self.write_to_file(self.property_name, self.molecule.n_atoms)
- 
-        return self.correction_property, self.corrected_property 
+        #self.write_to_file(self.property_name, self.molecule.n_atoms)
+        
+        qff = self.get_quartic_force_field()
+        qff_norm = self.molecule.to_normal_coordinates_4D(qff)
+        
+        quartic_correction = self.quartic_precision(pre_property, qff_norm)
+        
+        return 0
+        #return self.correction_property, self.corrected_property 
+        
+    def quartic_precision(self, prop_deriv, qff_norm):
+        """" Calculates the corrections to the dipole moment
+        uncorrected_property: The uncorrected dipole moment
+        pre_property: The second derivative of the dipole moment
+        return: The corrections to the dipole moment, the corrected dipole 
+        moment as np.arrays correcting to a second order perurbation 
+        of the wavefunction"""
+        
+        prop_grad = [0] 
+        cff_norm = array([[[0.00002662753]]])
+        self.freq = array([0.0185])
+            
+        self.freq =array([0.00034225])
+            
+        first_a3 = zeros((self.molecule.number_of_normal_modes, self.molecule.number_of_normal_modes, self.molecule.number_of_normal_modes))
+        second_a2 = zeros((self.molecule.number_of_normal_modes, self.molecule.number_of_normal_modes, self.molecule.number_of_normal_modes))
+        second_b11 = zeros((self.molecule.number_of_normal_modes, self.molecule.number_of_normal_modes, self.molecule.number_of_normal_modes))
+        second_b31 = zeros((self.molecule.number_of_normal_modes, self.molecule.number_of_normal_modes, self.molecule.number_of_normal_modes))
+            
+        quartic_correction = zeros((self.molecule.n_atoms, 3,3))
 
+        for i in range(self.molecule.number_of_normal_modes):
+            for atom in range(self.molecule.n_atoms):
+                for b in range(3):
+                    for a in range(3):
+                        first_a3[i] = sqrt(3.0)*cff_norm[i][i][i]/36**(5.0/2)
+                        
+                        prefix_1 = 3*sqrt(3)*first_a3[i]/(8*sqrt(2))*self.freq[i]**(5.0/2)
+                        prefix_2 = sqrt(2)/(32.0*self.freq[i]**3)
+                        second_a2 += prefix_1*cff_norm[i][i][i] - prefix_2*qff_norm[i][i][i][i]
+                       
+                        for m in range(self.molecule.number_of_normal_modes):
+                            prefix_3 = sqrt(2.0)/(8*self.freq[m]*self.freq[i]**2)
+                            second_a2 += prefix_3*qff_norm[i][i][m][m]
+                        
+                        quartic_correction[atom][a][b]= second_a2[i]*sqrt(2.0)*prop_deriv[atom][i][a][b]/(4*self.freq[i]) \
+                                + first_a3[i]**2 * prop_deriv[atom][i][a][b]/(3*self.freq[i])\
+                                - prop_grad[i]*1/(2*self.freq[i])
+                         
+                    for i in range(self.molecule.number_of_normal_modes):    
+                        for j in range(self.molecule.number_of_normal_modes):
+                            prefix_1= 1/(32*self.freq[i]**(3.0/2) * self.freq[j]**0.5*(self.freq[i] + self.freq[j]))
+                            second_b11[i][j] += prefix_1*qff_norm[i][i][i][j]
+                            
+                            prefix_1= sqrt(6.0)/(96*self.freq[i]**(3/2) * self.freq[j]**0.5*(3*self.freq[i] + self.freq[j]))
+                            second_b31[i][j] += prefix_1*qff_norm[i][i][i][j]
+                            
+                            for m in range(self.molecule.number_of_normal_modes):
+                                prefix_2 = 1/sqrt(2.0) * self.freq[m]*2*self.freq[i]**(1.0/2)*sqrt(2.0)*self.freq[j]**(1.0/2)*(self.freq[i]+self.freq[j])
+                                second_b11[i][j] += prefix_2*qff_norm[i][i][i][j]
+                        
+                            quartic_correction[atom][a][b] = second_b11[i][j]*prop_deriv[atom][i][a][b]/(4*self.freq[i]**(1.0/2)*self.freq[j]**(1.0/2)) \
+                                        + second_b31[i][j]*sqrt(2.0)*prop_deriv[atom][i][a][b]/(4*self.freq[j])
+        
+        quartic_correction = quartic_correction*self.prefactor
+        print("2nd order correction")
+        print quartic_correction        
+        return quartic_correction
+                    
     def get_preproperty(self):
         read_property = self.read_dic[self.property_name]
         molecule_path = self.molecule.input_name \

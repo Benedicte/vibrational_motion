@@ -1,0 +1,9 @@
+ATOMBASIS
+Water
+
+AtomTypes=2 Nosymmetry Angstrom
+Charge=9.0 Atoms=1 Basis=ano-1 6 5 4 3 
+F    -0.01765919  0.00000000  0.000000000
+Charge=1.0 Atoms=1 Basis=ano-1 5 4 3 
+H     1.70612158  0.00000000  0.000000000
+

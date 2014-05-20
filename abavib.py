@@ -3,6 +3,12 @@ import Molecule as mol
 import Propertyclasses as pr
 import pydoc
 
+"""
+The module working as the interface of the command line based program. 
+Initiated the other modules and funcions needed to perform the 
+calculations requested.  
+"""
+
 if __name__ == '__main__':
 
     print("In order to calculate molecular properties, make sure to have made a directory named\

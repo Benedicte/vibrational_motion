@@ -2,6 +2,7 @@ import unittest
 import abavib as av
 import read_input as ri
 import numpy as np
+import pydoc
 
 molecule = "fluoromethane"
 input_name = "input_" + molecule + "/"
