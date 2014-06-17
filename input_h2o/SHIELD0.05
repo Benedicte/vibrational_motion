@@ -1,0 +1,4724 @@
+
+
+   ****************************************************************************
+   *************** DALTON2011 - An electronic structure program ***************
+   ****************************************************************************
+
+    This is output from DALTON Release 2011 (DEVELOPMENT VERSION)
+   ----------------------------------------------------------------------------
+    NOTE:
+     
+    DALTON is an experimental code for the evaluation of molecular
+    properties using (MC)SCF, DFT, CI, and CC wave functions.
+    The authors accept no responsibility for the performance of
+    the code or for the correctness of the results.
+     
+    The code (in whole or part) is provided under a licence and
+    is not to be reproduced for further distribution without
+    the written permission of the authors or their representatives.
+     
+    See the home page "http://daltonprogram.org" for further information.
+     
+    If results obtained with this code are published,
+    an appropriate citation would be:
+     
+    "Dalton, a molecular electronic structure program,
+    Release Dalton2011 (2011), see http://daltonprogram.org"
+   ----------------------------------------------------------------------------
+
+    Authors in alphabetical order (major contribution(s) in parenthesis):
+
+  Celestino Angeli,         University of Ferrara,        Italy       (NEVPT2)
+  Keld L. Bak,              UNI-C,                        Denmark     (AOSOPPA, non-adiabatic coupling, magnetic properties)
+  Vebjoern Bakken,          University of Oslo,           Norway      (DALTON; geometry optimizer, symmetry detection)
+  Ove Christiansen,         Aarhus University,            Denmark     (CC module)
+  Renzo Cimiraglia,         University of Ferrara,        Italy       (NEVPT2)
+  Sonia Coriani,            University of Trieste,        Italy       (CC module, MCD in RESPONS)
+  Paal Dahle,               University of Oslo,           Norway      (Parallelization)
+  Erik K. Dalskov,          UNI-C,                        Denmark     (SOPPA)
+  Thomas Enevoldsen,        SDU - Odense University,      Denmark     (SOPPA)
+  Berta Fernandez,          U. of Santiago de Compostela, Spain       (doublet spin, ESR in RESPONS)
+  Lara Ferrighi,            Aarhus University,            Denmark     (PCM Cubic response)
+  Heike Fliegl,             University of Helsinki,       Finland     (CCSD(R12))
+  Luca Frediani,            University of Tromsoe,        Norway      (PCM)
+  Bin Gao,                  University of Tromsoe,        Norway      (Gen1Int module)
+  Christof Haettig,         Ruhr University Bochum,       Germany     (CC module)
+  Kasper Hald,              Aarhus University,            Denmark     (CC module)
+  Asger Halkier,            Aarhus University,            Denmark     (CC module)
+  Hanne Heiberg,            University of Oslo,           Norway      (geometry analysis, selected one-electron integrals)
+  Trygve Helgaker,          University of Oslo,           Norway      (DALTON; ABACUS, ERI, DFT modules, London, and much more)
+  Hinne Hettema,            University of Auckland,       New Zealand (quadratic response in RESPONS; SIRIUS supersymmetry)
+  Brano Jansik              University of Aarhus          Denmark     (DFT cubic response)
+  Hans Joergen Aa. Jensen,  Univ. of Southern Denmark,    Denmark     (DALTON; SIRIUS, RESPONS, ABACUS modules, London, and much more)
+  Dan Jonsson,              University of Tromsoe,        Norway      (cubic response in RESPONS module)
+  Poul Joergensen,          Aarhus University,            Denmark     (RESPONS, ABACUS, and CC modules)
+  Sheela Kirpekar,          SDU - Odense University,      Denmark     (Mass-velocity & Darwin integrals)
+  Wim Klopper,              University of Karlsruhe,      Germany     (R12 code in CC, SIRIUS, and ABACUS modules)
+  Stefan Knecht,            Univ. of Southern Denmark,    Denmark     (Parallel CI)
+  Rika Kobayashi,           ANU Supercomputer Facility,   Australia   (DIIS in CC, London in MCSCF)
+  Jacob Kongsted,           Univ. of Southern Denmark,    Denmark     (QM/MM code)
+  Henrik Koch,              University of Trondheim,      Norway      (CC module, Cholesky decomposition)
+  Andrea Ligabue,           University of Modena,         Italy       (CTOCD, AOSOPPA)
+  Ola B. Lutnaes,           University of Oslo,           Norway      (DFT Hessian)
+  Juan I. Melo,             University of Buenos Aires,   Argentina   (LRESC, Relativistic Effects on NMR Shieldings)
+  Kurt V. Mikkelsen,        University of Copenhagen,     Denmark     (MC-SCRF and QM/MM code)
+  Christian Neiss,          Univ. Erlangen-Nuernberg,     Germany     (CCSD(R12))
+  Christian B. Nielsen,     University of Copenhagen,     Denmark     (QM/MM code)
+  Patrick Norman,           University of Linkoeping,     Sweden      (cubic response and complex response in RESPONS)
+  Jeppe Olsen,              Aarhus University,            Denmark     (SIRIUS CI/density modules)
+  Anders Osted,             Copenhagen University,        Denmark     (QM/MM code)
+  Martin J. Packer,         University of Sheffield,      UK          (SOPPA)
+  Filip Pawlowski,          Kazimierz Wielki University   Poland      (CC3)
+  Thomas B. Pedersen,       University of Oslo,           Norway      (Cholesky decomposition)
+  Patricio F. Provasi,      University of Northeastern,   Argentina   (Analysis of coupling constants in localized orbitals)
+  Zilvinas Rinkevicius,     KTH Stockholm,                Sweden      (open-shell DFT, ESR)
+  Elias Rudberg,            KTH Stockholm,                Sweden      (DFT grid and basis info)
+  Torgeir A. Ruden,         University of Oslo,           Norway      (Numerical derivatives in ABACUS)
+  Kenneth Ruud,             University of Tromsoe,        Norway      (DALTON; ABACUS magnetic properties and  much more)
+  Pawel Salek,              KTH Stockholm,                Sweden      (DALTON; DFT code)
+  Claire C.M. Samson        University of Karlsruhe       Germany     (Boys localization, r12 integrals in ERI)
+  Alfredo Sanchez de Meras, University of Valencia,       Spain       (CC module, Cholesky decomposition)
+  Trond Saue,               CNRS/ULP Toulouse,            France      (direct Fock matrix construction)
+  Stephan P. A. Sauer,      University of Copenhagen,     Denmark     (SOPPA(CCSD), SOPPA prop., AOSOPPA, vibrational g-factors)
+  Bernd Schimmelpfennig,    Forschungszentrum Karlsruhe,  Germany     (AMFI module)
+  Arnfinn H. Steindal,      University of Tromsoe,        Norway      (parallel QM/MM)
+  K. O. Sylvester-Hvid,     University of Copenhagen,     Denmark     (MC-SCRF)
+  Peter R. Taylor,          VLSCI/Univ. of Melbourne,     Australia   (Symmetry handling ABACUS, integral transformation)
+  David P. Tew,             University of Bristol,        England     (CCSD(R12))
+  Olav Vahtras,             KTH Stockholm,                Sweden      (triplet response, spin-orbit, ESR, TDDFT, open-shell DFT)
+  David J. Wilson,          La Trobe University,          Australia   (DFT Hessian and DFT magnetizabilities)
+  Hans Agren,               KTH Stockholm,                Sweden      (SIRIUS module, MC-SCRF solvation model)
+ --------------------------------------------------------------------------------
+
+     Date and time (Linux)  : Wed Jun  4 11:29:23 2014
+     Host name              : c41-6.local                             
+
+ * Work memory size             :   100000000 =  762.94 megabytes.
+
+ * Directories for basis set searches:
+   1) /global/work/benedico/2092034.stallo-adm.uit.no/basis/
+
+
+Compilation information
+-----------------------
+
+ Who compiled             | ringholm@c4-14.local
+ System                   | Linux-2.6.32-279.2.1.el6.x86_64
+ CMake generator          | Unix Makefiles
+ Processor                | x86_64
+ 64-bit integers          | OFF
+ MPI                      | ON
+ Fortran compiler         | /global/apps/openmpi/1.6.2/intel/13.0/bin/mpif90
+ Fortran compiler version | ifort (IFORT) 13.0.1 20121010
+ Fortran flags            | -g -w -fpp -assume byterecl -traceback  -O3 -xW -i
+                          | p
+ C compiler               | /global/apps/openmpi/1.6.2/intel/13.0/bin/mpicc
+ C compiler version       | icc (ICC) 13.0.1 20121010
+ C flags                  | -g -wd981 -wd279 -wd383 -vec-report0 -wd1572 -wd17
+                          | 7 -restrict -DRESTRICT=restrict -O3 -ip
+ C++ compiler             | /global/apps/openmpi/1.6.2/intel/13.0/bin/mpic++
+ C++ compiler version     | unknown
+ C++ flags                | -Wno-unknown-pragmas -debug -O3 -DNDEBUG
+ BLAS                     | -Wl,--start-group;/global/apps/intel/2013.1/mkl/li
+                          | b/intel64/libmkl_core.so;/global/apps/intel/2013.1
+                          | /mkl/lib/intel64/libmkl_intel_thread.so;/usr/lib64
+                          | /libpthread.so;/usr/lib64/libm.so;/global/apps/int
+                          | el/2013.1/mkl/lib/intel64/libmkl_intel_lp64.so;-op
+                          | enmp;-Wl,--end-group
+ LAPACK                   | -Wl,--start-group;/global/apps/intel/2013.1/mkl/li
+                          | b/intel64/libmkl_lapack95_lp64.a;-Wl,--end-group
+ Static linking           | OFF
+ Last Git revision        | 594ebf87a0b5bbf85096c992d156c91ca36366f1
+ Configuration time       | 2013-04-12 16:31:22.672078
+
+ * Parallel with MPI: Using   16 CPUs.
+
+
+   Content of the .dal input file
+ ----------------------------------
+
+*DALTON INPUT                                     
+.WALK                                             
+*WALK                                             
+.VIBAVE                                           
+.DISPLACEMENT                                     
+0.05                                              
+.TEMPERATURES                                     
+1                                                 
+300.0                                             
+**WAVE FUNCTIONS                                  
+.HF                                               
+*SCF INPUT                                        
+.THRESH                                           
+1.0D-8                                            
+**START                                           
+.SHIELD                                           
+*LINRES                                           
+.THRESH                                           
+1.0D-5                                            
+*RESPONS                                          
+.THRESH                                           
+1.0D-5                                            
+**EACH STEP                                       
+.SHIELD                                           
+*LINRES                                           
+.THRESH                                           
+1.0D-5                                            
+*RESPONS                                          
+.THRESH                                           
+1.0D-5                                            
+**END OF DALTON INPUT                             
+                                                  
+
+
+   Content of the .mol file
+ ----------------------------
+
+ATOMBASIS                                                                      
+water                                                                          
+                                                                               
+AtomTypes=2 Nosymmetry                                                         
+Charge=8.0 Atoms=1 Basis=ano-1 6 5 4 3                                         
+O  2.60206050e-09  -1.86638805e-01   3.40297963e-07                            
+Charge=1.0 Atoms=2 Basis=ano-1 5 4 3                                           
+H  1.44139399e+00   8.92349178e-01   1.98557079e-05                            
+H -1.44139391e+00   8.92349116e-01   1.38899890e-08                            
+
+
+       *******************************************************************
+       *********** Output from DALTON general input processing ***********
+       *******************************************************************
+
+ --------------------------------------------------------------------------------
+   Overall default print level:    0
+   Print level for DALTON.STAT:    1
+
+    Parallel calculation using MPI
+    Geometry optimization
+      Starting at iteration:    0
+      Maximum number of iterations:   20
+    AO-direct calculation (in sections where implemented)
+    "Old" integral transformation used (limited to max 255 basis functions)
+ --------------------------------------------------------------------------------
+
+
+                  .----------------------------------------------.
+                  | Commencing geometry optimization using .WALK |
+                  `----------------------------------------------'
+
+
+
+     @@>>>>>>>>>> Geometry walk iteration number:    0 <<<<<<<<<<
+
+
+
+
+   ****************************************************************************
+   *************** Output of molecule and basis set information ***************
+   ****************************************************************************
+
+
+    The two title cards from your ".mol" input:
+    ------------------------------------------------------------------------
+ 1: water                                                                   
+ 2:                                                                         
+    ------------------------------------------------------------------------
+
+  Atomic type no.    1
+  --------------------
+  Nuclear charge:   8.00000
+  Number of symmetry independent centers:    1
+  Number of basis sets to read;    2
+  The basis set is "ano-1 6 5 4 3" from the basis set library.
+  Basis set file used for this atomic type with Z =   8 :
+     "/global/work/benedico/2092034.stallo-adm.uit.no/basis/ano-1"
+
+  Atomic type no.    2
+  --------------------
+  Nuclear charge:   1.00000
+  Number of symmetry independent centers:    2
+  Number of basis sets to read;    2
+  The basis set is "ano-1 5 4 3" from the basis set library.
+  Basis set file used for this atomic type with Z =   1 :
+     "/global/work/benedico/2092034.stallo-adm.uit.no/basis/ano-1"
+
+
+                         SYMGRP: Point group information
+                         -------------------------------
+
+Point group: C1 
+
+
+                                 Isotopic Masses
+                                 ---------------
+
+                           O          15.994915
+                           H           1.007825
+                           H           1.007825
+
+                       Total mass:    18.010565 amu
+                       Natural abundance:  99.730 %
+
+ Center-of-mass coordinates (a.u.):    0.000000   -0.065884    0.000001
+
+
+  Atoms and basis sets
+  --------------------
+
+  Number of atom types :    2
+  Total number of atoms:    3
+
+  label    atoms   charge   prim   cont     basis
+  ----------------------------------------------------------------------
+  O           1    8.0000    82    62      [14s9p4d3f|6s5p4d3f]                               
+  H           2    1.0000    35    32      [8s4p3d|5s4p3d]                                    
+  ----------------------------------------------------------------------
+  total:      3   10.0000   152   126
+  ----------------------------------------------------------------------
+  Spherical harmonic basis used.
+
+  Threshold for neglecting AO integrals:  1.00D-12
+
+
+  Cartesian Coordinates (a.u.)
+  ----------------------------
+
+  Total number of coordinates:    9
+  O       :     1  x   0.0000000026    2  y  -0.1866388050    3  z   0.0000003403
+  H       :     4  x   1.4413939900    5  y   0.8923491780    6  z   0.0000198557
+  H       :     7  x  -1.4413939100    8  y   0.8923491160    9  z   0.0000000139
+
+
+   Interatomic separations (in Angstrom):
+   --------------------------------------
+
+            O           H           H     
+            ------      ------      ------
+ O     :    0.000000
+ H     :    0.952788    0.000000
+ H     :    0.952788    1.525506    0.000000
+
+
+  Max    interatomic separation is    1.5255 Angstrom (    2.8828 Bohr)
+  between atoms    3 and    2, "H     " and "H     ".
+
+  Min HX interatomic separation is    0.9528 Angstrom (    1.8005 Bohr)
+
+
+  Bond distances (Angstrom):
+  --------------------------
+
+                  atom 1     atom 2       distance
+                  ------     ------       --------
+  bond distance:  H          O            0.952788
+  bond distance:  H          O            0.952788
+
+
+  Bond angles (degrees):
+  ----------------------
+
+                  atom 1     atom 2     atom 3         angle
+                  ------     ------     ------         -----
+  bond angle:     H          O          H            106.365
+
+
+
+
+ Principal moments of inertia (u*A**2) and principal axes
+ --------------------------------------------------------
+
+   IA       0.583586          1.000000    0.000000    0.000007
+   IB       1.172689         -0.000000    1.000000    0.000009
+   IC       1.756275         -0.000007   -0.000009    1.000000
+
+
+ Rotational constants
+ --------------------
+
+ The molecule is planar.
+
+               A                   B                   C
+
+         865988.2872         430957.4756         287756.1552 MHz
+           28.886260           14.375194            9.598512 cm-1
+
+
+@  Nuclear repulsion energy :    9.233264009559 Hartree
+
+
+                     .---------------------------------------.
+                     | Starting in Integral Section (HERMIT) |
+                     `---------------------------------------'
+
+
+
+    *************************************************************************
+    ****************** Output from HERMIT input processing ******************
+    *************************************************************************
+
+
+
+     ************************************************************************
+     ************************** Output from HERINT **************************
+     ************************************************************************
+
+ >>>  Time used in GABGEN     is   0.13 seconds
+ >>>> Total CPU  time used in HERMIT:   0.46 seconds
+ >>>> Total wall time used in HERMIT:   0.58 seconds
+
+
+                        .----------------------------------.
+                        | End of Integral Section (HERMIT) |
+                        `----------------------------------'
+
+
+
+                   .--------------------------------------------.
+                   | Starting in Wave Function Section (SIRIUS) |
+                   `--------------------------------------------'
+
+
+ *** Output from Huckel module :
+
+     Using EWMO model:          T
+     Using EHT  model:          F
+     Number of Huckel orbitals each symmetry:    7
+
+ EWMO - Energy Weighted Maximum Overlap - is a Huckel type method,
+        which normally is better than Extended Huckel Theory.
+ Reference: Linderberg and Ohrn, Propagators in Quantum Chemistry (Wiley, 1973)
+
+ Huckel EWMO eigenvalues for symmetry :  1
+          -20.685040      -1.613179      -0.782234      -0.685388      -0.616200
+           -0.231489      -0.166371
+
+ **********************************************************************
+ *SIRIUS* a direct, restricted step, second order MCSCF program       *
+ **********************************************************************
+
+ 
+     Date and time (Linux)  : Wed Jun  4 11:29:24 2014
+     Host name              : c41-6.local                             
+
+ Title lines from ".mol" input file:
+     water                                                                   
+                                                                             
+
+ Print level on unit LUPRI =   2 is   0
+ Print level on unit LUW4  =   2 is   5
+
+@    Restricted, closed shell Hartree-Fock calculation.
+ Fock matrices are calculated directly and in parallel without use of integrals on disk.
+
+ Initial molecular orbitals are obtained according to
+ ".MOSTART EWMO  " input option
+
+     Wave function specification
+     ============================
+     For the wave function of type :      >>> HF       <<<
+     Number of closed shell electrons          10
+     Number of electrons in active shells       0
+     Total charge of the molecule               0
+
+     Spin multiplicity and 2 M_S                1         0
+     Total number of symmetries                 1
+     Reference state symmetry                   1
+
+     Orbital specifications
+     ======================
+     Abelian symmetry species          All |    1
+                                       --- |  ---
+     Occupied SCF orbitals               5 |    5
+     Secondary orbitals                121 |  121
+     Total number of orbitals          126 |  126
+     Number of basis functions         126 |  126
+
+     Optimization information
+     ========================
+@    Number of configurations                 1
+@    Number of orbital rotations            605
+     ------------------------------------------
+@    Total number of variables              606
+
+     Maximum number of Fock   iterations      0
+     Maximum number of DIIS   iterations     60
+     Maximum number of QC-SCF iterations     60
+     Threshold for SCF convergence     1.00D-08
+
+
+ >>>>> DIIS optimization of Hartree-Fock <<<<<
+
+ C1-DIIS algorithm; max error vectors =   10
+
+ Iter      Total energy        Error norm    Delta(E)  DIIS dim.
+ -----------------------------------------------------------------------------
+   1  Screening settings (-IFTHRS, DIFDEN)   -8    T
+   1    -75.8793140509        1.91536D+00   -7.59D+01    1
+      Virial theorem: -V/T =      1.997465
+@      MULPOP O      -0.47; H       0.24; H       0.24; 
+ -----------------------------------------------------------------------------
+   2  Screening settings (-IFTHRS, DIFDEN)   -8    T
+   2    -76.0595403913        4.19545D-01   -1.80D-01    2
+      Virial theorem: -V/T =      2.002770
+@      MULPOP O      -0.82; H       0.41; H       0.41; 
+ -----------------------------------------------------------------------------
+   3  Screening settings (-IFTHRS, DIFDEN)   -8    T
+   3    -76.0663932524        9.66038D-02   -6.85D-03    3
+      Virial theorem: -V/T =      1.999772
+@      MULPOP O      -0.85; H       0.42; H       0.42; 
+ -----------------------------------------------------------------------------
+   4  Screening settings (-IFTHRS, DIFDEN)  -10    F
+   4    -76.0672098866        4.87980D-02   -8.17D-04    4
+      Virial theorem: -V/T =      2.001520
+@      MULPOP O      -0.84; H       0.42; H       0.42; 
+ -----------------------------------------------------------------------------
+   5  Screening settings (-IFTHRS, DIFDEN)  -10    T
+   5    -76.0673262845        1.05924D-02   -1.16D-04    5
+      Virial theorem: -V/T =      2.000614
+@      MULPOP O      -0.84; H       0.42; H       0.42; 
+ -----------------------------------------------------------------------------
+   6  Screening settings (-IFTHRS, DIFDEN)  -10    T
+   6    -76.0673435978        2.31124D-03   -1.73D-05    6
+      Virial theorem: -V/T =      2.000707
+@      MULPOP O      -0.84; H       0.42; H       0.42; 
+ -----------------------------------------------------------------------------
+   7  Screening settings (-IFTHRS, DIFDEN)  -10    T
+   7    -76.0673446120        4.12659D-04   -1.01D-06    7
+      Virial theorem: -V/T =      2.000725
+@      MULPOP O      -0.84; H       0.42; H       0.42; 
+ -----------------------------------------------------------------------------
+   8  Screening settings (-IFTHRS, DIFDEN)  -12    F
+   8    -76.0673446409        5.95571D-05   -2.89D-08    8
+      Virial theorem: -V/T =      2.000727
+@      MULPOP O      -0.84; H       0.42; H       0.42; 
+ -----------------------------------------------------------------------------
+   9  Screening settings (-IFTHRS, DIFDEN)  -15    F
+   9    -76.0673446414        1.07714D-05   -4.87D-10    9
+      Virial theorem: -V/T =      2.000728
+@      MULPOP O      -0.84; H       0.42; H       0.42; 
+ -----------------------------------------------------------------------------
+  10  Screening settings (-IFTHRS, DIFDEN)  -15    T
+  10    -76.0673446414        1.68007D-06   -1.45D-11   10
+      Virial theorem: -V/T =      2.000728
+@      MULPOP O      -0.84; H       0.42; H       0.42; 
+ -----------------------------------------------------------------------------
+  11  Screening settings (-IFTHRS, DIFDEN)  -15    T
+  11    -76.0673446414        2.50299D-07   -2.70D-13   10
+      Virial theorem: -V/T =      2.000728
+@      MULPOP O      -0.84; H       0.42; H       0.42; 
+ -----------------------------------------------------------------------------
+  12  Screening settings (-IFTHRS, DIFDEN)  -15    T
+  12    -76.0673446414        3.26287D-08   -2.42D-13   10
+      Virial theorem: -V/T =      2.000728
+@      MULPOP O      -0.84; H       0.42; H       0.42; 
+ -----------------------------------------------------------------------------
+  13  Screening settings (-IFTHRS, DIFDEN)  -15    T
+  13    -76.0673446414        6.58742D-09    5.68D-14   10
+
+ *** DIIS converged in  13 iterations !
+@    Converged SCF energy, gradient:    -76.067344641368    6.59D-09
+   - total time used in SIRFCK :              0.00 seconds
+
+
+ *** SCF orbital energy analysis ***
+
+ Only the five lowest virtual orbital energies printed in each symmetry.
+
+ Number of electrons :   10
+ Orbital occupations :    5
+
+ Sym       Hartree-Fock orbital energies
+
+  1    -20.56254047    -1.35359700    -0.72378060    -0.58213079    -0.51028790
+         0.03258878     0.05274713     0.13724706     0.14234320     0.17780457
+
+    E(LUMO) :     0.03258878 au (symmetry 1)
+  - E(HOMO) :    -0.51028790 au (symmetry 1)
+  ------------------------------------------
+    gap     :     0.54287668 au
+
+ >>> Writing SIRIFC interface file <<<
+
+ >>>> CPU and wall time for SCF :       5.588       5.625
+
+
+                       .-----------------------------------.
+                       | >>> Final results from SIRIUS <<< |
+                       `-----------------------------------'
+
+
+@    Spin multiplicity:           1
+@    Spatial symmetry:            1
+@    Total charge of molecule:    0
+
+@    Final HF energy:             -76.067344641368                 
+@    Nuclear repulsion:             9.233264009559
+@    Electronic energy:           -85.300608650927
+
+@    Final gradient norm:           0.000000006587
+
+ 
+     Date and time (Linux)  : Wed Jun  4 11:29:29 2014
+     Host name              : c41-6.local                             
+
+ (Only coefficients >0.0100 are printed.)
+
+ Molecular orbitals for symmetry species  1
+ ------------------------------------------
+
+    Orbital         1        2        3        4        5        6        7
+   1 O   :1s    -1.0008   0.0049  -0.0000   0.0028   0.0000  -0.0068  -0.0000
+   2 O   :1s    -0.0053  -0.9197  -0.0000   0.2867   0.0000  -0.3777   0.0000
+   3 O   :1s    -0.0016  -0.0680   0.0000  -0.0216   0.0000  -0.7650   0.0000
+   4 O   :1s     0.0008  -0.0105   0.0000  -0.0086  -0.0000  -0.4769   0.0000
+   5 O   :1s     0.0004   0.0018   0.0000  -0.0007  -0.0000  -0.0558   0.0000
+   7 O   :2px    0.0000   0.0000  -0.6997  -0.0000   0.0000  -0.0000  -0.2145
+   8 O   :2py   -0.0026  -0.1215   0.0000  -0.8448   0.0000   0.0053  -0.0000
+   9 O   :2pz   -0.0000  -0.0000  -0.0000  -0.0000  -0.9583   0.0000  -0.0000
+  10 O   :2px    0.0000   0.0000   0.0461   0.0000   0.0000  -0.0000  -0.9340
+  11 O   :2py   -0.0001   0.0009  -0.0000  -0.0111   0.0000   0.0245  -0.0000
+  12 O   :2pz   -0.0000   0.0000   0.0000  -0.0000  -0.0181   0.0000  -0.0000
+  13 O   :2px   -0.0000  -0.0000   0.0121   0.0000  -0.0000  -0.0000  -0.8001
+  14 O   :2py    0.0002   0.0010  -0.0000   0.0244  -0.0000  -0.0526  -0.0000
+  15 O   :2pz    0.0000   0.0000   0.0000   0.0000   0.0261  -0.0000  -0.0000
+  16 O   :2px   -0.0000  -0.0000  -0.0010  -0.0000  -0.0000  -0.0000  -0.2581
+  17 O   :2py    0.0007  -0.0028  -0.0000   0.0072  -0.0000  -0.0124  -0.0000
+  19 O   :2px   -0.0000  -0.0000  -0.0016  -0.0000  -0.0000   0.0000  -0.0662
+  22 O   :3d2-   0.0000   0.0000  -0.0430   0.0000   0.0000  -0.0000   0.0590
+  23 O   :3d1-  -0.0000  -0.0000  -0.0000  -0.0000  -0.0269   0.0000   0.0000
+  24 O   :3d0    0.0004   0.0129  -0.0000   0.0260  -0.0000  -0.0266   0.0000
+  26 O   :3d2+  -0.0000  -0.0045   0.0000   0.0168  -0.0000   0.0098  -0.0000
+  27 O   :3d2-   0.0000   0.0000  -0.0016   0.0000   0.0000  -0.0000  -0.0749
+  29 O   :3d0    0.0002  -0.0001  -0.0000   0.0069  -0.0000  -0.0186   0.0000
+  32 O   :3d2-  -0.0000  -0.0000   0.0014   0.0000  -0.0000  -0.0000  -0.0891
+  36 O   :3d2+  -0.0000   0.0000   0.0000  -0.0024   0.0000  -0.0115   0.0000
+  37 O   :3d2-  -0.0000  -0.0000   0.0004  -0.0000  -0.0000  -0.0000  -0.0253
+  46 O   :4f1+  -0.0000  -0.0000   0.0045   0.0000  -0.0000   0.0000  -0.0178
+  63 H   :1s     0.0026  -0.0866  -0.2904  -0.1323  -0.0000   0.3679   1.9977
+  64 H   :1s    -0.0000   0.0669   0.0670   0.0524  -0.0000   0.7872   3.4980
+  65 H   :1s    -0.0004  -0.0376  -0.0330  -0.0284   0.0000   0.2725   1.0461
+  68 H   :2px   -0.0011   0.0032  -0.0026  -0.0061   0.0000   0.0823   0.2382
+  69 H   :2py   -0.0007  -0.0014   0.0139  -0.0357   0.0000   0.0396   0.1164
+  70 H   :2pz   -0.0000   0.0000   0.0000  -0.0000  -0.0381   0.0000   0.0000
+  71 H   :2px   -0.0001  -0.0135  -0.0112  -0.0140   0.0000  -0.0151  -0.0190
+  72 H   :2py   -0.0002  -0.0102  -0.0094  -0.0118   0.0000  -0.0358  -0.1061
+  74 H   :2px    0.0002   0.0029   0.0044   0.0046  -0.0000  -0.0360  -0.0859
+  75 H   :2py    0.0001   0.0022   0.0026   0.0036  -0.0000  -0.0325  -0.1003
+  77 H   :2px   -0.0000  -0.0003   0.0007   0.0007  -0.0000  -0.0122  -0.0244
+  78 H   :2py    0.0000  -0.0002   0.0000   0.0013  -0.0000  -0.0096  -0.0281
+  80 H   :3d2-   0.0001   0.0005  -0.0002   0.0058  -0.0000  -0.0195  -0.0572
+  82 H   :3d0   -0.0001  -0.0000  -0.0007  -0.0020   0.0000   0.0110   0.0453
+  84 H   :3d2+   0.0002  -0.0005   0.0033  -0.0018  -0.0000  -0.0035  -0.0110
+  85 H   :3d2-   0.0001   0.0023   0.0026   0.0038   0.0000  -0.0083  -0.0349
+  87 H   :3d0   -0.0001  -0.0014  -0.0019  -0.0019  -0.0000   0.0046   0.0337
+  90 H   :3d2-   0.0000  -0.0001  -0.0002   0.0007  -0.0000  -0.0019  -0.0104
+  92 H   :3d0    0.0000   0.0000  -0.0001  -0.0002   0.0000   0.0011   0.0133
+  95 H   :1s     0.0026  -0.0866   0.2904  -0.1323   0.0000   0.3679  -1.9977
+  96 H   :1s    -0.0000   0.0669  -0.0670   0.0524   0.0000   0.7872  -3.4980
+  97 H   :1s    -0.0004  -0.0376   0.0330  -0.0284  -0.0000   0.2725  -1.0461
+ 100 H   :2px    0.0011  -0.0032  -0.0026   0.0061   0.0000  -0.0823   0.2382
+ 101 H   :2py   -0.0007  -0.0014  -0.0139  -0.0357   0.0000   0.0396  -0.1164
+ 102 H   :2pz    0.0000  -0.0000  -0.0000  -0.0000  -0.0381  -0.0000   0.0000
+ 103 H   :2px    0.0001   0.0135  -0.0112   0.0140   0.0000   0.0151  -0.0190
+ 104 H   :2py   -0.0002  -0.0102   0.0094  -0.0118   0.0000  -0.0358   0.1061
+ 106 H   :2px   -0.0002  -0.0029   0.0044  -0.0046  -0.0000   0.0360  -0.0859
+ 107 H   :2py    0.0001   0.0022  -0.0026   0.0036   0.0000  -0.0325   0.1003
+ 109 H   :2px    0.0000   0.0003   0.0007  -0.0007  -0.0000   0.0122  -0.0244
+ 110 H   :2py    0.0000  -0.0002  -0.0000   0.0013  -0.0000  -0.0096   0.0281
+ 112 H   :3d2-  -0.0001  -0.0005  -0.0002  -0.0058   0.0000   0.0195  -0.0572
+ 114 H   :3d0   -0.0001  -0.0000   0.0007  -0.0020  -0.0000   0.0110  -0.0453
+ 116 H   :3d2+   0.0002  -0.0005  -0.0033  -0.0018   0.0000  -0.0035   0.0110
+ 117 H   :3d2-  -0.0001  -0.0023   0.0026  -0.0038  -0.0000   0.0083  -0.0349
+ 119 H   :3d0   -0.0001  -0.0014   0.0019  -0.0019  -0.0000   0.0046  -0.0337
+ 122 H   :3d2-  -0.0000   0.0001  -0.0002  -0.0007   0.0000   0.0019  -0.0104
+ 124 H   :3d0    0.0000   0.0000   0.0001  -0.0002  -0.0000   0.0011  -0.0133
+
+
+
+ >>>> Total CPU  time used in SIRIUS :      5.86 seconds
+ >>>> Total wall time used in SIRIUS :      5.91 seconds
+
+ 
+     Date and time (Linux)  : Wed Jun  4 11:29:30 2014
+     Host name              : c41-6.local                             
+
+
+                     .---------------------------------------.
+                     | End of Wave Function Section (SIRIUS) |
+                     `---------------------------------------'
+
+
+
+ Changes of defaults for WALK:
+ -----------------------------
+
+
+ Walk type: Numerical differentiation                 
+ Vibrational averaging of  molecular properties at an effective geometry
+
+ Vibrational corrections will be calculated for the temperatures (in K):
+     300.00
+
+Maximum number of iterations reset in numerical differentiation to    19
+
+
+
+
+        *****************************************************************
+        ******** Output from **START input processing for ABACUS ********
+        *****************************************************************
+
+
+
+ The following molecular properties will be calculated in this run:
+ ------------------------------------------------------------------
+
+ Default print level:        0
+
+      The molecular gradient
+      The molecular Hessian
+      Geometry optimization
+      Nuclear magnetic shieldings
+      Direct calculation - no two-electron integrals written or read.
+      Two-electron integrals will be calculated in parallel
+      Natural orbital connection is used
+      for perturbation dependent basis sets.
+
+
+ Changes of defaults for LINRES:
+ -------------------------------
+
+ Singlet linear response module for properties
+ as VCD, MAGSUS, SPIN-SPIN, SHIELD, SPINRO, MOLGFA
+ Print level in LINRES        :    0
+ Threshold in LINRES          : 1.00D-05
+ Maximum iterations in LINRES :   60
+
+
+ Changes of defaults for RESPON in ABACUS:
+ -----------------------------------------
+
+ Threshold in RESPON          : 1.00E-05
+
+ INFO: Changed THRP threshold used in integral transformation from  1.00D-15 to integral evaluation threshold  1.00D-12
+
+ Center of mass dipole origin  :    0.000000   -0.065884    0.000001
+
+ Center of mass gauge origin   :    0.000000   -0.065884    0.000001
+
+
+ Changes of defaults for WALK:
+ -----------------------------
+
+
+ Walk type: Numerical differentiation                 
+ Vibrational averaging of  molecular properties at an effective geometry
+
+ Vibrational corrections will be calculated for the temperatures (in K):
+     300.00
+
+Maximum number of iterations reset in numerical differentiation to    19
+
+
+
+
+                 .------------------------------------------------.
+                 | Starting in Static Property Section (ABACUS) - |
+                 `------------------------------------------------'
+
+
+ 
+     Date and time (Linux)  : Wed Jun  4 11:29:30 2014
+     Host name              : c41-6.local                             
+
+
+            +---------------------------------------------------------+
+            ! Gradient elements calculated directly and from symmetry !
+            +---------------------------------------------------------+
+
+
+
+        Coordinate    Direct calc.     Tra.-rot. sym.   Difference
+        ----------------------------------------------------------
+
+        O    x       -0.0000003738     0.0000000831    -0.0000004569
+        O    y       -4.5053664750    -4.5053664750    -0.0000000000
+        O    z       -0.0000400477    -0.0000400623     0.0000000146
+        H    x        2.5997261364     2.5997256796     0.0000004569
+        H    z        0.0000358637     0.0000379247    -0.0000020610
+        H    z        0.0000041841     0.0000021376     0.0000020465
+
+
+
+ >>> WARNING from TRAROT:
+
+ Largest deviation from tra-rot symmetry is in gradient element  6:  2.06E-06
+
+
+   ***************************************************************************
+   ************************ FINAL RESULTS from ABACUS ************************
+   ***************************************************************************
+
+
+ 
+     Date and time (Linux)  : Wed Jun  4 11:30:00 2014
+     Host name              : c41-6.local                             
+
+ WARNING: warnings have been issued, please check the output above !
+
+
+                             Molecular geometry (au)
+                             -----------------------
+
+ O          0.0000000026           -0.1866388050            0.0000003403
+ H          1.4413939900            0.8923491780            0.0000198557
+ H         -1.4413939100            0.8923491160            0.0000000139
+
+
+
+
+
+                        Molecular wave function and energy
+                        ----------------------------------
+
+     Spin multiplicity  1     State number       1     Total charge       0
+
+     Total energy        -76.0673446414 au (Hartrees)
+                         -2069.89774087 eV
+                           -199714.7826 kJ/mol
+
+
+                             Relativistic corrections
+                             ------------------------
+
+     Darwin correction:                          0.2046056823 au
+     Mass-velocity correction:                  -0.2563957373 au
+
+     Total relativistic correction:             -0.0517900550 au (0.0681%)
+     Non-relativistic + relativistic energy:   -76.1191346963 au
+
+
+
+
+                             Molecular gradient (au)
+                             -----------------------
+
+ O         -0.0000003738           -4.5053664750           -0.0000400477
+ H          2.5997261364            2.2526832039            0.0000358637
+ H         -2.5997257626            2.2526832711            0.0000041841
+
+
+
+
+
+                              Molecular Hessian (au)
+                              ----------------------
+
+           O    x      O    y      O    z      H    x      H    y      H    z
+
+ O    x    4.296641
+ O    y    0.000000    3.688904
+ O    z    0.000001   -0.000004    4.175548
+
+ H    x   -4.318649    1.745572   -0.000005    5.418343
+ H    y   -0.045323   -1.844452   -0.000000   -0.037800    1.841000
+ H    z   -0.000016    0.000014   -2.087774    0.000024   -0.000000    1.945697
+
+ H    x    0.022008   -1.745572   -0.000001   -1.099694    0.083124   -0.000009
+ H    y    0.045323   -1.844452    0.000004   -1.707772    0.003452   -0.000014
+ H    z    0.000015   -0.000010   -2.087774   -0.000024    0.000000    0.142077
+
+
+           H    x      H    y      H    z
+
+ H    x    1.077685
+ H    y    1.662449    1.840999
+ H    z    0.000010    0.000010    1.945697
+
+
+
+
+
+                                  Dipole moment
+                                  -------------
+
+                 au               Debye          C m (/(10**-30)
+              0.765463           1.945614           6.489868
+
+
+                             Dipole moment components
+                             ------------------------
+
+                 au               Debye          C m (/(10**-30)
+
+      x      0.00000002         0.00000005         0.00000015
+      y      0.76546330         1.94561352         6.48986815
+      z      0.00000681         0.00001730         0.00005771
+
+
+   Units:   1 a.u. =   2.54175 Debye 
+            1 a.u. =   8.47835 (10**-30) C m (SI)
+
+
+
+
+  ******************************************************************************
+  ************************ ABACUS - CHEMICAL SHIELDINGS ************************
+  ******************************************************************************
+
+
+
+                 Shielding tensors in symmetry coordinates (ppm)
+                 -----------------------------------------------
+
+                       Bx             By             Bz
+
+        O    x   368.50448521     0.00001314     0.00043485
+        O    y     0.00001176   317.03349460     0.00010442
+        O    z     0.00043428     0.00010415   305.34417947
+
+        H    x    39.03730873     9.80999162     0.00019757
+        H    y     8.45260225    29.86795860     0.00011918
+        H    z     0.00018549     0.00012852    23.00798383
+
+        H    x    39.03731135    -9.80999242     0.00002308
+        H    y    -8.45260289    29.86795976     0.00000281
+        H    z     0.00003517    -0.00000652    23.00798522
+
+
+
+
+
+  Chemical shielding for O     :
+  ==============================
+
+
+  Shielding constant:    330.2941 ppm
+  Anisotropy:             57.3156 ppm
+  Asymmetry:               0.3059    
+
+  S parameter:            58.2028 ppm
+  A parameter:             0.0000 ppm
+
+
+  Total shielding tensor (ppm):
+  -----------------------------
+
+ String on input: "O       "
+ String on input: "O       "
+                    Bx             By             Bz
+
+  O      x   368.50448521     0.00001314     0.00043485
+  O      y     0.00001176   317.03349460     0.00010442
+  O      z     0.00043428     0.00010415   305.34417947
+
+
+  Diamagnetic and paramagnetic contributions (ppm):
+  -------------------------------------------------
+
+                 Bx         By         Bz            Bx         By         Bz
+
+  O      x   416.5113     0.0000     0.0000      -48.0069     0.0000     0.0004
+  O      y     0.0000   416.5943     0.0000        0.0000   -99.5608     0.0001
+  O      z     0.0000     0.0000   416.4909        0.0004     0.0001  -111.1467
+
+  Diamagnetic contribution:    416.532172         Paramagnetic:     -86.238119
+
+
+  Antisymmetric and traceless symmetric parts (ppm):
+  --------------------------------------------------
+
+                 Bx         By         Bz            Bx         By         Bz
+
+  O      x     0.0000     0.0000     0.0000       38.2104     0.0000     0.0004
+  O      y    -0.0000     0.0000     0.0000        0.0000   -13.2606     0.0001
+  O      z    -0.0000    -0.0000     0.0000        0.0004     0.0001   -24.9499
+
+
+  Principal values and axes:
+  --------------------------
+
+  O         305.344179  =  330.29  -  24.95:    -0.000007 -0.000009  1.000000
+  O         317.033495  =  330.29  -  13.26:    -0.000000  1.000000  0.000009
+  O         368.504485  =  330.29  +  38.21:     1.000000  0.000000  0.000007
+
+
+  Chemical shielding for H     :
+  ==============================
+
+
+  Shielding constant:     30.6378 ppm
+  Anisotropy:             21.0488 ppm
+  Asymmetry:               0.0874    
+
+  S parameter:            21.0756 ppm
+  A parameter:             0.6787 ppm
+
+
+  Total shielding tensor (ppm):
+  -----------------------------
+
+ String on input: "H       "
+ String on input: "H       "
+                    Bx             By             Bz
+
+  H      x    39.03730873     9.80999162     0.00019757
+  H      y     8.45260225    29.86795860     0.00011918
+  H      z     0.00018549     0.00012852    23.00798383
+
+
+  Diamagnetic and paramagnetic contributions (ppm):
+  -------------------------------------------------
+
+                 Bx         By         Bz            Bx         By         Bz
+
+  H      x    36.8313    17.7862     0.0003        2.2060    -7.9762    -0.0001
+  H      y    14.8789    22.2937     0.0002       -6.4263     7.5742    -0.0001
+  H      z     0.0003     0.0002    12.5811       -0.0001    -0.0001    10.4269
+
+  Diamagnetic contribution:     23.902041         Paramagnetic:       6.735709
+
+
+  Antisymmetric and traceless symmetric parts (ppm):
+  --------------------------------------------------
+
+                 Bx         By         Bz            Bx         By         Bz
+
+  H      x     0.0000     0.6787     0.0000        8.3996     9.1313     0.0002
+  H      y    -0.6787     0.0000    -0.0000        9.1313    -0.7698     0.0001
+  H      z    -0.0000     0.0000     0.0000        0.0002     0.0001    -7.6298
+
+
+  Principal values and axes:
+  --------------------------
+
+  H          23.007984  =   30.64  -   7.63:    -0.000007 -0.000009  1.000000
+  H          24.235010  =   30.64  -   6.40:    -0.525023  0.851088  0.000004
+  H          44.670257  =   30.64  +  14.03:     0.851088  0.525023  0.000011
+
+
+  Chemical shielding for H     :
+  ==============================
+
+
+  Shielding constant:     30.6378 ppm
+  Anisotropy:             21.0488 ppm
+  Asymmetry:               0.0874    
+
+  S parameter:            21.0756 ppm
+  A parameter:             0.6787 ppm
+
+
+  Total shielding tensor (ppm):
+  -----------------------------
+
+ String on input: "H       "
+ String on input: "H       "
+                    Bx             By             Bz
+
+  H      x    39.03731135    -9.80999242     0.00002308
+  H      y    -8.45260289    29.86795976     0.00000281
+  H      z     0.00003517    -0.00000652    23.00798522
+
+
+  Diamagnetic and paramagnetic contributions (ppm):
+  -------------------------------------------------
+
+                 Bx         By         Bz            Bx         By         Bz
+
+  H      x    36.8313   -17.7862     0.0000        2.2060     7.9762     0.0000
+  H      y   -14.8789    22.2937    -0.0000        6.4263     7.5742     0.0000
+  H      z     0.0000    -0.0000    12.5811        0.0000     0.0000    10.4269
+
+  Diamagnetic contribution:     23.902044         Paramagnetic:       6.735708
+
+
+  Antisymmetric and traceless symmetric parts (ppm):
+  --------------------------------------------------
+
+                 Bx         By         Bz            Bx         By         Bz
+
+  H      x     0.0000    -0.6787    -0.0000        8.3996    -9.1313     0.0000
+  H      y     0.6787     0.0000     0.0000       -9.1313    -0.7698    -0.0000
+  H      z     0.0000    -0.0000     0.0000        0.0000    -0.0000    -7.6298
+
+
+  Principal values and axes:
+  --------------------------
+
+  H          23.007985  =   30.64  -   7.63:    -0.000007 -0.000009  1.000000
+  H          24.235011  =   30.64  -   6.40:     0.525023  0.851088  0.000011
+  H          44.670260  =   30.64  +  14.03:     0.851088 -0.525023  0.000001
+
+
+                         +--------------------------------+
+                         ! Summary of chemical shieldings !
+                         +--------------------------------+
+
+@1  Definitions from J. Mason, Solid state Nuc. Magn. Res. 2 (1993), 285
+
+@1 London orbitals (GIAOs) has been used.
+
+@1 atom   shielding       dia      para     skew      span     (aniso     asym)
+@1 ----------------------------------------------------------------------------
+@1 O       330.2941  416.5322  -86.2381    0.6299   63.1603   57.3156    0.3059
+@1 H        30.6378   23.9020    6.7357    0.8867   21.6623   21.0488    0.0874
+@1 H        30.6378   23.9020    6.7357    0.8867   21.6623   21.0488    0.0874
+
+
+
+                         +--------------------------------+
+                         ! Summary of chemical shieldings !
+                         +--------------------------------+
+
+@2  Definitions from Smith, Palke, and Grieg, Concepts in Mag. Res. 4 (1992), 107
+
+@2 London orbitals (GIAOs) has been used.
+
+@2 atom   shielding       dia      para     aniso      asym        S        A
+@2 ----------------------------------------------------------------------------
+@2 O       330.2941  416.5322  -86.2381   57.3156    0.3059   58.2028    0.0000
+@2 H        30.6378   23.9020    6.7357   21.0488    0.0874   21.0756    0.6787
+@2 H        30.6378   23.9020    6.7357   21.0488    0.0874   21.0756    0.6787
+
+
+
+   Interatomic separations (in Angstrom):
+   --------------------------------------
+
+            O           H           H     
+            ------      ------      ------
+ O     :    0.000000
+ H     :    0.952788    0.000000
+ H     :    0.952788    1.525506    0.000000
+
+
+  Max    interatomic separation is    1.5255 Angstrom (    2.8828 Bohr)
+  between atoms    3 and    2, "H     " and "H     ".
+
+  Min HX interatomic separation is    0.9528 Angstrom (    1.8005 Bohr)
+
+
+  Bond distances (Angstrom):
+  --------------------------
+
+                  atom 1     atom 2       distance
+                  ------     ------       --------
+  bond distance:  H          O            0.952788
+  bond distance:  H          O            0.952788
+
+
+  Bond angles (degrees):
+  ----------------------
+
+                  atom 1     atom 2     atom 3         angle
+                  ------     ------     ------         -----
+  bond angle:     H          O          H            106.365
+
+
+
+
+                                 Isotopic Masses
+                                 ---------------
+
+                           O          15.994915
+                           H           1.007825
+                           H           1.007825
+
+                       Total mass:    18.010565 amu
+                       Natural abundance:  99.730 %
+
+ Center-of-mass coordinates (a.u.):    0.000000   -0.065884    0.000001
+  Norm of projected gradient     6.630584
+
+ Largest deviation from orthonormality of OMOs:0.423572E-11
+ - found for element  126  31
+
+
+       ********************************************************************
+       ****************** ABACUS - VIBRATIONAL AVERAGING ******************
+       ********************************************************************
+
+ Energy at effective geometry:   -76.0673446414
+
+
+  Analytical gradient at effective geometry
+  -----------------------------------------
+
+
+               Column   1     Column   2     Column   3     Column   4     Column   5
+       1      -0.00000037    -4.50536647    -0.00004005     2.59972614     2.25268320
+
+               Column   6     Column   7     Column   8     Column   9
+       1       0.00003586    -2.59972576     2.25268327     0.00000418
+    ==== End of matrix output ====
+
+
+  Analytical Hessian at effective geometry
+  ----------------------------------------
+
+
+               Column   1     Column   2     Column   3     Column   4     Column   5
+       1       3.24516659     0.00000029     0.00002234    -3.79291205    -1.21462151
+       2       0.00000029     3.68890375     0.00003280     1.74557215    -1.84445190
+       3       0.00002234     0.00003280     0.00000000    -0.00001058    -0.00002476
+       4      -3.79291205     1.74557215    -0.00001058     5.15547417     0.54684895
+       5      -1.21462151    -1.84445190    -0.00002476     0.54684895     1.37684209
+       6      -0.00003691    -0.00000439    -0.00000000     0.00004035     0.00001601
+       7       0.54774546    -1.74557244    -0.00001175    -1.36256212     0.66777256
+       8       1.21462122    -1.84445185    -0.00000804    -2.29242110     0.46760981
+       9       0.00001457    -0.00002842    -0.00000000    -0.00002976     0.00000875
+
+               Column   6     Column   7     Column   8     Column   9
+       1      -0.00003691     0.54774546     1.21462122     0.00001457
+       2      -0.00000439    -1.74557244    -1.84445185    -0.00002842
+       3      -0.00000000    -0.00001175    -0.00000804    -0.00000000
+       4       0.00004035    -1.36256212    -2.29242110    -0.00002976
+       5       0.00001601     0.66777256     0.46760981     0.00000875
+       6       0.00000000    -0.00000344    -0.00001162    -0.00000000
+       7      -0.00000344     0.81481666     1.07779988     0.00001519
+       8      -0.00001162     1.07779988     1.37684204     0.00001966
+       9      -0.00000000     0.00001519     0.00001966     0.00000000
+    ==== End of matrix output ====
+
+
+  Dipole moment at effective geometry
+  -----------------------------------
+
+
+               Column   1     Column   2     Column   3
+       1       0.00000002     0.76546330     0.00000681
+    ==== End of matrix output ====
+
+
+  Chemical shielding tensors at effective geometry
+  ------------------------------------------------
+
+                  Bx             By             Bz
+
+  O      x   368.50448521     0.00001314     0.00043485
+  O      y     0.00001176   317.03349460     0.00010442
+  O      z     0.00043428     0.00010415   305.34417947
+                  Bx             By             Bz
+
+  H      x    39.03730873     9.80999162     0.00019757
+  H      y     8.45260225    29.86795860     0.00011918
+  H      z     0.00018549     0.00012852    23.00798383
+                  Bx             By             Bz
+
+  H      x    39.03731135    -9.80999242     0.00002308
+  H      y    -8.45260289    29.86795976     0.00000281
+  H      z     0.00003517    -0.00000652    23.00798522
+
+
+ CPU time statistics for ABACUS
+ ------------------------------
+
+ MAGINT     00:00:02       6 %
+ TWOTEX     00:00:04      15 %
+ RHSIDE     00:00:07      26 %
+ RESPON     00:00:04      13 %
+ LINRES     00:00:09      35 %
+ REST       00:00:01       4 %
+
+ TOTAL      00:00:26     100 %
+
+
+ >>>> Total CPU  time used in ABACUS:  26.24 seconds
+ >>>> Total wall time used in ABACUS:  30.95 seconds
+
+
+                   .-------------------------------------------.
+                   | End of Static Property Section (ABACUS) - |
+                   `-------------------------------------------'
+
+
+@  Geometry walk step no.   0:  Molecular energy =    -76.067345   Molecular gradient =  6.630584
+
+
+     @@>>>>>>>>>> Geometry walk iteration number:    1 <<<<<<<<<<
+
+
+
+
+ **************************************************************************************
+ ****************** Output of molecule and basis set info suppressed ******************
+ **************************************************************************************
+
+
+
+                     .---------------------------------------.
+                     | Starting in Integral Section (HERMIT) |
+                     `---------------------------------------'
+
+ >>>  Time used in GABGEN     is   0.13 seconds
+ >>>> Total CPU  time used in HERMIT:   0.43 seconds
+ >>>> Total wall time used in HERMIT:   0.44 seconds
+
+
+                        .----------------------------------.
+                        | End of Integral Section (HERMIT) |
+                        `----------------------------------'
+
+
+
+                   .--------------------------------------------.
+                   | Starting in Wave Function Section (SIRIUS) |
+                   `--------------------------------------------'
+
+
+ **********************************************************************
+ *SIRIUS* a direct, restricted step, second order MCSCF program       *
+ **********************************************************************
+
+ (Wave function specification suppressed here, see output above for initial geometry.)
+
+
+ >>>>> DIIS optimization of Hartree-Fock <<<<<
+
+ C1-DIIS algorithm; max error vectors =   10
+
+ Iter      Total energy        Error norm    Delta(E)  DIIS dim.
+ -----------------------------------------------------------------------------
+   1  Screening settings (-IFTHRS, DIFDEN)  -15    T
+   1    -63.3748243073        5.07754D+01    1.27D+01    1
+      Virial theorem: -V/T =      1.696356
+@      MULPOP O     -12.40; H     -32.78; H      45.18; 
+ -----------------------------------------------------------------------------
+   2  Screening settings (-IFTHRS, DIFDEN)   -8    F
+   2    -75.9678990803        1.65262D+00   -1.26D+01    2
+      Virial theorem: -V/T =      1.980129
+@      MULPOP O      -5.17; H       0.43; H       4.74; 
+ -----------------------------------------------------------------------------
+   3  Screening settings (-IFTHRS, DIFDEN)   -8    T
+   3    -76.0343723722        9.15039D-01   -6.65D-02    3
+      Virial theorem: -V/T =      2.019062
+@      MULPOP O      -1.10; H       0.42; H       0.68; 
+ -----------------------------------------------------------------------------
+   4  Screening settings (-IFTHRS, DIFDEN)   -8    T
+   4    -76.0661132296        6.19450D-02   -3.17D-02    4
+      Virial theorem: -V/T =      2.000443
+@      MULPOP O      -1.00; H       0.45; H       0.55; 
+ -----------------------------------------------------------------------------
+   5  Screening settings (-IFTHRS, DIFDEN)  -10    F
+   5    -76.0663679253        1.62647D-02   -2.55D-04    5
+      Virial theorem: -V/T =      2.001344
+@      MULPOP O      -0.85; H       0.41; H       0.44; 
+ -----------------------------------------------------------------------------
+   6  Screening settings (-IFTHRS, DIFDEN)  -10    T
+   6    -76.0663951305        4.63004D-03   -2.72D-05    6
+      Virial theorem: -V/T =      2.001184
+@      MULPOP O      -0.84; H       0.40; H       0.43; 
+ -----------------------------------------------------------------------------
+   7  Screening settings (-IFTHRS, DIFDEN)  -10    T
+   7    -76.0663986606        6.96756D-04   -3.53D-06    7
+      Virial theorem: -V/T =      2.001175
+@      MULPOP O      -0.84; H       0.40; H       0.43; 
+ -----------------------------------------------------------------------------
+   8  Screening settings (-IFTHRS, DIFDEN)  -12    F
+   8    -76.0663987390        1.50703D-04   -7.85D-08    8
+      Virial theorem: -V/T =      2.001176
+@      MULPOP O      -0.84; H       0.40; H       0.43; 
+ -----------------------------------------------------------------------------
+   9  Screening settings (-IFTHRS, DIFDEN)  -15    F
+   9    -76.0663987426        2.92900D-05   -3.58D-09    9
+      Virial theorem: -V/T =      2.001176
+@      MULPOP O      -0.84; H       0.40; H       0.43; 
+ -----------------------------------------------------------------------------
+  10  Screening settings (-IFTHRS, DIFDEN)  -15    T
+  10    -76.0663987427        6.48734D-06   -1.33D-10   10
+      Virial theorem: -V/T =      2.001176
+@      MULPOP O      -0.84; H       0.40; H       0.43; 
+ -----------------------------------------------------------------------------
+  11  Screening settings (-IFTHRS, DIFDEN)  -15    T
+  11    -76.0663987428        1.06238D-06   -5.87D-12   10
+      Virial theorem: -V/T =      2.001176
+@      MULPOP O      -0.84; H       0.40; H       0.43; 
+ -----------------------------------------------------------------------------
+  12  Screening settings (-IFTHRS, DIFDEN)  -15    T
+  12    -76.0663987428        2.52285D-07   -1.42D-14   10
+      Virial theorem: -V/T =      2.001176
+@      MULPOP O      -0.84; H       0.40; H       0.43; 
+ -----------------------------------------------------------------------------
+  13  Screening settings (-IFTHRS, DIFDEN)  -15    T
+  13    -76.0663987428        3.27743D-08    1.85D-13   10
+      Virial theorem: -V/T =      2.001176
+@      MULPOP O      -0.84; H       0.40; H       0.43; 
+ -----------------------------------------------------------------------------
+  14  Screening settings (-IFTHRS, DIFDEN)  -15    T
+  14    -76.0663987428        5.03133D-09   -3.41D-13   10
+
+ *** DIIS converged in  14 iterations !
+@    Converged SCF energy, gradient:    -76.066398742750    5.03D-09
+   - total time used in SIRFCK :              0.00 seconds
+
+
+ *** SCF orbital energy analysis ***
+
+ Only the five lowest virtual orbital energies printed in each symmetry.
+
+ Number of electrons :   10
+ Orbital occupations :    5
+
+ Sym       Hartree-Fock orbital energies
+
+  1    -20.56322122    -1.34826072    -0.72217656    -0.57736613    -0.50910036
+         0.03257322     0.05253783     0.13788086     0.14283936     0.17694706
+
+    E(LUMO) :     0.03257322 au (symmetry 1)
+  - E(HOMO) :    -0.50910036 au (symmetry 1)
+  ------------------------------------------
+    gap     :     0.54167358 au
+
+ >>> Writing SIRIFC interface file <<<
+
+
+ Check ratio for geometry walk with converged SCF :
+
+
+
+ >>> step control for geometry walk (ABACUS interface)
+
+
+ (SIRSTP) Close to convergence, ratio set to one.
+ Energy difference; actual and predicted:    9.45899D-04    0.00000D+00
+
+
+ *** GEOMETRY WALK STEP ACCEPTED.
+
+
+ >>>> CPU and wall time for SCF :       5.238       6.531
+
+
+                       .-----------------------------------.
+                       | >>> Final results from SIRIUS <<< |
+                       `-----------------------------------'
+
+
+@    Spin multiplicity:           1
+@    Spatial symmetry:            1
+@    Total charge of molecule:    0
+
+@    Final HF energy:             -76.066398742750                 
+@    Nuclear repulsion:             9.150575477186
+@    Electronic energy:           -85.216974219937
+
+@    Final gradient norm:           0.000000005031
+
+ 
+     Date and time (Linux)  : Wed Jun  4 11:30:08 2014
+     Host name              : c41-6.local                             
+
+
+
+ >>>> Total CPU  time used in SIRIUS :      5.24 seconds
+ >>>> Total wall time used in SIRIUS :      6.54 seconds
+
+ 
+     Date and time (Linux)  : Wed Jun  4 11:30:08 2014
+     Host name              : c41-6.local                             
+
+
+                     .---------------------------------------.
+                     | End of Wave Function Section (SIRIUS) |
+                     `---------------------------------------'
+
+
+
+        *****************************************************************
+        ******** Output from **EACH  input processing for ABACUS ********
+        *****************************************************************
+
+
+
+ The following molecular properties will be calculated in this run:
+ ------------------------------------------------------------------
+
+ Default print level:       -2
+
+      The molecular gradient
+      Geometry optimization
+      Nuclear magnetic shieldings
+      Direct calculation - no two-electron integrals written or read.
+      Two-electron integrals will be calculated in parallel
+      Natural orbital connection is used
+      for perturbation dependent basis sets.
+
+
+ Changes of defaults for RESPON in ABACUS:
+ -----------------------------------------
+
+ RESPON skipped in this run.
+
+ INFO: Changed THRP threshold used in integral transformation from  1.00D-15 to integral evaluation threshold  1.00D-12
+
+ Center of mass dipole origin  :    0.000000   -0.065884    0.000001
+
+ Center of mass gauge origin   :    0.000000   -0.065884    0.000001
+
+
+                 .------------------------------------------------.
+                 | Starting in Static Property Section (ABACUS) - |
+                 `------------------------------------------------'
+
+
+ 
+     Date and time (Linux)  : Wed Jun  4 11:30:08 2014
+     Host name              : c41-6.local                             
+
+
+            +---------------------------------------------------------+
+            ! Gradient elements calculated directly and from symmetry !
+            +---------------------------------------------------------+
+
+
+
+        Coordinate    Direct calc.     Tra.-rot. sym.   Difference
+        ----------------------------------------------------------
+
+        O    x       -0.0081375314     0.1463237658    -0.1544612972
+        O    y       -4.3712606440    -4.3712606440    -0.0000000000
+        O    z       -0.0000395940    -0.0000378627    -0.0000017313
+        H    x        2.6019469292     2.4474856320     0.1544612972
+        H    z        0.0000337119     0.0000357578    -0.0000020460
+        H    z        0.0000058822     0.0000021049     0.0000037773
+
+
+
+ >>> WARNING from TRAROT:
+
+ Largest deviation from tra-rot symmetry is in gradient element  1:  1.54E-01
+
+
+   ***************************************************************************
+   ************************ FINAL RESULTS from ABACUS ************************
+   ***************************************************************************
+
+
+ 
+     Date and time (Linux)  : Wed Jun  4 11:30:22 2014
+     Host name              : c41-6.local                             
+
+ WARNING: warnings have been issued, please check the output above !
+
+
+  ******************************************************************************
+  ************************ ABACUS - CHEMICAL SHIELDINGS ************************
+  ******************************************************************************
+
+
+
+                 Shielding tensors in symmetry coordinates (ppm)
+                 -----------------------------------------------
+
+                       Bx             By             Bz
+
+        O    x   364.51089866     5.21335440     0.00049572
+        O    y     4.91426477   313.69378173     0.00016304
+        O    z     0.00049188     0.00016350   299.28930711
+
+        H    x    38.22702084     9.37132297     0.00019202
+        H    y     7.89559296    28.88584784     0.00011168
+        H    z     0.00017888     0.00012183    22.43872010
+
+        H    x    39.21239593    -9.68705711     0.00002553
+        H    y    -8.16142056    29.36409069     0.00000052
+        H    z     0.00003913    -0.00000994    22.98412692
+
+
+
+
+
+  Chemical shielding for O     :
+  ==============================
+
+
+  Shielding constant:    325.8313 ppm
+  Anisotropy:             58.7689 ppm
+  Asymmetry:               0.3549    
+
+  S parameter:            59.9899 ppm
+  A parameter:             0.1495 ppm
+
+
+  Total shielding tensor (ppm):
+  -----------------------------
+
+ String on input: "O       "
+ String on input: "O       "
+                    Bx             By             Bz
+
+  O      x   364.51089866     5.21335440     0.00049572
+  O      y     4.91426477   313.69378173     0.00016304
+  O      z     0.00049188     0.00016350   299.28930711
+
+
+  Diamagnetic and paramagnetic contributions (ppm):
+  -------------------------------------------------
+
+                 Bx         By         Bz            Bx         By         Bz
+
+  O      x   416.2982     0.0343     0.0000      -51.7873     5.1790     0.0005
+  O      y     0.0829   416.4396     0.0000        4.8314  -102.7458     0.0002
+  O      z     0.0000     0.0000   416.1519        0.0005     0.0002  -116.8626
+
+  Diamagnetic contribution:    416.296562         Paramagnetic:     -90.465232
+
+
+  Antisymmetric and traceless symmetric parts (ppm):
+  --------------------------------------------------
+
+                 Bx         By         Bz            Bx         By         Bz
+
+  O      x     0.0000     0.1495     0.0000       38.6796     5.0638     0.0005
+  O      y    -0.1495     0.0000    -0.0000        5.0638   -12.1375     0.0002
+  O      z    -0.0000     0.0000     0.0000        0.0005     0.0002   -26.5420
+
+
+  Principal values and axes:
+  --------------------------
+
+  O         299.289307  =  325.83  -  26.54:    -0.000007 -0.000009  1.000000
+  O         313.194098  =  325.83  -  12.64:    -0.098200  0.995167  0.000008
+  O         365.010582  =  325.83  +  39.18:     0.995167  0.098200  0.000008
+
+
+  Chemical shielding for H     :
+  ==============================
+
+
+  Shielding constant:     29.8505 ppm
+  Anisotropy:             20.2826 ppm
+  Asymmetry:               0.0963    
+
+  S parameter:            20.3139 ppm
+  A parameter:             0.7379 ppm
+
+
+  Total shielding tensor (ppm):
+  -----------------------------
+
+ String on input: "H       "
+ String on input: "H       "
+                    Bx             By             Bz
+
+  H      x    38.22702084     9.37132297     0.00019202
+  H      y     7.89559296    28.88584784     0.00011168
+  H      z     0.00017888     0.00012183    22.43872010
+
+
+  Diamagnetic and paramagnetic contributions (ppm):
+  -------------------------------------------------
+
+                 Bx         By         Bz            Bx         By         Bz
+
+  H      x    36.0389    17.0989     0.0003        2.1881    -7.7275    -0.0001
+  H      y    14.4266    20.9146     0.0002       -6.5310     7.9713    -0.0001
+  H      z     0.0003     0.0002    11.8023       -0.0001    -0.0001    10.6364
+
+  Diamagnetic contribution:     22.918612         Paramagnetic:       6.931918
+
+
+  Antisymmetric and traceless symmetric parts (ppm):
+  --------------------------------------------------
+
+                 Bx         By         Bz            Bx         By         Bz
+
+  H      x     0.0000     0.7379     0.0000        8.3765     8.6335     0.0002
+  H      y    -0.7379     0.0000    -0.0000        8.6335    -0.9647     0.0001
+  H      z    -0.0000     0.0000     0.0000        0.0002     0.0001    -7.4118
+
+
+  Principal values and axes:
+  --------------------------
+
+  H          22.438720  =   29.85  -   7.41:    -0.000007 -0.000009  1.000000
+  H          23.740581  =   29.85  -   6.11:    -0.511947  0.859017  0.000004
+  H          43.372288  =   29.85  +  13.52:     0.859017  0.511947  0.000010
+
+
+  Chemical shielding for H     :
+  ==============================
+
+
+  Shielding constant:     30.5202 ppm
+  Anisotropy:             20.9410 ppm
+  Asymmetry:               0.0796    
+
+  S parameter:            20.9631 ppm
+  A parameter:             0.7628 ppm
+
+
+  Total shielding tensor (ppm):
+  -----------------------------
+
+ String on input: "H       "
+ String on input: "H       "
+                    Bx             By             Bz
+
+  H      x    39.21239593    -9.68705711     0.00002553
+  H      y    -8.16142056    29.36409069     0.00000052
+  H      z     0.00003913    -0.00000994    22.98412692
+
+
+  Diamagnetic and paramagnetic contributions (ppm):
+  -------------------------------------------------
+
+                 Bx         By         Bz            Bx         By         Bz
+
+  H      x    37.3314   -17.6830     0.0000        1.8810     7.9959     0.0000
+  H      y   -14.6885    21.6906    -0.0000        6.5271     7.6735     0.0000
+  H      z     0.0000    -0.0000    12.3863       -0.0000     0.0000    10.5978
+
+  Diamagnetic contribution:     23.802778         Paramagnetic:       6.717427
+
+
+  Antisymmetric and traceless symmetric parts (ppm):
+  --------------------------------------------------
+
+                 Bx         By         Bz            Bx         By         Bz
+
+  H      x     0.0000    -0.7628    -0.0000        8.6922    -8.9242     0.0000
+  H      y     0.7628     0.0000     0.0000       -8.9242    -1.1561    -0.0000
+  H      z     0.0000    -0.0000     0.0000        0.0000    -0.0000    -7.5361
+
+
+  Principal values and axes:
+  --------------------------
+
+  H          22.984127  =   30.52  -   7.54:    -0.000007 -0.000009  1.000000
+  H          24.095632  =   30.52  -   6.42:     0.508375  0.861136  0.000011
+  H          44.480854  =   30.52  +  13.96:     0.861136 -0.508375  0.000001
+
+
+                         +--------------------------------+
+                         ! Summary of chemical shieldings !
+                         +--------------------------------+
+
+@1  Definitions from J. Mason, Solid state Nuc. Magn. Res. 2 (1993), 285
+
+@1 London orbitals (GIAOs) has been used.
+
+@1 atom   shielding       dia      para     skew      span     (aniso     asym)
+@1 ----------------------------------------------------------------------------
+@1 O       325.8313  416.2966  -90.4652    0.5769   65.7213   58.7689    0.3549
+@1 H        29.8505   22.9186    6.9319    0.8756   20.9336   20.2826    0.0963
+@1 H        30.5202   23.8028    6.7174    0.8966   21.4967   20.9410    0.0796
+
+
+
+                         +--------------------------------+
+                         ! Summary of chemical shieldings !
+                         +--------------------------------+
+
+@2  Definitions from Smith, Palke, and Grieg, Concepts in Mag. Res. 4 (1992), 107
+
+@2 London orbitals (GIAOs) has been used.
+
+@2 atom   shielding       dia      para     aniso      asym        S        A
+@2 ----------------------------------------------------------------------------
+@2 O       325.8313  416.2966  -90.4652   58.7689    0.3549   59.9899    0.1495
+@2 H        29.8505   22.9186    6.9319   20.2826    0.0963   20.3139    0.7379
+@2 H        30.5202   23.8028    6.7174   20.9410    0.0796   20.9631    0.7628
+
+
+ Largest deviation from orthonormality of OMOs:0.118746E-10
+ - found for element   56 126
+
+
+       ********************************************************************
+       ****************** ABACUS - VIBRATIONAL AVERAGING ******************
+       ********************************************************************
+
+ Coordinate displaced in this calculation:    O    x
+ Displacement:                               +0.0500000000
+
+
+ CPU time statistics for ABACUS
+ ------------------------------
+
+ MAGINT     00:00:02      12 %
+ TWOTEX     00:00:01       8 %
+ RHSIDE     00:00:03      24 %
+ LINRES     00:00:07      53 %
+
+ TOTAL      00:00:14     100 %
+
+
+ >>>> Total CPU  time used in ABACUS:  14.16 seconds
+ >>>> Total wall time used in ABACUS:  14.38 seconds
+
+
+                   .-------------------------------------------.
+                   | End of Static Property Section (ABACUS) - |
+                   `-------------------------------------------'
+
+
+@  Geometry walk step no.   1:  Molecular energy =    -76.066399   Molecular gradient =  6.493599
+
+
+     @@>>>>>>>>>> Geometry walk iteration number:    2 <<<<<<<<<<
+
+
+
+
+ **************************************************************************************
+ ****************** Output of molecule and basis set info suppressed ******************
+ **************************************************************************************
+
+
+
+                     .---------------------------------------.
+                     | Starting in Integral Section (HERMIT) |
+                     `---------------------------------------'
+
+ >>>  Time used in GABGEN     is   0.13 seconds
+ >>>> Total CPU  time used in HERMIT:   0.43 seconds
+ >>>> Total wall time used in HERMIT:   0.44 seconds
+
+
+                        .----------------------------------.
+                        | End of Integral Section (HERMIT) |
+                        `----------------------------------'
+
+
+
+                   .--------------------------------------------.
+                   | Starting in Wave Function Section (SIRIUS) |
+                   `--------------------------------------------'
+
+
+ **********************************************************************
+ *SIRIUS* a direct, restricted step, second order MCSCF program       *
+ **********************************************************************
+
+ (Wave function specification suppressed here, see output above for initial geometry.)
+
+
+ >>>>> DIIS optimization of Hartree-Fock <<<<<
+
+ C1-DIIS algorithm; max error vectors =   10
+
+ Iter      Total energy        Error norm    Delta(E)  DIIS dim.
+ -----------------------------------------------------------------------------
+   1  Screening settings (-IFTHRS, DIFDEN)  -15    T
+   1    -50.7340160658        7.16143D+01    2.53D+01    1
+      Virial theorem: -V/T =      1.441917
+@      MULPOP O     -20.10; H      48.55; H     -28.45; 
+ -----------------------------------------------------------------------------
+   2  Screening settings (-IFTHRS, DIFDEN)   -8    F
+   2    -75.8834183475        2.25892D+00   -2.51D+01    2
+      Virial theorem: -V/T =      1.970988
+@      MULPOP O       1.71; H       1.14; H      -2.85; 
+ -----------------------------------------------------------------------------
+   3  Screening settings (-IFTHRS, DIFDEN)   -8    T
+   3    -76.0073969690        1.24464D+00   -1.24D-01    3
+      Virial theorem: -V/T =      2.024498
+@      MULPOP O      -0.37; H       0.31; H       0.06; 
+ -----------------------------------------------------------------------------
+   4  Screening settings (-IFTHRS, DIFDEN)   -8    T
+   4    -76.0668034238        9.90360D-02   -5.94D-02    4
+      Virial theorem: -V/T =      1.998719
+@      MULPOP O      -0.75; H       0.43; H       0.32; 
+ -----------------------------------------------------------------------------
+   5  Screening settings (-IFTHRS, DIFDEN)  -10    F
+   5    -76.0673371796        1.92260D-02   -5.34D-04    5
+      Virial theorem: -V/T =      2.000431
+@      MULPOP O      -0.84; H       0.44; H       0.40; 
+ -----------------------------------------------------------------------------
+   6  Screening settings (-IFTHRS, DIFDEN)  -10    T
+   6    -76.0673726501        5.20399D-03   -3.55D-05    6
+      Virial theorem: -V/T =      2.000249
+@      MULPOP O      -0.85; H       0.44; H       0.41; 
+ -----------------------------------------------------------------------------
+   7  Screening settings (-IFTHRS, DIFDEN)  -10    T
+   7    -76.0673769591        9.19575D-04   -4.31D-06    7
+      Virial theorem: -V/T =      2.000243
+@      MULPOP O      -0.85; H       0.44; H       0.41; 
+ -----------------------------------------------------------------------------
+   8  Screening settings (-IFTHRS, DIFDEN)  -12    F
+   8    -76.0673770861        1.82827D-04   -1.27D-07    8
+      Virial theorem: -V/T =      2.000245
+@      MULPOP O      -0.85; H       0.44; H       0.41; 
+ -----------------------------------------------------------------------------
+   9  Screening settings (-IFTHRS, DIFDEN)  -12    T
+   9    -76.0673770915        4.01851D-05   -5.47D-09    9
+      Virial theorem: -V/T =      2.000245
+@      MULPOP O      -0.85; H       0.44; H       0.41; 
+ -----------------------------------------------------------------------------
+  10  Screening settings (-IFTHRS, DIFDEN)  -15    F
+  10    -76.0673770918        8.13418D-06   -2.64D-10   10
+      Virial theorem: -V/T =      2.000245
+@      MULPOP O      -0.85; H       0.44; H       0.41; 
+ -----------------------------------------------------------------------------
+  11  Screening settings (-IFTHRS, DIFDEN)  -15    T
+  11    -76.0673770918        1.24861D-06   -9.04D-12   10
+      Virial theorem: -V/T =      2.000245
+@      MULPOP O      -0.85; H       0.44; H       0.41; 
+ -----------------------------------------------------------------------------
+  12  Screening settings (-IFTHRS, DIFDEN)  -15    T
+  12    -76.0673770918        2.60357D-07   -3.84D-13   10
+      Virial theorem: -V/T =      2.000245
+@      MULPOP O      -0.85; H       0.44; H       0.41; 
+ -----------------------------------------------------------------------------
+  13  Screening settings (-IFTHRS, DIFDEN)  -15    T
+  13    -76.0673770918        4.35571D-08    8.53D-14   10
+      Virial theorem: -V/T =      2.000245
+@      MULPOP O      -0.85; H       0.44; H       0.41; 
+ -----------------------------------------------------------------------------
+  14  Screening settings (-IFTHRS, DIFDEN)  -15    T
+  14    -76.0673770918        6.48004D-09    1.56D-13   10
+
+ *** DIIS converged in  14 iterations !
+@    Converged SCF energy, gradient:    -76.067377091820    6.48D-09
+   - total time used in SIRFCK :              0.00 seconds
+
+
+ *** SCF orbital energy analysis ***
+
+ Only the five lowest virtual orbital energies printed in each symmetry.
+
+ Number of electrons :   10
+ Orbital occupations :    5
+
+ Sym       Hartree-Fock orbital energies
+
+  1    -20.56179767    -1.35921386    -0.72515121    -0.58689492    -0.51147855
+         0.03257518     0.05296221     0.13658369     0.14184532     0.17841806
+
+    E(LUMO) :     0.03257518 au (symmetry 1)
+  - E(HOMO) :    -0.51147855 au (symmetry 1)
+  ------------------------------------------
+    gap     :     0.54405374 au
+
+ >>> Writing SIRIFC interface file <<<
+
+
+ Check ratio for geometry walk with converged SCF :
+
+
+
+ >>> step control for geometry walk (ABACUS interface)
+
+
+ (SIRSTP) Close to convergence, ratio set to one.
+ Energy difference; actual and predicted:   -9.78349D-04    0.00000D+00
+
+
+ *** GEOMETRY WALK STEP ACCEPTED.
+
+
+ >>>> CPU and wall time for SCF :       7.457       8.094
+
+
+                       .-----------------------------------.
+                       | >>> Final results from SIRIUS <<< |
+                       `-----------------------------------'
+
+
+@    Spin multiplicity:           1
+@    Spatial symmetry:            1
+@    Total charge of molecule:    0
+
+@    Final HF energy:             -76.067377091820                 
+@    Nuclear repulsion:             9.317773923932
+@    Electronic energy:           -85.385151015753
+
+@    Final gradient norm:           0.000000006480
+
+ 
+     Date and time (Linux)  : Wed Jun  4 11:30:31 2014
+     Host name              : c41-6.local                             
+
+
+
+ >>>> Total CPU  time used in SIRIUS :      7.46 seconds
+ >>>> Total wall time used in SIRIUS :      8.15 seconds
+
+ 
+     Date and time (Linux)  : Wed Jun  4 11:30:31 2014
+     Host name              : c41-6.local                             
+
+
+                     .---------------------------------------.
+                     | End of Wave Function Section (SIRIUS) |
+                     `---------------------------------------'
+
+
+
+        *****************************************************************
+        ******** Output from **EACH  input processing for ABACUS ********
+        *****************************************************************
+
+
+
+ The following molecular properties will be calculated in this run:
+ ------------------------------------------------------------------
+
+ Default print level:       -2
+
+      The molecular gradient
+      Geometry optimization
+      Nuclear magnetic shieldings
+      Direct calculation - no two-electron integrals written or read.
+      Two-electron integrals will be calculated in parallel
+      Natural orbital connection is used
+      for perturbation dependent basis sets.
+
+
+ Changes of defaults for RESPON in ABACUS:
+ -----------------------------------------
+
+ RESPON skipped in this run.
+
+ INFO: Changed THRP threshold used in integral transformation from  1.00D-15 to integral evaluation threshold  1.00D-12
+
+ Center of mass dipole origin  :    0.000000   -0.065884    0.000001
+
+ Center of mass gauge origin   :    0.000000   -0.065884    0.000001
+
+
+                 .------------------------------------------------.
+                 | Starting in Static Property Section (ABACUS) - |
+                 `------------------------------------------------'
+
+
+ 
+     Date and time (Linux)  : Wed Jun  4 11:30:31 2014
+     Host name              : c41-6.local                             
+
+
+            +---------------------------------------------------------+
+            ! Gradient elements calculated directly and from symmetry !
+            +---------------------------------------------------------+
+
+
+
+        Coordinate    Direct calc.     Tra.-rot. sym.   Difference
+        ----------------------------------------------------------
+
+        O    x        0.0116415509    -0.1282790504     0.1399206013
+        O    y       -4.6401673015    -4.6401673015    -0.0000000000
+        O    z       -0.0000404366    -0.0000421439     0.0000017073
+        H    x        2.5903523265     2.7302729278    -0.1399206013
+        H    z        0.0000381227     0.0000399183    -0.0000017956
+        H    z        0.0000023140     0.0000022256     0.0000000884
+
+
+
+ >>> WARNING from TRAROT:
+
+ Largest deviation from tra-rot symmetry is in gradient element  4:  1.40E-01
+
+
+   ***************************************************************************
+   ************************ FINAL RESULTS from ABACUS ************************
+   ***************************************************************************
+
+
+ 
+     Date and time (Linux)  : Wed Jun  4 11:30:49 2014
+     Host name              : c41-6.local                             
+
+ WARNING: warnings have been issued, please check the output above !
+
+
+  ******************************************************************************
+  ************************ ABACUS - CHEMICAL SHIELDINGS ************************
+  ******************************************************************************
+
+
+
+                 Shielding tensors in symmetry coordinates (ppm)
+                 -----------------------------------------------
+
+                       Bx             By             Bz
+
+        O    x   372.19497857    -5.20084285     0.00037567
+        O    y    -4.41166990   319.92585218     0.00004942
+        O    z     0.00038115     0.00004296   311.11344154
+
+        H    x    39.85424425    10.26432751     0.00020321
+        H    y     9.01499788    30.90020248     0.00012704
+        H    z     0.00019207     0.00013560    23.59532411
+
+        H    x    38.83147004    -9.89591477     0.00002072
+        H    y    -8.73035324    30.36736239     0.00000511
+        H    z     0.00003114    -0.00000285    23.02845004
+
+
+
+
+
+  Chemical shielding for O     :
+  ==============================
+
+
+  Shielding constant:    334.4114 ppm
+  Anisotropy:             57.3327 ppm
+  Asymmetry:               0.2191    
+
+  S parameter:            57.7896 ppm
+  A parameter:             0.3946 ppm
+
+
+  Total shielding tensor (ppm):
+  -----------------------------
+
+ String on input: "O       "
+ String on input: "O       "
+                    Bx             By             Bz
+
+  O      x   372.19497857    -5.20084285     0.00037567
+  O      y    -4.41166990   319.92585218     0.00004942
+  O      z     0.00038115     0.00004296   311.11344154
+
+
+  Diamagnetic and paramagnetic contributions (ppm):
+  -------------------------------------------------
+
+                 Bx         By         Bz            Bx         By         Bz
+
+  O      x   416.7134    -0.0256    -0.0000      -44.5185    -5.1752     0.0004
+  O      y    -0.0835   416.7215    -0.0000       -4.3282   -96.7956     0.0001
+  O      z    -0.0000    -0.0000   416.8197        0.0004     0.0000  -105.7063
+
+  Diamagnetic contribution:    416.751542         Paramagnetic:     -82.340117
+
+
+  Antisymmetric and traceless symmetric parts (ppm):
+  --------------------------------------------------
+
+                 Bx         By         Bz            Bx         By         Bz
+
+  O      x     0.0000    -0.3946    -0.0000       37.7836    -4.8063     0.0004
+  O      y     0.3946     0.0000     0.0000       -4.8063   -14.4856     0.0000
+  O      z     0.0000    -0.0000     0.0000        0.0004     0.0000   -23.2980
+
+
+  Principal values and axes:
+  --------------------------
+
+  O         311.113442  =  334.41  -  23.30:    -0.000007 -0.000009  1.000000
+  O         319.487582  =  334.41  -  14.92:     0.090811  0.995868  0.000010
+  O         372.633249  =  334.41  +  38.22:     0.995868 -0.090811  0.000006
+
+
+  Chemical shielding for H     :
+  ==============================
+
+
+  Shielding constant:     31.4499 ppm
+  Anisotropy:             21.8338 ppm
+  Asymmetry:               0.0792    
+
+  S parameter:            21.8567 ppm
+  A parameter:             0.6247 ppm
+
+
+  Total shielding tensor (ppm):
+  -----------------------------
+
+ String on input: "H       "
+ String on input: "H       "
+                    Bx             By             Bz
+
+  H      x    39.85424425    10.26432751     0.00020321
+  H      y     9.01499788    30.90020248     0.00012704
+  H      z     0.00019207     0.00013560    23.59532411
+
+
+  Diamagnetic and paramagnetic contributions (ppm):
+  -------------------------------------------------
+
+                 Bx         By         Bz            Bx         By         Bz
+
+  H      x    37.6347    18.4778     0.0003        2.2196    -8.2134    -0.0001
+  H      y    15.3313    23.7656     0.0002       -6.3163     7.1346    -0.0001
+  H      z     0.0003     0.0002    13.4194       -0.0001    -0.0001    10.1759
+
+  Diamagnetic contribution:     24.939908         Paramagnetic:       6.510016
+
+
+  Antisymmetric and traceless symmetric parts (ppm):
+  --------------------------------------------------
+
+                 Bx         By         Bz            Bx         By         Bz
+
+  H      x     0.0000     0.6247     0.0000        8.4043     9.6397     0.0002
+  H      y    -0.6247     0.0000    -0.0000        9.6397    -0.5497     0.0001
+  H      z    -0.0000     0.0000     0.0000        0.0002     0.0001    -7.8546
+
+
+  Principal values and axes:
+  --------------------------
+
+  H          23.595324  =   31.45  -   7.85:    -0.000007 -0.000009  1.000000
+  H          24.748639  =   31.45  -   6.70:    -0.537948  0.842978  0.000004
+  H          46.005808  =   31.45  +  14.56:     0.842978  0.537948  0.000011
+
+
+  Chemical shielding for H     :
+  ==============================
+
+
+  Shielding constant:     30.7424 ppm
+  Anisotropy:             21.1299 ppm
+  Asymmetry:               0.0952    
+
+  S parameter:            21.1618 ppm
+  A parameter:             0.5828 ppm
+
+
+  Total shielding tensor (ppm):
+  -----------------------------
+
+ String on input: "H       "
+ String on input: "H       "
+                    Bx             By             Bz
+
+  H      x    38.83147004    -9.89591477     0.00002072
+  H      y    -8.73035324    30.36736239     0.00000511
+  H      z     0.00003114    -0.00000285    23.02845004
+
+
+  Diamagnetic and paramagnetic contributions (ppm):
+  -------------------------------------------------
+
+                 Bx         By         Bz            Bx         By         Bz
+
+  H      x    36.3178   -17.8666     0.0000        2.5137     7.9706     0.0000
+  H      y   -15.0542    22.8889    -0.0000        6.3238     7.4784     0.0000
+  H      z     0.0000    -0.0000    12.7663        0.0000     0.0000    10.2622
+
+  Diamagnetic contribution:     23.991000         Paramagnetic:       6.751428
+
+
+  Antisymmetric and traceless symmetric parts (ppm):
+  --------------------------------------------------
+
+                 Bx         By         Bz            Bx         By         Bz
+
+  H      x     0.0000    -0.5828    -0.0000        8.0890    -9.3131     0.0000
+  H      y     0.5828     0.0000     0.0000       -9.3131    -0.3751     0.0000
+  H      z     0.0000    -0.0000     0.0000        0.0000     0.0000    -7.7140
+
+
+  Principal values and axes:
+  --------------------------
+
+  H          23.028450  =   30.74  -   7.71:    -0.000007 -0.000009  1.000000
+  H          24.369815  =   30.74  -   6.37:     0.541430  0.840746  0.000011
+  H          44.829018  =   30.74  +  14.09:     0.840746 -0.541430  0.000001
+
+
+                         +--------------------------------+
+                         ! Summary of chemical shieldings !
+                         +--------------------------------+
+
+@1  Definitions from J. Mason, Solid state Nuc. Magn. Res. 2 (1993), 285
+
+@1 London orbitals (GIAOs) has been used.
+
+@1 atom   shielding       dia      para     skew      span     (aniso     asym)
+@1 ----------------------------------------------------------------------------
+@1 O       334.4114  416.7515  -82.3401    0.7278   61.5198   57.3327    0.2191
+@1 H        31.4499   24.9399    6.5100    0.8971   22.4105   21.8338    0.0792
+@1 H        30.7424   23.9910    6.7514    0.8769   21.8006   21.1299    0.0952
+
+
+
+                         +--------------------------------+
+                         ! Summary of chemical shieldings !
+                         +--------------------------------+
+
+@2  Definitions from Smith, Palke, and Grieg, Concepts in Mag. Res. 4 (1992), 107
+
+@2 London orbitals (GIAOs) has been used.
+
+@2 atom   shielding       dia      para     aniso      asym        S        A
+@2 ----------------------------------------------------------------------------
+@2 O       334.4114  416.7515  -82.3401   57.3327    0.2191   57.7896    0.3946
+@2 H        31.4499   24.9399    6.5100   21.8338    0.0792   21.8567    0.6247
+@2 H        30.7424   23.9910    6.7514   21.1299    0.0952   21.1618    0.5828
+
+
+ Largest deviation from orthonormality of OMOs:0.123270E-10
+ - found for element   28  28
+
+
+       ********************************************************************
+       ****************** ABACUS - VIBRATIONAL AVERAGING ******************
+       ********************************************************************
+
+ Coordinate displaced in this calculation:    O    x
+ Displacement:                               -0.0500000000
+
+
+ CPU time statistics for ABACUS
+ ------------------------------
+
+ MAGINT     00:00:02      10 %
+ TWOTEX     00:00:01       8 %
+ RHSIDE     00:00:04      24 %
+ LINRES     00:00:09      55 %
+ REST       00:00:01       6 %
+
+ TOTAL      00:00:17     100 %
+
+
+ >>>> Total CPU  time used in ABACUS:  16.51 seconds
+ >>>> Total wall time used in ABACUS:  22.18 seconds
+
+
+                   .-------------------------------------------.
+                   | End of Static Property Section (ABACUS) - |
+                   `-------------------------------------------'
+
+
+@  Geometry walk step no.   2:  Molecular energy =    -76.067377   Molecular gradient =  6.766342
+
+
+     @@>>>>>>>>>> Geometry walk iteration number:    3 <<<<<<<<<<
+
+
+
+
+ **************************************************************************************
+ ****************** Output of molecule and basis set info suppressed ******************
+ **************************************************************************************
+
+
+
+                     .---------------------------------------.
+                     | Starting in Integral Section (HERMIT) |
+                     `---------------------------------------'
+
+ >>>  Time used in GABGEN     is   0.13 seconds
+ >>>> Total CPU  time used in HERMIT:   0.43 seconds
+ >>>> Total wall time used in HERMIT:   0.44 seconds
+
+
+                        .----------------------------------.
+                        | End of Integral Section (HERMIT) |
+                        `----------------------------------'
+
+
+
+                   .--------------------------------------------.
+                   | Starting in Wave Function Section (SIRIUS) |
+                   `--------------------------------------------'
+
+
+ **********************************************************************
+ *SIRIUS* a direct, restricted step, second order MCSCF program       *
+ **********************************************************************
+
+ (Wave function specification suppressed here, see output above for initial geometry.)
+
+
+ >>>>> DIIS optimization of Hartree-Fock <<<<<
+
+ C1-DIIS algorithm; max error vectors =   10
+
+ Iter      Total energy        Error norm    Delta(E)  DIIS dim.
+ -----------------------------------------------------------------------------
+   1  Screening settings (-IFTHRS, DIFDEN)  -15    T
+   1    -62.7027231027        4.92965D+01    1.34D+01    1
+      Virial theorem: -V/T =      1.693931
+@      MULPOP O      -4.19; H     -64.20; H      68.38; 
+ -----------------------------------------------------------------------------
+   2  Screening settings (-IFTHRS, DIFDEN)   -8    F
+   2    -75.8153772137        2.46163D+00   -1.31D+01    2
+      Virial theorem: -V/T =      1.958172
+@      MULPOP O      -3.03; H      -1.97; H       5.00; 
+ -----------------------------------------------------------------------------
+   3  Screening settings (-IFTHRS, DIFDEN)   -8    T
+   3    -75.9586909645        1.63180D+00   -1.43D-01    3
+      Virial theorem: -V/T =      2.033200
+@      MULPOP O      -0.79; H       0.16; H       0.62; 
+ -----------------------------------------------------------------------------
+   4  Screening settings (-IFTHRS, DIFDEN)   -8    T
+   4    -76.0659120565        7.44000D-02   -1.07D-01    4
+      Virial theorem: -V/T =      2.000760
+@      MULPOP O      -0.93; H       0.37; H       0.55; 
+ -----------------------------------------------------------------------------
+   5  Screening settings (-IFTHRS, DIFDEN)  -10    F
+   5    -76.0664102861        2.40179D-02   -4.98D-04    5
+      Virial theorem: -V/T =      2.001381
+@      MULPOP O      -0.84; H       0.40; H       0.44; 
+ -----------------------------------------------------------------------------
+   6  Screening settings (-IFTHRS, DIFDEN)  -10    T
+   6    -76.0664859080        7.29840D-03   -7.56D-05    6
+      Virial theorem: -V/T =      2.001134
+@      MULPOP O      -0.83; H       0.40; H       0.43; 
+ -----------------------------------------------------------------------------
+   7  Screening settings (-IFTHRS, DIFDEN)  -10    T
+   7    -76.0664954878        1.13854D-03   -9.58D-06    7
+      Virial theorem: -V/T =      2.001084
+@      MULPOP O      -0.84; H       0.40; H       0.44; 
+ -----------------------------------------------------------------------------
+   8  Screening settings (-IFTHRS, DIFDEN)  -12    F
+   8    -76.0664956859        2.23498D-04   -1.98D-07    8
+      Virial theorem: -V/T =      2.001089
+@      MULPOP O      -0.84; H       0.40; H       0.44; 
+ -----------------------------------------------------------------------------
+   9  Screening settings (-IFTHRS, DIFDEN)  -12    T
+   9    -76.0664956938        3.65885D-05   -7.89D-09    9
+      Virial theorem: -V/T =      2.001089
+@      MULPOP O      -0.84; H       0.40; H       0.44; 
+ -----------------------------------------------------------------------------
+  10  Screening settings (-IFTHRS, DIFDEN)  -15    F
+  10    -76.0664956940        7.67364D-06   -2.13D-10   10
+      Virial theorem: -V/T =      2.001089
+@      MULPOP O      -0.84; H       0.40; H       0.44; 
+ -----------------------------------------------------------------------------
+  11  Screening settings (-IFTHRS, DIFDEN)  -15    T
+  11    -76.0664956940        1.87342D-06   -9.49D-12   10
+      Virial theorem: -V/T =      2.001089
+@      MULPOP O      -0.84; H       0.40; H       0.44; 
+ -----------------------------------------------------------------------------
+  12  Screening settings (-IFTHRS, DIFDEN)  -15    T
+  12    -76.0664956940        3.65981D-07   -3.41D-13   10
+      Virial theorem: -V/T =      2.001089
+@      MULPOP O      -0.84; H       0.40; H       0.44; 
+ -----------------------------------------------------------------------------
+  13  Screening settings (-IFTHRS, DIFDEN)  -15    T
+  13    -76.0664956940        5.93253D-08    3.69D-13   10
+      Virial theorem: -V/T =      2.001089
+@      MULPOP O      -0.84; H       0.40; H       0.44; 
+ -----------------------------------------------------------------------------
+  14  Screening settings (-IFTHRS, DIFDEN)  -15    T
+  14    -76.0664956940        9.03136D-09   -4.26D-13   10
+
+ *** DIIS converged in  14 iterations !
+@    Converged SCF energy, gradient:    -76.066495694045    9.03D-09
+   - total time used in SIRFCK :              0.00 seconds
+
+
+ *** SCF orbital energy analysis ***
+
+ Only the five lowest virtual orbital energies printed in each symmetry.
+
+ Number of electrons :   10
+ Orbital occupations :    5
+
+ Sym       Hartree-Fock orbital energies
+
+  1    -20.56466364    -1.35065929    -0.71615283    -0.58371791    -0.51009708
+         0.03230635     0.05281952     0.13766834     0.14332742     0.17689793
+
+    E(LUMO) :     0.03230635 au (symmetry 1)
+  - E(HOMO) :    -0.51009708 au (symmetry 1)
+  ------------------------------------------
+    gap     :     0.54240343 au
+
+ >>> Writing SIRIFC interface file <<<
+
+
+ Check ratio for geometry walk with converged SCF :
+
+
+
+ >>> step control for geometry walk (ABACUS interface)
+
+
+ (SIRSTP) Close to convergence, ratio set to one.
+ Energy difference; actual and predicted:    8.81398D-04    0.00000D+00
+
+
+ *** GEOMETRY WALK STEP ACCEPTED.
+
+
+ >>>> CPU and wall time for SCF :       6.579       6.790
+
+
+                       .-----------------------------------.
+                       | >>> Final results from SIRIUS <<< |
+                       `-----------------------------------'
+
+
+@    Spin multiplicity:           1
+@    Spatial symmetry:            1
+@    Total charge of molecule:    0
+
+@    Final HF energy:             -76.066495694045                 
+@    Nuclear repulsion:             9.159659834842
+@    Electronic energy:           -85.226155528887
+
+@    Final gradient norm:           0.000000009031
+
+ 
+     Date and time (Linux)  : Wed Jun  4 11:31:01 2014
+     Host name              : c41-6.local                             
+
+
+
+ >>>> Total CPU  time used in SIRIUS :      6.58 seconds
+ >>>> Total wall time used in SIRIUS :      7.44 seconds
+
+ 
+     Date and time (Linux)  : Wed Jun  4 11:31:01 2014
+     Host name              : c41-6.local                             
+
+
+                     .---------------------------------------.
+                     | End of Wave Function Section (SIRIUS) |
+                     `---------------------------------------'
+
+
+
+        *****************************************************************
+        ******** Output from **EACH  input processing for ABACUS ********
+        *****************************************************************
+
+
+
+ The following molecular properties will be calculated in this run:
+ ------------------------------------------------------------------
+
+ Default print level:       -2
+
+      The molecular gradient
+      Geometry optimization
+      Nuclear magnetic shieldings
+      Direct calculation - no two-electron integrals written or read.
+      Two-electron integrals will be calculated in parallel
+      Natural orbital connection is used
+      for perturbation dependent basis sets.
+
+
+ Changes of defaults for RESPON in ABACUS:
+ -----------------------------------------
+
+ RESPON skipped in this run.
+
+ INFO: Changed THRP threshold used in integral transformation from  1.00D-15 to integral evaluation threshold  1.00D-12
+
+ Center of mass dipole origin  :    0.000000   -0.065884    0.000001
+
+ Center of mass gauge origin   :    0.000000   -0.065884    0.000001
+
+
+                 .------------------------------------------------.
+                 | Starting in Static Property Section (ABACUS) - |
+                 `------------------------------------------------'
+
+
+ 
+     Date and time (Linux)  : Wed Jun  4 11:31:01 2014
+     Host name              : c41-6.local                             
+
+
+            +---------------------------------------------------------+
+            ! Gradient elements calculated directly and from symmetry !
+            +---------------------------------------------------------+
+
+
+
+        Coordinate    Direct calc.     Tra.-rot. sym.   Difference
+        ----------------------------------------------------------
+
+        O    x       -0.0104416606     0.1555221337    -0.1659637942
+        O    y       -4.5817686092    -4.5817686092     0.0000000000
+        O    z       -0.0000408752    -0.0000396712    -0.0000012039
+        H    x        2.5367706584     2.3708068642     0.1659637942
+        H    z        0.0000337049     0.0000360813    -0.0000023764
+        H    z        0.0000071703     0.0000035899     0.0000035803
+
+
+
+ >>> WARNING from TRAROT:
+
+ Largest deviation from tra-rot symmetry is in gradient element  1:  1.66E-01
+
+
+   ***************************************************************************
+   ************************ FINAL RESULTS from ABACUS ************************
+   ***************************************************************************
+
+
+ 
+     Date and time (Linux)  : Wed Jun  4 11:31:18 2014
+     Host name              : c41-6.local                             
+
+ WARNING: warnings have been issued, please check the output above !
+
+
+  ******************************************************************************
+  ************************ ABACUS - CHEMICAL SHIELDINGS ************************
+  ******************************************************************************
+
+
+
+                 Shielding tensors in symmetry coordinates (ppm)
+                 -----------------------------------------------
+
+                       Bx             By             Bz
+
+        O    x   364.32595693     6.17839790     0.00047935
+        O    y     5.35170592   310.95086394     0.00011124
+        O    z     0.00047081     0.00011544   302.72966123
+
+        H    x    37.91441844     9.47640374     0.00018995
+        H    y     8.19405247    29.64788028     0.00011940
+        H    z     0.00017853     0.00012822    22.56315733
+
+        H    x    38.99157008    -9.86394362     0.00002121
+        H    y    -8.48971481    30.19187896     0.00000405
+        H    z     0.00003347    -0.00000538    23.16163278
+
+
+
+
+
+  Chemical shielding for O     :
+  ==============================
+
+
+  Shielding constant:    326.0022 ppm
+  Anisotropy:             58.4091 ppm
+  Asymmetry:               0.1953    
+
+  S parameter:            58.7793 ppm
+  A parameter:             0.4133 ppm
+
+
+  Total shielding tensor (ppm):
+  -----------------------------
+
+ String on input: "O       "
+ String on input: "O       "
+                    Bx             By             Bz
+
+  O      x   364.32595693     6.17839790     0.00047935
+  O      y     5.35170592   310.95086394     0.00011124
+  O      z     0.00047081     0.00011544   302.72966123
+
+
+  Diamagnetic and paramagnetic contributions (ppm):
+  -------------------------------------------------
+
+                 Bx         By         Bz            Bx         By         Bz
+
+  O      x   416.5590     0.0567     0.0000      -52.2330     6.1217     0.0005
+  O      y     0.0910   416.3218     0.0000        5.2607  -105.3709     0.0001
+  O      z     0.0000     0.0000   416.3243        0.0005     0.0001  -113.5946
+
+  Diamagnetic contribution:    416.401678         Paramagnetic:     -90.399517
+
+
+  Antisymmetric and traceless symmetric parts (ppm):
+  --------------------------------------------------
+
+                 Bx         By         Bz            Bx         By         Bz
+
+  O      x     0.0000     0.4133     0.0000       38.3238     5.7651     0.0005
+  O      y    -0.4133     0.0000    -0.0000        5.7651   -15.0513     0.0001
+  O      z    -0.0000     0.0000     0.0000        0.0005     0.0001   -23.2725
+
+
+  Principal values and axes:
+  --------------------------
+
+  O         302.729661  =  326.00  -  23.27:    -0.000007 -0.000009  1.000000
+  O         310.335279  =  326.00  -  15.67:    -0.106175  0.994347  0.000008
+  O         364.941541  =  326.00  +  38.94:     0.994347  0.106175  0.000008
+
+
+  Chemical shielding for H     :
+  ==============================
+
+
+  Shielding constant:     30.0418 ppm
+  Anisotropy:             20.2404 ppm
+  Asymmetry:               0.1085    
+
+  S parameter:            20.2800 ppm
+  A parameter:             0.6412 ppm
+
+
+  Total shielding tensor (ppm):
+  -----------------------------
+
+ String on input: "H       "
+ String on input: "H       "
+                    Bx             By             Bz
+
+  H      x    37.91441844     9.47640374     0.00018995
+  H      y     8.19405247    29.64788028     0.00011940
+  H      z     0.00017853     0.00012822    22.56315733
+
+
+  Diamagnetic and paramagnetic contributions (ppm):
+  -------------------------------------------------
+
+                 Bx         By         Bz            Bx         By         Bz
+
+  H      x    35.3394    17.4900     0.0003        2.5750    -8.0136    -0.0001
+  H      y    14.7429    22.1176     0.0002       -6.5489     7.5303    -0.0001
+  H      z     0.0003     0.0002    12.2487       -0.0001    -0.0001    10.3145
+
+  Diamagnetic contribution:     23.235219         Paramagnetic:       6.806599
+
+
+  Antisymmetric and traceless symmetric parts (ppm):
+  --------------------------------------------------
+
+                 Bx         By         Bz            Bx         By         Bz
+
+  H      x     0.0000     0.6412     0.0000        7.8726     8.8352     0.0002
+  H      y    -0.6412     0.0000    -0.0000        8.8352    -0.3939     0.0001
+  H      z    -0.0000     0.0000     0.0000        0.0002     0.0001    -7.4787
+
+
+  Principal values and axes:
+  --------------------------
+
+  H          22.563157  =   30.04  -   7.48:    -0.000007 -0.000009  1.000000
+  H          24.026911  =   30.04  -   6.01:    -0.536777  0.843724  0.000004
+  H          43.535388  =   30.04  +  13.49:     0.843724  0.536777  0.000011
+
+
+  Chemical shielding for H     :
+  ==============================
+
+
+  Shielding constant:     30.7817 ppm
+  Anisotropy:             20.9807 ppm
+  Asymmetry:               0.0896    
+
+  S parameter:            21.0087 ppm
+  A parameter:             0.6871 ppm
+
+
+  Total shielding tensor (ppm):
+  -----------------------------
+
+ String on input: "H       "
+ String on input: "H       "
+                    Bx             By             Bz
+
+  H      x    38.99157008    -9.86394362     0.00002121
+  H      y    -8.48971481    30.19187896     0.00000405
+  H      z     0.00003347    -0.00000538    23.16163278
+
+
+  Diamagnetic and paramagnetic contributions (ppm):
+  -------------------------------------------------
+
+                 Bx         By         Bz            Bx         By         Bz
+
+  H      x    36.7479   -18.1627     0.0000        2.2437     8.2987     0.0000
+  H      y   -15.0498    23.0411    -0.0000        6.5601     7.1508     0.0000
+  H      z     0.0000    -0.0000    12.9246        0.0000     0.0000    10.2370
+
+  Diamagnetic contribution:     24.237849         Paramagnetic:       6.543845
+
+
+  Antisymmetric and traceless symmetric parts (ppm):
+  --------------------------------------------------
+
+                 Bx         By         Bz            Bx         By         Bz
+
+  H      x     0.0000    -0.6871    -0.0000        8.2099    -9.1768     0.0000
+  H      y     0.6871     0.0000     0.0000       -9.1768    -0.5898    -0.0000
+  H      z     0.0000    -0.0000     0.0000        0.0000    -0.0000    -7.6201
+
+
+  Principal values and axes:
+  --------------------------
+
+  H          23.161633  =   30.78  -   7.62:    -0.000007 -0.000009  1.000000
+  H          24.414651  =   30.78  -   6.37:     0.532762  0.846265  0.000011
+  H          44.768799  =   30.78  +  13.99:     0.846265 -0.532762  0.000001
+
+
+                         +--------------------------------+
+                         ! Summary of chemical shieldings !
+                         +--------------------------------+
+
+@1  Definitions from J. Mason, Solid state Nuc. Magn. Res. 2 (1993), 285
+
+@1 London orbitals (GIAOs) has been used.
+
+@1 atom   shielding       dia      para     skew      span     (aniso     asym)
+@1 ----------------------------------------------------------------------------
+@1 O       326.0022  416.4017  -90.3995    0.7555   62.2119   58.4091    0.1953
+@1 H        30.0418   23.2352    6.8066    0.8604   20.9722   20.2404    0.1085
+@1 H        30.7817   24.2378    6.5438    0.8840   21.6072   20.9807    0.0896
+
+
+
+                         +--------------------------------+
+                         ! Summary of chemical shieldings !
+                         +--------------------------------+
+
+@2  Definitions from Smith, Palke, and Grieg, Concepts in Mag. Res. 4 (1992), 107
+
+@2 London orbitals (GIAOs) has been used.
+
+@2 atom   shielding       dia      para     aniso      asym        S        A
+@2 ----------------------------------------------------------------------------
+@2 O       326.0022  416.4017  -90.3995   58.4091    0.1953   58.7793    0.4133
+@2 H        30.0418   23.2352    6.8066   20.2404    0.1085   20.2800    0.6412
+@2 H        30.7817   24.2378    6.5438   20.9807    0.0896   21.0087    0.6871
+
+
+ Largest deviation from orthonormality of OMOs:0.157572E-10
+ - found for element  126  34
+
+
+       ********************************************************************
+       ****************** ABACUS - VIBRATIONAL AVERAGING ******************
+       ********************************************************************
+
+ Coordinate displaced in this calculation:    O    y
+ Displacement:                               +0.0500000000
+
+
+ CPU time statistics for ABACUS
+ ------------------------------
+
+ MAGINT     00:00:02      10 %
+ TWOTEX     00:00:01       8 %
+ RHSIDE     00:00:04      24 %
+ LINRES     00:00:09      54 %
+
+ TOTAL      00:00:16     100 %
+
+
+ >>>> Total CPU  time used in ABACUS:  16.14 seconds
+ >>>> Total wall time used in ABACUS:  18.29 seconds
+
+
+                   .-------------------------------------------.
+                   | End of Static Property Section (ABACUS) - |
+                   `-------------------------------------------'
+
+
+@  Geometry walk step no.   3:  Molecular energy =    -76.066496   Molecular gradient =  6.657018
+
+
+     @@>>>>>>>>>> Geometry walk iteration number:    4 <<<<<<<<<<
+
+
+
+
+ **************************************************************************************
+ ****************** Output of molecule and basis set info suppressed ******************
+ **************************************************************************************
+
+
+
+                     .---------------------------------------.
+                     | Starting in Integral Section (HERMIT) |
+                     `---------------------------------------'
+
+ >>>  Time used in GABGEN     is   0.13 seconds
+ >>>> Total CPU  time used in HERMIT:   0.43 seconds
+ >>>> Total wall time used in HERMIT:   0.44 seconds
+
+
+                        .----------------------------------.
+                        | End of Integral Section (HERMIT) |
+                        `----------------------------------'
+
+
+
+                   .--------------------------------------------.
+                   | Starting in Wave Function Section (SIRIUS) |
+                   `--------------------------------------------'
+
+
+ **********************************************************************
+ *SIRIUS* a direct, restricted step, second order MCSCF program       *
+ **********************************************************************
+
+ (Wave function specification suppressed here, see output above for initial geometry.)
+
+
+ >>>>> DIIS optimization of Hartree-Fock <<<<<
+
+ C1-DIIS algorithm; max error vectors =   10
+
+ Iter      Total energy        Error norm    Delta(E)  DIIS dim.
+ -----------------------------------------------------------------------------
+   1  Screening settings (-IFTHRS, DIFDEN)  -15    T
+   1    -36.5316649179        8.49980D+01    3.95D+01    1
+      Virial theorem: -V/T =      1.261019
+@      MULPOP O     -25.47; H      89.65; H     -64.18; 
+ -----------------------------------------------------------------------------
+   2  Screening settings (-IFTHRS, DIFDEN)   -8    F
+   2    -75.9816959980        2.16011D+00   -3.95D+01    2
+      Virial theorem: -V/T =      1.999114
+@      MULPOP O      -3.35; H       6.39; H      -3.04; 
+ -----------------------------------------------------------------------------
+   3  Screening settings (-IFTHRS, DIFDEN)   -8    T
+   3    -76.0510302722        6.54805D-01   -6.93D-02    3
+      Virial theorem: -V/T =      2.013006
+@      MULPOP O      -0.97; H       0.77; H       0.20; 
+ -----------------------------------------------------------------------------
+   4  Screening settings (-IFTHRS, DIFDEN)   -8    T
+   4    -76.0648833361        2.41699D-01   -1.39D-02    4
+      Virial theorem: -V/T =      1.995733
+@      MULPOP O      -0.93; H       0.54; H       0.39; 
+ -----------------------------------------------------------------------------
+   5  Screening settings (-IFTHRS, DIFDEN)   -8    T
+   5    -76.0672121154        2.17631D-02   -2.33D-03    5
+      Virial theorem: -V/T =      2.000546
+@      MULPOP O      -0.86; H       0.46; H       0.41; 
+ -----------------------------------------------------------------------------
+   6  Screening settings (-IFTHRS, DIFDEN)  -10    F
+   6    -76.0672730949        4.54538D-03   -6.10D-05    6
+      Virial theorem: -V/T =      2.000349
+@      MULPOP O      -0.85; H       0.44; H       0.41; 
+ -----------------------------------------------------------------------------
+   7  Screening settings (-IFTHRS, DIFDEN)  -10    T
+   7    -76.0672767773        1.15636D-03   -3.68D-06    7
+      Virial theorem: -V/T =      2.000330
+@      MULPOP O      -0.85; H       0.44; H       0.41; 
+ -----------------------------------------------------------------------------
+   8  Screening settings (-IFTHRS, DIFDEN)  -12    F
+   8    -76.0672769915        2.34813D-04   -2.14D-07    8
+      Virial theorem: -V/T =      2.000328
+@      MULPOP O      -0.85; H       0.44; H       0.41; 
+ -----------------------------------------------------------------------------
+   9  Screening settings (-IFTHRS, DIFDEN)  -12    T
+   9    -76.0672770003        4.01921D-05   -8.74D-09    9
+      Virial theorem: -V/T =      2.000329
+@      MULPOP O      -0.85; H       0.44; H       0.41; 
+ -----------------------------------------------------------------------------
+  10  Screening settings (-IFTHRS, DIFDEN)  -15    F
+  10    -76.0672770005        7.14570D-06   -2.24D-10   10
+      Virial theorem: -V/T =      2.000329
+@      MULPOP O      -0.85; H       0.44; H       0.41; 
+ -----------------------------------------------------------------------------
+  11  Screening settings (-IFTHRS, DIFDEN)  -15    T
+  11    -76.0672770005        1.53383D-06   -7.02D-12   10
+      Virial theorem: -V/T =      2.000329
+@      MULPOP O      -0.85; H       0.44; H       0.41; 
+ -----------------------------------------------------------------------------
+  12  Screening settings (-IFTHRS, DIFDEN)  -15    T
+  12    -76.0672770005        3.82906D-07   -2.27D-13   10
+      Virial theorem: -V/T =      2.000329
+@      MULPOP O      -0.85; H       0.44; H       0.41; 
+ -----------------------------------------------------------------------------
+  13  Screening settings (-IFTHRS, DIFDEN)  -15    T
+  13    -76.0672770005        7.67980D-08    0.00D+00   10
+      Virial theorem: -V/T =      2.000329
+@      MULPOP O      -0.85; H       0.44; H       0.41; 
+ -----------------------------------------------------------------------------
+  14  Screening settings (-IFTHRS, DIFDEN)  -15    T
+  14    -76.0672770005        1.01032D-08    8.53D-14   10
+      Virial theorem: -V/T =      2.000329
+@      MULPOP O      -0.85; H       0.44; H       0.41; 
+ -----------------------------------------------------------------------------
+  15  Screening settings (-IFTHRS, DIFDEN)  -15    T
+  15    -76.0672770005        2.02252D-09   -2.27D-13   10
+
+ *** DIIS converged in  15 iterations !
+@    Converged SCF energy, gradient:    -76.067277000512    2.02D-09
+   - total time used in SIRFCK :              0.00 seconds
+
+
+ *** SCF orbital energy analysis ***
+
+ Only the five lowest virtual orbital energies printed in each symmetry.
+
+ Number of electrons :   10
+ Orbital occupations :    5
+
+ Sym       Hartree-Fock orbital energies
+
+  1    -20.56037100    -1.35673934    -0.73150900    -0.58036047    -0.51050426
+         0.03284751     0.05268415     0.13673104     0.14130067     0.17852722
+
+    E(LUMO) :     0.03284751 au (symmetry 1)
+  - E(HOMO) :    -0.51050426 au (symmetry 1)
+  ------------------------------------------
+    gap     :     0.54335177 au
+
+ >>> Writing SIRIFC interface file <<<
+
+
+ Check ratio for geometry walk with converged SCF :
+
+
+
+ >>> step control for geometry walk (ABACUS interface)
+
+
+ (SIRSTP) Close to convergence, ratio set to one.
+ Energy difference; actual and predicted:   -7.81306D-04    0.00000D+00
+
+
+ *** GEOMETRY WALK STEP ACCEPTED.
+
+
+ >>>> CPU and wall time for SCF :       7.345      10.005
+
+
+                       .-----------------------------------.
+                       | >>> Final results from SIRIUS <<< |
+                       `-----------------------------------'
+
+
+@    Spin multiplicity:           1
+@    Spatial symmetry:            1
+@    Total charge of molecule:    0
+
+@    Final HF energy:             -76.067277000512                 
+@    Nuclear repulsion:             9.308873126851
+@    Electronic energy:           -85.376150127363
+
+@    Final gradient norm:           0.000000002023
+
+ 
+     Date and time (Linux)  : Wed Jun  4 11:31:31 2014
+     Host name              : c41-6.local                             
+
+
+
+ >>>> Total CPU  time used in SIRIUS :      7.35 seconds
+ >>>> Total wall time used in SIRIUS :     10.64 seconds
+
+ 
+     Date and time (Linux)  : Wed Jun  4 11:31:31 2014
+     Host name              : c41-6.local                             
+
+
+                     .---------------------------------------.
+                     | End of Wave Function Section (SIRIUS) |
+                     `---------------------------------------'
+
+
+
+        *****************************************************************
+        ******** Output from **EACH  input processing for ABACUS ********
+        *****************************************************************
+
+
+
+ The following molecular properties will be calculated in this run:
+ ------------------------------------------------------------------
+
+ Default print level:       -2
+
+      The molecular gradient
+      Geometry optimization
+      Nuclear magnetic shieldings
+      Direct calculation - no two-electron integrals written or read.
+      Two-electron integrals will be calculated in parallel
+      Natural orbital connection is used
+      for perturbation dependent basis sets.
+
+
+ Changes of defaults for RESPON in ABACUS:
+ -----------------------------------------
+
+ RESPON skipped in this run.
+
+ INFO: Changed THRP threshold used in integral transformation from  1.00D-15 to integral evaluation threshold  1.00D-12
+
+ Center of mass dipole origin  :    0.000000   -0.065884    0.000001
+
+ Center of mass gauge origin   :    0.000000   -0.065884    0.000001
+
+
+                 .------------------------------------------------.
+                 | Starting in Static Property Section (ABACUS) - |
+                 `------------------------------------------------'
+
+
+ 
+     Date and time (Linux)  : Wed Jun  4 11:31:31 2014
+     Host name              : c41-6.local                             
+
+
+            +---------------------------------------------------------+
+            ! Gradient elements calculated directly and from symmetry !
+            +---------------------------------------------------------+
+
+
+
+        Coordinate    Direct calc.     Tra.-rot. sym.   Difference
+        ----------------------------------------------------------
+
+        O    x        0.0120371368    -0.1514987278     0.1635358646
+        O    y       -4.4234322843    -4.4234322843    -0.0000000000
+        O    z       -0.0000391612    -0.0000403765     0.0000012152
+        H    x        2.6613331894     2.8248690539    -0.1635358646
+        H    z        0.0000380820     0.0000396420    -0.0000015600
+        H    z        0.0000010792     0.0000007345     0.0000003447
+
+
+
+ >>> WARNING from TRAROT:
+
+ Largest deviation from tra-rot symmetry is in gradient element  4:  1.64E-01
+
+
+   ***************************************************************************
+   ************************ FINAL RESULTS from ABACUS ************************
+   ***************************************************************************
+
+
+ 
+     Date and time (Linux)  : Wed Jun  4 11:31:47 2014
+     Host name              : c41-6.local                             
+
+ WARNING: warnings have been issued, please check the output above !
+
+
+  ******************************************************************************
+  ************************ ABACUS - CHEMICAL SHIELDINGS ************************
+  ******************************************************************************
+
+
+
+                 Shielding tensors in symmetry coordinates (ppm)
+                 -----------------------------------------------
+
+                       Bx             By             Bz
+
+        O    x   372.17327309    -5.46964279     0.00039598
+        O    y    -5.07950975   322.57125781     0.00009782
+        O    z     0.00039799     0.00009397   307.78218779
+
+        H    x    40.22732295    10.11711414     0.00020523
+        H    y     8.70259157    30.09170023     0.00011870
+        H    z     0.00019263     0.00012840    23.48278528
+
+        H    x    39.05761479    -9.74095229     0.00002499
+        H    y    -8.38382430    29.50689088     0.00000154
+        H    z     0.00003709    -0.00000774    22.83721917
+
+
+
+
+
+  Chemical shielding for O     :
+  ==============================
+
+
+  Shielding constant:    334.1756 ppm
+  Anisotropy:             57.8286 ppm
+  Asymmetry:               0.3692    
+
+  S parameter:            59.1279 ppm
+  A parameter:             0.1951 ppm
+
+
+  Total shielding tensor (ppm):
+  -----------------------------
+
+ String on input: "O       "
+ String on input: "O       "
+                    Bx             By             Bz
+
+  O      x   372.17327309    -5.46964279     0.00039598
+  O      y    -5.07950975   322.57125781     0.00009782
+  O      z     0.00039799     0.00009397   307.78218779
+
+
+  Diamagnetic and paramagnetic contributions (ppm):
+  -------------------------------------------------
+
+                 Bx         By         Bz            Bx         By         Bz
+
+  O      x   416.4582    -0.0114    -0.0000      -44.2850    -5.4582     0.0004
+  O      y    -0.0948   416.8582     0.0000       -4.9847   -94.2869     0.0001
+  O      z    -0.0000     0.0000   416.6514        0.0004     0.0001  -108.8692
+
+  Diamagnetic contribution:    416.655947         Paramagnetic:     -82.480374
+
+
+  Antisymmetric and traceless symmetric parts (ppm):
+  --------------------------------------------------
+
+                 Bx         By         Bz            Bx         By         Bz
+
+  O      x     0.0000    -0.1951    -0.0000       37.9977    -5.2746     0.0004
+  O      y     0.1951     0.0000     0.0000       -5.2746   -11.6043     0.0001
+  O      z     0.0000    -0.0000     0.0000        0.0004     0.0001   -26.3934
+
+
+  Principal values and axes:
+  --------------------------
+
+  O         307.782188  =  334.18  -  26.39:    -0.000007 -0.000009  1.000000
+  O         322.016573  =  334.18  -  12.16:     0.104585  0.994516  0.000010
+  O         372.727958  =  334.18  +  38.55:     0.994516 -0.104585  0.000006
+
+
+  Chemical shielding for H     :
+  ==============================
+
+
+  Shielding constant:     31.2673 ppm
+  Anisotropy:             21.8700 ppm
+  Asymmetry:               0.0678    
+
+  S parameter:            21.8868 ppm
+  A parameter:             0.7073 ppm
+
+
+  Total shielding tensor (ppm):
+  -----------------------------
+
+ String on input: "H       "
+ String on input: "H       "
+                    Bx             By             Bz
+
+  H      x    40.22732295    10.11711414     0.00020523
+  H      y     8.70259157    30.09170023     0.00011870
+  H      z     0.00019263     0.00012840    23.48278528
+
+
+  Diamagnetic and paramagnetic contributions (ppm):
+  -------------------------------------------------
+
+                 Bx         By         Bz            Bx         By         Bz
+
+  H      x    38.4044    18.0566     0.0003        1.8229    -7.9395    -0.0001
+  H      y    14.9899    22.4710     0.0002       -6.2873     7.6207    -0.0001
+  H      z     0.0003     0.0002    12.9436       -0.0001    -0.0001    10.5392
+
+  Diamagnetic contribution:     24.606304         Paramagnetic:       6.660966
+
+
+  Antisymmetric and traceless symmetric parts (ppm):
+  --------------------------------------------------
+
+                 Bx         By         Bz            Bx         By         Bz
+
+  H      x     0.0000     0.7073     0.0000        8.9601     9.4099     0.0002
+  H      y    -0.7073     0.0000    -0.0000        9.4099    -1.1756     0.0001
+  H      z    -0.0000     0.0000     0.0000        0.0002     0.0001    -7.7845
+
+
+  Principal values and axes:
+  --------------------------
+
+  H          23.482785  =   31.27  -   7.78:    -0.000007 -0.000009  1.000000
+  H          24.471760  =   31.27  -   6.80:    -0.512752  0.858537  0.000004
+  H          45.847264  =   31.27  +  14.58:     0.858537  0.512752  0.000010
+
+
+  Chemical shielding for H     :
+  ==============================
+
+
+  Shielding constant:     30.4672 ppm
+  Anisotropy:             21.0879 ppm
+  Asymmetry:               0.0855    
+
+  S parameter:            21.1135 ppm
+  A parameter:             0.6786 ppm
+
+
+  Total shielding tensor (ppm):
+  -----------------------------
+
+ String on input: "H       "
+ String on input: "H       "
+                    Bx             By             Bz
+
+  H      x    39.05761479    -9.74095229     0.00002499
+  H      y    -8.38382430    29.50689088     0.00000154
+  H      z     0.00003709    -0.00000774    22.83721917
+
+
+  Diamagnetic and paramagnetic contributions (ppm):
+  -------------------------------------------------
+
+                 Bx         By         Bz            Bx         By         Bz
+
+  H      x    36.8940   -17.3937     0.0000        2.1636     7.6528     0.0000
+  H      y   -14.6948    21.5490    -0.0000        6.3110     7.9579     0.0000
+  H      z     0.0000    -0.0000    12.2373       -0.0000     0.0000    10.6000
+
+  Diamagnetic contribution:     23.560060         Paramagnetic:       6.907181
+
+
+  Antisymmetric and traceless symmetric parts (ppm):
+  --------------------------------------------------
+
+                 Bx         By         Bz            Bx         By         Bz
+
+  H      x     0.0000    -0.6786    -0.0000        8.5904    -9.0624     0.0000
+  H      y     0.6786     0.0000     0.0000       -9.0624    -0.9604    -0.0000
+  H      z     0.0000    -0.0000     0.0000        0.0000    -0.0000    -7.6300
+
+
+  Principal values and axes:
+  --------------------------
+
+  H          22.837219  =   30.47  -   7.63:    -0.000007 -0.000009  1.000000
+  H          24.038671  =   30.47  -   6.43:     0.516633  0.856207  0.000011
+  H          44.525834  =   30.47  +  14.06:     0.856207 -0.516633  0.000001
+
+
+                         +--------------------------------+
+                         ! Summary of chemical shieldings !
+                         +--------------------------------+
+
+@1  Definitions from J. Mason, Solid state Nuc. Magn. Res. 2 (1993), 285
+
+@1 London orbitals (GIAOs) has been used.
+
+@1 atom   shielding       dia      para     skew      span     (aniso     asym)
+@1 ----------------------------------------------------------------------------
+@1 O       334.1756  416.6559  -82.4804    0.5617   64.9458   57.8286    0.3692
+@1 H        31.2673   24.6063    6.6610    0.9116   22.3645   21.8700    0.0678
+@1 H        30.4672   23.5601    6.9072    0.8892   21.6886   21.0879    0.0855
+
+
+
+                         +--------------------------------+
+                         ! Summary of chemical shieldings !
+                         +--------------------------------+
+
+@2  Definitions from Smith, Palke, and Grieg, Concepts in Mag. Res. 4 (1992), 107
+
+@2 London orbitals (GIAOs) has been used.
+
+@2 atom   shielding       dia      para     aniso      asym        S        A
+@2 ----------------------------------------------------------------------------
+@2 O       334.1756  416.6559  -82.4804   57.8286    0.3692   59.1279    0.1951
+@2 H        31.2673   24.6063    6.6610   21.8700    0.0678   21.8868    0.7073
+@2 H        30.4672   23.5601    6.9072   21.0879    0.0855   21.1135    0.6786
+
+
+ Largest deviation from orthonormality of OMOs:0.222355E-10
+ - found for element   34  34
+
+
+       ********************************************************************
+       ****************** ABACUS - VIBRATIONAL AVERAGING ******************
+       ********************************************************************
+
+ Coordinate displaced in this calculation:    O    y
+ Displacement:                               -0.0500000000
+
+
+ CPU time statistics for ABACUS
+ ------------------------------
+
+ MAGINT     00:00:02      10 %
+ TWOTEX     00:00:01       8 %
+ RHSIDE     00:00:04      24 %
+ LINRES     00:00:09      55 %
+ REST       00:00:01       6 %
+
+ TOTAL      00:00:16     100 %
+
+
+ >>>> Total CPU  time used in ABACUS:  16.34 seconds
+ >>>> Total wall time used in ABACUS:  16.69 seconds
+
+
+                   .-------------------------------------------.
+                   | End of Static Property Section (ABACUS) - |
+                   `-------------------------------------------'
+
+
+@  Geometry walk step no.   4:  Molecular energy =    -76.067277   Molecular gradient =  6.602048
+
+
+     @@>>>>>>>>>> Geometry walk iteration number:    5 <<<<<<<<<<
+
+
+
+
+ **************************************************************************************
+ ****************** Output of molecule and basis set info suppressed ******************
+ **************************************************************************************
+
+
+
+                     .---------------------------------------.
+                     | Starting in Integral Section (HERMIT) |
+                     `---------------------------------------'
+
+ >>>  Time used in GABGEN     is   0.13 seconds
+ >>>> Total CPU  time used in HERMIT:   0.43 seconds
+ >>>> Total wall time used in HERMIT:   0.44 seconds
+
+
+                        .----------------------------------.
+                        | End of Integral Section (HERMIT) |
+                        `----------------------------------'
+
+
+
+                   .--------------------------------------------.
+                   | Starting in Wave Function Section (SIRIUS) |
+                   `--------------------------------------------'
+
+
+ **********************************************************************
+ *SIRIUS* a direct, restricted step, second order MCSCF program       *
+ **********************************************************************
+
+ (Wave function specification suppressed here, see output above for initial geometry.)
+
+
+ >>>>> DIIS optimization of Hartree-Fock <<<<<
+
+ C1-DIIS algorithm; max error vectors =   10
+
+ Iter      Total energy        Error norm    Delta(E)  DIIS dim.
+ -----------------------------------------------------------------------------
+   1  Screening settings (-IFTHRS, DIFDEN)  -15    T
+   1    -51.8363153306        7.15803D+01    2.42D+01    1
+      Virial theorem: -V/T =      1.462386
+@      MULPOP O       0.06; H     -65.20; H      65.14; 
+ -----------------------------------------------------------------------------
+   2  Screening settings (-IFTHRS, DIFDEN)   -8    F
+   2    -75.8700388979        2.31563D+00   -2.40D+01    2
+      Virial theorem: -V/T =      1.969786
+@      MULPOP O       0.67; H      -4.04; H       3.37; 
+ -----------------------------------------------------------------------------
+   3  Screening settings (-IFTHRS, DIFDEN)   -8    T
+   3    -75.9961850301        1.35250D+00   -1.26D-01    3
+      Virial theorem: -V/T =      2.026430
+@      MULPOP O      -0.48; H       0.02; H       0.46; 
+ -----------------------------------------------------------------------------
+   4  Screening settings (-IFTHRS, DIFDEN)   -8    T
+   4    -76.0669047532        7.32810D-02   -7.07D-02    4
+      Virial theorem: -V/T =      1.999248
+@      MULPOP O      -0.80; H       0.30; H       0.49; 
+ -----------------------------------------------------------------------------
+   5  Screening settings (-IFTHRS, DIFDEN)  -10    F
+   5    -76.0673294811        2.18084D-02   -4.25D-04    5
+      Virial theorem: -V/T =      2.000184
+@      MULPOP O      -0.85; H       0.40; H       0.45; 
+ -----------------------------------------------------------------------------
+   6  Screening settings (-IFTHRS, DIFDEN)  -10    T
+   6    -76.0673818326        6.06420D-03   -5.24D-05    6
+      Virial theorem: -V/T =      1.999937
+@      MULPOP O      -0.86; H       0.41; H       0.45; 
+ -----------------------------------------------------------------------------
+   7  Screening settings (-IFTHRS, DIFDEN)  -10    T
+   7    -76.0673884883        1.18446D-03   -6.66D-06    7
+      Virial theorem: -V/T =      1.999901
+@      MULPOP O      -0.86; H       0.41; H       0.45; 
+ -----------------------------------------------------------------------------
+   8  Screening settings (-IFTHRS, DIFDEN)  -12    F
+   8    -76.0673887298        2.32904D-04   -2.41D-07    8
+      Virial theorem: -V/T =      1.999901
+@      MULPOP O      -0.86; H       0.41; H       0.45; 
+ -----------------------------------------------------------------------------
+   9  Screening settings (-IFTHRS, DIFDEN)  -12    T
+   9    -76.0673887388        3.22147D-05   -9.04D-09    9
+      Virial theorem: -V/T =      1.999901
+@      MULPOP O      -0.86; H       0.41; H       0.45; 
+ -----------------------------------------------------------------------------
+  10  Screening settings (-IFTHRS, DIFDEN)  -15    F
+  10    -76.0673887390        6.16478D-06   -1.33D-10   10
+      Virial theorem: -V/T =      1.999901
+@      MULPOP O      -0.86; H       0.41; H       0.45; 
+ -----------------------------------------------------------------------------
+  11  Screening settings (-IFTHRS, DIFDEN)  -15    T
+  11    -76.0673887390        1.11548D-06   -4.75D-12   10
+      Virial theorem: -V/T =      1.999901
+@      MULPOP O      -0.86; H       0.41; H       0.45; 
+ -----------------------------------------------------------------------------
+  12  Screening settings (-IFTHRS, DIFDEN)  -15    T
+  12    -76.0673887390        2.28666D-07   -5.68D-14   10
+      Virial theorem: -V/T =      1.999901
+@      MULPOP O      -0.86; H       0.41; H       0.45; 
+ -----------------------------------------------------------------------------
+  13  Screening settings (-IFTHRS, DIFDEN)  -15    T
+  13    -76.0673887390        3.80492D-08    0.00D+00   10
+      Virial theorem: -V/T =      1.999901
+@      MULPOP O      -0.86; H       0.41; H       0.45; 
+ -----------------------------------------------------------------------------
+  14  Screening settings (-IFTHRS, DIFDEN)  -15    T
+  14    -76.0673887390        5.52129D-09   -1.14D-13   10
+
+ *** DIIS converged in  14 iterations !
+@    Converged SCF energy, gradient:    -76.067388738970    5.52D-09
+   - total time used in SIRFCK :              0.00 seconds
+
+
+ *** SCF orbital energy analysis ***
+
+ Only the five lowest virtual orbital energies printed in each symmetry.
+
+ Number of electrons :   10
+ Orbital occupations :    5
+
+ Sym       Hartree-Fock orbital energies
+
+  1    -20.55974704    -1.36166605    -0.73276443    -0.58461127    -0.51157342
+         0.03283978     0.05286856     0.13615864     0.14087184     0.17913949
+
+    E(LUMO) :     0.03283978 au (symmetry 1)
+  - E(HOMO) :    -0.51157342 au (symmetry 1)
+  ------------------------------------------
+    gap     :     0.54441320 au
+
+ >>> Writing SIRIFC interface file <<<
+
+
+ Check ratio for geometry walk with converged SCF :
+
+
+
+ >>> step control for geometry walk (ABACUS interface)
+
+
+ (SIRSTP) Close to convergence, ratio set to one.
+ Energy difference; actual and predicted:   -1.11738D-04    0.00000D+00
+
+
+ *** GEOMETRY WALK STEP ACCEPTED.
+
+
+ >>>> CPU and wall time for SCF :       6.258       6.341
+
+
+                       .-----------------------------------.
+                       | >>> Final results from SIRIUS <<< |
+                       `-----------------------------------'
+
+
+@    Spin multiplicity:           1
+@    Spatial symmetry:            1
+@    Total charge of molecule:    0
+
+@    Final HF energy:             -76.067388738970                 
+@    Nuclear repulsion:             9.383501280502
+@    Electronic energy:           -85.450890019472
+
+@    Final gradient norm:           0.000000005521
+
+ 
+     Date and time (Linux)  : Wed Jun  4 11:31:55 2014
+     Host name              : c41-6.local                             
+
+
+
+ >>>> Total CPU  time used in SIRIUS :      6.26 seconds
+ >>>> Total wall time used in SIRIUS :      6.45 seconds
+
+ 
+     Date and time (Linux)  : Wed Jun  4 11:31:55 2014
+     Host name              : c41-6.local                             
+
+
+                     .---------------------------------------.
+                     | End of Wave Function Section (SIRIUS) |
+                     `---------------------------------------'
+
+
+
+        *****************************************************************
+        ******** Output from **EACH  input processing for ABACUS ********
+        *****************************************************************
+
+
+
+ The following molecular properties will be calculated in this run:
+ ------------------------------------------------------------------
+
+ Default print level:       -2
+
+      The molecular gradient
+      Geometry optimization
+      Nuclear magnetic shieldings
+      Direct calculation - no two-electron integrals written or read.
+      Two-electron integrals will be calculated in parallel
+      Natural orbital connection is used
+      for perturbation dependent basis sets.
+
+
+ Changes of defaults for RESPON in ABACUS:
+ -----------------------------------------
+
+ RESPON skipped in this run.
+
+ INFO: Changed THRP threshold used in integral transformation from  1.00D-15 to integral evaluation threshold  1.00D-12
+
+ Center of mass dipole origin  :    0.000000   -0.065884    0.000001
+
+ Center of mass gauge origin   :    0.000000   -0.065884    0.000001
+
+
+                 .------------------------------------------------.
+                 | Starting in Static Property Section (ABACUS) - |
+                 `------------------------------------------------'
+
+
+ 
+     Date and time (Linux)  : Wed Jun  4 11:31:55 2014
+     Host name              : c41-6.local                             
+
+
+            +---------------------------------------------------------+
+            ! Gradient elements calculated directly and from symmetry !
+            +---------------------------------------------------------+
+
+
+
+        Coordinate    Direct calc.     Tra.-rot. sym.   Difference
+        ----------------------------------------------------------
+
+        O    x       -0.0138168510     0.1392724394    -0.1530892904
+        O    y       -4.5443723291    -4.5443723291     0.0000000000
+        O    z       -0.0000401812    -0.0000394506    -0.0000007306
+        H    x        2.6710487701     2.5179594797     0.1530892904
+        H    z        0.0000401284     0.0000370095     0.0000031189
+        H    z        0.0000000528     0.0000024411    -0.0000023883
+
+
+
+ >>> WARNING from TRAROT:
+
+ Largest deviation from tra-rot symmetry is in gradient element  1:  1.53E-01
+
+
+   ***************************************************************************
+   ************************ FINAL RESULTS from ABACUS ************************
+   ***************************************************************************
+
+
+ 
+     Date and time (Linux)  : Wed Jun  4 11:32:12 2014
+     Host name              : c41-6.local                             
+
+ WARNING: warnings have been issued, please check the output above !
+
+
+  ******************************************************************************
+  ************************ ABACUS - CHEMICAL SHIELDINGS ************************
+  ******************************************************************************
+
+
+
+                 Shielding tensors in symmetry coordinates (ppm)
+                 -----------------------------------------------
+
+                       Bx             By             Bz
+
+        O    x   375.35250578     5.58067352     0.00048222
+        O    y     4.93592512   325.04459209     0.00014485
+        O    z     0.00047581     0.00014851   312.67697265
+
+        H    x    39.30972654     9.97118040     0.00020022
+        H    y     8.75618998    30.17371094     0.00012316
+        H    z     0.00018940     0.00013150    23.10372129
+
+        H    x    40.52098448   -10.38146939     0.00002293
+        H    y    -9.09120897    30.79818373    -0.00000015
+        H    z     0.00003443    -0.00000899    23.77339556
+
+
+
+
+
+  Chemical shielding for O     :
+  ==============================
+
+
+  Shielding constant:    337.6914 ppm
+  Anisotropy:             57.3073 ppm
+  Asymmetry:               0.3095    
+
+  S parameter:            58.2150 ppm
+  A parameter:             0.3224 ppm
+
+
+  Total shielding tensor (ppm):
+  -----------------------------
+
+ String on input: "O       "
+ String on input: "O       "
+                    Bx             By             Bz
+
+  O      x   375.35250578     5.58067352     0.00048222
+  O      y     4.93592512   325.04459209     0.00014485
+  O      z     0.00047581     0.00014851   312.67697265
+
+
+  Diamagnetic and paramagnetic contributions (ppm):
+  -------------------------------------------------
+
+                 Bx         By         Bz            Bx         By         Bz
+
+  O      x   416.6482     0.0076    -0.0000      -41.2957     5.5731     0.0005
+  O      y     0.0972   416.9750     0.0000        4.8388   -91.9304     0.0001
+  O      z    -0.0000     0.0000   416.9534        0.0005     0.0001  -104.2764
+
+  Diamagnetic contribution:    416.858861         Paramagnetic:     -79.167504
+
+
+  Antisymmetric and traceless symmetric parts (ppm):
+  --------------------------------------------------
+
+                 Bx         By         Bz            Bx         By         Bz
+
+  O      x     0.0000     0.3224     0.0000       37.6611     5.2583     0.0005
+  O      y    -0.3224     0.0000    -0.0000        5.2583   -12.6468     0.0001
+  O      z    -0.0000     0.0000     0.0000        0.0005     0.0001   -25.0144
+
+
+  Principal values and axes:
+  --------------------------
+
+  O         312.676973  =  337.69  -  25.01:    -0.000007 -0.000009  1.000000
+  O         324.500859  =  337.69  -  13.19:    -0.102856  0.994696  0.000008
+  O         375.896239  =  337.69  +  38.20:     0.994696  0.102856  0.000008
+
+
+  Chemical shielding for H     :
+  ==============================
+
+
+  Shielding constant:     30.8624 ppm
+  Anisotropy:             21.4468 ppm
+  Asymmetry:               0.0853    
+
+  S parameter:            21.4727 ppm
+  A parameter:             0.6075 ppm
+
+
+  Total shielding tensor (ppm):
+  -----------------------------
+
+ String on input: "H       "
+ String on input: "H       "
+                    Bx             By             Bz
+
+  H      x    39.30972654     9.97118040     0.00020022
+  H      y     8.75618998    30.17371094     0.00012316
+  H      z     0.00018940     0.00013150    23.10372129
+
+
+  Diamagnetic and paramagnetic contributions (ppm):
+  -------------------------------------------------
+
+                 Bx         By         Bz            Bx         By         Bz
+
+  H      x    37.0018    17.7381     0.0003        2.3080    -7.7669    -0.0001
+  H      y    14.9771    22.4319     0.0002       -6.2209     7.7418    -0.0001
+  H      z     0.0003     0.0002    12.6681       -0.0001    -0.0001    10.4357
+
+  Diamagnetic contribution:     24.033902         Paramagnetic:       6.828485
+
+
+  Antisymmetric and traceless symmetric parts (ppm):
+  --------------------------------------------------
+
+                 Bx         By         Bz            Bx         By         Bz
+
+  H      x     0.0000     0.6075     0.0000        8.4473     9.3637     0.0002
+  H      y    -0.6075     0.0000    -0.0000        9.3637    -0.6887     0.0001
+  H      z    -0.0000     0.0000     0.0000        0.0002     0.0001    -7.7587
+
+
+  Principal values and axes:
+  --------------------------
+
+  H          23.103721  =   30.86  -   7.76:    -0.000007 -0.000009  1.000000
+  H          24.323211  =   30.86  -   6.54:    -0.529881  0.848072  0.000004
+  H          45.160226  =   30.86  +  14.30:     0.848072  0.529881  0.000011
+
+
+  Chemical shielding for H     :
+  ==============================
+
+
+  Shielding constant:     31.6975 ppm
+  Anisotropy:             22.2669 ppm
+  Asymmetry:               0.0676    
+
+  S parameter:            22.2839 ppm
+  A parameter:             0.6451 ppm
+
+
+  Total shielding tensor (ppm):
+  -----------------------------
+
+ String on input: "H       "
+ String on input: "H       "
+                    Bx             By             Bz
+
+  H      x    40.52098448   -10.38146939     0.00002293
+  H      y    -9.09120897    30.79818373    -0.00000015
+  H      z     0.00003443    -0.00000899    23.77339556
+
+
+  Diamagnetic and paramagnetic contributions (ppm):
+  -------------------------------------------------
+
+                 Bx         By         Bz            Bx         By         Bz
+
+  H      x    38.5542   -18.4284     0.0000        1.9668     8.0469     0.0000
+  H      y   -15.2861    23.4240    -0.0000        6.1949     7.3742     0.0000
+  H      z     0.0000    -0.0000    13.4241       -0.0000     0.0000    10.3493
+
+  Diamagnetic contribution:     25.134097         Paramagnetic:       6.563424
+
+
+  Antisymmetric and traceless symmetric parts (ppm):
+  --------------------------------------------------
+
+                 Bx         By         Bz            Bx         By         Bz
+
+  H      x     0.0000    -0.6451    -0.0000        8.8235    -9.7363     0.0000
+  H      y     0.6451     0.0000     0.0000       -9.7363    -0.8993    -0.0000
+  H      z     0.0000    -0.0000     0.0000        0.0000    -0.0000    -7.9241
+
+
+  Principal values and axes:
+  --------------------------
+
+  H          23.773396  =   31.70  -   7.92:    -0.000007 -0.000009  1.000000
+  H          24.777052  =   31.70  -   6.92:     0.525968  0.850505  0.000011
+  H          46.542117  =   31.70  +  14.84:     0.850505 -0.525968  0.000001
+
+
+                         +--------------------------------+
+                         ! Summary of chemical shieldings !
+                         +--------------------------------+
+
+@1  Definitions from J. Mason, Solid state Nuc. Magn. Res. 2 (1993), 285
+
+@1 London orbitals (GIAOs) has been used.
+
+@1 atom   shielding       dia      para     skew      span     (aniso     asym)
+@1 ----------------------------------------------------------------------------
+@1 O       337.6914  416.8589  -79.1675    0.6259   63.2193   57.3073    0.3095
+@1 H        30.8624   24.0339    6.8285    0.8894   22.0565   21.4468    0.0853
+@1 H        31.6975   25.1341    6.5634    0.9118   22.7687   22.2669    0.0676
+
+
+
+                         +--------------------------------+
+                         ! Summary of chemical shieldings !
+                         +--------------------------------+
+
+@2  Definitions from Smith, Palke, and Grieg, Concepts in Mag. Res. 4 (1992), 107
+
+@2 London orbitals (GIAOs) has been used.
+
+@2 atom   shielding       dia      para     aniso      asym        S        A
+@2 ----------------------------------------------------------------------------
+@2 O       337.6914  416.8589  -79.1675   57.3073    0.3095   58.2150    0.3224
+@2 H        30.8624   24.0339    6.8285   21.4468    0.0853   21.4727    0.6075
+@2 H        31.6975   25.1341    6.5634   22.2669    0.0676   22.2839    0.6451
+
+
+ Largest deviation from orthonormality of OMOs:0.170696E-10
+ - found for element   34 126
+
+
+       ********************************************************************
+       ****************** ABACUS - VIBRATIONAL AVERAGING ******************
+       ********************************************************************
+
+ Coordinate displaced in this calculation:    O    z
+ Displacement:                               +0.0500000000
+
+
+ CPU time statistics for ABACUS
+ ------------------------------
+
+ MAGINT     00:00:02      10 %
+ TWOTEX     00:00:02      10 %
+ RHSIDE     00:00:04      23 %
+ LINRES     00:00:09      54 %
+
+ TOTAL      00:00:17     100 %
+
+
+ >>>> Total CPU  time used in ABACUS:  16.95 seconds
+ >>>> Total wall time used in ABACUS:  18.34 seconds
+
+
+                   .-------------------------------------------.
+                   | End of Static Property Section (ABACUS) - |
+                   `-------------------------------------------'
+
+
+@  Geometry walk step no.   5:  Molecular energy =    -76.067389   Molecular gradient =  6.721573
+
+
+     @@>>>>>>>>>> Geometry walk iteration number:    6 <<<<<<<<<<
+
+
+
+
+ **************************************************************************************
+ ****************** Output of molecule and basis set info suppressed ******************
+ **************************************************************************************
+
+
+
+                     .---------------------------------------.
+                     | Starting in Integral Section (HERMIT) |
+                     `---------------------------------------'
+
+ >>>  Time used in GABGEN     is   0.13 seconds
+ >>>> Total CPU  time used in HERMIT:   0.43 seconds
+ >>>> Total wall time used in HERMIT:   0.44 seconds
+
+
+                        .----------------------------------.
+                        | End of Integral Section (HERMIT) |
+                        `----------------------------------'
+
+
+
+                   .--------------------------------------------.
+                   | Starting in Wave Function Section (SIRIUS) |
+                   `--------------------------------------------'
+
+
+ **********************************************************************
+ *SIRIUS* a direct, restricted step, second order MCSCF program       *
+ **********************************************************************
+
+ (Wave function specification suppressed here, see output above for initial geometry.)
+
+
+ >>>>> DIIS optimization of Hartree-Fock <<<<<
+
+ C1-DIIS algorithm; max error vectors =   10
+
+ Iter      Total energy        Error norm    Delta(E)  DIIS dim.
+ -----------------------------------------------------------------------------
+   1  Screening settings (-IFTHRS, DIFDEN)  -15    T
+   1    -55.2314541003        6.44641D+01    2.08D+01    1
+      Virial theorem: -V/T =      1.543534
+@      MULPOP O       2.96; H      50.93; H     -53.89; 
+ -----------------------------------------------------------------------------
+   2  Screening settings (-IFTHRS, DIFDEN)   -8    F
+   2    -75.8107828952        2.53697D+00   -2.06D+01    2
+      Virial theorem: -V/T =      1.963839
+@      MULPOP O      -3.72; H       4.33; H      -0.60; 
+ -----------------------------------------------------------------------------
+   3  Screening settings (-IFTHRS, DIFDEN)   -8    T
+   3    -75.9606146244        1.61106D+00   -1.50D-01    3
+      Virial theorem: -V/T =      2.033274
+@      MULPOP O      -0.87; H       0.60; H       0.27; 
+ -----------------------------------------------------------------------------
+   4  Screening settings (-IFTHRS, DIFDEN)   -8    T
+   4    -76.0650102732        9.04588D-02   -1.04D-01    4
+      Virial theorem: -V/T =      2.000804
+@      MULPOP O      -0.96; H       0.55; H       0.41; 
+ -----------------------------------------------------------------------------
+   5  Screening settings (-IFTHRS, DIFDEN)  -10    F
+   5    -76.0656916961        2.65665D-02   -6.81D-04    5
+      Virial theorem: -V/T =      2.001778
+@      MULPOP O      -0.84; H       0.44; H       0.40; 
+ -----------------------------------------------------------------------------
+   6  Screening settings (-IFTHRS, DIFDEN)  -10    T
+   6    -76.0657878933        8.27243D-03   -9.62D-05    6
+      Virial theorem: -V/T =      2.001517
+@      MULPOP O      -0.83; H       0.43; H       0.40; 
+ -----------------------------------------------------------------------------
+   7  Screening settings (-IFTHRS, DIFDEN)  -10    T
+   7    -76.0657999947        1.27554D-03   -1.21D-05    7
+      Virial theorem: -V/T =      2.001463
+@      MULPOP O      -0.83; H       0.43; H       0.40; 
+ -----------------------------------------------------------------------------
+   8  Screening settings (-IFTHRS, DIFDEN)  -12    F
+   8    -76.0658002658        2.50737D-04   -2.71D-07    8
+      Virial theorem: -V/T =      2.001465
+@      MULPOP O      -0.83; H       0.43; H       0.40; 
+ -----------------------------------------------------------------------------
+   9  Screening settings (-IFTHRS, DIFDEN)  -12    T
+   9    -76.0658002759        3.91253D-05   -1.01D-08    9
+      Virial theorem: -V/T =      2.001466
+@      MULPOP O      -0.83; H       0.43; H       0.40; 
+ -----------------------------------------------------------------------------
+  10  Screening settings (-IFTHRS, DIFDEN)  -15    F
+  10    -76.0658002762        6.72524D-06   -2.47D-10   10
+      Virial theorem: -V/T =      2.001466
+@      MULPOP O      -0.83; H       0.43; H       0.40; 
+ -----------------------------------------------------------------------------
+  11  Screening settings (-IFTHRS, DIFDEN)  -15    T
+  11    -76.0658002762        1.29851D-06   -7.42D-12   10
+      Virial theorem: -V/T =      2.001466
+@      MULPOP O      -0.83; H       0.43; H       0.40; 
+ -----------------------------------------------------------------------------
+  12  Screening settings (-IFTHRS, DIFDEN)  -15    T
+  12    -76.0658002762        2.08986D-07   -3.98D-13   10
+      Virial theorem: -V/T =      2.001466
+@      MULPOP O      -0.83; H       0.43; H       0.40; 
+ -----------------------------------------------------------------------------
+  13  Screening settings (-IFTHRS, DIFDEN)  -15    T
+  13    -76.0658002762        3.57979D-08    2.84D-13   10
+      Virial theorem: -V/T =      2.001466
+@      MULPOP O      -0.83; H       0.43; H       0.40; 
+ -----------------------------------------------------------------------------
+  14  Screening settings (-IFTHRS, DIFDEN)  -15    T
+  14    -76.0658002762        8.23627D-09   -1.42D-13   10
+
+ *** DIIS converged in  14 iterations !
+@    Converged SCF energy, gradient:    -76.065800276195    8.24D-09
+   - total time used in SIRFCK :              0.00 seconds
+
+
+ *** SCF orbital energy analysis ***
+
+ Only the five lowest virtual orbital energies printed in each symmetry.
+
+ Number of electrons :   10
+ Orbital occupations :    5
+
+ Sym       Hartree-Fock orbital energies
+
+  1    -20.56520880    -1.34608919    -0.71508431    -0.57954627    -0.50908739
+         0.03230735     0.05262914     0.13821493     0.14373137     0.17625250
+
+    E(LUMO) :     0.03230735 au (symmetry 1)
+  - E(HOMO) :    -0.50908739 au (symmetry 1)
+  ------------------------------------------
+    gap     :     0.54139473 au
+
+ >>> Writing SIRIFC interface file <<<
+
+
+ Check ratio for geometry walk with converged SCF :
+
+
+
+ >>> step control for geometry walk (ABACUS interface)
+
+
+ (SIRSTP) Close to convergence, ratio set to one.
+ Energy difference; actual and predicted:    1.58846D-03    0.00000D+00
+
+
+ *** GEOMETRY WALK STEP ACCEPTED.
+
+
+ >>>> CPU and wall time for SCF :       6.283       6.320
+
+
+                       .-----------------------------------.
+                       | >>> Final results from SIRIUS <<< |
+                       `-----------------------------------'
+
+
+@    Spin multiplicity:           1
+@    Spatial symmetry:            1
+@    Total charge of molecule:    0
+
+@    Final HF energy:             -76.065800276195                 
+@    Nuclear repulsion:             9.090320763795
+@    Electronic energy:           -85.156121039990
+
+@    Final gradient norm:           0.000000008236
+
+ 
+     Date and time (Linux)  : Wed Jun  4 11:32:20 2014
+     Host name              : c41-6.local                             
+
+
+
+ >>>> Total CPU  time used in SIRIUS :      6.29 seconds
+ >>>> Total wall time used in SIRIUS :      6.33 seconds
+
+ 
+     Date and time (Linux)  : Wed Jun  4 11:32:20 2014
+     Host name              : c41-6.local                             
+
+
+                     .---------------------------------------.
+                     | End of Wave Function Section (SIRIUS) |
+                     `---------------------------------------'
+
+
+
+        *****************************************************************
+        ******** Output from **EACH  input processing for ABACUS ********
+        *****************************************************************
+
+
+
+ The following molecular properties will be calculated in this run:
+ ------------------------------------------------------------------
+
+ Default print level:       -2
+
+      The molecular gradient
+      Geometry optimization
+      Nuclear magnetic shieldings
+      Direct calculation - no two-electron integrals written or read.
+      Two-electron integrals will be calculated in parallel
+      Natural orbital connection is used
+      for perturbation dependent basis sets.
+
+
+ Changes of defaults for RESPON in ABACUS:
+ -----------------------------------------
+
+ RESPON skipped in this run.
+
+ INFO: Changed THRP threshold used in integral transformation from  1.00D-15 to integral evaluation threshold  1.00D-12
+
+ Center of mass dipole origin  :    0.000000   -0.065884    0.000001
+
+ Center of mass gauge origin   :    0.000000   -0.065884    0.000001
+
+
+                 .------------------------------------------------.
+                 | Starting in Static Property Section (ABACUS) - |
+                 `------------------------------------------------'
+
+
+ 
+     Date and time (Linux)  : Wed Jun  4 11:32:20 2014
+     Host name              : c41-6.local                             
+
+
+            +---------------------------------------------------------+
+            ! Gradient elements calculated directly and from symmetry !
+            +---------------------------------------------------------+
+
+
+
+        Coordinate    Direct calc.     Tra.-rot. sym.   Difference
+        ----------------------------------------------------------
+
+        O    x        0.0087295153    -0.1717970338     0.1805265491
+        O    y       -4.4637418228    -4.4637418228    -0.0000000000
+        O    z       -0.0000398660    -0.0000408746     0.0000010087
+        H    x        2.5286673210     2.7091938701    -0.1805265491
+        H    z        0.0000325018     0.0000391215    -0.0000066197
+        H    z        0.0000073641     0.0000017531     0.0000056110
+
+
+
+ >>> WARNING from TRAROT:
+
+ Largest deviation from tra-rot symmetry is in gradient element  4:  1.81E-01
+
+
+   ***************************************************************************
+   ************************ FINAL RESULTS from ABACUS ************************
+   ***************************************************************************
+
+
+ 
+     Date and time (Linux)  : Wed Jun  4 11:32:37 2014
+     Host name              : c41-6.local                             
+
+ WARNING: warnings have been issued, please check the output above !
+
+
+  ******************************************************************************
+  ************************ ABACUS - CHEMICAL SHIELDINGS ************************
+  ******************************************************************************
+
+
+
+                 Shielding tensors in symmetry coordinates (ppm)
+                 -----------------------------------------------
+
+                       Bx             By             Bz
+
+        O    x   360.91343831    -6.30186743     0.00038257
+        O    y    -5.71052421   308.17719964     0.00005882
+        O    z     0.00038551     0.00005272   297.34837941
+
+        H    x    38.74134545     9.62300619     0.00019450
+        H    y     8.13164899    29.54427357     0.00011491
+        H    z     0.00018122     0.00012515    22.91899341
+
+        H    x    37.66015133    -9.25404450     0.00002326
+        H    y    -7.83861381    29.01527041     0.00000554
+        H    z     0.00003591    -0.00000414    22.31798098
+
+
+
+
+
+  Chemical shielding for O     :
+  ==============================
+
+
+  Shielding constant:    322.1463 ppm
+  Anisotropy:             59.1638 ppm
+  Asymmetry:               0.2574    
+
+  S parameter:            59.8136 ppm
+  A parameter:             0.2957 ppm
+
+
+  Total shielding tensor (ppm):
+  -----------------------------
+
+ String on input: "O       "
+ String on input: "O       "
+                    Bx             By             Bz
+
+  O      x   360.91343831    -6.30186743     0.00038257
+  O      y    -5.71052421   308.17719964     0.00005882
+  O      z     0.00038551     0.00005272   297.34837941
+
+
+  Diamagnetic and paramagnetic contributions (ppm):
+  -------------------------------------------------
+
+                 Bx         By         Bz            Bx         By         Bz
+
+  O      x   416.3823    -0.0615     0.0000      -55.4689    -6.2404     0.0004
+  O      y    -0.0928   416.2020     0.0000       -5.6177  -108.0248     0.0001
+  O      z     0.0000     0.0000   416.0454        0.0004     0.0001  -118.6970
+
+  Diamagnetic contribution:    416.209903         Paramagnetic:     -94.063564
+
+
+  Antisymmetric and traceless symmetric parts (ppm):
+  --------------------------------------------------
+
+                 Bx         By         Bz            Bx         By         Bz
+
+  O      x     0.0000    -0.2957    -0.0000       38.7671    -6.0062     0.0004
+  O      y     0.2957     0.0000     0.0000       -6.0062   -13.9691     0.0001
+  O      z     0.0000    -0.0000     0.0000        0.0004     0.0001   -24.7980
+
+
+  Principal values and axes:
+  --------------------------
+
+  O         297.348379  =  322.15  -  24.80:    -0.000007 -0.000009  1.000000
+  O         307.501797  =  322.15  -  14.64:     0.111747  0.993737  0.000010
+  O         361.588841  =  322.15  +  39.44:     0.993737 -0.111747  0.000006
+
+
+  Chemical shielding for H     :
+  ==============================
+
+
+  Shielding constant:     30.4015 ppm
+  Anisotropy:             20.6084 ppm
+  Asymmetry:               0.0892    
+
+  S parameter:            20.6358 ppm
+  A parameter:             0.7457 ppm
+
+
+  Total shielding tensor (ppm):
+  -----------------------------
+
+ String on input: "H       "
+ String on input: "H       "
+                    Bx             By             Bz
+
+  H      x    38.74134545     9.62300619     0.00019450
+  H      y     8.13164899    29.54427357     0.00011491
+  H      z     0.00018122     0.00012515    22.91899341
+
+
+  Diamagnetic and paramagnetic contributions (ppm):
+  -------------------------------------------------
+
+                 Bx         By         Bz            Bx         By         Bz
+
+  H      x    36.6595    17.8328     0.0003        2.0818    -8.2098    -0.0001
+  H      y    14.7797    22.1557     0.0002       -6.6481     7.3886    -0.0001
+  H      z     0.0003     0.0002    12.4934       -0.0001    -0.0001    10.4256
+
+  Diamagnetic contribution:     23.769540         Paramagnetic:       6.631998
+
+
+  Antisymmetric and traceless symmetric parts (ppm):
+  --------------------------------------------------
+
+                 Bx         By         Bz            Bx         By         Bz
+
+  H      x     0.0000     0.7457     0.0000        8.3398     8.8773     0.0002
+  H      y    -0.7457     0.0000    -0.0000        8.8773    -0.8573     0.0001
+  H      z    -0.0000     0.0000     0.0000        0.0002     0.0001    -7.4825
+
+
+  Principal values and axes:
+  --------------------------
+
+  H          22.918993  =   30.40  -   7.48:    -0.000007 -0.000009  1.000000
+  H          24.145136  =   30.40  -   6.26:    -0.519634  0.854389  0.000004
+  H          44.140483  =   30.40  +  13.74:     0.854389  0.519634  0.000011
+
+
+  Chemical shielding for H     :
+  ==============================
+
+
+  Shielding constant:     29.6645 ppm
+  Anisotropy:             19.8757 ppm
+  Asymmetry:               0.1089    
+
+  S parameter:            19.9149 ppm
+  A parameter:             0.7077 ppm
+
+
+  Total shielding tensor (ppm):
+  -----------------------------
+
+ String on input: "H       "
+ String on input: "H       "
+                    Bx             By             Bz
+
+  H      x    37.66015133    -9.25404450     0.00002326
+  H      y    -7.83861381    29.01527041     0.00000554
+  H      z     0.00003591    -0.00000414    22.31798098
+
+
+  Diamagnetic and paramagnetic contributions (ppm):
+  -------------------------------------------------
+
+                 Bx         By         Bz            Bx         By         Bz
+
+  H      x    35.2335   -17.1599     0.0000        2.4266     7.9058     0.0000
+  H      y   -14.4740    21.2628    -0.0000        6.6354     7.7525     0.0000
+  H      z     0.0000    -0.0000    11.8371        0.0000     0.0000    10.4809
+
+  Diamagnetic contribution:     22.777803         Paramagnetic:       6.886665
+
+
+  Antisymmetric and traceless symmetric parts (ppm):
+  --------------------------------------------------
+
+                 Bx         By         Bz            Bx         By         Bz
+
+  H      x     0.0000    -0.7077    -0.0000        7.9957    -8.5463     0.0000
+  H      y     0.7077     0.0000     0.0000       -8.5463    -0.6492     0.0000
+  H      z     0.0000    -0.0000     0.0000        0.0000     0.0000    -7.3465
+
+
+  Principal values and axes:
+  --------------------------
+
+  H          22.317981  =   29.66  -   7.35:    -0.000007 -0.000009  1.000000
+  H          23.760486  =   29.66  -   5.90:     0.523772  0.851858  0.000011
+  H          42.914936  =   29.66  +  13.25:     0.851858 -0.523772  0.000001
+
+
+                         +--------------------------------+
+                         ! Summary of chemical shieldings !
+                         +--------------------------------+
+
+@1  Definitions from J. Mason, Solid state Nuc. Magn. Res. 2 (1993), 285
+
+@1 London orbitals (GIAOs) has been used.
+
+@1 atom   shielding       dia      para     skew      span     (aniso     asym)
+@1 ----------------------------------------------------------------------------
+@1 O       322.1463  416.2099  -94.0636    0.6839   64.2405   59.1638    0.2574
+@1 H        30.4015   23.7695    6.6320    0.8844   21.2215   20.6084    0.0892
+@1 H        29.6645   22.7778    6.8867    0.8599   20.5970   19.8757    0.1089
+
+
+
+                         +--------------------------------+
+                         ! Summary of chemical shieldings !
+                         +--------------------------------+
+
+@2  Definitions from Smith, Palke, and Grieg, Concepts in Mag. Res. 4 (1992), 107
+
+@2 London orbitals (GIAOs) has been used.
+
+@2 atom   shielding       dia      para     aniso      asym        S        A
+@2 ----------------------------------------------------------------------------
+@2 O       322.1463  416.2099  -94.0636   59.1638    0.2574   59.8136    0.2957
+@2 H        30.4015   23.7695    6.6320   20.6084    0.0892   20.6358    0.7457
+@2 H        29.6645   22.7778    6.8867   19.8757    0.1089   19.9149    0.7077
+
+
+ Largest deviation from orthonormality of OMOs:0.364398E-11
+ - found for element   34  18
+
+
+       ********************************************************************
+       ****************** ABACUS - VIBRATIONAL AVERAGING ******************
+       ********************************************************************
+
+ Coordinate displaced in this calculation:    O    z
+ Displacement:                               -0.0500000000
+
+ All displacements are now done - numerical differentiation is complete.
+
+ Dipole moment second derivatives:
+ ---------------------------------
+     Mode          X                Y                Z
+       1          0.146588        -0.020831         0.000001
+       2         -0.246482        -0.070804        -0.000002
+       3          0.099817        -0.027952         0.000000
+
+ Nuclear shielding tensor second derivatives for: O     
+ --------------------------------------------------------
+
+ Mode   Bxmx    Bxmy    Bxmz    Bymx    Bymy    Bymz    Bzmx    Bzmy    Bzmz
+   1  -121.237 201.029   0.002   4.994 -178.942  -0.001   0.001   0.001 -114.244
+   2  -203.896 108.869   0.000 283.492 -217.947   0.000   0.002   0.000 -70.604
+   3  -297.211 -309.849  -0.003 -288.488 -338.079  -0.003  -0.002  -0.002 -265.203
+
+ Nuclear shielding tensor second derivatives for: H     
+ --------------------------------------------------------
+
+ Mode   Bxmx    Bxmy    Bxmz    Bymx    Bymy    Bymz    Bzmx    Bzmy    Bzmz
+   1     2.659   2.155  -0.000   6.267  20.053   0.000   0.000   0.000   7.231
+   2    26.850  -3.424   0.000 -10.586   1.465  -0.000   0.000  -0.000  11.990
+   3    -9.418  -6.946  -0.000 -10.319  -7.173  -0.000  -0.000  -0.000   2.699
+
+ Nuclear shielding tensor second derivatives for: H     
+ --------------------------------------------------------
+
+ Mode   Bxmx    Bxmy    Bxmz    Bymx    Bymy    Bymz    Bzmx    Bzmy    Bzmz
+   1   -12.303   5.373  -0.000  14.805  -1.787   0.000   0.000   0.000  -1.357
+   2   -10.175  12.667   0.000   6.036 -14.860  -0.000   0.000  -0.000  -6.847
+   3    42.605  -9.847  -0.000  -6.212  31.014  -0.000   0.000  -0.000  30.162
+
+
+          *************************************************************
+          ******** Vibrationally averaged molecular properties ********
+          *************************************************************
+
+
+
+  Vibrational Frequencies
+  -----------------------
+
+   mode   cm-1     hartrees 
+  --------------------------
+   1   3107.25     0.014158
+   2   3112.59     0.014182
+   3   3982.16     0.018144
+
+
+
+
+----------------------------------------------------------
+ Vibrational corrections for temperature T =   300.000000 K
+----------------------------------------------------------
+
+
+                                Dipole moment (au)
+                                ------------------
+
+    Effective geometry       <P^(0)_2>_eff      Vibrationally corrected
+ -----------------------------------------------------------------------
+
+  X        0.00000002           -0.00020910           -0.00020908
+  Y        0.76546330           -0.00109777            0.76436553
+  Z        0.00000681           -0.00000001            0.00000680
+
+
+                    Nuclear magnetic shielding constants (ppm)
+                    ------------------------------------------
+
+
+Atom : O     
+    Effective geometry       <P^(0)_2>_eff      Vibrationally corrected
+ -----------------------------------------------------------------------
+
+ Bxmx      368.50448521           -5.39269172          363.11179349
+ Bymx        0.00001314            0.60925884            0.60927197
+ Bzmx        0.00043485            0.00001344            0.00044829
+ Bxmy        0.00001176            0.65811522            0.65812698
+ Bymy      317.03349460           -6.39646515          310.63702945
+ Bzmy        0.00010442           -0.00000079            0.00010363
+ Bxmz        0.00043428           -0.00000362            0.00043066
+ Bymz        0.00010415           -0.00002423            0.00007992
+ Bzmz      305.34417947           -3.79402780          301.55015167
+
+Atom : H     
+    Effective geometry       <P^(0)_2>_eff      Vibrationally corrected
+ -----------------------------------------------------------------------
+
+ Bxmx       39.03730873            0.21421435           39.25152309
+ Bymx        9.80999162           -0.11965998            9.69033164
+ Bzmx        0.00019757           -0.00000073            0.00019684
+ Bxmy        8.45260225           -0.06474629            8.38785596
+ Bymy       29.86795860            0.15420674           30.02216534
+ Bzmy        0.00011918           -0.00000051            0.00011867
+ Bxmz        0.00018549           -0.00000054            0.00018496
+ Bymz        0.00012852           -0.00000119            0.00012733
+ Bzmz       23.00798383            0.20638983           23.21437367
+
+Atom : H     
+    Effective geometry       <P^(0)_2>_eff      Vibrationally corrected
+ -----------------------------------------------------------------------
+
+ Bxmx       39.03731135            0.10446593           39.14177728
+ Bymx       -9.80999242            0.15483215           -9.65516027
+ Bzmx        0.00002308            0.00000054            0.00002362
+ Bxmy       -8.45260289            0.10010870           -8.35249419
+ Bymy       29.86795976            0.07341666           29.94137641
+ Bzmy        0.00000281           -0.00000071            0.00000210
+ Bxmz        0.00003517            0.00000056            0.00003573
+ Bymz       -0.00000652            0.00000049           -0.00000603
+ Bzmz       23.00798522            0.14862214           23.15660736
+
+ Numerical differentiation complete.
+
+
+ CPU time statistics for ABACUS
+ ------------------------------
+
+ MAGINT     00:00:02      10 %
+ TWOTEX     00:00:01       8 %
+ RHSIDE     00:00:04      24 %
+ LINRES     00:00:09      55 %
+ REST       00:00:01       6 %
+
+ TOTAL      00:00:17     100 %
+
+
+ >>>> Total CPU  time used in ABACUS:  16.66 seconds
+ >>>> Total wall time used in ABACUS:  17.94 seconds
+
+
+                   .-------------------------------------------.
+                   | End of Static Property Section (ABACUS) - |
+                   `-------------------------------------------'
+
+
+@  Geometry walk step no.   6:  Molecular energy =    -76.065800   Molecular gradient =  6.536826
+
+
+                          .-----------------------------.
+                          | Geometry walk has converged |
+                          `-----------------------------'
+
+
+
+ **************************************************************************************
+ ****************** Output of molecule and basis set info suppressed ******************
+ **************************************************************************************
+
+
+
+                     .---------------------------------------.
+                     | Starting in Integral Section (HERMIT) |
+                     `---------------------------------------'
+
+ >>>  Time used in GABGEN     is   0.13 seconds
+ >>>> Total CPU  time used in HERMIT:   0.43 seconds
+ >>>> Total wall time used in HERMIT:   0.44 seconds
+
+
+                        .----------------------------------.
+                        | End of Integral Section (HERMIT) |
+                        `----------------------------------'
+
+
+
+                   .--------------------------------------------.
+                   | Starting in Wave Function Section (SIRIUS) |
+                   `--------------------------------------------'
+
+
+ **********************************************************************
+ *SIRIUS* a direct, restricted step, second order MCSCF program       *
+ **********************************************************************
+
+ (Wave function specification suppressed here, see output above for initial geometry.)
+
+
+ >>>>> DIIS optimization of Hartree-Fock <<<<<
+
+ C1-DIIS algorithm; max error vectors =   10
+
+ Iter      Total energy        Error norm    Delta(E)  DIIS dim.
+ -----------------------------------------------------------------------------
+   1  Screening settings (-IFTHRS, DIFDEN)  -15    T
+   1     49.9430944584        2.87032D+02    1.26D+02    1
+      Virial theorem: -V/T =      0.481120
+@      MULPOP O      12.73; H     -57.71; H      44.98; 
+ -----------------------------------------------------------------------------
+   2  Screening settings (-IFTHRS, DIFDEN)   -8    F
+   2    -71.8108668232        1.91495D+01   -1.22D+02    2
+      Virial theorem: -V/T =      2.140215
+@      MULPOP O     -20.68; H      31.25; H     -10.58; 
+ -----------------------------------------------------------------------------
+   3  Screening settings (-IFTHRS, DIFDEN)   -8    T
+   3    -83.8680549950        2.25741D+01   -1.21D+01    3
+      Virial theorem: -V/T =      1.872111
+@      MULPOP O      -5.05; H      29.51; H     -24.46; 
+ -----------------------------------------------------------------------------
+   4  Screening settings (-IFTHRS, DIFDEN)   -8    T
+   4    -88.0519177851        5.40919D+00   -4.18D+00    4
+      Virial theorem: -V/T =      2.034982
+@      MULPOP O      -8.96; H      35.31; H     -26.35; 
+ -----------------------------------------------------------------------------
+   5  Screening settings (-IFTHRS, DIFDEN)   -8    T
+   5    -88.4447457981        1.52256D-01   -3.93D-01    5
+      Virial theorem: -V/T =      2.079436
+@      MULPOP O      -9.78; H      35.68; H     -25.90; 
+ -----------------------------------------------------------------------------
+   6  Screening settings (-IFTHRS, DIFDEN)  -10    F
+   6    -88.4454938987        6.83544D-02   -7.48D-04    6
+      Virial theorem: -V/T =      2.081168
+@      MULPOP O      -9.76; H      35.66; H     -25.91; 
+ -----------------------------------------------------------------------------
+   7  Screening settings (-IFTHRS, DIFDEN)  -10    T
+   7    -88.4455435264        1.04130D-02   -4.96D-05    7
+      Virial theorem: -V/T =      2.080756
+@      MULPOP O      -9.75; H      35.65; H     -25.90; 
+ -----------------------------------------------------------------------------
+   8  Screening settings (-IFTHRS, DIFDEN)  -10    T
+   8    -88.4455456625        1.33077D-03   -2.14D-06    8
+      Virial theorem: -V/T =      2.080670
+@      MULPOP O      -9.75; H      35.65; H     -25.89; 
+ -----------------------------------------------------------------------------
+   9  Screening settings (-IFTHRS, DIFDEN)  -12    F
+   9    -88.4455457197        1.98031D-04   -5.73D-08    9
+      Virial theorem: -V/T =      2.080678
+@      MULPOP O      -9.75; H      35.65; H     -25.89; 
+ -----------------------------------------------------------------------------
+  10  Screening settings (-IFTHRS, DIFDEN)  -12    T
+  10    -88.4455457222        2.39143D-05   -2.46D-09   10
+      Virial theorem: -V/T =      2.080679
+@      MULPOP O      -9.75; H      35.65; H     -25.89; 
+ -----------------------------------------------------------------------------
+  11  Screening settings (-IFTHRS, DIFDEN)  -15    F
+  11    -88.4455457255        2.83183D-06   -3.33D-09   10
+      Virial theorem: -V/T =      2.080679
+@      MULPOP O      -9.75; H      35.65; H     -25.89; 
+ -----------------------------------------------------------------------------
+  12  Screening settings (-IFTHRS, DIFDEN)  -15    T
+  12    -88.4455457255        5.00728D-07   -2.20D-11   10
+      Virial theorem: -V/T =      2.080679
+@      MULPOP O      -9.75; H      35.65; H     -25.89; 
+ -----------------------------------------------------------------------------
+  13  Screening settings (-IFTHRS, DIFDEN)  -15    T
+  13    -88.4455457255        5.23805D-08    2.52D-11   10
+      Virial theorem: -V/T =      2.080679
+@      MULPOP O      -9.75; H      35.65; H     -25.89; 
+ -----------------------------------------------------------------------------
+  14  Screening settings (-IFTHRS, DIFDEN)  -15    T
+  14    -88.4455457255        3.07056D-09   -1.20D-11   10
+
+ *** DIIS converged in  14 iterations !
+@    Converged SCF energy, gradient:    -88.445545725528    3.07D-09
+   - total time used in SIRFCK :              0.00 seconds
+
+
+ *** SCF orbital energy analysis ***
+
+ Only the five lowest virtual orbital energies printed in each symmetry.
+
+ Number of electrons :   10
+ Orbital occupations :    5
+
+ Sym       Hartree-Fock orbital energies
+
+  1    -22.89963652    -5.19365561    -3.58498652    -2.53260598    -2.34851082
+        -1.48042118    -1.03059999    -0.71779357    -0.65610546    -0.57730650
+
+    E(LUMO) :    -1.48042118 au (symmetry 1)
+  - E(HOMO) :    -2.34851082 au (symmetry 1)
+  ------------------------------------------
+    gap     :     0.86808964 au
+
+ >>> Writing SIRIFC interface file <<<
+
+
+ Check ratio for geometry walk with converged SCF :
+
+
+
+ >>> step control for geometry walk (ABACUS interface)
+
+
+ (SIRSTP) Close to convergence, ratio set to one.
+ Energy difference; actual and predicted:   -1.23797D+01    0.00000D+00
+
+
+ *** GEOMETRY WALK STEP ACCEPTED.
+
+
+ >>>> CPU and wall time for SCF :       6.432       6.471
+
+
+                       .-----------------------------------.
+                       | >>> Final results from SIRIUS <<< |
+                       `-----------------------------------'
+
+
+@    Spin multiplicity:           1
+@    Spatial symmetry:            1
+@    Total charge of molecule:    0
+
+@    Final HF energy:             -88.445545725528                 
+@    Nuclear repulsion:             9.233264009559
+@    Electronic energy:           -97.678809735087
+
+@    Final gradient norm:           0.000000003071
+
+ 
+     Date and time (Linux)  : Wed Jun  4 11:32:45 2014
+     Host name              : c41-6.local                             
+
+
+
+ >>>> Total CPU  time used in SIRIUS :      6.44 seconds
+ >>>> Total wall time used in SIRIUS :      6.48 seconds
+
+ 
+     Date and time (Linux)  : Wed Jun  4 11:32:45 2014
+     Host name              : c41-6.local                             
+
+
+                     .---------------------------------------.
+                     | End of Wave Function Section (SIRIUS) |
+                     `---------------------------------------'
+
+
+ INFO: Changed THRP threshold used in integral transformation from  1.00D-15 to integral evaluation threshold  1.00D-12
+
+ Center of mass dipole origin  :    0.000000   -0.065884    0.000001
+
+ Center of mass gauge origin   :    0.000000   -0.065884    0.000001
+
+
+                 .------------------------------------------------.
+                 | Starting in Static Property Section (ABACUS) - |
+                 `------------------------------------------------'
+
+
+ 
+     Date and time (Linux)  : Wed Jun  4 11:32:45 2014
+     Host name              : c41-6.local                             
+
+
+   ***************************************************************************
+   ************************ FINAL RESULTS from ABACUS ************************
+   ***************************************************************************
+
+
+ 
+     Date and time (Linux)  : Wed Jun  4 11:32:45 2014
+     Host name              : c41-6.local                             
+
+
+ CPU time statistics for ABACUS
+ ------------------------------
+
+
+
+
+ >>>> Total CPU  time used in ABACUS:   0.27 seconds
+ >>>> Total wall time used in ABACUS:   0.31 seconds
+
+
+                   .-------------------------------------------.
+                   | End of Static Property Section (ABACUS) - |
+                   `-------------------------------------------'
+
+ >>>> Total CPU  time used in DALTON:  2 minutes 58 seconds
+ >>>> Total wall time used in DALTON:  3 minutes 22 seconds
+
+ 
+     Date and time (Linux)  : Wed Jun  4 11:32:45 2014
+     Host name              : c41-6.local                             

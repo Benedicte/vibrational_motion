@@ -1,7 +1,7 @@
 from Property import Property
 import Molecule as mol
 import read_input as ri
-from numpy import array, zeros, absolute, add, sqrt
+from numpy import array, zeros, absolute, add, sqrt, transpose
 import pydoc
 
 class Property_1_Tensor(Property):
@@ -18,13 +18,16 @@ class Property_1_Tensor(Property):
     
     def __call__(self): 
         
-        pre_property = self.get_preproperty()
-        self.freq = 0.0185
+        #dipole = ri.read_dipole_hessian(self.molecule.input_name + "/dh", self.molecule.n_coordinates)        
+        #dipole_norm = self.molecule.to_normal_coordinates_2D(dipole)
+        #print(dipole_norm)
+        #self.freq = 0.0185
+        
+        pre_property = self.get_preproperty_ana[1]()
+        
         self.uncorrected_property = self.get_uncorrected_property()
         eigenvalues = self.molecule.eigenvalues
         correction_property = zeros((3))
-        #eigenvalues = absolute(eigenvalues)
-        eigenvalues = array([0.00034225]) 
         
         for i in range(self.molecule.number_of_normal_modes):
             factor = 1/(sqrt(eigenvalues[i])) # the reduced one
@@ -37,22 +40,55 @@ class Property_1_Tensor(Property):
         self.write_to_file(self.property_name)
         
         print("0th order correction")
+        print(self.correction_property)
+        
+        print("0th order corrected")
         print self.corrected_property
         
-        qff = self.get_quartic_force_field()
-        qff_norm = self.molecule.to_normal_coordinates_4D(qff)
+        #qff = self.get_quartic_force_field()
+        #qff_norm = self.molecule.to_normal_coordinates_4D(qff)
         
-        quartic_correction = self.quartic_precision(pre_property, qff_norm)
+        #quartic_correction = self.quartic_precision(pre_property, qff_norm)
         
-        second_corrrection = self.corrected_property + quartic_correction 
+        #second_corrrection = self.corrected_property + quartic_correction 
         
-        print("Second order Corrected")
-        print(second_corrrection)
+        #print("Second order Corrected")
+        #print(second_corrrection)
         
         
         return self.correction_property, self.corrected_property
     
-    def quartic_precision(self, prop_deriv, qff_norm): # Not even close to complete
+    def first_order_eq(self,freq, cff_norm, prop_grad):
+        
+        pre_property = self.get_preproperty()
+        dipole = ri.read_dipole_hessian(self.molecule.input_name + "/dipole", self.molecule.n_coordinates)        
+        dipole_norm = self.molecule.to_normal_coordinates_2D(dipole)
+        
+        self.uncorrected_property = self.get_uncorrected_property()
+        eigenvalues = self.molecule.eigenvalues
+        
+        first_order_correction = zeros((3))
+        a = zeros((self.molecule.number_of_normal_modes))
+        
+        for n in range(3):
+            for i in range(self.molecule.number_of_normal_modes):
+                factor = -1/4.0*sqrt(2.0)*freq[i]**(3/2.0)
+                for m in range(self.molecule.number_of_normal_modes):
+                    a[i] = a[i] + factor*cff_norm[i,m,m]/freq[m]
+                    
+            for i in range(self.molecule.number_of_normal_modes):
+                first_order_correction[n] = first_order_correction[n] + sqrt(2.0)*propgrad[n,i]*a[i]/sqrt(freq[i])
+
+        self.correction_property = correction_property * self.prefactor
+        self.corrected_property = add(self.uncorrected_property, first_order_correction)
+        
+        print("0th order correction")
+        print(self.correction_property)
+        
+        print("0th order corrected")
+        print self.corrected_property
+        
+    def quartic_precision(self):
         """" Calculates the corrections to the dipole moment
         uncorrected_property: The uncorrected dipole moment
         pre_property: The second derivative of the dipole moment
@@ -60,13 +96,14 @@ class Property_1_Tensor(Property):
         moment as np.arrays correcting to a second order perurbation 
         of the wavefunction"""
         
-        prop_grad = [0]
+        prop_grad = self.get_gradient()
+        prop_deriv = self.get_preproperty_ana()[0]
         
-        cff_norm = array([[[0.00002662753]]])
-        self.freq = array([0.0185])
+        cff_cart = ri.read_cubic_force_field_anal(self.molecule.input_name + 'cubic_force_field', self.molecule.n_coordinates)
+        cff_norm = molecule.to_normal_coordinates_3D(cff_cart)
         
-        self.freq =array([0.00034225])
-        qff_norm = array([[[[10.345714]]]])
+        qff_cart = ri.read_quartic_force_field(self.molecule.input_name + "quartic_force_field", self.molecule.n_coordinates)
+        qff_norm = molecule.to_normal_coordinates_4D(qff_cart)
         
         first_a3 = zeros((self.molecule.number_of_normal_modes, self.molecule.number_of_normal_modes, self.molecule.number_of_normal_modes))
         second_a2 = zeros((self.molecule.number_of_normal_modes, self.molecule.number_of_normal_modes, self.molecule.number_of_normal_modes))
@@ -109,21 +146,75 @@ class Property_1_Tensor(Property):
         
         print("2nd order correction")
         print quartic_correction        
+        
         return quartic_correction
             
     def get_preproperty(self):
-        pre_property = ri.read_2d_input(self.molecule.input_name + "/SHIELD", self.molecule.number_of_normal_modes)
+        pre_property = ri.read_2d_input(self.molecule.input_name + "/MOLQUAD", self.molecule.number_of_normal_modes)
         return pre_property
+
+    def get_preproperty_ana(self):
         
-    def get_prop_grad(self):
-        prop_grad = 5
-        return prop_grad
+        pre_property_cart = ri.read_dipole_hessian("input_" + self.molecule.name + "/"+"dh", self.molecule.n_coordinates)
+        pre_property_full, pre_property_diag = self.to_normal_coordinates_2D(pre_property_cart)
+        return(pre_property_full, pre_property_diag)
+
+    def get_gradient(self):
+        gradient_cart = ri.read_dipole_gradient("input_" + self.molecule.name + "/"+"dg", self.molecule.n_coordinates)
+        gradient_norm = self.to_normal_coordinates_1D(gradient_cart)
+        
+        return gradient_norm
     
     def get_uncorrected_property(self):
-        uncorrected_property = ri.read_DALTON_values_2d(self.molecule.input_name + "SHIELD")[0]
+        uncorrected_property = ri.read_DALTON_values_2d(self.molecule.input_name + "MOLQUAD")[0]
         #uncorrected_property = self.molecule.hessian_trans_rot(uncorrected_property, self.molecule.coordinates, self.molecule.number_of_normal_modes, self.molecule.n_atoms)
         return uncorrected_property
-            
+
+    def to_normal_coordinates_1D(self, grad): 
+        
+        #conversion_factor = 205.07454 # (a.u to Debye)*(a.u to a.m.u)*(Angstrom to bohr) 
+        conversion_factor = -1822.8884796
+        
+        grad_norm = zeros((self.molecule.number_of_normal_modes,3))
+        
+        for ip in range(self.molecule.number_of_normal_modes):
+            temp = zeros((3))
+            for i in range(self.molecule.n_coordinates):
+                for j in range(3):
+                    temp[j] = temp[j] + grad[i,j]*self.eigenvectors_full[i,ip]
+            grad_norm[ip,:] = temp
+        grad_norm = grad_norm*conversion_factor
+        
+        return(grad_norm)
+        
+    def to_normal_coordinates_2D(self, dipole_hessian):
+        
+        self.n_coordinates = self.molecule.n_coordinates
+        self.number_of_normal_modes = self.molecule.number_of_normal_modes
+        
+        hess_norm_temp = zeros((self.n_coordinates, self.n_coordinates, 3)) 
+        hess_norm = zeros((self.number_of_normal_modes,self.number_of_normal_modes,3))
+        
+        for i in range(self.n_coordinates):
+            for ip in range(self.number_of_normal_modes):
+                temp = zeros((3))
+                for j in range(self.n_coordinates):
+                    for k in range(3):
+                        temp[k] = temp[k] + dipole_hessian[i,j,k]*self.molecule.eigenvectors_full[j,ip]
+                hess_norm_temp[i,ip,:] = temp
+        for i in range(self.number_of_normal_modes):
+            for ip in range(self.number_of_normal_modes):
+                temp = zeros((3))
+                for j in range(self.n_coordinates):
+                    for k in range(3):
+                        temp[k] = temp[k] + hess_norm_temp[j,ip,k]*self.molecule.eigenvectors_full[j,i]
+                hess_norm[i,ip,:] = temp
+        
+        hess_diag = hess_norm.diagonal(0,0,1)
+        hess_diag = transpose(hess_diag)* -1822.8884796
+        return(hess_norm, hess_diag) 
+
+        
 class Property_2_Tensor(Property):
     """" Calculates the corrections to the g-factors, nuclear spin-rotations,
     ,molecular quadropole moments, and spin-spin couplings
@@ -222,10 +313,13 @@ class Property_2_Tensor(Property):
         
             self.write_to_file(self.property_name)
             
-            qff = self.get_quartic_force_field()
-            qff_norm = self.molecule.to_normal_coordinates_4D(qff)
+            print(self.correction_property)
+            print(self.corrected_property)
+            
+            #qff = self.get_quartic_force_field()
+            #qff_norm = self.molecule.to_normal_coordinates_4D(qff)
         
-            quartic_correction = self.quartic_precision(pre_property, qff_norm)
+            #quartic_correction = self.quartic_precision(pre_property, qff_norm)
                 
             return self.correction_property, self.corrected_property  
 
@@ -354,28 +448,30 @@ class Property_3_Tensor(Property):
         returns: The corrections to the property, the corrected property as 
                  np.arrays"""
         
-        
         correction_property = zeros((self.molecule.n_atoms,3,3))
         pre_property = self.get_preproperty()[0]
         self.uncorrected_property = self.get_uncorrected_property() 
         eigenvalues = self.molecule.eigenvalues
 
-        #for nm in range(self.molecule.number_of_normal_modes):
-            #factor = 1/(sqrt(eigenvalues[nm])) # the reduced one
-        #    for atm in range(self.molecule.n_atoms):
-        #        for i in range(3):
-        #            for j in range(3):
-        #                correction_property[atm,j,i] += pre_property[atm,nm,j,i]*factor
+        for nm in range(self.molecule.number_of_normal_modes):
+            factor = 1/(sqrt(eigenvalues[nm])) # the reduced one
+            for atm in range(self.molecule.n_atoms):
+                for i in range(3):
+                    for j in range(3):
+                        correction_property[atm,j,i] += pre_property[atm,nm,j,i]*factor
     
-        #self.correction_property = correction_property*self.prefactor
-        #self.corrected_property = self.correction_property + self.uncorrected_property
+        self.correction_property = correction_property*self.prefactor
+        self.corrected_property = self.correction_property + self.uncorrected_property
+        
+        
+        print(self.correction_property)
+        print("corrected property")
+        print(self.corrected_property)        
         
         #self.write_to_file(self.property_name, self.molecule.n_atoms)
-        
-        qff = self.get_quartic_force_field()
-        qff_norm = self.molecule.to_normal_coordinates_4D(qff)
-        
-        quartic_correction = self.quartic_precision(pre_property, qff_norm)
+        #qff = self.get_quartic_force_field()
+        #qff_norm = self.molecule.to_normal_coordinates_4D(qff)
+        #quartic_correction = self.quartic_precision(pre_property, qff_norm)
         
         return 0
         #return self.correction_property, self.corrected_property 
@@ -460,9 +556,14 @@ class Property_3_Tensor(Property):
         
         return uncorrected_property
 
-class Polarizability:
+class Polarizability(Property):
+    
+    def __init__(self, molecule, property_name):
+        Property.__init__(self, molecule, property_name)
+        self.molecule = molecule
+        self.property_name = property_name
 
-    def __call__():
+    def __call__(self):
         """ Computes polarizability corrections and adds the corrections
         to the original value of the polarizabilty.
         property_type: The name of the first tensor property, used when
@@ -474,38 +575,76 @@ class Polarizability:
         polar: If the molecule is polar or not, as a bollean.
         returns: The corrections to the property, the corrected property as 
                  np.arrays"""
+        
+        correction_property = zeros((3,3))
+        pre_property = self.get_preproperty()
+        uncorrected_property = self.get_uncorrected_property() 
+        eigenvalues = self.molecule.eigenvalues
+
+        m_e = 1822.8884796 # conversion factor from a.m.u to a.u 
+        prefactor = 1/(4*m_e)
+        corrected_property = zeros((3,3))
     
-        if(polar):
-            corrected_property = get_3D_property(property_type, pre_property, n_nm, eig, write_to_file)
-
-        else:
-            m_e = 1822.8884796 # conversion factor from a.m.u to a.u 
-            prefactor = 1/(4*m_e)
-            corrected_property = zeros((3,3))
+        for mode in range(self.molecule.number_of_normal_modes):
+            factor = 1/(sqrt(eigenvalues[mode])) # the reduced one
+            for i in range(3):
+                for j in range(3):
+                    correction_property[j,i] += pre_property[mode,j,i]*factor
         
-            for nm in range(n_nm):
-                factor = 1/(sqrt(eig[nm])) # the reduced one
-                for i in range(3):
-                    for j in range(3):
-                        corrected_property[ifreq,j,i] += pre_property[ifreq,nm,j,i]*factor
-        
-            corrected_property = corrected_property*prefactor
-            if (write_to_file == True):
-            
-                filename = os.path.abspath("/home/benedico/Dropbox/master/The Program/output/" + property_type)
-                f = open(filename, "w")
-            
-            for atom in range(n_atom):
-                line1 = str(corrected_property[atom][0]).strip('[]')
-                line2 = str(corrected_property[atom][1]).strip('[]')
-                line3 = str(corrected_property[atom][2]).strip('[]')
-            
-                f.write(line1 + "\n")
-                f.write(line2 + "\n")
-                f.write(line3 + "\n")
-                
-                f.write("\n") # Seperates the 2D matrices making up the 3D matrix
+        print("correction_property")
+        correction_property = correction_property*prefactor
+        corrected_property = uncorrected_property + correction_property 
 
-            f.close()
+        print(correction_property)
+        print(corrected_property)
 
         return corrected_property, "POLARI" 
+        
+    def to_normal_coordinates_2D_pol(self, dipole_hessian):
+        
+        hess_norm_temp = zeros((self.molecule.n_coordinates, self.molecule.n_coordinates, 3,3)) 
+        hess_norm = zeros((self.molecule.number_of_normal_modes,self.molecule.number_of_normal_modes,3,3))
+        
+        for i in range(self.molecule.n_coordinates):
+            for ip in range(self.molecule.n_coordinates):
+                temp = zeros((3,3))
+                for j in range(self.molecule.n_coordinates):
+                    for k in range(3):
+                        for l in range(3):
+                            temp[k,l] = temp[k,l] + dipole_hessian[i,j,k,l]*self.molecule.eigenvectors_full[j,ip]
+                hess_norm_temp[i,ip,:,:] = temp
+        for i in range(self.molecule.number_of_normal_modes):
+            for ip in range(self.molecule.number_of_normal_modes):
+                temp = zeros((3,3))
+                for j in range(self.molecule.n_coordinates):
+                    for k in range(3):
+                        for l in range(3):
+                            temp[k,l] = temp[k,l] + hess_norm_temp[j,ip,k,l]*self.molecule.eigenvectors_full[j,i]
+                hess_norm[i,ip,:,:] = temp
+                
+        hess_diag = hess_norm.diagonal(0,0,1)
+        hess_diag = transpose(hess_diag)* -1822.8884796
+       
+        print("hess norm")
+        print(hess_diag)
+        
+        return(hess_diag) 
+
+    def get_preproperty(self):
+        
+        pre_property_cart = ri.read_polari_hessian("input_" + self.molecule.name + "/"+"ph", self.molecule.n_coordinates)
+        pre_property = self.to_normal_coordinates_2D_pol(pre_property_cart)
+        print("pre-property")
+        print(pre_property)
+        
+        return pre_property
+        
+    def get_uncorrected_property(self):
+        
+        molecule_path = self.molecule.input_name \
+                        + "POLARI"
+        
+        uncorrected_property  \
+        = ri.read_DALTON_POLARI(molecule_path)[0]
+        
+        return uncorrected_property

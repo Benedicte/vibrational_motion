@@ -515,7 +515,7 @@ def read_SHIELD(filename, natom, nm):
     f.close()
     return second_deriv, property_type
 
-def read_quartic_force_field1(filename, n_cord):
+def read_quartic_force_field(filename, n_cord):
     
     """Reads and returns the quartic force field in cartessian coordinates
     as a 4 dimensional np.array"""
@@ -523,40 +523,16 @@ def read_quartic_force_field1(filename, n_cord):
     f = open(filename, 'r')
     quartic_force_field = zeros((n_cord, n_cord, n_cord, n_cord))
     dummy = []
-    counter = n_cord # Make an if counting, and thus reading correctly..
-
-    finished = 0
-    while (finished == 0):
-        cur_line = f.readline()
-        if re.search('Fourth derivative of energy in symmetry coordinates',cur_line):
-            finished = 1
 
     for D4 in range(n_cord):
         dummy = f.readline()
-        dummy = f.readline()
-        dummy = f.readline()
-        
-        if(D4 == 0):
-                
-                dummy = f.readline()
-                dummy = f.readline()
-                dummy = f.readline()
-                dummy = f.readline()
-    
         for D3 in range(n_cord):
-            j = 0
-            while(j < n_cord-1):
-                for D2 in range(n_cord):
+            dummy = f.readline()
+            for D2 in range(n_cord):
                     mline = f.readline()
-                    #print(mline)
                     mline = mline.split()
-                    for D1 in range(min(6,n_cord - j)):
+                    for D1 in range(n_cord):
                         quartic_force_field[D4][D3][D2][D1] = mline[D1]
-                
-                dummy = f.readline()
-                dummy = f.readline()
-                
-                j = j + 5
         
     f.close()
     return quartic_force_field
@@ -915,6 +891,66 @@ def read_DALTON_MOLQUAD(filename):
     corrected_values[2][2] = mline[3]
             
     return uncorrected_values, corrections, corrected_values
+
+def read_DALTON_POLARI(filename):
+    """ For testing purposes, extracts the correct values from DALTON"""
+    
+    f = open(filename, 'r')
+    
+    uncorrected_values = zeros((3,3))
+    corrections = zeros((3,3))
+    corrected_values = zeros((3,3))
+    
+    dummy = []
+    
+    finished = 0
+    while (finished != 2):
+        cur_line = f.readline()
+        if not cur_line: raise Exception("Dalton file does not contain the values looked for")
+        if re.search('Vibrationally corrected',cur_line):
+            finished = finished + 1
+
+    dummy = f.readline()
+    dummy = f.readline()
+    
+    
+    mline = f.readline()
+    mline = mline.split()
+    uncorrected_values[0][0] = mline[1]
+    corrections[0][0] = mline[2]
+    corrected_values[0][0] = mline[3]
+        
+    mline = f.readline()
+    mline = mline.split()
+    uncorrected_values[0][1] = mline[1]
+    corrections[0][1] = mline[2]
+    corrected_values[0][1] = mline[3]
+            
+    mline = f.readline()
+    mline = mline.split()
+    uncorrected_values[0][2] = mline[1]
+    corrections[0][2] = mline[2]
+    corrected_values[0][2] = mline[3]
+        
+    mline = f.readline()
+    mline = mline.split()
+    uncorrected_values[1][1] = mline[1]
+    corrections[1][1] = mline[2]
+    corrected_values[1][1] = mline[3]
+        
+    mline = f.readline()
+    mline = mline.split()
+    uncorrected_values[1][2] = mline[1]
+    corrections[1][2] = mline[2]
+    corrected_values[1][2] = mline[3]
+        
+    mline = f.readline()
+    mline = mline.split()
+    uncorrected_values[2][2] = mline[1]
+    corrections[2][2] = mline[2]
+    corrected_values[2][2] = mline[3]
+            
+    return uncorrected_values, corrections, corrected_values
     
 def read_DALTON_GFACTOR(filename):
     """ For testing purposes, extracts the correct values from DALTON"""
@@ -1021,7 +1057,6 @@ def read_eigenvector(filename, n_cord):
         j = j + 5
         
     f.close()
-    print(eigenvector)
     return eigenvector
         
 def read_cubic_force_field(filename, n_cord):
@@ -1081,6 +1116,59 @@ def read_cubic_force_field_anal(filename, n_cord):
                 cubic_force_field[D3][D2][D1] = mline[D1]
     f.close()
     return cubic_force_field
+
+def read_dipole_gradient(filename, n_cord):
+    """Reads and returns the dipole gradient in cartessian coordinates
+    as a 3 dimensional np.array"""
+    f = open(filename, 'r')
+    dipole_gradient = zeros((n_cord, 3))
+    dummy = []
+    dummy = f.readline()
+    for D2 in range(n_cord):
+        mline = f.readline()
+        mline = mline.split()
+        for D1 in range(3):
+            dipole_gradient[D2][D1] = mline[D1]
+    f.close()
+    return dipole_gradient
+
+def read_dipole_hessian(filename, n_cord):
+    
+    """Reads and returns the dipole second derivative in cartessian coordinates
+    as a 3 dimensional np.array"""
+    f = open(filename, 'r')
+    dipole_hessian = zeros((n_cord, n_cord, 3))
+    dummy = []
+        
+    for D3 in range(n_cord):
+        dummy = f.readline()
+        for D2 in range(n_cord):
+            mline = f.readline()
+            mline = mline.split()
+            for D1 in range(3):
+                dipole_hessian[D3][D2][D1] = mline[D1]
+    f.close()
+    return dipole_hessian
+    
+def read_polari_hessian(filename, n_cord):
+    
+    """Reads and returns the polarizability second derivative in cartessian coordinates
+    as a 3 dimensional np.array"""
+    f = open(filename, 'r')
+    dipole_hessian = zeros((n_cord, n_cord, 3, 3))
+    dummy = []
+    
+    for D4 in range(n_cord):
+        dummy = f.readline()
+        for D3 in range(n_cord):
+            dummy = f.readline()
+            for D2 in range(3):
+                mline = f.readline()
+                mline = mline.split()
+                for D1 in range(3):
+                    dipole_hessian[D4][D3][D2][D1] = mline[D1]
+    f.close()
+    return dipole_hessian
 
 def read_cubic_force_field_norm(filename, n_nm):
     """ For testing purposes, extracts the correct values from DALTON"""

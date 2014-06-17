@@ -26,8 +26,8 @@ if __name__ == '__main__':
     
     dft = raw_input('at DFT or at HF level?')
     
-    if(dft == "dft"):
-        molecule_name = "dft_" + molecule_name
+    #if(dft == "dft"):
+    molecule_name = "dft_" + molecule_name
     
     molecule = mol.Molecule(molecule_name)
 

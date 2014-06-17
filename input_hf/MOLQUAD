@@ -90,13 +90,13 @@
   Hans Agren,               KTH Stockholm,                Sweden      (SIRIUS module, MC-SCRF solvation model)
  --------------------------------------------------------------------------------
 
-     Date and time (Linux)  : Fri Apr 25 10:06:55 2014
-     Host name              : c4-12.local                             
+     Date and time (Linux)  : Mon Jun  2 01:32:28 2014
+     Host name              : c32-8.local                             
 
  * Work memory size             :   100000000 =  762.94 megabytes.
 
  * Directories for basis set searches:
-   1) /global/work/benedico/2055415.stallo-adm.uit.no/basis/
+   1) /global/work/benedico/2089657.stallo-adm.uit.no/basis/
 
 
 Compilation information
@@ -147,11 +147,10 @@ Compilation information
 1                                                 
 300.0                                             
 **WAVE FUNCTIONS                                  
-.DFT                                              
-BLYP                                              
+.HF                                               
 *SCF INPUT                                        
 .THRESH                                           
-1.0D-9                                            
+1.0D-10                                           
 **START                                           
 .QUADRU                                           
 *LINRES                                           
@@ -176,15 +175,15 @@ BLYP
    Content of the .mol file
  ----------------------------
 
-BASIS                                                                          
-aug-cc-pVTZ                                                                    
+ATOMBASIS                                                                      
 HF                                                                             
                                                                                
-Atomtypes=2 Nosymmetry                                                         
-Charge=9.0 Atoms=1                                                             
-F     0.01247728  0.00000000  0.000000000                                      
-Charge=1.0 Atoms=1                                                             
-H     1.79050671  0.00000000  0.000000000                                      
+AtomTypes=2 Nosymmetry                                                         
+Charge=9.0 Atoms=1 Basis=ano-1 6 5 4 3                                         
+F     0.0  0.00000000  0.000000000                                             
+Charge=1.0 Atoms=1 Basis=ano-1 5 4 3                                           
+H      1.72231371  0.          0.                                              
+                                                                               
 
 
        *******************************************************************
@@ -231,16 +230,18 @@ H     1.79050671  0.00000000  0.000000000
   Nuclear charge:   9.00000
   Number of symmetry independent centers:    1
   Number of basis sets to read;    2
+  The basis set is "ano-1 6 5 4 3" from the basis set library.
   Basis set file used for this atomic type with Z =   9 :
-     "/global/work/benedico/2055415.stallo-adm.uit.no/basis/aug-cc-pVTZ"
+     "/global/work/benedico/2089657.stallo-adm.uit.no/basis/ano-1"
 
   Atomic type no.    2
   --------------------
   Nuclear charge:   1.00000
   Number of symmetry independent centers:    1
   Number of basis sets to read;    2
+  The basis set is "ano-1 5 4 3" from the basis set library.
   Basis set file used for this atomic type with Z =   1 :
-     "/global/work/benedico/2055415.stallo-adm.uit.no/basis/aug-cc-pVTZ"
+     "/global/work/benedico/2089657.stallo-adm.uit.no/basis/ano-1"
 
 
                          SYMGRP: Point group information
@@ -258,7 +259,7 @@ Point group: C1
                        Total mass:    20.006228 amu
                        Natural abundance:  99.985 %
 
- Center-of-mass coordinates (a.u.):    0.102047    0.000000    0.000000
+ Center-of-mass coordinates (a.u.):    0.086763    0.000000    0.000000
 
 
   Atoms and basis sets
@@ -267,14 +268,12 @@ Point group: C1
   Number of atom types :    2
   Total number of atoms:    2
 
-  Basis set used is "aug-cc-pVTZ" from the basis set library.
-
   label    atoms   charge   prim   cont     basis
   ----------------------------------------------------------------------
-  F           1    9.0000    58    46      [11s6p3d2f|5s4p3d2f]                               
-  H           1    1.0000    25    23      [6s3p2d|4s3p2d]                                    
+  F           1    9.0000    82    62      [14s9p4d3f|6s5p4d3f]                               
+  H           1    1.0000    35    32      [8s4p3d|5s4p3d]                                    
   ----------------------------------------------------------------------
-  total:      2   10.0000    83    69
+  total:      2   10.0000   117    94
   ----------------------------------------------------------------------
   Spherical harmonic basis used.
 
@@ -285,8 +284,8 @@ Point group: C1
   ----------------------------
 
   Total number of coordinates:    6
-  F       :     1  x   0.0124772800    2  y   0.0000000000    3  z   0.0000000000
-  H       :     4  x   1.7905067100    5  y   0.0000000000    6  z   0.0000000000
+  F       :     1  x   0.0000000000    2  y   0.0000000000    3  z   0.0000000000
+  H       :     4  x   1.7223137100    5  y   0.0000000000    6  z   0.0000000000
 
 
    Interatomic separations (in Angstrom):
@@ -295,13 +294,13 @@ Point group: C1
             F           H     
             ------      ------
  F     :    0.000000
- H     :    0.940893    0.000000
+ H     :    0.911409    0.000000
 
 
-  Max    interatomic separation is    0.9409 Angstrom (    1.7780 Bohr)
+  Max    interatomic separation is    0.9114 Angstrom (    1.7223 Bohr)
   between atoms    2 and    1, "H     " and "F     ".
 
-  Min HX interatomic separation is    0.9409 Angstrom (    1.7780 Bohr)
+  Min HX interatomic separation is    0.9114 Angstrom (    1.7223 Bohr)
 
 
   Bond distances (Angstrom):
@@ -309,7 +308,7 @@ Point group: C1
 
                   atom 1     atom 2       distance
                   ------     ------       --------
-  bond distance:  H          F            0.940893
+  bond distance:  H          F            0.911409
 
 
 
@@ -318,8 +317,8 @@ Point group: C1
  --------------------------------------------------------
 
    IA       0.000000          1.000000    0.000000    0.000000
-   IB       0.847261          0.000000    1.000000    0.000000
-   IC       0.847261          0.000000    0.000000    1.000000
+   IB       0.794994          0.000000    1.000000    0.000000
+   IC       0.794994          0.000000    0.000000    1.000000
 
 
  Rotational constants
@@ -327,10 +326,10 @@ Point group: C1
 
  The molecule is linear.
 
-               B =       596485.69 MHz     (   19.896621 cm-1)
+               B =       635701.75 MHz     (   21.204728 cm-1)
 
 
-@  Nuclear repulsion energy :    5.061783482403 Hartree
+@  Nuclear repulsion energy :    5.225528861406 Hartree
 
 
                      .---------------------------------------.
@@ -349,8 +348,8 @@ Point group: C1
      ************************** Output from HERINT **************************
      ************************************************************************
 
- >>>> Total CPU  time used in HERMIT:   0.04 seconds
- >>>> Total wall time used in HERMIT:   0.20 seconds
+ >>>> Total CPU  time used in HERMIT:   0.24 seconds
+ >>>> Total wall time used in HERMIT:   0.34 seconds
 
 
                         .----------------------------------.
@@ -375,16 +374,16 @@ Point group: C1
  Reference: Linderberg and Ohrn, Propagators in Quantum Chemistry (Wiley, 1973)
 
  Huckel EWMO eigenvalues for symmetry :  1
-          -26.384190      -1.719331      -0.830158      -0.730000      -0.730000
-           -0.251521
+          -26.384376      -1.729333      -0.829897      -0.730000      -0.730000
+           -0.241594
 
  **********************************************************************
  *SIRIUS* a direct, restricted step, second order MCSCF program       *
  **********************************************************************
 
  
-     Date and time (Linux)  : Fri Apr 25 10:06:56 2014
-     Host name              : c4-12.local                             
+     Date and time (Linux)  : Mon Jun  2 01:32:29 2014
+     Host name              : c32-8.local                             
 
  Title lines from ".mol" input file:
      HF                                                                      
@@ -393,7 +392,7 @@ Point group: C1
  Print level on unit LUPRI =   2 is   0
  Print level on unit LUW4  =   2 is   5
 
-@    Restricted, closed shell Kohn-Sham DFT calculation.
+@    Restricted, closed shell Hartree-Fock calculation.
  Fock matrices are calculated directly and in parallel without use of integrals on disk.
 
  Initial molecular orbitals are obtained according to
@@ -401,7 +400,7 @@ Point group: C1
 
      Wave function specification
      ============================
-     For the wave function of type :      >>> KS-DFT   <<<
+     For the wave function of type :      >>> HF       <<<
      Number of closed shell electrons          10
      Number of electrons in active shells       0
      Total charge of the molecule               0
@@ -409,39 +408,27 @@ Point group: C1
      Spin multiplicity and 2 M_S                1         0
      Total number of symmetries                 1
      Reference state symmetry                   1
- 
-     This is a DFT calculation of type: BLYP
- Weighted mixed functional:
-                       LYP:    1.00000
-                     Becke:    1.00000
-                    Slater:    1.00000
 
      Orbital specifications
      ======================
      Abelian symmetry species          All |    1
                                        --- |  ---
      Occupied SCF orbitals               5 |    5
-     Secondary orbitals                 64 |   64
-     Total number of orbitals           69 |   69
-     Number of basis functions          69 |   69
+     Secondary orbitals                 89 |   89
+     Total number of orbitals           94 |   94
+     Number of basis functions          94 |   94
 
      Optimization information
      ========================
 @    Number of configurations                 1
-@    Number of orbital rotations            320
+@    Number of orbital rotations            445
      ------------------------------------------
-@    Total number of variables              321
+@    Total number of variables              446
 
      Maximum number of Fock   iterations      0
      Maximum number of DIIS   iterations     60
      Maximum number of QC-SCF iterations     60
-     Threshold for SCF convergence     1.00D-09
- 
-     This is a DFT calculation of type: BLYP
- Weighted mixed functional:
-                       LYP:    1.00000
-                     Becke:    1.00000
-                    Slater:    1.00000
+     Threshold for SCF convergence     1.00D-10
 
 
  >>>>> DIIS optimization of Hartree-Fock <<<<<
@@ -450,72 +437,76 @@ Point group: C1
 
  Iter      Total energy        Error norm    Delta(E)  DIIS dim.
  -----------------------------------------------------------------------------
-   1  Screening settings (-IFTHRS, DIFDEN)   -7    F
-      K-S energy, electrons, error :    -10.850309351637   9.9999998691   -1.31D-07
-   1    -100.379068284        1.52733D+00   -1.00D+02    1
-      Virial theorem: -V/T =      1.997192
-@      MULPOP F      -0.49; H       0.49; 
+   1  Screening settings (-IFTHRS, DIFDEN)   -7    T
+   1    -99.9578021186        1.62998D+00   -1.00D+02    1
+      Virial theorem: -V/T =      1.994738
+@      MULPOP F      -0.30; H       0.30; 
  -----------------------------------------------------------------------------
-   2  Screening settings (-IFTHRS, DIFDEN)   -8    F
-      K-S energy, electrons, error :    -10.610848209152   9.9999998607   -1.39D-07
-   2    -100.427072325        1.19932D+00   -4.80D-02    2
-      Virial theorem: -V/T =      2.018187
-@      MULPOP F      -0.20; H       0.20; 
+   2  Screening settings (-IFTHRS, DIFDEN)   -7    T
+   2    -100.065268535        4.00887D-01   -1.07D-01    2
+      Virial theorem: -V/T =      2.004309
+@      MULPOP F      -0.53; H       0.53; 
  -----------------------------------------------------------------------------
-   3  Screening settings (-IFTHRS, DIFDEN)   -8    F
-      K-S energy, electrons, error :    -10.948710686605   9.9999998764   -1.24D-07
-   3    -100.461295125        7.30912D-01   -3.42D-02    3
-      Virial theorem: -V/T =      1.993161
-@      MULPOP F      -0.44; H       0.44; 
+   3  Screening settings (-IFTHRS, DIFDEN)   -9    F
+   3    -100.069802595        1.27739D-01   -4.53D-03    3
+      Virial theorem: -V/T =      1.998472
+@      MULPOP F      -0.56; H       0.56; 
  -----------------------------------------------------------------------------
-   4  Screening settings (-IFTHRS, DIFDEN)   -8    F
-      K-S energy, electrons, error :    -10.775311894968   9.9999998702   -1.30D-07
-   4    -100.479542626        8.72982D-02   -1.82D-02    4
-      Virial theorem: -V/T =      2.006438
-@      MULPOP F      -0.34; H       0.34; 
+   4  Screening settings (-IFTHRS, DIFDEN)   -9    T
+   4    -100.070439614        4.47071D-02   -6.37D-04    4
+      Virial theorem: -V/T =      2.001011
+@      MULPOP F      -0.55; H       0.55; 
  -----------------------------------------------------------------------------
-   5  Screening settings (-IFTHRS, DIFDEN)   -9    F
-      K-S energy, electrons, error :    -10.788654320899   9.9999998703   -1.30D-07
-   5    -100.479784370        9.34310D-03   -2.42D-04    5
-      Virial theorem: -V/T =      2.005279
-@      MULPOP F      -0.34; H       0.34; 
+   5  Screening settings (-IFTHRS, DIFDEN)   -9    T
+   5    -100.070532675        7.26427D-03   -9.31D-05    5
+      Virial theorem: -V/T =      2.000328
+@      MULPOP F      -0.56; H       0.56; 
  -----------------------------------------------------------------------------
-   6  Screening settings (-IFTHRS, DIFDEN)  -10    F
-      K-S energy, electrons, error :    -10.790360603110   9.9999998704   -1.30D-07
-   6    -100.479788299        3.01892D-04   -3.93D-06    6
-      Virial theorem: -V/T =      2.005165
-@      MULPOP F      -0.34; H       0.34; 
+   6  Screening settings (-IFTHRS, DIFDEN)  -11    F
+   6    -100.070539958        1.38687D-03   -7.28D-06    6
+      Virial theorem: -V/T =      2.000346
+@      MULPOP F      -0.56; H       0.56; 
  -----------------------------------------------------------------------------
-   7  Screening settings (-IFTHRS, DIFDEN)  -12    F
-      K-S energy, electrons, error :    -10.790344760706   9.9999998704   -1.30D-07
-   7    -100.479788305        5.60608D-05   -5.97D-09    7
-      Virial theorem: -V/T =      2.005165
-@      MULPOP F      -0.34; H       0.34; 
+   7  Screening settings (-IFTHRS, DIFDEN)  -11    T
+   7    -100.070540215        2.25158D-04   -2.57D-07    7
+      Virial theorem: -V/T =      2.000354
+@      MULPOP F      -0.56; H       0.56; 
  -----------------------------------------------------------------------------
-   8  Screening settings (-IFTHRS, DIFDEN)  -12    F
-      K-S energy, electrons, error :    -10.790355301262   9.9999998704   -1.30D-07
-   8    -100.479788305        1.95601D-06   -1.40D-10    8
-      Virial theorem: -V/T =      2.005164
-@      MULPOP F      -0.34; H       0.34; 
+   8  Screening settings (-IFTHRS, DIFDEN)  -11    T
+   8    -100.070540221        2.24400D-05   -5.69D-09    8
+      Virial theorem: -V/T =      2.000355
+@      MULPOP F      -0.56; H       0.56; 
  -----------------------------------------------------------------------------
-   9  Screening settings (-IFTHRS, DIFDEN)  -14    F
-      K-S energy, electrons, error :    -10.790354887806   9.9999998704   -1.30D-07
-   9    -100.479788305        7.70447D-08   -1.42D-13    9
-      Virial theorem: -V/T =      2.005164
-@      MULPOP F      -0.34; H       0.34; 
+   9  Screening settings (-IFTHRS, DIFDEN)  -13    F
+   9    -100.070540221        3.09973D-06   -5.13D-11    9
+      Virial theorem: -V/T =      2.000355
+@      MULPOP F      -0.56; H       0.56; 
  -----------------------------------------------------------------------------
-  10  Screening settings (-IFTHRS, DIFDEN)  -15    F
-      K-S energy, electrons, error :    -10.790354908114   9.9999998704   -1.30D-07
-  10    -100.479788305        9.49193D-09   -1.42D-14   10
-      Virial theorem: -V/T =      2.005164
-@      MULPOP F      -0.34; H       0.34; 
+  10  Screening settings (-IFTHRS, DIFDEN)  -16    F
+  10    -100.070540221        2.11574D-07   -3.84D-13   10
+      Virial theorem: -V/T =      2.000355
+@      MULPOP F      -0.56; H       0.56; 
  -----------------------------------------------------------------------------
-  11  Screening settings (-IFTHRS, DIFDEN)  -15    F
-      K-S energy, electrons, error :    -10.790354905819   9.9999998704   -1.30D-07
-  11    -100.479788305        3.16364D-10    4.26D-14   10
+  11  Screening settings (-IFTHRS, DIFDEN)  -16    T
+  11    -100.070540221        2.58003D-08    2.84D-14   10
+      Virial theorem: -V/T =      2.000355
+@      MULPOP F      -0.56; H       0.56; 
+ -----------------------------------------------------------------------------
+  12  Screening settings (-IFTHRS, DIFDEN)  -16    T
+  12    -100.070540221        2.65317D-09   -1.56D-13   10
+      Virial theorem: -V/T =      2.000355
+@      MULPOP F      -0.56; H       0.56; 
+ -----------------------------------------------------------------------------
+  13  Screening settings (-IFTHRS, DIFDEN)  -16    T
+  13    -100.070540221        3.78009D-10    1.42D-14   10
+      Virial theorem: -V/T =      2.000355
+@      MULPOP F      -0.56; H       0.56; 
+ -----------------------------------------------------------------------------
+  14  Screening settings (-IFTHRS, DIFDEN)  -16    T
+  14    -100.070540221        2.96520D-11    2.84D-14   10
 
- *** DIIS converged in  11 iterations !
-@    Converged SCF energy, gradient:   -100.479788305270    3.16D-10
+ *** DIIS converged in  14 iterations !
+@    Converged SCF energy, gradient:   -100.070540221065    2.97D-11
    - total time used in SIRFCK :              0.00 seconds
 
 
@@ -526,19 +517,19 @@ Point group: C1
  Number of electrons :   10
  Orbital occupations :    5
 
- Sym       Kohn-Sham orbital energies
+ Sym       Hartree-Fock orbital energies
 
-  1    -24.28977897    -1.09406908    -0.48968960    -0.35241361    -0.35241361
-        -0.04503810     0.05622158     0.10881787     0.10881787     0.11250084
+  1    -26.29455720    -1.60293540    -0.77036170    -0.65086773    -0.65086773
+         0.03288171     0.15942895     0.21226763     0.21226763     0.21481554
 
-    E(LUMO) :    -0.04503810 au (symmetry 1)
-  - E(HOMO) :    -0.35241361 au (symmetry 1)
+    E(LUMO) :     0.03288171 au (symmetry 1)
+  - E(HOMO) :    -0.65086773 au (symmetry 1)
   ------------------------------------------
-    gap     :     0.30737551 au
+    gap     :     0.68374943 au
 
  >>> Writing SIRIFC interface file <<<
 
- >>>> CPU and wall time for SCF :       3.127       3.198
+ >>>> CPU and wall time for SCF :       2.044       2.078
 
 
                        .-----------------------------------.
@@ -550,15 +541,15 @@ Point group: C1
 @    Spatial symmetry:            1
 @    Total charge of molecule:    0
 
-@    Final DFT energy:           -100.479788305270                 
-@    Nuclear repulsion:             5.061783482403
-@    Electronic energy:          -105.541571787673
+@    Final HF energy:            -100.070540221065                 
+@    Nuclear repulsion:             5.225528861406
+@    Electronic energy:          -105.296069082471
 
-@    Final gradient norm:           0.000000000316
+@    Final gradient norm:           0.000000000030
 
  
-     Date and time (Linux)  : Fri Apr 25 10:06:59 2014
-     Host name              : c4-12.local                             
+     Date and time (Linux)  : Mon Jun  2 01:32:31 2014
+     Host name              : c32-8.local                             
 
  (Only coefficients >0.0100 are printed.)
 
@@ -566,54 +557,59 @@ Point group: C1
  ------------------------------------------
 
     Orbital         1        2        3        4        5        6        7
-   1 F   :1s    -0.9944  -0.0175   0.0026   0.0000  -0.0000  -0.0052   0.0115
-   2 F   :1s     0.0064   0.8962  -0.2704   0.0000  -0.0000  -0.2218   0.0976
-   3 F   :1s    -0.0094   0.0133  -0.0057   0.0000  -0.0000  -0.0072   0.0027
-   4 F   :1s    -0.0012   0.0065  -0.1605   0.0000  -0.0000  -0.1185  -0.6343
-   5 F   :1s     0.0021   0.0381  -0.1084   0.0000  -0.0000   0.1276  -4.2097
-   6 F   :2px   -0.0026   0.1458   0.8429  -0.0000   0.0000  -0.3113   0.3638
-   7 F   :2py   -0.0000  -0.0000   0.0000   0.9898  -0.0000   0.0000   0.0000
-   8 F   :2pz    0.0000   0.0000   0.0000  -0.0000  -0.9898   0.0000  -0.0000
-   9 F   :2px    0.0019  -0.0026  -0.0422   0.0000  -0.0000   0.0084  -0.0425
-  10 F   :2py    0.0000  -0.0000  -0.0000  -0.0356   0.0000  -0.0000   0.0000
-  11 F   :2pz   -0.0000  -0.0000  -0.0000   0.0000   0.0356  -0.0000  -0.0000
-  12 F   :2px    0.0022  -0.0149  -0.0950   0.0000  -0.0000  -0.0442  -0.3913
-  15 F   :2px    0.0003   0.0041   0.0103  -0.0000   0.0000   0.0208  -1.1641
-  16 F   :2py    0.0000   0.0000   0.0000   0.0559  -0.0000  -0.0000   0.0000
-  17 F   :2pz    0.0000   0.0000   0.0000  -0.0000  -0.0559   0.0000  -0.0000
-  23 F   :3d2-   0.0000  -0.0000   0.0000   0.0113  -0.0000   0.0000  -0.0000
-  25 F   :3d0   -0.0003  -0.0045  -0.0058   0.0000  -0.0000  -0.0003   0.0124
-  26 F   :3d1+   0.0000  -0.0000   0.0000  -0.0000  -0.0113   0.0000   0.0000
-  27 F   :3d2+   0.0004   0.0077   0.0100  -0.0000   0.0000   0.0005  -0.0214
-  28 F   :3d2-   0.0000   0.0000   0.0000   0.0103  -0.0000  -0.0000  -0.0000
-  30 F   :3d0   -0.0003  -0.0025   0.0015  -0.0000  -0.0000   0.0026   0.0388
-  31 F   :3d1+  -0.0000   0.0000  -0.0000  -0.0000  -0.0103  -0.0000  -0.0000
-  32 F   :3d2+   0.0005   0.0043  -0.0026   0.0000   0.0000  -0.0044  -0.0672
-  47 H   :1s    -0.0033   0.3991   0.6994  -0.0000   0.0000   0.2606  -0.3068
-  48 H   :1s    -0.0000  -0.1532  -0.0904  -0.0000   0.0000   0.0557   0.3832
-  49 H   :1s    -0.0000  -0.1719  -0.1419  -0.0000   0.0000   0.1040   3.3207
-  50 H   :1s    -0.0002  -0.0015   0.0030  -0.0000   0.0000   0.6652   1.4179
-  51 H   :2px    0.0005  -0.0154  -0.0129   0.0000   0.0000   0.0132  -0.0124
-  52 H   :2py    0.0000   0.0000   0.0000   0.0123  -0.0000  -0.0000   0.0000
-  53 H   :2pz    0.0000   0.0000  -0.0000  -0.0000  -0.0123  -0.0000  -0.0000
-  54 H   :2px    0.0004  -0.0056  -0.0434   0.0000  -0.0000   0.0453  -0.3225
-  55 H   :2py    0.0000  -0.0000  -0.0000   0.0222  -0.0000   0.0000   0.0000
-  56 H   :2pz    0.0000  -0.0000  -0.0000  -0.0000  -0.0222   0.0000   0.0000
-  57 H   :2px    0.0004   0.0068  -0.0148   0.0000  -0.0000   0.2060  -1.6244
-  58 H   :2py    0.0000  -0.0000  -0.0000   0.0166  -0.0000   0.0000  -0.0000
-  59 H   :2pz    0.0000  -0.0000   0.0000  -0.0000  -0.0166   0.0000   0.0000
-  64 H   :3d2+   0.0003   0.0031   0.0050  -0.0000   0.0000  -0.0020   0.0130
-  67 H   :3d0    0.0001  -0.0004  -0.0054   0.0000  -0.0000   0.0034  -0.0714
-  69 H   :3d2+  -0.0001   0.0007   0.0094  -0.0000   0.0000  -0.0060   0.1236
+   1 F   :1s    -1.0003  -0.0013  -0.0023  -0.0000  -0.0000   0.0301   0.0436
+   2 F   :1s    -0.0018   0.9700  -0.2137  -0.0000  -0.0000   0.4430   0.8039
+   3 F   :1s    -0.0000   0.0431   0.0384   0.0000   0.0000   0.6060   1.8615
+   4 F   :1s     0.0008   0.0152   0.0223  -0.0000  -0.0000   0.5084   1.5978
+   5 F   :1s     0.0003   0.0025   0.0036  -0.0000  -0.0000   0.1311   0.3554
+   6 F   :1s    -0.0000   0.0000   0.0002   0.0000   0.0000   0.0277   0.0505
+   7 F   :2px   -0.0022   0.1038   0.8400   0.0000   0.0000   0.1496  -0.3790
+   8 F   :2py    0.0000  -0.0000   0.0000   0.0000  -0.9784  -0.0000   0.0000
+   9 F   :2pz   -0.0000   0.0000   0.0000  -0.9784  -0.0000  -0.0000   0.0000
+  10 F   :2px    0.0000   0.0074   0.0043   0.0000   0.0000   0.1643   0.7393
+  13 F   :2px    0.0004  -0.0014  -0.0192  -0.0000  -0.0000   0.1102   0.8429
+  14 F   :2py    0.0000   0.0000  -0.0000  -0.0000   0.0209   0.0000  -0.0000
+  15 F   :2pz    0.0000  -0.0000  -0.0000   0.0209   0.0000   0.0000  -0.0000
+  16 F   :2px    0.0005   0.0021  -0.0046  -0.0000  -0.0000   0.0331   0.2963
+  19 F   :2px   -0.0004   0.0002  -0.0015  -0.0000  -0.0000   0.0076   0.0948
+  22 F   :3d2-  -0.0000  -0.0000   0.0000   0.0000  -0.0189  -0.0000   0.0000
+  24 F   :3d0    0.0004  -0.0077  -0.0200  -0.0000  -0.0000  -0.0052   0.0956
+  25 F   :3d1+  -0.0000   0.0000   0.0000  -0.0189  -0.0000  -0.0000   0.0000
+  26 F   :3d2+  -0.0006   0.0133   0.0346   0.0000   0.0000   0.0090  -0.1656
+  29 F   :3d0    0.0002  -0.0020  -0.0060  -0.0000  -0.0000  -0.0157  -0.0015
+  31 F   :3d2+  -0.0003   0.0035   0.0104   0.0000   0.0000   0.0272   0.0026
+  34 F   :3d0   -0.0001   0.0003   0.0001   0.0000   0.0000  -0.0110  -0.0680
+  36 F   :3d2+   0.0002  -0.0005  -0.0001  -0.0000  -0.0000   0.0190   0.1178
+  39 F   :3d0   -0.0001   0.0000   0.0004   0.0000   0.0000  -0.0026  -0.0260
+  41 F   :3d2+   0.0001  -0.0000  -0.0007  -0.0000  -0.0000   0.0046   0.0450
+  46 F   :4f1+   0.0002  -0.0021  -0.0040  -0.0000  -0.0000  -0.0007   0.0449
+  48 F   :4f3+  -0.0002   0.0027   0.0052   0.0000   0.0000   0.0009  -0.0580
+  53 F   :4f1+   0.0001  -0.0006  -0.0007  -0.0000  -0.0000  -0.0025   0.0270
+  55 F   :4f3+  -0.0001   0.0008   0.0009   0.0000   0.0000   0.0032  -0.0349
+  63 H   :1s     0.0018   0.0572   0.1982   0.0000   0.0000  -0.9867  -1.2378
+  64 H   :1s    -0.0012  -0.0635  -0.1061  -0.0000   0.0000  -1.3544  -2.0593
+  65 H   :1s     0.0002   0.0401   0.0627   0.0000   0.0000  -0.3538   0.0359
+  66 H   :1s     0.0006  -0.0040  -0.0011  -0.0000  -0.0000  -0.0040   0.2423
+  67 H   :1s     0.0002  -0.0001   0.0003  -0.0000  -0.0000  -0.0037   0.0995
+  68 H   :2px   -0.0013  -0.0025   0.0342   0.0000   0.0000  -0.1234   0.1020
+  69 H   :2py   -0.0000   0.0000  -0.0000   0.0000  -0.0396   0.0000  -0.0000
+  70 H   :2pz    0.0000  -0.0000  -0.0000  -0.0396  -0.0000   0.0000  -0.0000
+  71 H   :2px    0.0006   0.0164   0.0301   0.0000   0.0000   0.0348   0.8807
+  74 H   :2px    0.0002  -0.0032  -0.0098  -0.0000  -0.0000   0.0588   0.3378
+  77 H   :2px   -0.0001   0.0016  -0.0005  -0.0000  -0.0000   0.0195   0.0488
+  82 H   :3d0   -0.0002  -0.0007   0.0037   0.0000   0.0000  -0.0259  -0.0832
+  84 H   :3d2+   0.0003   0.0013  -0.0065  -0.0000  -0.0000   0.0449   0.1441
+  87 H   :3d0    0.0000   0.0007   0.0035   0.0000   0.0000  -0.0161  -0.0219
+  89 H   :3d2+  -0.0000  -0.0012  -0.0061  -0.0000  -0.0000   0.0279   0.0380
 
 
 
- >>>> Total CPU  time used in SIRIUS :      3.20 seconds
- >>>> Total wall time used in SIRIUS :      3.29 seconds
+ >>>> Total CPU  time used in SIRIUS :      2.17 seconds
+ >>>> Total wall time used in SIRIUS :      2.22 seconds
 
  
-     Date and time (Linux)  : Fri Apr 25 10:06:59 2014
-     Host name              : c4-12.local                             
+     Date and time (Linux)  : Mon Jun  2 01:32:31 2014
+     Host name              : c32-8.local                             
 
 
                      .---------------------------------------.
@@ -675,9 +671,9 @@ Maximum number of iterations reset in numerical differentiation to    13
 
  INFO: Changed THRP threshold used in integral transformation from  1.00D-15 to integral evaluation threshold  1.00D-12
 
- Center of mass dipole origin  :    0.102047    0.000000    0.000000
+ Center of mass dipole origin  :    0.086763    0.000000    0.000000
 
- Center of mass gauge origin   :    0.102047    0.000000    0.000000
+ Center of mass gauge origin   :    0.086763    0.000000    0.000000
 
 
  Changes of defaults for WALK:
@@ -701,37 +697,8 @@ Maximum number of iterations reset in numerical differentiation to    13
 
 
  
-     Date and time (Linux)  : Fri Apr 25 10:06:59 2014
-     Host name              : c4-12.local                             
-       Electrons: 10.000000( -1.3e-07): LR-DFT*1 evaluation time:       0.0 s
-       Electrons: 10.000000( -1.3e-07): LR-DFT*1 evaluation time:       0.1 s
-       Electrons: 10.000000( -1.3e-07): LR-DFT*1 evaluation time:       0.1 s
-       Electrons: 10.000000( -1.3e-07): LR-DFT*1 evaluation time:       0.1 s
-       Electrons: 10.000000( -1.3e-07): LR-DFT*1 evaluation time:       0.1 s
-       Electrons: 10.000000( -1.3e-07): LR-DFT*1 evaluation time:       0.1 s
-       Electrons: 10.000000( -1.3e-07): LR-DFT*1 evaluation time:       0.1 s
-
-
-            +---------------------------------------------------------+
-            ! Gradient elements calculated directly and from symmetry !
-            +---------------------------------------------------------+
-
-
-
-        Coordinate    Direct calc.     Tra.-rot. sym.   Difference
-        ----------------------------------------------------------
-
-        F    x       -0.0060908028    -0.0060984500     0.0000076472
-        F    y        0.0000000000     0.0000000000     0.0000000000
-        F    z       -0.0000000000     0.0000000000    -0.0000000000
-        H    y       -0.0000000000     0.0000000000    -0.0000000000
-        H    z        0.0000000000     0.0000000000     0.0000000000
-
-
-
- >>> WARNING from TRAROT:
-
- Largest deviation from tra-rot symmetry is in gradient element  1:  7.65E-06
+     Date and time (Linux)  : Mon Jun  2 01:32:31 2014
+     Host name              : c32-8.local                             
 
 
    ***************************************************************************
@@ -740,17 +707,15 @@ Maximum number of iterations reset in numerical differentiation to    13
 
 
  
-     Date and time (Linux)  : Fri Apr 25 10:07:01 2014
-     Host name              : c4-12.local                             
-
- WARNING: warnings have been issued, please check the output above !
+     Date and time (Linux)  : Mon Jun  2 01:32:33 2014
+     Host name              : c32-8.local                             
 
 
                              Molecular geometry (au)
                              -----------------------
 
- F          0.0124772800            0.0000000000            0.0000000000
- H          1.7905067100            0.0000000000            0.0000000000
+ F          0.0000000000            0.0000000000            0.0000000000
+ H          1.7223137100            0.0000000000            0.0000000000
 
 
 
@@ -761,19 +726,19 @@ Maximum number of iterations reset in numerical differentiation to    13
 
      Spin multiplicity  1     State number       1     Total charge       0
 
-     Total energy       -100.4797883053 au (Hartrees)
-                         -2734.19412491 eV
-                           -263809.6435 kJ/mol
+     Total energy       -100.0705402211 au (Hartrees)
+                         -2723.05791805 eV
+                           -262735.1628 kJ/mol
 
 
                              Relativistic corrections
                              ------------------------
 
-     Darwin correction:                          0.3233319357 au
-     Mass-velocity correction:                  -0.4094948387 au
+     Darwin correction:                          0.3313801745 au
+     Mass-velocity correction:                  -0.4180365509 au
 
-     Total relativistic correction:             -0.0861629030 au (0.0858%)
-     Non-relativistic + relativistic energy:  -100.5659512082 au
+     Total relativistic correction:             -0.0866563764 au (0.0866%)
+     Non-relativistic + relativistic energy:  -100.1571965975 au
 
 
 
@@ -781,8 +746,8 @@ Maximum number of iterations reset in numerical differentiation to    13
                              Molecular gradient (au)
                              -----------------------
 
- F         -0.0060908028            0.0000000000           -0.0000000000
- H          0.0060984500           -0.0000000000            0.0000000000
+ F         -4.0674988763           -0.0000000000           -0.0000000000
+ H          4.0674988763            0.0000000000            0.0000000000
 
 
 
@@ -793,13 +758,13 @@ Maximum number of iterations reset in numerical differentiation to    13
 
            F    x      F    y      F    z      H    x      H    y      H    z
 
- F    x    0.531572
- F    y    0.000000    0.003426
- F    z   -0.000000    0.000000    0.003426
+ F    x   -0.884879
+ F    y   -0.000000    2.361648
+ F    z   -0.000000    0.000000    2.361648
 
- H    x   -0.531572   -0.000000    0.000000    0.531572
- H    y   -0.000000   -0.003426    0.000000    0.000000    0.003430
- H    z    0.000000    0.000000   -0.003426   -0.000000    0.000000    0.003430
+ H    x    0.884879    0.000000    0.000000   -0.884879
+ H    y    0.000000   -2.361648    0.000000   -0.000000    2.361648
+ H    z    0.000000    0.000000   -2.361648   -0.000000    0.000000    2.361648
 
 
 
@@ -809,7 +774,7 @@ Maximum number of iterations reset in numerical differentiation to    13
                                   -------------
 
                  au               Debye          C m (/(10**-30)
-              0.702509           1.785599           5.956118
+              0.752091           1.911626           6.376496
 
 
                              Dipole moment components
@@ -817,7 +782,7 @@ Maximum number of iterations reset in numerical differentiation to    13
 
                  au               Debye          C m (/(10**-30)
 
-      x      0.70250878         1.78559911         5.95611752
+      x      0.75209139         1.91162551         6.37649635
       y      0.00000000         0.00000000         0.00000000
       z      0.00000000         0.00000000         0.00000000
 
@@ -840,9 +805,9 @@ Maximum number of iterations reset in numerical differentiation to    13
   Principal values (au, SI and cgs) and axes:
   -------------------------------------------
 
-  Q_aa         1.7398      7.8058      2.3401      1.0000    0.0000    0.0000
-  Q_bb        -0.8699     -3.9029     -1.1701     -0.0000    1.0000    0.0000
-  Q_cc        -0.8699     -3.9029     -1.1701      0.0000    0.0000    1.0000
+  Q_aa         1.7098      7.6709      2.2997      1.0000    0.0000    0.0000
+  Q_bb        -0.8549     -3.8355     -1.1498      0.0000    1.0000    0.0000
+  Q_cc        -0.8549     -3.8355     -1.1498      0.0000    0.0000    1.0000
 
 
                           Total quadrupole moments (au)
@@ -850,9 +815,9 @@ Maximum number of iterations reset in numerical differentiation to    13
 
                          Ex          Ey          Ez
 
-            Ex       1.739817    0.000000    0.000000
-            Ey       0.000000   -0.869908    0.000000
-            Ez       0.000000    0.000000   -0.869908
+            Ex       1.709757    0.000000    0.000000
+            Ey       0.000000   -0.854878    0.000000
+            Ez       0.000000    0.000000   -0.854878
 
 
 
@@ -861,9 +826,9 @@ Maximum number of iterations reset in numerical differentiation to    13
 
                          Ex          Ey          Ez
 
-            Ex       2.340113    0.000000    0.000000
-            Ey       0.000000   -1.170056    0.000000
-            Ez       0.000000    0.000000   -1.170056
+            Ex       2.299681    0.000000    0.000000
+            Ey       0.000000   -1.149841    0.000000
+            Ez       0.000000    0.000000   -1.149841
 
 
 
@@ -872,9 +837,9 @@ Maximum number of iterations reset in numerical differentiation to    13
 
                          Ex          Ey          Ez
 
-            Ex       7.805776    0.000000    0.000000
-            Ey       0.000000   -3.902888    0.000000
-            Ez       0.000000    0.000000   -3.902888
+            Ex       7.670911    0.000000    0.000000
+            Ey       0.000000   -3.835456    0.000000
+            Ez       0.000000    0.000000   -3.835456
 
 
 
@@ -884,13 +849,13 @@ Maximum number of iterations reset in numerical differentiation to    13
             F           H     
             ------      ------
  F     :    0.000000
- H     :    0.940893    0.000000
+ H     :    0.911409    0.000000
 
 
-  Max    interatomic separation is    0.9409 Angstrom (    1.7780 Bohr)
+  Max    interatomic separation is    0.9114 Angstrom (    1.7223 Bohr)
   between atoms    2 and    1, "H     " and "F     ".
 
-  Min HX interatomic separation is    0.9409 Angstrom (    1.7780 Bohr)
+  Min HX interatomic separation is    0.9114 Angstrom (    1.7223 Bohr)
 
 
   Bond distances (Angstrom):
@@ -898,7 +863,7 @@ Maximum number of iterations reset in numerical differentiation to    13
 
                   atom 1     atom 2       distance
                   ------     ------       --------
-  bond distance:  H          F            0.940893
+  bond distance:  H          F            0.911409
 
 
 
@@ -912,23 +877,23 @@ Maximum number of iterations reset in numerical differentiation to    13
                        Total mass:    20.006228 amu
                        Natural abundance:  99.985 %
 
- Center-of-mass coordinates (a.u.):    0.102047    0.000000    0.000000
+ Center-of-mass coordinates (a.u.):    0.086763    0.000000    0.000000
 
  ORTVEC: New vector no.  5 is removed because of linear dependence;
  norm of vector after Gram-Schmidt's orthogonalization 0.00D+00
 
  (ORTVEC) NNEW reduced from  6 to  5
-  Norm of projected gradient     0.008619
+  Norm of projected gradient     5.752312
 
- Largest deviation from orthonormality of OMOs:0.130562E-12
- - found for element   15  15
+ Largest deviation from orthonormality of OMOs:0.934697E-12
+ - found for element   94  68
 
 
        ********************************************************************
        ****************** ABACUS - VIBRATIONAL AVERAGING ******************
        ********************************************************************
 
- Energy at effective geometry:  -100.4797883053
+ Energy at effective geometry:  -100.0705402211
 
 
   Analytical gradient at effective geometry
@@ -936,7 +901,7 @@ Maximum number of iterations reset in numerical differentiation to    13
 
 
                Column   1     Column   2     Column   3     Column   4     Column   5
-       1      -0.00609080     0.00000000    -0.00000000     0.00609845    -0.00000000
+       1      -4.06749888    -0.00000000    -0.00000000     4.06749888     0.00000000
 
                Column   6
     ==== End of matrix output ====
@@ -947,8 +912,8 @@ Maximum number of iterations reset in numerical differentiation to    13
 
 
                Column   1     Column   2     Column   3     Column   4     Column   5
-       1       0.53157208    -0.00000000     0.00000000    -0.53157208     0.00000000
-       4      -0.53157208     0.00000000    -0.00000000     0.53157208     0.00000000
+       1      -0.88487916     0.00000000     0.00000000     0.88487916     0.00000000
+       4       0.88487916     0.00000000     0.00000000    -0.88487916    -0.00000000
 
                Column   6
     ==== End of matrix output ====
@@ -959,7 +924,7 @@ Maximum number of iterations reset in numerical differentiation to    13
 
 
                Column   1     Column   2     Column   3
-       1       0.70250878     0.00000000     0.00000000
+       1       0.75209139     0.00000000     0.00000000
     ==== End of matrix output ====
 
 
@@ -968,9 +933,9 @@ Maximum number of iterations reset in numerical differentiation to    13
 
                        Bx                  By                  Bz
 
-  Bx         1.739816528451      0.000000000000      0.000000000000
-  By         0.000000000000     -0.869908264226      0.000000000000
-  Bz         0.000000000000      0.000000000000     -0.869908264226
+  Bx         1.709756733343      0.000000000000      0.000000000000
+  By         0.000000000000     -0.854878366671      0.000000000000
+  Bz         0.000000000000      0.000000000000     -0.854878366672
 
 
 
@@ -982,8 +947,8 @@ Maximum number of iterations reset in numerical differentiation to    13
  TOTAL      00:00:02     100 %
 
 
- >>>> Total CPU  time used in ABACUS:   1.76 seconds
- >>>> Total wall time used in ABACUS:   1.85 seconds
+ >>>> Total CPU  time used in ABACUS:   1.86 seconds
+ >>>> Total wall time used in ABACUS:   2.04 seconds
 
 
                    .-------------------------------------------.
@@ -991,7 +956,7 @@ Maximum number of iterations reset in numerical differentiation to    13
                    `-------------------------------------------'
 
 
-@  Geometry walk step no.   0:  Molecular energy =   -100.479788   Molecular gradient =  0.008619
+@  Geometry walk step no.   0:  Molecular energy =   -100.070540   Molecular gradient =  5.752312
 
 
      @@>>>>>>>>>> Geometry walk iteration number:    1 <<<<<<<<<<
@@ -1009,8 +974,8 @@ Maximum number of iterations reset in numerical differentiation to    13
                      | Starting in Integral Section (HERMIT) |
                      `---------------------------------------'
 
- >>>> Total CPU  time used in HERMIT:   0.03 seconds
- >>>> Total wall time used in HERMIT:   0.04 seconds
+ >>>> Total CPU  time used in HERMIT:   0.22 seconds
+ >>>> Total wall time used in HERMIT:   0.23 seconds
 
 
                         .----------------------------------.
@@ -1037,78 +1002,81 @@ Maximum number of iterations reset in numerical differentiation to    13
 
  Iter      Total energy        Error norm    Delta(E)  DIIS dim.
  -----------------------------------------------------------------------------
-   1  Screening settings (-IFTHRS, DIFDEN)  -15    F
-      K-S energy, electrons, error :    -10.649561179871  10.0000000238    2.38D-08
-   1    -98.8651317742        1.17469D+01    1.61D+00    1
-      Virial theorem: -V/T =      1.985738
-@      MULPOP F       7.66; H      -7.66; 
+   1  Screening settings (-IFTHRS, DIFDEN)  -16    T
+   1    -73.7463197340        7.33875D+01    2.63D+01    1
+      Virial theorem: -V/T =      1.505779
+@      MULPOP F      32.01; H     -32.01; 
  -----------------------------------------------------------------------------
    2  Screening settings (-IFTHRS, DIFDEN)   -7    F
-      K-S energy, electrons, error :    -11.005516103501  10.0000001655    1.65D-07
-   2    -100.441508950        1.04505D+00   -1.58D+00    2
-      Virial theorem: -V/T =      1.987987
+   2    -100.043060820        1.84928D+00   -2.63D+01    2
+      Virial theorem: -V/T =      2.013645
+@      MULPOP F       0.23; H      -0.23; 
+ -----------------------------------------------------------------------------
+   3  Screening settings (-IFTHRS, DIFDEN)   -7    T
+   3    -100.068092230        1.10120D-01   -2.50D-02    3
+      Virial theorem: -V/T =      2.000712
 @      MULPOP F      -0.50; H       0.50; 
  -----------------------------------------------------------------------------
-   3  Screening settings (-IFTHRS, DIFDEN)   -8    F
-      K-S energy, electrons, error :    -10.289440775267  10.0000001350    1.35D-07
-   3    -100.295424319        2.23205D+00    1.46D-01    3
-      Virial theorem: -V/T =      2.040571
-@      MULPOP F      -0.03; H       0.03; 
+   4  Screening settings (-IFTHRS, DIFDEN)   -9    F
+   4    -100.068688788        3.22196D-02   -5.97D-04    4
+      Virial theorem: -V/T =      2.001310
+@      MULPOP F      -0.55; H       0.55; 
  -----------------------------------------------------------------------------
-   4  Screening settings (-IFTHRS, DIFDEN)   -8    F
-      K-S energy, electrons, error :    -10.793460713910  10.0000001559    1.56D-07
-   4    -100.478602152        6.71913D-02   -1.83D-01    4
-      Virial theorem: -V/T =      2.004672
-@      MULPOP F      -0.38; H       0.38; 
+   5  Screening settings (-IFTHRS, DIFDEN)   -9    T
+   5    -100.068774092        1.31069D-02   -8.53D-05    5
+      Virial theorem: -V/T =      2.000796
+@      MULPOP F      -0.56; H       0.56; 
  -----------------------------------------------------------------------------
-   5  Screening settings (-IFTHRS, DIFDEN)   -9    F
-      K-S energy, electrons, error :    -10.775246206337  10.0000001549    1.55D-07
-   5    -100.478818535        1.36178D-02   -2.16D-04    5
-      Virial theorem: -V/T =      2.005807
-@      MULPOP F      -0.36; H       0.36; 
- -----------------------------------------------------------------------------
-   6  Screening settings (-IFTHRS, DIFDEN)  -10    F
-      K-S energy, electrons, error :    -10.777464558769  10.0000001550    1.55D-07
-   6    -100.478826193        2.11000D-03   -7.66D-06    6
-      Virial theorem: -V/T =      2.005656
-@      MULPOP F      -0.36; H       0.36; 
+   6  Screening settings (-IFTHRS, DIFDEN)   -9    T
+   6    -100.068788817        5.67222D-03   -1.47D-05    6
+      Virial theorem: -V/T =      2.000990
+@      MULPOP F      -0.55; H       0.55; 
  -----------------------------------------------------------------------------
    7  Screening settings (-IFTHRS, DIFDEN)  -11    F
-      K-S energy, electrons, error :    -10.777860281693  10.0000001550    1.55D-07
-   7    -100.478826354        2.30801D-04   -1.62D-07    7
-      Virial theorem: -V/T =      2.005627
-@      MULPOP F      -0.36; H       0.36; 
+   7    -100.068791358        9.29778D-04   -2.54D-06    7
+      Virial theorem: -V/T =      2.000897
+@      MULPOP F      -0.55; H       0.55; 
  -----------------------------------------------------------------------------
-   8  Screening settings (-IFTHRS, DIFDEN)  -12    F
-      K-S energy, electrons, error :    -10.777908832715  10.0000001550    1.55D-07
-   8    -100.478826357        1.20693D-05   -2.06D-09    8
-      Virial theorem: -V/T =      2.005624
-@      MULPOP F      -0.36; H       0.36; 
+   8  Screening settings (-IFTHRS, DIFDEN)  -11    T
+   8    -100.068791440        9.17528D-05   -8.15D-08    8
+      Virial theorem: -V/T =      2.000903
+@      MULPOP F      -0.55; H       0.55; 
  -----------------------------------------------------------------------------
-   9  Screening settings (-IFTHRS, DIFDEN)  -13    F
-      K-S energy, electrons, error :    -10.777908230637  10.0000001550    1.55D-07
-   9    -100.478826357        1.50475D-06   -9.61D-12    9
-      Virial theorem: -V/T =      2.005624
-@      MULPOP F      -0.36; H       0.36; 
+   9  Screening settings (-IFTHRS, DIFDEN)  -11    T
+   9    -100.068791441        6.32639D-06   -8.11D-10    9
+      Virial theorem: -V/T =      2.000904
+@      MULPOP F      -0.55; H       0.55; 
  -----------------------------------------------------------------------------
-  10  Screening settings (-IFTHRS, DIFDEN)  -14    F
-      K-S energy, electrons, error :    -10.777907926677  10.0000001550    1.55D-07
-  10    -100.478826357        5.30839D-08   -1.42D-13   10
-      Virial theorem: -V/T =      2.005624
-@      MULPOP F      -0.36; H       0.36; 
+  10  Screening settings (-IFTHRS, DIFDEN)  -16    F
+  10    -100.068791441        1.09896D-06   -4.26D-12   10
+      Virial theorem: -V/T =      2.000904
+@      MULPOP F      -0.55; H       0.55; 
  -----------------------------------------------------------------------------
-  11  Screening settings (-IFTHRS, DIFDEN)  -15    F
-      K-S energy, electrons, error :    -10.777907917045  10.0000001550    1.55D-07
-  11    -100.478826357        1.75799D-09    5.68D-14   10
-      Virial theorem: -V/T =      2.005624
-@      MULPOP F      -0.36; H       0.36; 
+  11  Screening settings (-IFTHRS, DIFDEN)  -16    T
+  11    -100.068791441        1.16128D-07   -2.84D-14   10
+      Virial theorem: -V/T =      2.000904
+@      MULPOP F      -0.55; H       0.55; 
  -----------------------------------------------------------------------------
-  12  Screening settings (-IFTHRS, DIFDEN)  -15    F
-      K-S energy, electrons, error :    -10.777907916690  10.0000001550    1.55D-07
-  12    -100.478826357        4.19606D-11    1.42D-14   10
+  12  Screening settings (-IFTHRS, DIFDEN)  -16    T
+  12    -100.068791441        9.15927D-09   -4.26D-14   10
+      Virial theorem: -V/T =      2.000904
+@      MULPOP F      -0.55; H       0.55; 
+ -----------------------------------------------------------------------------
+  13  Screening settings (-IFTHRS, DIFDEN)  -16    T
+  13    -100.068791441        1.01697D-09    1.42D-14   10
+      Virial theorem: -V/T =      2.000904
+@      MULPOP F      -0.55; H       0.55; 
+ -----------------------------------------------------------------------------
+  14  Screening settings (-IFTHRS, DIFDEN)  -16    T
+  14    -100.068791441        1.34588D-10    1.42D-14   10
+      Virial theorem: -V/T =      2.000904
+@      MULPOP F      -0.55; H       0.55; 
+ -----------------------------------------------------------------------------
+  15  Screening settings (-IFTHRS, DIFDEN)  -16    T
+  15    -100.068791441        1.99851D-11    1.42D-14   10
 
- *** DIIS converged in  12 iterations !
-@    Converged SCF energy, gradient:   -100.478826356513    4.20D-11
+ *** DIIS converged in  15 iterations !
+@    Converged SCF energy, gradient:   -100.068791440668    2.00D-11
    - total time used in SIRFCK :              0.00 seconds
 
 
@@ -1119,15 +1087,15 @@ Maximum number of iterations reset in numerical differentiation to    13
  Number of electrons :   10
  Orbital occupations :    5
 
- Sym       Kohn-Sham orbital energies
+ Sym       Hartree-Fock orbital energies
 
-  1    -24.29026735    -1.08638672    -0.48461281    -0.35021145    -0.35021145
-        -0.04958515     0.05273482     0.10866581     0.10866581     0.11074017
+  1    -26.29503699    -1.59349295    -0.75966734    -0.64812441    -0.64812441
+         0.03208210     0.15722948     0.21209100     0.21209100     0.21414606
 
-    E(LUMO) :    -0.04958515 au (symmetry 1)
-  - E(HOMO) :    -0.35021145 au (symmetry 1)
+    E(LUMO) :     0.03208210 au (symmetry 1)
+  - E(HOMO) :    -0.64812441 au (symmetry 1)
   ------------------------------------------
-    gap     :     0.30062630 au
+    gap     :     0.68020651 au
 
  >>> Writing SIRIFC interface file <<<
 
@@ -1140,13 +1108,13 @@ Maximum number of iterations reset in numerical differentiation to    13
 
 
  (SIRSTP) Close to convergence, ratio set to one.
- Energy difference; actual and predicted:    9.61949D-04    0.00000D+00
+ Energy difference; actual and predicted:    1.74878D-03    0.00000D+00
 
 
  *** GEOMETRY WALK STEP ACCEPTED.
 
 
- >>>> CPU and wall time for SCF :       0.805       0.893
+ >>>> CPU and wall time for SCF :       1.288       1.319
 
 
                        .-----------------------------------.
@@ -1158,24 +1126,24 @@ Maximum number of iterations reset in numerical differentiation to    13
 @    Spatial symmetry:            1
 @    Total charge of molecule:    0
 
-@    Final DFT energy:           -100.478826356513                 
-@    Nuclear repulsion:             4.920348000436
-@    Electronic energy:          -105.399174356948
+@    Final HF energy:            -100.068791440668                 
+@    Nuclear repulsion:             5.074930805240
+@    Electronic energy:          -105.143722245907
 
-@    Final gradient norm:           0.000000000042
-
- 
-     Date and time (Linux)  : Fri Apr 25 10:07:02 2014
-     Host name              : c4-12.local                             
-
-
-
- >>>> Total CPU  time used in SIRIUS :      0.81 seconds
- >>>> Total wall time used in SIRIUS :      0.90 seconds
+@    Final gradient norm:           0.000000000020
 
  
-     Date and time (Linux)  : Fri Apr 25 10:07:02 2014
-     Host name              : c4-12.local                             
+     Date and time (Linux)  : Mon Jun  2 01:32:35 2014
+     Host name              : c32-8.local                             
+
+
+
+ >>>> Total CPU  time used in SIRIUS :      1.29 seconds
+ >>>> Total wall time used in SIRIUS :      1.33 seconds
+
+ 
+     Date and time (Linux)  : Mon Jun  2 01:32:35 2014
+     Host name              : c32-8.local                             
 
 
                      .---------------------------------------.
@@ -1211,9 +1179,9 @@ Maximum number of iterations reset in numerical differentiation to    13
 
  INFO: Changed THRP threshold used in integral transformation from  1.00D-15 to integral evaluation threshold  1.00D-12
 
- Center of mass dipole origin  :    0.102047    0.000000    0.000000
+ Center of mass dipole origin  :    0.086763    0.000000    0.000000
 
- Center of mass gauge origin   :    0.102047    0.000000    0.000000
+ Center of mass gauge origin   :    0.086763    0.000000    0.000000
 
 
                  .------------------------------------------------.
@@ -1222,30 +1190,8 @@ Maximum number of iterations reset in numerical differentiation to    13
 
 
  
-     Date and time (Linux)  : Fri Apr 25 10:07:02 2014
-     Host name              : c4-12.local                             
-
-
-            +---------------------------------------------------------+
-            ! Gradient elements calculated directly and from symmetry !
-            +---------------------------------------------------------+
-
-
-
-        Coordinate    Direct calc.     Tra.-rot. sym.   Difference
-        ----------------------------------------------------------
-
-        F    x       -0.0307571890    -0.0307526993    -0.0000044897
-        F    y        0.0000000000     0.0000000000     0.0000000000
-        F    z        0.0000000000     0.0000000000     0.0000000000
-        H    y       -0.0000000000     0.0000000000    -0.0000000000
-        H    z       -0.0000000000     0.0000000000    -0.0000000000
-
-
-
- >>> WARNING from TRAROT:
-
- Largest deviation from tra-rot symmetry is in gradient element  1:  4.49E-06
+     Date and time (Linux)  : Mon Jun  2 01:32:35 2014
+     Host name              : c32-8.local                             
 
 
    ***************************************************************************
@@ -1254,10 +1200,8 @@ Maximum number of iterations reset in numerical differentiation to    13
 
 
  
-     Date and time (Linux)  : Fri Apr 25 10:07:02 2014
-     Host name              : c4-12.local                             
-
- WARNING: warnings have been issued, please check the output above !
+     Date and time (Linux)  : Mon Jun  2 01:32:35 2014
+     Host name              : c32-8.local                             
 
 
         *****************************************************************
@@ -1272,9 +1216,9 @@ Maximum number of iterations reset in numerical differentiation to    13
   Principal values (au, SI and cgs) and axes:
   -------------------------------------------
 
-  Q_aa         1.8194      8.1628      2.4471      1.0000    0.0000    0.0000
-  Q_bb        -0.9097     -4.0814     -1.2236      0.0000    0.0000    1.0000
-  Q_cc        -0.9097     -4.0814     -1.2236     -0.0000    1.0000    0.0000
+  Q_aa         1.7982      8.0676      2.4186      1.0000    0.0000    0.0000
+  Q_bb        -0.8991     -4.0338     -1.2093      0.0000    1.0000    0.0000
+  Q_cc        -0.8991     -4.0338     -1.2093     -0.0000    0.0000    1.0000
 
 
                           Total quadrupole moments (au)
@@ -1282,9 +1226,9 @@ Maximum number of iterations reset in numerical differentiation to    13
 
                          Ex          Ey          Ez
 
-            Ex       1.819392    0.000000    0.000000
-            Ey       0.000000   -0.909696    0.000000
-            Ez       0.000000    0.000000   -0.909696
+            Ex       1.798180   -0.000000    0.000000
+            Ey      -0.000000   -0.899090    0.000000
+            Ez       0.000000    0.000000   -0.899090
 
 
 
@@ -1293,9 +1237,9 @@ Maximum number of iterations reset in numerical differentiation to    13
 
                          Ex          Ey          Ez
 
-            Ex       2.447145    0.000000    0.000000
-            Ey       0.000000   -1.223572    0.000000
-            Ez       0.000000    0.000000   -1.223572
+            Ex       2.418614   -0.000000    0.000000
+            Ey      -0.000000   -1.209307    0.000000
+            Ez       0.000000    0.000000   -1.209307
 
 
 
@@ -1304,13 +1248,13 @@ Maximum number of iterations reset in numerical differentiation to    13
 
                          Ex          Ey          Ez
 
-            Ex       8.162796    0.000000    0.000000
-            Ey       0.000000   -4.081398    0.000000
-            Ez       0.000000    0.000000   -4.081398
+            Ex       8.067628   -0.000000    0.000000
+            Ey      -0.000000   -4.033814    0.000000
+            Ez       0.000000    0.000000   -4.033814
 
 
- Largest deviation from orthonormality of OMOs:0.365638E-12
- - found for element    3  35
+ Largest deviation from orthonormality of OMOs:0.571054E-11
+ - found for element   94  79
 
 
        ********************************************************************
@@ -1327,8 +1271,8 @@ Maximum number of iterations reset in numerical differentiation to    13
 
 
 
- >>>> Total CPU  time used in ABACUS:   0.39 seconds
- >>>> Total wall time used in ABACUS:   0.41 seconds
+ >>>> Total CPU  time used in ABACUS:   0.67 seconds
+ >>>> Total wall time used in ABACUS:   0.69 seconds
 
 
                    .-------------------------------------------.
@@ -1336,7 +1280,7 @@ Maximum number of iterations reset in numerical differentiation to    13
                    `-------------------------------------------'
 
 
-@  Geometry walk step no.   1:  Molecular energy =   -100.478826   Molecular gradient =  0.043494
+@  Geometry walk step no.   1:  Molecular energy =   -100.068791   Molecular gradient =  5.627996
 
 
      @@>>>>>>>>>> Geometry walk iteration number:    2 <<<<<<<<<<
@@ -1354,8 +1298,8 @@ Maximum number of iterations reset in numerical differentiation to    13
                      | Starting in Integral Section (HERMIT) |
                      `---------------------------------------'
 
- >>>> Total CPU  time used in HERMIT:   0.03 seconds
- >>>> Total wall time used in HERMIT:   0.05 seconds
+ >>>> Total CPU  time used in HERMIT:   0.22 seconds
+ >>>> Total wall time used in HERMIT:   0.23 seconds
 
 
                         .----------------------------------.
@@ -1382,78 +1326,81 @@ Maximum number of iterations reset in numerical differentiation to    13
 
  Iter      Total energy        Error norm    Delta(E)  DIIS dim.
  -----------------------------------------------------------------------------
-   1  Screening settings (-IFTHRS, DIFDEN)  -15    F
-      K-S energy, electrons, error :    -10.506829992860   9.9999995125   -4.87D-07
-   1    -96.4025410976        1.78356D+01    4.08D+00    1
-      Virial theorem: -V/T =      1.922462
-@      MULPOP F     -14.12; H      14.12; 
+   1  Screening settings (-IFTHRS, DIFDEN)  -16    T
+   1    -54.7540176561        9.33893D+01    4.53D+01    1
+      Virial theorem: -V/T =      1.306973
+@      MULPOP F     -44.21; H      44.21; 
  -----------------------------------------------------------------------------
    2  Screening settings (-IFTHRS, DIFDEN)   -7    F
-      K-S energy, electrons, error :    -11.317311926196   9.9999998387   -1.61D-07
-   2    -100.278840593        2.30391D+00   -3.88D+00    2
-      Virial theorem: -V/T =      1.967180
+   2    -100.025420423        2.22680D+00   -4.53D+01    2
+      Virial theorem: -V/T =      2.011657
+@      MULPOP F      -2.18; H       2.18; 
+ -----------------------------------------------------------------------------
+   3  Screening settings (-IFTHRS, DIFDEN)   -7    T
+   3    -100.069273166        1.81406D-01   -4.39D-02    3
+      Virial theorem: -V/T =      2.001860
+@      MULPOP F      -0.67; H       0.67; 
+ -----------------------------------------------------------------------------
+   4  Screening settings (-IFTHRS, DIFDEN)   -9    F
+   4    -100.070332715        7.15003D-02   -1.06D-03    4
+      Virial theorem: -V/T =      1.998739
+@      MULPOP F      -0.58; H       0.58; 
+ -----------------------------------------------------------------------------
+   5  Screening settings (-IFTHRS, DIFDEN)   -9    T
+   5    -100.070536384        2.54811D-02   -2.04D-04    5
+      Virial theorem: -V/T =      2.000134
 @      MULPOP F      -0.57; H       0.57; 
  -----------------------------------------------------------------------------
-   3  Screening settings (-IFTHRS, DIFDEN)   -8    F
-      K-S energy, electrons, error :     -9.594876781659   9.9999998789   -1.21D-07
-   3    -99.3330424221        5.30486D+00    9.46D-01    3
-      Virial theorem: -V/T =      2.083119
-@      MULPOP F       0.56; H      -0.56; 
+   6  Screening settings (-IFTHRS, DIFDEN)   -9    T
+   6    -100.070573246        4.67996D-03   -3.69D-05    6
+      Virial theorem: -V/T =      1.999721
+@      MULPOP F      -0.56; H       0.56; 
  -----------------------------------------------------------------------------
-   4  Screening settings (-IFTHRS, DIFDEN)   -7    F
-      K-S energy, electrons, error :    -10.836644420326   9.9999998533   -1.47D-07
-   4    -100.478219263        1.34823D-01   -1.15D+00    4
-      Virial theorem: -V/T =      2.002983
-@      MULPOP F      -0.36; H       0.36; 
+   7  Screening settings (-IFTHRS, DIFDEN)  -11    F
+   7    -100.070575999        9.93882D-04   -2.75D-06    7
+      Virial theorem: -V/T =      1.999727
+@      MULPOP F      -0.56; H       0.56; 
  -----------------------------------------------------------------------------
-   5  Screening settings (-IFTHRS, DIFDEN)   -9    F
-      K-S energy, electrons, error :    -10.793596893720   9.9999998547   -1.45D-07
-   5    -100.479275404        4.82291D-02   -1.06D-03    5
-      Virial theorem: -V/T =      2.005334
-@      MULPOP F      -0.31; H       0.31; 
+   8  Screening settings (-IFTHRS, DIFDEN)  -11    T
+   8    -100.070576119        1.29915D-04   -1.20D-07    8
+      Virial theorem: -V/T =      1.999727
+@      MULPOP F      -0.56; H       0.56; 
  -----------------------------------------------------------------------------
-   6  Screening settings (-IFTHRS, DIFDEN)   -9    F
-      K-S energy, electrons, error :    -10.801379859928   9.9999998543   -1.46D-07
-   6    -100.479352712        1.14754D-02   -7.73D-05    6
-      Virial theorem: -V/T =      2.004781
-@      MULPOP F      -0.32; H       0.32; 
+   9  Screening settings (-IFTHRS, DIFDEN)  -11    T
+   9    -100.070576121        8.49531D-06   -1.62D-09    9
+      Virial theorem: -V/T =      1.999728
+@      MULPOP F      -0.56; H       0.56; 
  -----------------------------------------------------------------------------
-   7  Screening settings (-IFTHRS, DIFDEN)  -10    F
-      K-S energy, electrons, error :    -10.803388862058   9.9999998543   -1.46D-07
-   7    -100.479357958        1.10637D-03   -5.25D-06    7
-      Virial theorem: -V/T =      2.004648
-@      MULPOP F      -0.32; H       0.32; 
+  10  Screening settings (-IFTHRS, DIFDEN)  -16    F
+  10    -100.070576121        1.30382D-06   -7.92D-12   10
+      Virial theorem: -V/T =      1.999728
+@      MULPOP F      -0.56; H       0.56; 
  -----------------------------------------------------------------------------
-   8  Screening settings (-IFTHRS, DIFDEN)  -11    F
-      K-S energy, electrons, error :    -10.803592781708   9.9999998543   -1.46D-07
-   8    -100.479358003        1.87829D-04   -4.48D-08    8
-      Virial theorem: -V/T =      2.004633
-@      MULPOP F      -0.32; H       0.32; 
+  11  Screening settings (-IFTHRS, DIFDEN)  -16    T
+  11    -100.070576121        1.36291D-07   -1.71D-13   10
+      Virial theorem: -V/T =      1.999728
+@      MULPOP F      -0.56; H       0.56; 
  -----------------------------------------------------------------------------
-   9  Screening settings (-IFTHRS, DIFDEN)  -12    F
-      K-S energy, electrons, error :    -10.803629832851   9.9999998543   -1.46D-07
-   9    -100.479358004        4.30340D-06   -1.36D-09    9
-      Virial theorem: -V/T =      2.004630
-@      MULPOP F      -0.32; H       0.32; 
+  12  Screening settings (-IFTHRS, DIFDEN)  -16    T
+  12    -100.070576121        1.42518D-08   -4.26D-14   10
+      Virial theorem: -V/T =      1.999728
+@      MULPOP F      -0.56; H       0.56; 
  -----------------------------------------------------------------------------
-  10  Screening settings (-IFTHRS, DIFDEN)  -14    F
-      K-S energy, electrons, error :    -10.803630782747   9.9999998543   -1.46D-07
-  10    -100.479358004        1.41302D-07   -8.24D-13   10
-      Virial theorem: -V/T =      2.004630
-@      MULPOP F      -0.32; H       0.32; 
+  13  Screening settings (-IFTHRS, DIFDEN)  -16    T
+  13    -100.070576121        1.28309D-09    7.11D-14   10
+      Virial theorem: -V/T =      1.999728
+@      MULPOP F      -0.56; H       0.56; 
  -----------------------------------------------------------------------------
-  11  Screening settings (-IFTHRS, DIFDEN)  -15    F
-      K-S energy, electrons, error :    -10.803630754424   9.9999998543   -1.46D-07
-  11    -100.479358004        1.03410D-08    8.53D-14   10
-      Virial theorem: -V/T =      2.004630
-@      MULPOP F      -0.32; H       0.32; 
+  14  Screening settings (-IFTHRS, DIFDEN)  -16    T
+  14    -100.070576121        1.66614D-10   -5.68D-14   10
+      Virial theorem: -V/T =      1.999728
+@      MULPOP F      -0.56; H       0.56; 
  -----------------------------------------------------------------------------
-  12  Screening settings (-IFTHRS, DIFDEN)  -15    F
-      K-S energy, electrons, error :    -10.803630756362   9.9999998543   -1.46D-07
-  12    -100.479358004        1.34279D-10   -2.84D-14   10
+  15  Screening settings (-IFTHRS, DIFDEN)  -16    T
+  15    -100.070576121        2.73815D-11   -5.68D-14   10
 
- *** DIIS converged in  12 iterations !
-@    Converged SCF energy, gradient:   -100.479358004210    1.34D-10
+ *** DIIS converged in  15 iterations !
+@    Converged SCF energy, gradient:   -100.070576120915    2.74D-11
    - total time used in SIRFCK :              0.00 seconds
 
 
@@ -1464,15 +1411,15 @@ Maximum number of iterations reset in numerical differentiation to    13
  Number of electrons :   10
  Orbital occupations :    5
 
- Sym       Kohn-Sham orbital energies
+ Sym       Hartree-Fock orbital energies
 
-  1    -24.28914770    -1.10236888    -0.49482459    -0.35468282    -0.35468282
-        -0.04102858     0.05953969     0.10890978     0.10890978     0.11438302
+  1    -26.29390157    -1.61313561    -0.78118727    -0.65369142    -0.65369142
+         0.03361364     0.16116323     0.21227209     0.21227209     0.21562469
 
-    E(LUMO) :    -0.04102858 au (symmetry 1)
-  - E(HOMO) :    -0.35468282 au (symmetry 1)
+    E(LUMO) :     0.03361364 au (symmetry 1)
+  - E(HOMO) :    -0.65369142 au (symmetry 1)
   ------------------------------------------
-    gap     :     0.31365424 au
+    gap     :     0.68730506 au
 
  >>> Writing SIRIFC interface file <<<
 
@@ -1485,13 +1432,13 @@ Maximum number of iterations reset in numerical differentiation to    13
 
 
  (SIRSTP) Close to convergence, ratio set to one.
- Energy difference; actual and predicted:   -5.31648D-04    0.00000D+00
+ Energy difference; actual and predicted:   -1.78468D-03    0.00000D+00
 
 
  *** GEOMETRY WALK STEP ACCEPTED.
 
 
- >>>> CPU and wall time for SCF :       0.726       0.764
+ >>>> CPU and wall time for SCF :       1.003       1.898
 
 
                        .-----------------------------------.
@@ -1503,24 +1450,24 @@ Maximum number of iterations reset in numerical differentiation to    13
 @    Spatial symmetry:            1
 @    Total charge of molecule:    0
 
-@    Final DFT energy:           -100.479358004210                 
-@    Nuclear repulsion:             5.211590741623
-@    Electronic energy:          -105.690948745833
+@    Final HF energy:            -100.070576120915                 
+@    Nuclear repulsion:             5.385338226262
+@    Electronic energy:          -105.455914347177
 
-@    Final gradient norm:           0.000000000134
-
- 
-     Date and time (Linux)  : Fri Apr 25 10:07:03 2014
-     Host name              : c4-12.local                             
-
-
-
- >>>> Total CPU  time used in SIRIUS :      0.73 seconds
- >>>> Total wall time used in SIRIUS :      0.77 seconds
+@    Final gradient norm:           0.000000000027
 
  
-     Date and time (Linux)  : Fri Apr 25 10:07:03 2014
-     Host name              : c4-12.local                             
+     Date and time (Linux)  : Mon Jun  2 01:32:37 2014
+     Host name              : c32-8.local                             
+
+
+
+ >>>> Total CPU  time used in SIRIUS :      1.01 seconds
+ >>>> Total wall time used in SIRIUS :      1.91 seconds
+
+ 
+     Date and time (Linux)  : Mon Jun  2 01:32:37 2014
+     Host name              : c32-8.local                             
 
 
                      .---------------------------------------.
@@ -1556,9 +1503,9 @@ Maximum number of iterations reset in numerical differentiation to    13
 
  INFO: Changed THRP threshold used in integral transformation from  1.00D-15 to integral evaluation threshold  1.00D-12
 
- Center of mass dipole origin  :    0.102047    0.000000    0.000000
+ Center of mass dipole origin  :    0.086763    0.000000    0.000000
 
- Center of mass gauge origin   :    0.102047    0.000000    0.000000
+ Center of mass gauge origin   :    0.086763    0.000000    0.000000
 
 
                  .------------------------------------------------.
@@ -1567,30 +1514,8 @@ Maximum number of iterations reset in numerical differentiation to    13
 
 
  
-     Date and time (Linux)  : Fri Apr 25 10:07:03 2014
-     Host name              : c4-12.local                             
-
-
-            +---------------------------------------------------------+
-            ! Gradient elements calculated directly and from symmetry !
-            +---------------------------------------------------------+
-
-
-
-        Coordinate    Direct calc.     Tra.-rot. sym.   Difference
-        ----------------------------------------------------------
-
-        F    x        0.0239080488     0.0239046257     0.0000034231
-        F    y       -0.0000000000     0.0000000000    -0.0000000000
-        F    z        0.0000000000     0.0000000000     0.0000000000
-        H    y        0.0000000000     0.0000000000     0.0000000000
-        H    z       -0.0000000000     0.0000000000    -0.0000000000
-
-
-
- >>> WARNING from TRAROT:
-
- Largest deviation from tra-rot symmetry is in gradient element  1:  3.42E-06
+     Date and time (Linux)  : Mon Jun  2 01:32:37 2014
+     Host name              : c32-8.local                             
 
 
    ***************************************************************************
@@ -1599,10 +1524,8 @@ Maximum number of iterations reset in numerical differentiation to    13
 
 
  
-     Date and time (Linux)  : Fri Apr 25 10:07:03 2014
-     Host name              : c4-12.local                             
-
- WARNING: warnings have been issued, please check the output above !
+     Date and time (Linux)  : Mon Jun  2 01:32:38 2014
+     Host name              : c32-8.local                             
 
 
         *****************************************************************
@@ -1617,9 +1540,9 @@ Maximum number of iterations reset in numerical differentiation to    13
   Principal values (au, SI and cgs) and axes:
   -------------------------------------------
 
-  Q_aa         1.6621      7.4573      2.2356      1.0000   -0.0000    0.0000
-  Q_bb        -0.8311     -3.7286     -1.1178      0.0000    1.0000    0.0000
-  Q_cc        -0.8311     -3.7286     -1.1178     -0.0000    0.0000    1.0000
+  Q_aa         1.6243      7.2876      2.1848      1.0000    0.0000    0.0000
+  Q_bb        -0.8122     -3.6438     -1.0924      0.0000    1.0000    0.0000
+  Q_cc        -0.8122     -3.6438     -1.0924     -0.0000    0.0000    1.0000
 
 
                           Total quadrupole moments (au)
@@ -1627,9 +1550,9 @@ Maximum number of iterations reset in numerical differentiation to    13
 
                          Ex          Ey          Ez
 
-            Ex       1.662136   -0.000000    0.000000
-            Ey      -0.000000   -0.831068   -0.000000
-            Ez       0.000000   -0.000000   -0.831068
+            Ex       1.624315    0.000000    0.000000
+            Ey       0.000000   -0.812157    0.000000
+            Ez       0.000000    0.000000   -0.812157
 
 
 
@@ -1638,9 +1561,9 @@ Maximum number of iterations reset in numerical differentiation to    13
 
                          Ex          Ey          Ez
 
-            Ex       2.235630   -0.000000    0.000000
-            Ey      -0.000000   -1.117815   -0.000000
-            Ez       0.000000   -0.000000   -1.117815
+            Ex       2.184759    0.000000    0.000000
+            Ey       0.000000   -1.092379    0.000000
+            Ez       0.000000    0.000000   -1.092379
 
 
 
@@ -1649,13 +1572,13 @@ Maximum number of iterations reset in numerical differentiation to    13
 
                          Ex          Ey          Ez
 
-            Ex       7.457260   -0.000000    0.000000
-            Ey      -0.000000   -3.728630   -0.000000
-            Ez       0.000000   -0.000000   -3.728630
+            Ex       7.287571    0.000000    0.000000
+            Ey       0.000000   -3.643786    0.000000
+            Ez       0.000000    0.000000   -3.643786
 
 
- Largest deviation from orthonormality of OMOs:0.215272E-12
- - found for element   28  33
+ Largest deviation from orthonormality of OMOs:0.180250E-11
+ - found for element   79  94
 
 
        ********************************************************************
@@ -1670,13 +1593,13 @@ Maximum number of iterations reset in numerical differentiation to    13
  Dipole moment second derivatives:
  ---------------------------------
      Mode          X                Y                Z
-       1          0.005323        -0.000000         0.000000
+       1          0.115800         0.000000        -0.000000
 
  Molecular quadrupole moment second derivatives:
  -----------------------------------------------
 
  Mode      XX          XY          YY          XZ          YZ          ZZ
-   1     0.758164   -0.000000   -0.379082    0.000000   -0.000000   -0.379082
+   1     1.192577    0.000000   -0.596289    0.000000    0.000000   -0.596289
 
 
           *************************************************************
@@ -1690,7 +1613,7 @@ Maximum number of iterations reset in numerical differentiation to    13
 
    mode   cm-1     hartrees 
   --------------------------
-   1   3836.13     0.017479
+   1   4254.98     0.019387
 
 
 
@@ -1706,9 +1629,9 @@ Maximum number of iterations reset in numerical differentiation to    13
     Effective geometry       <P^(0)_2>_eff      Vibrationally corrected
  -----------------------------------------------------------------------
 
-  X        0.70250878            0.00004177            0.70255055
-  Y        0.00000000           -0.00000000           -0.00000000
-  Z        0.00000000            0.00000000            0.00000000
+  X        0.75209139            0.00081917            0.75291056
+  Y        0.00000000            0.00000000            0.00000000
+  Z        0.00000000           -0.00000000           -0.00000000
 
 
                          Molecular quadrupole moment (au)
@@ -1717,12 +1640,12 @@ Maximum number of iterations reset in numerical differentiation to    13
     Effective geometry       <P^(0)_2>_eff      Vibrationally corrected
  -----------------------------------------------------------------------
 
- XX        1.73981653            0.00594887            1.74576540
- XY        0.00000000           -0.00000000           -0.00000000
+ XX        1.70975673            0.00843632            1.71819305
+ XY        0.00000000            0.00000000            0.00000000
  XZ        0.00000000            0.00000000            0.00000000
- YY       -0.86990826           -0.00297444           -0.87288270
- YZ        0.00000000           -0.00000000           -0.00000000
- ZZ       -0.86990826           -0.00297444           -0.87288270
+ YY       -0.85487837           -0.00421816           -0.85909653
+ YZ        0.00000000            0.00000000            0.00000000
+ ZZ       -0.85487837           -0.00421816           -0.85909653
 
  Numerical differentiation complete.
 
@@ -1730,12 +1653,12 @@ Maximum number of iterations reset in numerical differentiation to    13
  CPU time statistics for ABACUS
  ------------------------------
 
- REST       00:00:01     293 %
+ REST       00:00:02     302 %
 
 
 
- >>>> Total CPU  time used in ABACUS:   0.40 seconds
- >>>> Total wall time used in ABACUS:   0.42 seconds
+ >>>> Total CPU  time used in ABACUS:   0.66 seconds
+ >>>> Total wall time used in ABACUS:   0.68 seconds
 
 
                    .-------------------------------------------.
@@ -1743,7 +1666,7 @@ Maximum number of iterations reset in numerical differentiation to    13
                    `-------------------------------------------'
 
 
-@  Geometry walk step no.   2:  Molecular energy =   -100.479358   Molecular gradient =  0.033809
+@  Geometry walk step no.   2:  Molecular energy =   -100.070576   Molecular gradient =  5.865725
 
 
                           .-----------------------------.
@@ -1762,8 +1685,8 @@ Maximum number of iterations reset in numerical differentiation to    13
                      | Starting in Integral Section (HERMIT) |
                      `---------------------------------------'
 
- >>>> Total CPU  time used in HERMIT:   0.03 seconds
- >>>> Total wall time used in HERMIT:   0.04 seconds
+ >>>> Total CPU  time used in HERMIT:   0.22 seconds
+ >>>> Total wall time used in HERMIT:   0.23 seconds
 
 
                         .----------------------------------.
@@ -1790,96 +1713,81 @@ Maximum number of iterations reset in numerical differentiation to    13
 
  Iter      Total energy        Error norm    Delta(E)  DIIS dim.
  -----------------------------------------------------------------------------
-   1  Screening settings (-IFTHRS, DIFDEN)  -15    F
-      K-S energy, electrons, error :    -10.644263674922   9.9999997037   -2.96D-07
-   1    -84.8914674136        4.66305D+01    1.56D+01    1
-      Virial theorem: -V/T =      1.846944
-@      MULPOP F       8.41; H      -8.41; 
+   1  Screening settings (-IFTHRS, DIFDEN)  -16    T
+   1     4.85961741603        2.45922D+02    1.05D+02    1
+      Virial theorem: -V/T =      0.968043
+@      MULPOP F      34.21; H     -34.21; 
  -----------------------------------------------------------------------------
    2  Screening settings (-IFTHRS, DIFDEN)   -7    F
-      K-S energy, electrons, error :     -8.510231129193   9.9999994770   -5.23D-07
-   2    -102.348864002        1.53543D+01   -1.75D+01    2
-      Virial theorem: -V/T =      2.107565
-@      MULPOP F      -8.62; H       8.62; 
+   2    -94.6330521746        2.76511D+01   -9.95D+01    2
+      Virial theorem: -V/T =      2.031220
+@      MULPOP F      -3.23; H       3.23; 
  -----------------------------------------------------------------------------
-   3  Screening settings (-IFTHRS, DIFDEN)   -7    F
-      K-S energy, electrons, error :    -12.489869439445   9.9999998527   -1.47D-07
-   3    -106.800840402        1.24738D+01   -4.45D+00    3
-      Virial theorem: -V/T =      1.899712
-@      MULPOP F     -12.08; H      12.08; 
+   3  Screening settings (-IFTHRS, DIFDEN)   -7    T
+   3    -106.476100128        2.55460D+01   -1.18D+01    3
+      Virial theorem: -V/T =      1.847962
+@      MULPOP F     -13.26; H      13.26; 
  -----------------------------------------------------------------------------
-   4  Screening settings (-IFTHRS, DIFDEN)   -7    F
-      K-S energy, electrons, error :    -11.110038062564   9.9999997136   -2.86D-07
-   4    -109.133894664        2.15966D+00   -2.33D+00    4
-      Virial theorem: -V/T =      2.024752
-@      MULPOP F     -12.01; H      12.01; 
+   4  Screening settings (-IFTHRS, DIFDEN)   -7    T
+   4    -110.594102461        5.07655D+00   -4.12D+00    4
+      Virial theorem: -V/T =      1.970630
+@      MULPOP F     -16.12; H      16.12; 
  -----------------------------------------------------------------------------
-   5  Screening settings (-IFTHRS, DIFDEN)   -8    F
-      K-S energy, electrons, error :    -10.908472397989   9.9999996932   -3.07D-07
-   5    -109.214759350        3.71204D-01   -8.09D-02    5
-      Virial theorem: -V/T =      2.034559
-@      MULPOP F     -12.05; H      12.05; 
+   5  Screening settings (-IFTHRS, DIFDEN)   -7    T
+   5    -110.832848766        1.25050D-01   -2.39D-01    5
+      Virial theorem: -V/T =      1.992475
+@      MULPOP F     -16.38; H      16.38; 
  -----------------------------------------------------------------------------
    6  Screening settings (-IFTHRS, DIFDEN)   -9    F
-      K-S energy, electrons, error :    -10.865105121707   9.9999996886   -3.11D-07
-   6    -109.217223115        4.30570D-02   -2.46D-03    6
-      Virial theorem: -V/T =      2.038158
-@      MULPOP F     -11.99; H      11.99; 
+   6    -110.833258554        4.62212D-02   -4.10D-04    6
+      Virial theorem: -V/T =      1.993640
+@      MULPOP F     -16.35; H      16.35; 
  -----------------------------------------------------------------------------
-   7  Screening settings (-IFTHRS, DIFDEN)  -10    F
-      K-S energy, electrons, error :    -10.861154684611   9.9999996885   -3.12D-07
-   7    -109.217260619        3.62218D-03   -3.75D-05    7
-      Virial theorem: -V/T =      2.038406
-@      MULPOP F     -12.00; H      12.00; 
+   7  Screening settings (-IFTHRS, DIFDEN)   -9    T
+   7    -110.833277687        2.91796D-03   -1.91D-05    7
+      Virial theorem: -V/T =      1.993440
+@      MULPOP F     -16.35; H      16.35; 
  -----------------------------------------------------------------------------
    8  Screening settings (-IFTHRS, DIFDEN)  -11    F
-      K-S energy, electrons, error :    -10.860782795825   9.9999996884   -3.12D-07
-   8    -109.217260902        1.72749D-04   -2.83D-07    8
-      Virial theorem: -V/T =      2.038432
-@      MULPOP F     -12.00; H      12.00; 
+   8    -110.833277843        5.26345D-04   -1.56D-07    8
+      Virial theorem: -V/T =      1.993429
+@      MULPOP F     -16.34; H      16.34; 
  -----------------------------------------------------------------------------
-   9  Screening settings (-IFTHRS, DIFDEN)  -12    F
-      K-S energy, electrons, error :    -10.860805466512   9.9999996884   -3.12D-07
-   9    -109.217260903        1.37446D-06   -6.72D-10    9
-      Virial theorem: -V/T =      2.038430
-@      MULPOP F     -12.00; H      12.00; 
+   9  Screening settings (-IFTHRS, DIFDEN)  -11    T
+   9    -110.833277846        8.87527D-05   -3.17D-09    9
+      Virial theorem: -V/T =      1.993431
+@      MULPOP F     -16.34; H      16.34; 
  -----------------------------------------------------------------------------
-  10  Screening settings (-IFTHRS, DIFDEN)  -14    F
-      K-S energy, electrons, error :    -10.860805539622   9.9999996884   -3.12D-07
-  10    -109.217260903        1.32112D-07   -2.71D-11   10
-      Virial theorem: -V/T =      2.038430
-@      MULPOP F     -12.00; H      12.00; 
+  10  Screening settings (-IFTHRS, DIFDEN)  -11    T
+  10    -110.833277846        2.85249D-06   -8.51D-11   10
+      Virial theorem: -V/T =      1.993431
+@      MULPOP F     -16.34; H      16.34; 
  -----------------------------------------------------------------------------
-  11  Screening settings (-IFTHRS, DIFDEN)  -15    F
-      K-S energy, electrons, error :    -10.860805552298   9.9999996884   -3.12D-07
-  11    -109.217260903        6.79544D-09    1.08D-10   10
-      Virial theorem: -V/T =      2.038430
-@      MULPOP F     -12.00; H      12.00; 
+  11  Screening settings (-IFTHRS, DIFDEN)  -16    F
+  11    -110.833277846        8.43277D-07    4.83D-10   10
+      Virial theorem: -V/T =      1.993431
+@      MULPOP F     -16.34; H      16.34; 
  -----------------------------------------------------------------------------
-  12  Screening settings (-IFTHRS, DIFDEN)  -15    F
-      K-S energy, electrons, error :    -10.860805553135   9.9999996884   -3.12D-07
-  12    -109.217260903        2.61044D-09    2.39D-11   10
-      Virial theorem: -V/T =      2.038430
-@      MULPOP F     -12.00; H      12.00; 
+  12  Screening settings (-IFTHRS, DIFDEN)  -16    T
+  12    -110.833277846        4.14882D-08    3.72D-12   10
+      Virial theorem: -V/T =      1.993431
+@      MULPOP F     -16.34; H      16.34; 
  -----------------------------------------------------------------------------
-  13  Screening settings (-IFTHRS, DIFDEN)  -15    F
-      K-S energy, electrons, error :    -10.860805553094   9.9999996884   -3.12D-07
-  13    -109.217260902        3.19787D-09    2.78D-10   10
-      Virial theorem: -V/T =      2.038430
-@      MULPOP F     -12.00; H      12.00; 
+  13  Screening settings (-IFTHRS, DIFDEN)  -16    T
+  13    -110.833277846        1.02570D-09   -2.71D-12   10
+      Virial theorem: -V/T =      1.993431
+@      MULPOP F     -16.34; H      16.34; 
  -----------------------------------------------------------------------------
-  14  Screening settings (-IFTHRS, DIFDEN)  -15    F
-      K-S energy, electrons, error :    -10.860805553092   9.9999996884   -3.12D-07
-  14    -109.217260903        1.87848D-09   -5.55D-10   10
-      Virial theorem: -V/T =      2.038430
-@      MULPOP F     -12.00; H      12.00; 
+  14  Screening settings (-IFTHRS, DIFDEN)  -16    T
+  14    -110.833277846        1.08077D-10    4.97D-13   10
+      Virial theorem: -V/T =      1.993431
+@      MULPOP F     -16.34; H      16.34; 
  -----------------------------------------------------------------------------
-  15  Screening settings (-IFTHRS, DIFDEN)  -15    F
-      K-S energy, electrons, error :    -10.860805553140   9.9999996884   -3.12D-07
-  15    -109.217260903        8.29222D-10    2.62D-10   10
+  15  Screening settings (-IFTHRS, DIFDEN)  -16    T
+  15    -110.833277846        6.78636D-11    6.54D-13   10
 
  *** DIIS converged in  15 iterations !
-@    Converged SCF energy, gradient:   -109.217260902702    8.29D-10
+@    Converged SCF energy, gradient:   -110.833277845538    6.79D-11
    - total time used in SIRFCK :              0.00 seconds
 
 
@@ -1890,15 +1798,15 @@ Maximum number of iterations reset in numerical differentiation to    13
  Number of electrons :   10
  Orbital occupations :    5
 
- Sym       Kohn-Sham orbital energies
+ Sym       Hartree-Fock orbital energies
 
-  1    -26.04433554    -4.76627938    -2.44916114    -1.90803266    -1.90803266
-        -1.24639707    -0.82514824    -0.51552444    -0.51552444    -0.47903966
+  1    -28.61514885    -5.33661949    -3.20831868    -2.55974913    -2.55974913
+        -1.47924354    -0.86874022    -0.64042045    -0.64042045    -0.51915653
 
-    E(LUMO) :    -1.24639707 au (symmetry 1)
-  - E(HOMO) :    -1.90803266 au (symmetry 1)
+    E(LUMO) :    -1.47924354 au (symmetry 1)
+  - E(HOMO) :    -2.55974913 au (symmetry 1)
   ------------------------------------------
-    gap     :     0.66163559 au
+    gap     :     1.08050560 au
 
  >>> Writing SIRIFC interface file <<<
 
@@ -1911,13 +1819,13 @@ Maximum number of iterations reset in numerical differentiation to    13
 
 
  (SIRSTP) Close to convergence, ratio set to one.
- Energy difference; actual and predicted:   -8.73790D+00    0.00000D+00
+ Energy difference; actual and predicted:   -1.07627D+01    0.00000D+00
 
 
  *** GEOMETRY WALK STEP ACCEPTED.
 
 
- >>>> CPU and wall time for SCF :       0.946       1.003
+ >>>> CPU and wall time for SCF :       0.944       0.973
 
 
                        .-----------------------------------.
@@ -1929,24 +1837,24 @@ Maximum number of iterations reset in numerical differentiation to    13
 @    Spatial symmetry:            1
 @    Total charge of molecule:    0
 
-@    Final DFT energy:           -109.217260902702                 
-@    Nuclear repulsion:             5.061783482403
-@    Electronic energy:          -114.279044385105
+@    Final HF energy:            -110.833277845538                 
+@    Nuclear repulsion:             5.225528861406
+@    Electronic energy:          -116.058806706944
 
-@    Final gradient norm:           0.000000000829
+@    Final gradient norm:           0.000000000068
 
  
-     Date and time (Linux)  : Fri Apr 25 10:07:05 2014
-     Host name              : c4-12.local                             
+     Date and time (Linux)  : Mon Jun  2 01:32:39 2014
+     Host name              : c32-8.local                             
 
 
 
  >>>> Total CPU  time used in SIRIUS :      0.95 seconds
- >>>> Total wall time used in SIRIUS :      1.01 seconds
+ >>>> Total wall time used in SIRIUS :      0.98 seconds
 
  
-     Date and time (Linux)  : Fri Apr 25 10:07:05 2014
-     Host name              : c4-12.local                             
+     Date and time (Linux)  : Mon Jun  2 01:32:39 2014
+     Host name              : c32-8.local                             
 
 
                      .---------------------------------------.
@@ -1956,9 +1864,9 @@ Maximum number of iterations reset in numerical differentiation to    13
 
  INFO: Changed THRP threshold used in integral transformation from  1.00D-15 to integral evaluation threshold  1.00D-12
 
- Center of mass dipole origin  :    0.102047    0.000000    0.000000
+ Center of mass dipole origin  :    0.086763    0.000000    0.000000
 
- Center of mass gauge origin   :    0.102047    0.000000    0.000000
+ Center of mass gauge origin   :    0.086763    0.000000    0.000000
 
 
                  .------------------------------------------------.
@@ -1967,8 +1875,8 @@ Maximum number of iterations reset in numerical differentiation to    13
 
 
  
-     Date and time (Linux)  : Fri Apr 25 10:07:05 2014
-     Host name              : c4-12.local                             
+     Date and time (Linux)  : Mon Jun  2 01:32:39 2014
+     Host name              : c32-8.local                             
 
 
    ***************************************************************************
@@ -1977,8 +1885,8 @@ Maximum number of iterations reset in numerical differentiation to    13
 
 
  
-     Date and time (Linux)  : Fri Apr 25 10:07:05 2014
-     Host name              : c4-12.local                             
+     Date and time (Linux)  : Mon Jun  2 01:32:39 2014
+     Host name              : c32-8.local                             
 
 
  CPU time statistics for ABACUS
@@ -1987,17 +1895,17 @@ Maximum number of iterations reset in numerical differentiation to    13
 
 
 
- >>>> Total CPU  time used in ABACUS:   0.01 seconds
- >>>> Total wall time used in ABACUS:   0.02 seconds
+ >>>> Total CPU  time used in ABACUS:   0.16 seconds
+ >>>> Total wall time used in ABACUS:   0.16 seconds
 
 
                    .-------------------------------------------.
                    | End of Static Property Section (ABACUS) - |
                    `-------------------------------------------'
 
- >>>> Total CPU  time used in DALTON:   8.46 seconds
- >>>> Total wall time used in DALTON:   9.23 seconds
+ >>>> Total CPU  time used in DALTON:   9.73 seconds
+ >>>> Total wall time used in DALTON:  11.19 seconds
 
  
-     Date and time (Linux)  : Fri Apr 25 10:07:05 2014
-     Host name              : c4-12.local                             
+     Date and time (Linux)  : Mon Jun  2 01:32:39 2014
+     Host name              : c32-8.local                             
