@@ -1149,6 +1149,23 @@ def read_dipole_hessian(filename, n_cord):
                 dipole_hessian[D3][D2][D1] = mline[D1]
     f.close()
     return dipole_hessian
+
+def read_polari_gradient(filename, n_cord):
+    """Reads and returns the polarizability gradient in cartessian coordinates
+    as a 3 dimensional np.array"""
+    f = open(filename, 'r')
+    polari_gradient = zeros((n_cord, 3, 3))
+    dummy = []
+    
+    for D3 in range(n_cord):
+        dummy = f.readline()
+        for D2 in range(3):
+            mline = f.readline()
+            mline = mline.split()
+            for D1 in range(3):
+                polari_gradient[D3][D2][D1] = mline[D1]
+    f.close()
+    return polari_gradient
     
 def read_polari_hessian(filename, n_cord):
     

@@ -44,22 +44,12 @@ class Molecule:
         self.eigenvalues_full, \
         self.eigenvectors_full = self.diagonalize(self.hessian)
         
-      
-        #self.eigenvalues = array([4.156680273787628E-004])
-        #self.frequencies = array([0.020386001])
-        
-        #self.cff_norm = self.to_normal_coordinates_3D\
-        #(ri.read_cubic_force_field(self.get_cubic_force_field_name1(), self.n_coordinates))
-        
         self.cff_norm = self.to_normal_coordinates_3D\
         (ri.read_cubic_force_field_anal(self.get_cubic_force_field_name(), self.n_coordinates))
         
         #self.qff_norm = self.to_normal_coordinates_4D(ri.read_quartic_force_field1(self.input_name + 'quartic', self.n_coordinates))
         
         self.effective_geometry = self.get_effective_geometry()
-        
-        #dipole_gradient = ri.read_dipole_gradient("input_" + self.name + "/"+"dg", self.get_coordinates())
-        #self.to_normal_coordinates_1D(dipole_gradient)
         
         open(self.get_output_name(), 'w').close() # As we are appending to the output, the old results must be deleted before each run
     
@@ -180,8 +170,7 @@ class Molecule:
             hess_proj[3,3] = 0.5
             hess_proj[4,4] = 1
             hess_proj[5,5] = 1
-        
-        print(hess_proj)     
+
         return hess_proj
                                    
     def mass_hessian(self, masses):
@@ -257,6 +246,7 @@ class Molecule:
        
         coordinates, masses, num_atoms_list, charge_list,\
         n_atoms, atom_list = ri.read_molecule(self.get_molecule_input_name())
+    
         
         M_I = self.mass_hessian(masses)
         if (self.linear):
@@ -276,11 +266,8 @@ class Molecule:
         v_reduced = array(v_reduced, double)
         v_reduced = v_reduced[v_args]
         
-        #La = dot(M_I, array(La, double))
-        #La_reduced = La_reduced[:,v_args]
-    
-        La = ri.read_eigenvector(self.get_eigenvector_name(), self.n_coordinates)
-        La_reduced =  La[:,:self.number_of_normal_modes]
+        La= dot(M_I, array(La, double))
+        La_reduced = La[:,v_args]
     
         freq = sqrt(absolute(v_reduced))
         
@@ -292,95 +279,6 @@ class Molecule:
         eqsign = vectorize(eqsign)
 
         return v_reduced, La_reduced, freq, v, La
-     
-    def to_normal_coordinates_1D(self, grad): 
-        
-        conversion_factor = 205.07454 # (a.u to Debye)*(a.u to a.m.u)*(Angstrom to bohr) 
-        
-        grad_norm = zeros((self.number_of_normal_modes,3))
-        
-        for ip in range(self.number_of_normal_modes):
-            temp = zeros((3))
-            for i in range(self.n_coordinates):
-                for j in range(3):
-                    temp[j] = temp[j] + grad[i,j]*self.eigenvectors_full[i,ip]
-            grad_norm[ip,:] = temp
-        grad_norm = grad_norm*conversion_factor
-            
-
-        print("grad norm")
-        print(grad_norm)
-        
-    def to_normal_coordinates_1D_pol(self, grad): 
-        
-        conversion_factor = 205.07454 # (a.u to Debye)*(a.u to a.m.u)*(Angstrom to bohr) 
-        
-        grad_norm = zeros((self.number_of_normal_modes,3,3))
-        
-        for ip in range(self.number_of_normal_modes):
-            temp = zeros((3,3))
-            for i in range(self.n_coordinates):
-                for j in range(3):
-                    for k in range(3):
-                        temp[j,k] = temp[j,k] + grad[i,j,k]*self.eigenvectors_full[i,ip]
-            grad_norm[ip,:,:] = temp
-        grad_norm = grad_norm*conversion_factor
-            
-        print("grad norm")
-        print(grad_norm)
-
-    def to_normal_coordinates_2D(self, dipole_hessian):
-        
-        hess_norm_temp = zeros((self.n_coordinates, self.n_coordinates, 3)) 
-        hess_norm = zeros((self.number_of_normal_modes,self.number_of_normal_modes,3))
-        
-        for i in range(self.n_coordinates):
-            for ip in range(self.number_of_normal_modes):
-                temp = zeros((3))
-                for j in range(self.n_coordinates):
-                    for k in range(3):
-                        temp[k] = temp[k] + dipole_hessian[i,j,k]*self.eigenvectors_full[j,ip]
-                hess_norm_temp[i,ip,:] = temp
-        for i in range(self.number_of_normal_modes):
-            for ip in range(self.number_of_normal_modes):
-                temp = zeros((3))
-                for j in range(self.n_coordinates):
-                    for k in range(3):
-                        temp[k] = temp[k] + hess_norm_temp[j,ip,k]*self.eigenvectors_full[j,i]
-                hess_norm[i,ip,:] = temp
-        
-        hess_diag = hess_norm.diagonal(0,0,1)
-        hess_diag = transpose(hess_diag)* -1822.8884796
-        print("hess norm")
-        print(hess_diag)
-        
-    def to_normal_coordinates_2D_pol(self, dipole_hessian):
-        
-        hess_norm_temp = zeros((self.n_coordinates, self.n_coordinates, 3,3)) 
-        hess_norm = zeros((self.number_of_normal_modes,self.number_of_normal_modes,3,3))
-        
-        for i in range(self.n_coordinates):
-            for ip in range(self.n_coordinates):
-                temp = zeros((3,3))
-                for j in range(self.n_coordinates):
-                    for k in range(3):
-                        for l in range(3):
-                            temp[k,l] = temp[k,l] + dipole_hessian[i,j,k,l]*self.eigenvectors_full[j,ip]
-                hess_norm_temp[i,ip,:,:] = temp
-        for i in range(self.number_of_normal_modes):
-            for ip in range(self.number_of_normal_modes):
-                temp = zeros((3,3))
-                for j in range(self.n_coordinates):
-                    for k in range(3):
-                        for l in range(3):
-                            temp[k,l] = temp[k,l] + hess_norm_temp[j,ip,k,l]*self.eigenvectors_full[j,i]
-                hess_norm[i,ip,:,:] = temp
-                
-        hess_diag = hess_norm.diagonal(0,0,1)
-        hess_diag = transpose(hess_diag)* -1824.8884796
-       
-        print("hess norm")
-        print(hess_diag)
         
     def to_normal_coordinates_3D(self, cubic_force_field):
         """Converts a cubic force field represented by cartessian coordinates
@@ -399,7 +297,7 @@ class Molecule:
         cubic_force_field_clone = copy(cubic_force_field)
         cff_norm = zeros((self.n_coordinates,self.n_coordinates,self.n_coordinates))
         
-        # In matrix operations
+        #In matrix operations
         
         #cubic_force_field_clone = transpose(cubic_force_field_clone)
         
@@ -548,11 +446,11 @@ class Molecule:
         returns: cartessian coordinates as an np.array.
         """
         factor = sqrt(1822.8884796) #I DONT KNOW WHY?!
-        anstrom_to_bohr = 1.88971616463
+        #anstrom_to_bohr = 1.88971616463
         
-       
+        print(self.eigenvectors)
+         
         effective_geometry_norm = self.effective_geometry_norm(self.cff_norm)
-        
         cartessian_coordinates = np.sum(factor*effective_geometry_norm*self.eigenvectors, 1)
         
         #instead of reshape() this will fail if it cannot be done efficiently:
@@ -561,7 +459,8 @@ class Molecule:
         effective_geometry = self.coordinates + cartessian_coordinates
         
         print(self.coordinates)
-        
+       
+        print("corrections")
         print(cartessian_coordinates)
         print ("effective geometry")
         print (effective_geometry)
@@ -577,14 +476,25 @@ class Molecule:
         n_atoms: The number of atoms constituting the molecule as an int
         return: The effective geometry in normal coordinates as an np.arrays
         """
-        factor = sqrt(1822.8884796)
-        molecular_geometry = zeros((self.number_of_normal_modes))
+        # 1822.8884796 is the conversion factor from a.m.u to a.u
         
-        for i in range(self.number_of_normal_modes):
-            prefix = 1/(4*self.frequencies[i]**2*factor)
-            temp = 0
-            for j in range(self.number_of_normal_modes): 
-                temp = temp + divide(cff_norm[i,j,j], self.frequencies[j])
-            molecular_geometry[i] = -1*temp*prefix 
-        return molecular_geometry    
+        
+        prefix = -1/(4*sqrt(1822.8884796)*self.frequencies**2)
+        
+        molecular_geometry = np.sum(divide(cff_norm.diagonal(0,0,1)\
+        [:self.number_of_normal_modes,:self.number_of_normal_modes],self.frequencies), axis=1)
+        molecular_geometry = molecular_geometry*prefix
+        
+        #DALTON Implementation
+        #molecular_geometry = zeros((self.number_of_normal_modes))
+        #for i in range(self.number_of_normal_modes):
+        #    prefix = -1/(4*self.frequencies[i]**2*factor)
+        #    temp = 0
+        #    for j in range(self.number_of_normal_modes): 
+        #        temp = temp + divide(cff_norm[i,j,j], self.frequencies[j])
+        #    molecular_geometry[i] = temp*prefix 
+        
+               
+        print molecular_geometry
+        return molecular_geometry 
              
