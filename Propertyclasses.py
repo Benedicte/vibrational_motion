@@ -1,3 +1,9 @@
+"""
+Copyright (c) 2013-2014 Benedicte Ofstad
+Distributed under the GNU Lesser General Public License v3.0. 
+For full terms see the file LICENSE.md.
+"""
+
 from Property import Property
 import Molecule as mol
 import read_input as ri

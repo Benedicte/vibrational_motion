@@ -1,3 +1,9 @@
+"""
+Copyright (c) 2013-2014 Benedicte Ofstad
+Distributed under the GNU Lesser General Public License v3.0. 
+For full terms see the file LICENSE.md.
+"""
+
 import read_input as ri
 from numpy import array, zeros, vstack, dot, identity, sqrt, set_printoptions, compress, reshape, multiply, divide, add, subtract, diag, absolute, sort, argsort, fliplr
 from numpy import vectorize, diff, copy, transpose, inner, diagonal
